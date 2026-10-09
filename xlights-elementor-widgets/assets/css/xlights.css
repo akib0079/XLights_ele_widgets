@@ -6,62 +6,114 @@
  */
 
 @font-face {
-	font-family: "XL Montserrat";
-	src: url("../fonts/montserrat-latin-variable.woff2") format("woff2-variations"),
-		url("../fonts/montserrat-latin-variable.woff2") format("woff2");
-	font-weight: 100 900;
+	font-family: "XL Barlow";
+	src: url("../fonts/barlow-400.woff2") format("woff2");
+	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+	font-family: "XL Barlow";
+	src: url("../fonts/barlow-500.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "XL Barlow";
+	src: url("../fonts/barlow-600.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "XL Barlow Condensed";
+	src: url("../fonts/barlow-condensed-300.woff2") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "XL Barlow Condensed";
+	src: url("../fonts/barlow-condensed-500.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * Palette follows the live X LIGHTS website: black and white, navy, slate and a
+ * signal-blue accent for interactive states. Warm light (--xl-glow) is reserved
+ * for light effects (the soffit-dot line, glows); it is never a UI color.
+ */
 :root {
-	--xl-accent: #c98a3f;
-	--xl-dark: #0e0e10;
-	--xl-surface: #f5f1ea;
-	--xl-text: #1e1e22;
+	--xl-accent: #3367fe;
+	--xl-dark: #131c2d;
+	--xl-surface: #e9eaed;
+	--xl-text: #1b2130;
 }
 
 /* -------------------------------------------------------------------------
  * Tokens
  * ---------------------------------------------------------------------- */
 .xl-root {
-	--xl-accent-ink: #8a5b25;
-	--xl-accent-soft: rgba(201, 138, 63, 0.14);
-	--xl-dark-2: #18181c;
-	--xl-dark-3: #222228;
+	--xl-ink: #05070b;
+	--xl-navy-deep: #0b111c;
+	--xl-slate: #39414e;
+	--xl-accent-ink: #2952cb;
+	--xl-accent-soft: rgba(51, 103, 254, 0.1);
+	--xl-accent-on-dark: #c8d7fe;
+	--xl-tint-on-dark: rgba(200, 215, 254, 0.12);
+	--xl-glow: #ffd79a;
+	--xl-glow-cool: rgba(110, 146, 255, 0.2);
+	--xl-dark-2: #1a2436;
+	--xl-dark-3: #232d40;
 	--xl-light: #ffffff;
-	--xl-heading: #111114;
-	--xl-muted: #5f5a54;
-	--xl-on-dark: #f5f0e8;
-	--xl-on-dark-muted: rgba(245, 240, 232, 0.72);
-	--xl-line: rgba(17, 17, 20, 0.12);
+	--xl-heading: var(--xl-ink);
+	--xl-muted: #565d6b;
+	--xl-on-dark: #eef1f7;
+	--xl-on-dark-muted: rgba(238, 241, 247, 0.74);
+	--xl-line: rgba(11, 17, 28, 0.12);
 	--xl-line-dark: rgba(255, 255, 255, 0.14);
 	--xl-card-bg: #ffffff;
-	--xl-btn-bg: var(--xl-accent);
-	--xl-btn-color: #111114;
-	--xl-btn-bg-hover: #ffffff;
+	--xl-btn-bg: var(--xl-ink);
+	--xl-btn-color: #ffffff;
+	--xl-btn-bg-hover: var(--xl-accent);
+	--xl-btn-color-hover: #ffffff;
 	--xl-btn-line: currentColor;
 	--xl-container: 1240px;
 	--xl-gutter: clamp(20px, 4vw, 40px);
+	--xl-frame: clamp(8px, 1.4vw, 20px);
 	--xl-section-y: clamp(64px, 9vw, 128px);
 	--xl-gap: clamp(16px, 2.2vw, 28px);
 	--xl-radius: 18px;
-	--xl-radius-sm: 10px;
-	--xl-img-radius: 18px;
-	--xl-btn-radius: 999px;
-	--xl-shadow: 0 1px 2px rgba(17, 17, 20, 0.05), 0 18px 40px -18px rgba(17, 17, 20, 0.22);
-	--xl-shadow-lg: 0 40px 80px -30px rgba(0, 0, 0, 0.45);
+	--xl-radius-lg: clamp(18px, 2.2vw, 30px);
+	--xl-radius-sm: 8px;
+	--xl-img-radius: 20px;
+	--xl-btn-radius: 6px;
+	--xl-shadow: 0 1px 2px rgba(11, 17, 28, 0.06), 0 24px 48px -28px rgba(19, 28, 45, 0.35);
+	--xl-shadow-lg: 0 40px 80px -36px rgba(11, 17, 28, 0.55);
 	--xl-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 	--xl-anim-duration: 700ms;
-	--xl-header-h: 76px;
-	--xl-font-display: var(--xl-font-heading, "XL Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-	--xl-font-text: var(--xl-font-body, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+	--xl-header-h: 80px;
+	--xl-font-display: var(--xl-font-heading, "XL Barlow Condensed", "Barlow Condensed", "Arial Narrow", ui-sans-serif, system-ui, sans-serif);
+	--xl-font-text: var(--xl-font-body, "XL Barlow", "Barlow", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+	--xl-font-ui: var(--xl-font-text);
 
 	color: var(--xl-text);
 	font-family: var(--xl-font-text);
 	font-size: 16px;
 	line-height: 1.6;
+	font-synthesis-weight: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -69,8 +121,8 @@
 
 @supports (color: color-mix(in srgb, red, blue)) {
 	.xl-root {
-		--xl-accent-ink: color-mix(in srgb, var(--xl-accent) 66%, #000);
-		--xl-accent-soft: color-mix(in srgb, var(--xl-accent) 14%, transparent);
+		--xl-accent-ink: color-mix(in srgb, var(--xl-accent) 80%, #000);
+		--xl-accent-soft: color-mix(in srgb, var(--xl-accent) 10%, transparent);
 	}
 }
 
@@ -205,14 +257,38 @@
 	--xl-muted: var(--xl-on-dark-muted);
 	--xl-line: var(--xl-line-dark);
 	--xl-card-bg: var(--xl-dark-2);
-	--xl-accent-ink: var(--xl-accent);
+	--xl-accent-ink: var(--xl-accent-on-dark);
+	--xl-accent-soft: var(--xl-tint-on-dark);
+	--xl-btn-bg: #ffffff;
+	--xl-btn-color: var(--xl-ink);
+	--xl-btn-bg-hover: var(--xl-accent-on-dark);
+	--xl-btn-color-hover: var(--xl-ink);
 }
 
-.xl-root .xl-bg--dark:not(.xl-section--hero)::before {
+/* Dark surfaces that are not dark sections (footer, panels, cards) use the
+ * same on-dark tokens. */
+.xl-footer,
+.xl-root .xl-cta,
+.xl-root .xl-quote__aside,
+.xl-root .xl-financing,
+.xl-root .xl-cards--bento .xl-card,
+.xl-root .xl-map {
+	--xl-heading: #ffffff;
+	--xl-muted: var(--xl-on-dark-muted);
+	--xl-line: var(--xl-line-dark);
+	--xl-accent-ink: var(--xl-accent-on-dark);
+	--xl-accent-soft: var(--xl-tint-on-dark);
+	--xl-btn-bg: #ffffff;
+	--xl-btn-color: var(--xl-ink);
+	--xl-btn-bg-hover: var(--xl-accent-on-dark);
+	--xl-btn-color-hover: var(--xl-ink);
+}
+
+.xl-root .xl-bg--dark:not(.xl-hero--media)::before {
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: radial-gradient(60% 50% at 85% 0%, rgba(201, 138, 63, 0.16), transparent 70%), radial-gradient(40% 40% at 0% 100%, rgba(201, 138, 63, 0.08), transparent 70%);
+	background: radial-gradient(60% 55% at 85% 0%, rgba(110, 146, 255, 0.14), transparent 70%), radial-gradient(45% 50% at 0% 100%, rgba(150, 160, 182, 0.12), transparent 70%);
 	pointer-events: none;
 }
 
@@ -262,68 +338,79 @@
 /* -------------------------------------------------------------------------
  * Typography
  * ---------------------------------------------------------------------- */
+/* Display type: Barlow Condensed, uppercase. Section titles are Light (300);
+ * <em> inside a title switches to Medium (500) — emphasis by weight, not color. */
 .xl-root .xl-title,
 .xl-root .xl-card__title,
 .xl-root .xl-tabs__title,
 .xl-root .xl-project__title,
 .xl-root .xl-team__name,
-.xl-root .xl-footer__title,
 .xl-root .xl-quote__aside-title {
 	font-family: var(--xl-font-display);
 	color: var(--xl-heading);
-	font-weight: 650;
-	letter-spacing: -0.02em;
-	line-height: 1.12;
+	font-weight: 300;
+	letter-spacing: 0.005em;
+	line-height: 1.04;
+	text-transform: uppercase;
 	text-wrap: balance;
+}
+
+.xl-root .xl-card__title,
+.xl-root .xl-tabs__title,
+.xl-root .xl-project__title,
+.xl-root .xl-team__name,
+.xl-root .xl-quote__aside-title {
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	line-height: 1.15;
 }
 
 .xl-root .xl-title em,
 .xl-root .xl-hero__title em {
 	font-style: normal;
-	color: var(--xl-accent-ink);
-}
-
-.xl-root .xl-bg--dark .xl-title em,
-.xl-root .xl-hero--media .xl-hero__title em {
-	color: var(--xl-accent);
+	font-weight: 500;
+	color: inherit;
 }
 
 .xl-root .xl-h1,
 .xl-root .xl-hero__title {
-	font-size: clamp(2.35rem, 1.2rem + 4.4vw, 4.6rem);
-	line-height: 1.02;
-	letter-spacing: -0.03em;
-	font-weight: 700;
+	font-size: clamp(2.7rem, 1.25rem + 5.2vw, 5.9rem);
+	line-height: 0.98;
+	letter-spacing: 0;
+	font-weight: 300;
 }
 
 .xl-root .xl-h2 {
-	font-size: clamp(1.85rem, 1.15rem + 2.4vw, 3.1rem);
+	font-size: clamp(2.15rem, 1.3rem + 2.9vw, 3.75rem);
 }
 
 .xl-root .xl-h3 {
-	font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+	font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem);
 }
 
 .xl-root .xl-eyebrow {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.6em;
-	margin-bottom: 1rem;
-	font-family: var(--xl-font-display);
-	font-size: 0.78rem;
-	font-weight: 650;
-	letter-spacing: 0.18em;
+	margin-bottom: 1.1rem;
+	font-family: var(--xl-font-ui);
+	font-size: 0.74rem;
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	line-height: 1.3;
 	text-transform: uppercase;
 	color: var(--xl-accent-ink);
 }
 
+/* The "X" mark from the logo, drawn in currentColor. */
 .xl-root .xl-eyebrow::before {
 	content: "";
-	width: 22px;
-	height: 2px;
-	border-radius: 2px;
-	background: currentColor;
-	opacity: 0.8;
+	flex: none;
+	width: 11px;
+	height: 11px;
+	background:
+		linear-gradient(45deg, transparent calc(50% - 0.8px), currentColor calc(50% - 0.8px) calc(50% + 0.8px), transparent calc(50% + 0.8px)),
+		linear-gradient(-45deg, transparent calc(50% - 0.8px), currentColor calc(50% - 0.8px) calc(50% + 0.8px), transparent calc(50% + 0.8px));
 }
 
 .xl-root .xl-head {
@@ -429,7 +516,7 @@
 	align-items: center;
 	padding: 0.5rem 0.95rem;
 	border: 1px solid var(--xl-line);
-	border-radius: 999px;
+	border-radius: var(--xl-radius-sm);
 	font-size: 0.9rem;
 	font-weight: 500;
 }
@@ -460,25 +547,26 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.6em;
-	min-height: 48px;
-	padding: 0.85em 1.6em;
+	gap: 0.7em;
+	min-height: 50px;
+	padding: 0.85em 1.75em;
 	border-radius: var(--xl-btn-radius);
 	border: 1.5px solid transparent;
-	font-family: var(--xl-font-display);
-	font-size: 0.95rem;
-	font-weight: 650;
-	letter-spacing: 0.01em;
+	font-family: var(--xl-font-ui);
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
 	line-height: 1.2;
+	text-transform: uppercase;
 	text-decoration: none;
 	text-align: center;
 	cursor: pointer;
-	transition: background-color 0.25s var(--xl-ease), color 0.25s var(--xl-ease), border-color 0.25s var(--xl-ease), transform 0.25s var(--xl-ease), box-shadow 0.25s var(--xl-ease);
+	transition: background-color 0.25s var(--xl-ease), color 0.25s var(--xl-ease), border-color 0.25s var(--xl-ease), transform 0.25s var(--xl-ease);
 }
 
 .xl-root .xl-btn .xl-icon {
-	width: 1.1em;
-	height: 1.1em;
+	width: 1.15em;
+	height: 1.15em;
 	transition: transform 0.25s var(--xl-ease);
 }
 
@@ -486,27 +574,22 @@
 	transform: translateX(3px);
 }
 
+/* Primary: ink on light backgrounds, white on dark; signal blue on hover. */
 .xl-root .xl-btn--primary {
 	background: var(--xl-btn-bg);
+	border-color: var(--xl-btn-bg);
 	color: var(--xl-btn-color);
-	box-shadow: 0 10px 30px -12px rgba(201, 138, 63, 0.7);
 }
 
 .xl-root .xl-btn--primary:hover,
 .xl-root .xl-btn--primary:focus-visible {
 	background: var(--xl-btn-bg-hover);
-	color: #111114;
-	transform: translateY(-1px);
-}
-
-.xl-root .xl-bg--light .xl-btn--primary:hover,
-.xl-root .xl-bg--warm .xl-btn--primary:hover {
-	background: var(--xl-dark);
-	color: #ffffff;
+	border-color: var(--xl-btn-bg-hover);
+	color: var(--xl-btn-color-hover);
 }
 
 .xl-root .xl-btn--secondary {
-	border-color: var(--xl-btn-line);
+	border-color: currentColor;
 	color: var(--xl-heading);
 	background: transparent;
 }
@@ -518,24 +601,24 @@
 }
 
 .xl-root .xl-bg--dark .xl-btn--secondary:hover {
-	color: var(--xl-dark);
+	color: var(--xl-ink);
 }
 
 .xl-root .xl-btn--ghost {
-	border-color: rgba(255, 255, 255, 0.4);
+	border-color: rgba(255, 255, 255, 0.55);
 	color: #ffffff;
-	background: rgba(255, 255, 255, 0.04);
-	backdrop-filter: blur(6px);
+	background: transparent;
 }
 
 .xl-root .xl-btn--ghost:hover {
 	border-color: #ffffff;
-	background: rgba(255, 255, 255, 0.12);
+	background: #ffffff;
+	color: var(--xl-ink);
 }
 
 .xl-root .xl-bg--light .xl-btn--ghost,
 .xl-root .xl-bg--warm .xl-btn--ghost {
-	border-color: var(--xl-line);
+	border-color: currentColor;
 	color: var(--xl-heading);
 	background: transparent;
 }
@@ -543,21 +626,24 @@
 .xl-root .xl-bg--light .xl-btn--ghost:hover,
 .xl-root .xl-bg--warm .xl-btn--ghost:hover {
 	border-color: var(--xl-heading);
-	background: transparent;
+	background: var(--xl-heading);
+	color: #ffffff;
 }
 
 .xl-root .xl-btn--light {
 	background: #ffffff;
-	color: #111114;
+	border-color: #ffffff;
+	color: var(--xl-ink);
 }
 
 .xl-root .xl-btn--light:hover {
-	background: var(--xl-accent);
+	background: var(--xl-accent-on-dark);
+	border-color: var(--xl-accent-on-dark);
 }
 
 .xl-root .xl-btn--text {
 	min-height: 0;
-	padding: 0.35em 0;
+	padding: 0.4em 0;
 	border: 0;
 	border-radius: 0;
 	color: var(--xl-accent-ink);
@@ -575,8 +661,8 @@
 
 .xl-root .xl-btn--lg {
 	min-height: 56px;
-	padding: 1em 2em;
-	font-size: 1rem;
+	padding: 1em 2.1em;
+	font-size: 0.85rem;
 }
 
 .xl-root .xl-btn--block {
@@ -588,7 +674,7 @@
 	place-items: center;
 	width: 46px;
 	height: 46px;
-	border-radius: 50%;
+	border-radius: var(--xl-btn-radius);
 	border: 1px solid var(--xl-line);
 	color: var(--xl-heading);
 	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
@@ -637,7 +723,7 @@
 
 .xl-root .xl-media--phone .xl-media__frame {
 	aspect-ratio: auto;
-	background: radial-gradient(70% 60% at 50% 40%, rgba(201, 138, 63, 0.28), transparent 70%), var(--xl-dark);
+	background: radial-gradient(70% 60% at 50% 40%, rgba(124, 152, 255, 0.24), transparent 70%), var(--xl-dark);
 	box-shadow: none;
 	display: grid;
 	place-items: center;
@@ -655,13 +741,13 @@
 	left: 16px;
 	top: 16px;
 	padding: 0.45rem 0.85rem;
-	border-radius: 999px;
-	background: rgba(14, 14, 16, 0.72);
+	border-radius: 4px;
+	background: rgba(11, 17, 28, 0.72);
 	backdrop-filter: blur(8px);
 	color: #ffffff;
-	font-size: 0.75rem;
+	font-size: 0.7rem;
 	font-weight: 600;
-	letter-spacing: 0.06em;
+	letter-spacing: 0.16em;
 	text-transform: uppercase;
 }
 
@@ -681,7 +767,7 @@
 	color: #111;
 	font-size: 0.72rem;
 	font-weight: 600;
-	border: 1px dashed #b8860b;
+	border: 1px dashed #3367fe;
 }
 
 /* Phone mockup */
@@ -691,7 +777,7 @@
 	aspect-ratio: 9 / 19;
 	padding: 11px;
 	border-radius: 46px;
-	background: linear-gradient(145deg, #2a2a31, #0b0b0d);
+	background: linear-gradient(145deg, #2b303b, #0b0d12);
 	box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.12), 0 50px 90px -30px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0, 0, 0, 0.6);
 }
 
@@ -713,8 +799,8 @@
 	height: 100%;
 	overflow: hidden;
 	border-radius: 36px;
-	background: #fbfaf8;
-	color: #1c1c1f;
+	background: #ffffff;
+	color: #0b0f17;
 	display: flex;
 	flex-direction: column;
 }
@@ -737,17 +823,15 @@
 
 .xl-root .xl-app__logo {
 	margin-top: 26px;
-	font-family: var(--xl-font-display);
-	font-weight: 800;
-	letter-spacing: 0.12em;
-	font-size: 12px;
+	width: 70px;
+	height: auto;
 }
 
 .xl-root .xl-app__dots {
 	width: 26px;
 	height: 10px;
 	border-radius: 3px;
-	border: 1.5px solid #1c1c1f;
+	border: 1.5px solid #0b0f17;
 	opacity: 0.6;
 }
 
@@ -761,7 +845,7 @@
 }
 
 .xl-root .xl-app__title {
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	font-weight: 700;
 	font-size: 17px;
 	margin: 4px 2px 4px;
@@ -805,7 +889,7 @@
 .xl-root .xl-app__row small,
 .xl-root .xl-app__card small {
 	font-size: 10.5px;
-	color: #77736d;
+	color: #6b7280;
 }
 
 .xl-root .xl-app__online {
@@ -813,7 +897,7 @@
 }
 
 .xl-root .xl-app__row--all {
-	background: #1c1c1f;
+	background: #0b0f17;
 	color: #fff;
 }
 
@@ -822,7 +906,7 @@
 	width: 34px;
 	height: 20px;
 	border-radius: 20px;
-	background: #d9d6d0;
+	background: #d5d9e0;
 	position: relative;
 }
 
@@ -915,12 +999,12 @@
 .xl-root .xl-app__slider span {
 	height: 8px;
 	border-radius: 8px;
-	background: linear-gradient(90deg, #2a2a30, var(--xl-accent));
+	background: linear-gradient(90deg, #2b303b, var(--xl-accent));
 	position: relative;
 }
 
 .xl-root .xl-app__slider--white span {
-	background: linear-gradient(90deg, #ffd08a, #f2f6ff);
+	background: linear-gradient(90deg, #ffd79a, #f2f6ff);
 }
 
 .xl-root .xl-app__slider span::after {
@@ -969,7 +1053,7 @@
 	margin-top: 4px;
 	padding: 10px;
 	border-radius: 12px;
-	background: #1c1c1f;
+	background: #0b0f17;
 	color: #fff;
 	font-size: 12px;
 	font-weight: 600;
@@ -984,7 +1068,7 @@
 	display: flex;
 	justify-content: space-around;
 	padding: 12px 18px 18px;
-	border-top: 1px solid #ece9e3;
+	border-top: 1px solid #e6e8ec;
 	background: #fff;
 }
 
@@ -992,7 +1076,7 @@
 	width: 18px;
 	height: 18px;
 	border-radius: 6px;
-	background: #d9d6d0;
+	background: #d5d9e0;
 }
 
 .xl-root .xl-app__tabs i:first-child {
@@ -1020,6 +1104,25 @@
 
 .xl-root .xl-hero--h-full {
 	min-height: 100svh;
+}
+
+/* Inset frame (default): the hero sits inside a rounded frame below a solid
+ * header, echoing the framed hero on the X LIGHTS website. */
+.xl-root .xl-hero--inset {
+	margin: var(--xl-frame) var(--xl-frame) 0;
+	border-radius: var(--xl-radius-lg);
+}
+
+.xl-root .xl-hero--media.xl-hero--inset {
+	min-height: min(76vh, 820px);
+}
+
+.xl-root .xl-hero--inset.xl-hero--h-full {
+	min-height: calc(100svh - var(--xl-header-h) - var(--xl-frame));
+}
+
+.xl-root .xl-hero--inset.xl-hero--h-medium {
+	min-height: min(58vh, 600px);
 }
 
 .xl-root .xl-hero--h-medium {
@@ -1060,7 +1163,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(180deg, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) * 0.75)) 0%, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) * 0.35)) 35%, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) + 0.2)) 100%), linear-gradient(90deg, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) * 0.9)) 0%, rgba(8, 8, 10, 0) 70%);
+	background: linear-gradient(180deg, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.75)) 0%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.35)) 35%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) + 0.2)) 100%), linear-gradient(90deg, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.9)) 0%, rgba(9, 13, 22, 0) 70%);
 }
 
 .xl-root .xl-hero__inner {
@@ -1096,13 +1199,13 @@
 
 .xl-root .xl-hero--media .xl-eyebrow,
 .xl-root .xl-bg--dark .xl-eyebrow {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-hero__text {
-	margin-top: 1.4rem;
-	max-width: 620px;
-	font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.3rem);
+	margin-top: 1.5rem;
+	max-width: 600px;
+	font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.25rem);
 	line-height: 1.6;
 	color: var(--xl-muted);
 }
@@ -1135,13 +1238,13 @@
 }
 
 .xl-root .xl-hero__call a:hover {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-hero__call .xl-icon {
 	width: 1em;
 	height: 1em;
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-hero__highlights {
@@ -1169,7 +1272,7 @@
 .xl-root .xl-hero__highlights .xl-icon {
 	width: 1.05em;
 	height: 1.05em;
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 	stroke-width: 2.4;
 }
 
@@ -1191,7 +1294,7 @@
 	width: 70%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(201, 138, 63, 0.42), transparent 65%);
+	background: radial-gradient(circle, rgba(124, 152, 255, 0.42), transparent 65%);
 	filter: blur(10px);
 }
 
@@ -1233,10 +1336,10 @@
 	position: absolute;
 	inset: auto 0 10px 0;
 	height: 6px;
-	background-image: radial-gradient(circle, #ffd08a 0 2.2px, rgba(255, 208, 138, 0.35) 2.6px, transparent 5px);
+	background-image: radial-gradient(circle, #ffd79a 0 2.2px, rgba(255, 215, 154, 0.35) 2.6px, transparent 5px);
 	background-size: 34px 6px;
 	background-repeat: repeat-x;
-	filter: drop-shadow(0 0 4px rgba(255, 208, 138, 0.8));
+	filter: drop-shadow(0 0 4px rgba(255, 215, 154, 0.8));
 	opacity: 0.85;
 }
 
@@ -1276,7 +1379,7 @@
 }
 
 .xl-root .xl-crumbs a:hover {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 	text-decoration: underline;
 }
 
@@ -1387,14 +1490,14 @@
 	width: 54px;
 	height: 54px;
 	margin-bottom: 1.25rem;
-	border-radius: 16px;
+	border-radius: 10px;
 	background: var(--xl-accent-soft);
 	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-bg--dark .xl-card__icon {
-	color: var(--xl-accent);
-	background: rgba(201, 138, 63, 0.14);
+	color: var(--xl-accent-ink);
+	background: rgba(124, 152, 255, 0.14);
 }
 
 .xl-root .xl-card__icon .xl-icon,
@@ -1418,12 +1521,15 @@
 }
 
 .xl-root .xl-card__more {
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	font-size: 0.74rem;
 	display: inline-flex;
 	align-items: center;
 	gap: 0.4rem;
 	margin-top: auto;
 	padding-top: 1.25rem;
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	font-weight: 650;
 	font-size: 0.9rem;
 	color: var(--xl-accent-ink);
@@ -1494,7 +1600,7 @@
 	margin-bottom: 1.25rem;
 	font-family: var(--xl-font-display);
 	font-size: 2.6rem;
-	font-weight: 700;
+	font-weight: 500;
 	line-height: 1;
 	color: transparent;
 	-webkit-text-stroke: 1.2px var(--xl-accent);
@@ -1540,7 +1646,6 @@
 	color: #ffffff;
 	--xl-heading: #ffffff;
 	--xl-muted: rgba(255, 255, 255, 0.82);
-	--xl-accent-ink: var(--xl-accent);
 	background: var(--xl-dark);
 	justify-content: flex-end;
 }
@@ -1557,7 +1662,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(180deg, rgba(8, 8, 10, 0) 25%, rgba(8, 8, 10, 0.88) 100%);
+	background: linear-gradient(180deg, rgba(9, 13, 22, 0) 25%, rgba(9, 13, 22, 0.88) 100%);
 }
 
 .xl-root .xl-cards--overlay .xl-card__body,
@@ -1746,25 +1851,27 @@
 	margin-inline: clamp(16px, 2.5vw, 32px);
 	border-radius: 50%;
 	text-align: center;
-	background: radial-gradient(circle at 50% 35%, rgba(201, 138, 63, 0.35), rgba(201, 138, 63, 0.05) 70%), var(--xl-dark-2);
-	border: 1px solid rgba(201, 138, 63, 0.45);
-	box-shadow: 0 0 0 10px rgba(201, 138, 63, 0.06), 0 0 0 22px rgba(201, 138, 63, 0.03), 0 20px 60px -20px rgba(201, 138, 63, 0.55);
+	background: radial-gradient(circle at 50% 35%, rgba(124, 152, 255, 0.35), rgba(124, 152, 255, 0.05) 70%), var(--xl-dark-2);
+	border: 1px solid rgba(124, 152, 255, 0.45);
+	box-shadow: 0 0 0 10px rgba(124, 152, 255, 0.06), 0 0 0 22px rgba(124, 152, 255, 0.03), 0 20px 60px -20px rgba(124, 152, 255, 0.55);
 	color: var(--xl-on-dark);
 }
 
 .xl-root .xl-bg--light .xl-connected__hub,
 .xl-root .xl-bg--warm .xl-connected__hub {
-	background: radial-gradient(circle at 50% 35%, rgba(201, 138, 63, 0.3), rgba(201, 138, 63, 0.04) 70%), var(--xl-dark);
+	background: radial-gradient(circle at 50% 35%, rgba(124, 152, 255, 0.3), rgba(124, 152, 255, 0.04) 70%), var(--xl-dark);
 }
 
 .xl-root .xl-connected__hub-icon .xl-icon {
 	width: 34px;
 	height: 34px;
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-connected__hub strong {
 	font-family: var(--xl-font-display);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 	font-size: 1rem;
 	letter-spacing: 0.02em;
 }
@@ -1811,7 +1918,7 @@
 }
 
 .xl-root .xl-bg--dark .xl-connected__icon {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-connected__icon .xl-icon {
@@ -1826,7 +1933,7 @@
 }
 
 .xl-root .xl-connected__text strong {
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	font-size: 1.02rem;
 	line-height: 1.25;
 	color: var(--xl-heading);
@@ -1850,7 +1957,7 @@
 }
 
 .xl-root .xl-connected__node:hover {
-	border-color: var(--xl-accent);
+	border-color: var(--xl-accent-ink);
 }
 
 @media (max-width: 767px) {
@@ -1911,7 +2018,7 @@
 	gap: 0.5rem;
 	min-height: 44px;
 	padding: 0.55rem 1rem;
-	border-radius: 999px;
+	border-radius: var(--xl-btn-radius, 6px);
 	border: 1px solid var(--xl-line);
 	font-size: 0.88rem;
 	font-weight: 600;
@@ -1931,8 +2038,8 @@
 
 .xl-root .xl-tabs__tab[aria-selected="true"] {
 	background: var(--xl-accent);
-	border-color: var(--xl-accent);
-	color: #111114;
+	border-color: var(--xl-accent-ink);
+	color: #ffffff;
 }
 
 .xl-root .xl-tabs__panel {
@@ -1972,7 +2079,7 @@
 	width: 80%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(201, 138, 63, 0.45), transparent 65%);
+	background: radial-gradient(circle, rgba(124, 152, 255, 0.45), transparent 65%);
 	filter: blur(20px);
 }
 
@@ -2016,11 +2123,11 @@
 	min-height: 52px;
 	padding: 0.55rem 1.15rem 0.55rem 0.9rem;
 	border-radius: 12px;
-	background: #0b0b0d;
+	background: #0b0d12;
 	color: #ffffff;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	text-decoration: none;
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	font-weight: 650;
 	line-height: 1.15;
 	transition: transform 0.2s var(--xl-ease), border-color 0.2s;
@@ -2028,7 +2135,7 @@
 
 .xl-root .xl-store:hover {
 	transform: translateY(-2px);
-	border-color: var(--xl-accent);
+	border-color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-store small {
@@ -2065,7 +2172,7 @@
 	align-items: center;
 	min-height: 44px;
 	padding: 0.55rem 1.1rem;
-	border-radius: 999px;
+	border-radius: var(--xl-btn-radius, 6px);
 	border: 1px solid var(--xl-line);
 	font-size: 0.88rem;
 	font-weight: 600;
@@ -2152,8 +2259,8 @@
 	gap: 0.35rem;
 	align-items: center;
 	padding: 0.4rem 0.7rem;
-	border-radius: 999px;
-	background: rgba(14, 14, 16, 0.72);
+	border-radius: 4px;
+	background: rgba(11, 17, 28, 0.72);
 	color: #fff;
 	font-size: 0.78rem;
 	backdrop-filter: blur(6px);
@@ -2169,9 +2276,9 @@
 	left: 12px;
 	top: 12px;
 	padding: 0.35rem 0.7rem;
-	border-radius: 999px;
+	border-radius: 4px;
 	background: var(--xl-accent);
-	color: #111114;
+	color: #ffffff;
 	font-size: 0.72rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
@@ -2224,13 +2331,13 @@
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: rgba(8, 8, 10, 0.94);
+	background: rgba(9, 13, 22, 0.94);
 	color: #fff;
 	overflow: hidden;
 }
 
 .xl-lightbox::backdrop {
-	background: rgba(8, 8, 10, 0.8);
+	background: rgba(9, 13, 22, 0.8);
 }
 
 .xl-lightbox__stage {
@@ -2264,7 +2371,7 @@
 .xl-lightbox__btn:hover,
 .xl-lightbox__btn:focus-visible {
 	background: rgba(255, 255, 255, 0.18);
-	outline: 2px solid #c98a3f;
+	outline: 2px solid #c8d7fe;
 	outline-offset: 2px;
 }
 
@@ -2360,8 +2467,8 @@
 	position: absolute;
 	top: 14px;
 	padding: 0.35rem 0.75rem;
-	border-radius: 999px;
-	background: rgba(14, 14, 16, 0.72);
+	border-radius: 4px;
+	background: rgba(11, 17, 28, 0.72);
 	color: #fff;
 	font-size: 0.75rem;
 	font-weight: 700;
@@ -2412,7 +2519,7 @@
 }
 
 .xl-ba:focus-within .xl-ba__handle .xl-icon {
-	outline: 3px solid var(--xl-accent, #c98a3f);
+	outline: 3px solid var(--xl-accent, #3367fe);
 	outline-offset: 2px;
 }
 
@@ -2451,7 +2558,7 @@
 .xl-root .xl-review__stars {
 	display: flex;
 	gap: 2px;
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-review__stars .xl-icon {
@@ -2488,7 +2595,7 @@
 }
 
 .xl-root .xl-review__by strong {
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	color: var(--xl-heading);
 }
 
@@ -2504,7 +2611,7 @@
 }
 
 .xl-root .xl-review--large .xl-review__text {
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	font-size: clamp(1.25rem, 1rem + 1vw, 1.7rem);
 	line-height: 1.45;
 	font-weight: 500;
@@ -2572,7 +2679,7 @@
 	align-items: center;
 	padding: clamp(28px, 4vw, 48px);
 	border-radius: calc(var(--xl-radius) + 6px);
-	background: linear-gradient(120deg, var(--xl-dark) 0%, #1d1a16 100%);
+	background: linear-gradient(120deg, var(--xl-dark) 0%, #1d2a40 100%);
 	color: var(--xl-on-dark);
 	--xl-heading: #ffffff;
 	--xl-muted: var(--xl-on-dark-muted);
@@ -2589,7 +2696,7 @@
 	width: 50%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(201, 138, 63, 0.35), transparent 65%);
+	background: radial-gradient(circle, rgba(124, 152, 255, 0.35), transparent 65%);
 	pointer-events: none;
 }
 
@@ -2599,7 +2706,7 @@
 }
 
 .xl-root .xl-financing .xl-eyebrow {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 	margin-bottom: 0.5rem;
 }
 
@@ -2609,8 +2716,8 @@
 	width: 68px;
 	height: 68px;
 	border-radius: 20px;
-	background: rgba(201, 138, 63, 0.16);
-	color: var(--xl-accent);
+	background: rgba(124, 152, 255, 0.16);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-financing__icon .xl-icon {
@@ -2682,7 +2789,7 @@
 	padding: 1.35rem 0.25rem;
 	cursor: pointer;
 	list-style: none;
-	font-family: var(--xl-font-display);
+	font-family: var(--xl-font-ui);
 	font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
 	font-weight: 600;
 	color: var(--xl-heading);
@@ -2709,8 +2816,8 @@
 .xl-root .xl-accordion__item[open] .xl-accordion__icon {
 	transform: rotate(45deg);
 	background: var(--xl-accent);
-	border-color: var(--xl-accent);
-	color: #111114;
+	border-color: var(--xl-accent-ink);
+	color: #ffffff;
 }
 
 .xl-root .xl-accordion__a {
@@ -2762,7 +2869,7 @@
 	align-items: center;
 	gap: 0.45rem;
 	padding: 0.6rem 1rem;
-	border-radius: 999px;
+	border-radius: var(--xl-btn-radius, 6px);
 	background: var(--xl-card-bg);
 	border: 1px solid var(--xl-line);
 	font-weight: 600;
@@ -2869,8 +2976,8 @@
 
 .xl-root .xl-social a:hover {
 	background: var(--xl-accent);
-	border-color: var(--xl-accent);
-	color: #111114;
+	border-color: var(--xl-accent-ink);
+	color: #ffffff;
 }
 
 .xl-root .xl-social .xl-icon {
@@ -2895,10 +3002,10 @@
 	border: 1px solid var(--xl-line);
 	box-shadow: var(--xl-shadow);
 	color: var(--xl-text);
-	--xl-heading: #111114;
-	--xl-muted: #5f5a54;
-	--xl-line: rgba(17, 17, 20, 0.12);
-	--xl-accent-ink: #8a5b25;
+	--xl-heading: #05070b;
+	--xl-muted: #565d6b;
+	--xl-line: rgba(11, 17, 28, 0.12);
+	--xl-accent-ink: #2952cb;
 }
 
 .xl-root .xl-quote__main .xl-head {
@@ -2932,8 +3039,8 @@
 }
 
 .xl-root .xl-quote__aside .xl-checklist .xl-icon {
-	color: var(--xl-accent);
-	background: rgba(201, 138, 63, 0.16);
+	color: var(--xl-accent-ink);
+	background: rgba(124, 152, 255, 0.16);
 }
 
 .xl-root .xl-quote__contact {
@@ -2960,7 +3067,7 @@
 .xl-root .xl-quote__contact-link small {
 	font-weight: 400;
 	font-size: 0.78rem;
-	opacity: 0.7;
+	color: var(--xl-on-dark-muted);
 }
 
 .xl-root .xl-quote__contact-link .xl-icon {
@@ -2968,12 +3075,12 @@
 	height: 42px;
 	padding: 10px;
 	border-radius: 50%;
-	background: rgba(201, 138, 63, 0.16);
-	color: var(--xl-accent);
+	background: rgba(124, 152, 255, 0.16);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-quote__contact-link:hover {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-form {
@@ -3030,10 +3137,10 @@
 	width: 100%;
 	min-height: 50px;
 	padding: 0.75rem 0.95rem;
-	border: 1.5px solid #d9d4cc;
-	border-radius: 12px;
+	border: 1.5px solid #d5d9e0;
+	border-radius: var(--xl-radius-sm);
 	background: #fff;
-	color: #1e1e22;
+	color: #1b2130;
 	font: inherit;
 	font-size: 16px;
 	line-height: 1.4;
@@ -3062,8 +3169,8 @@
 
 .xl-root .xl-input:focus {
 	outline: none;
-	border-color: var(--xl-accent);
-	box-shadow: 0 0 0 4px rgba(201, 138, 63, 0.2);
+	border-color: var(--xl-accent-ink);
+	box-shadow: 0 0 0 4px rgba(51, 103, 254, 0.2);
 }
 
 .xl-root .xl-input::placeholder {
@@ -3116,7 +3223,7 @@
 	gap: 0.6rem;
 	min-height: 54px;
 	padding: 0.75rem 1rem;
-	border: 1.5px solid #d9d4cc;
+	border: 1.5px solid #d5d9e0;
 	border-radius: 12px;
 	background: #fff;
 	font-weight: 600;
@@ -3131,8 +3238,8 @@
 
 .xl-root .xl-segment input:checked + span,
 .xl-root .xl-chip input:checked + span {
-	border-color: var(--xl-accent);
-	background: rgba(201, 138, 63, 0.1);
+	border-color: var(--xl-accent-ink);
+	background: rgba(51, 103, 254, 0.1);
 	box-shadow: inset 0 0 0 1px var(--xl-accent);
 }
 
@@ -3152,7 +3259,7 @@
 .xl-root .xl-chip span {
 	min-height: 46px;
 	padding: 0.55rem 1rem;
-	border-radius: 999px;
+	border-radius: var(--xl-btn-radius, 6px);
 	font-size: 0.92rem;
 }
 
@@ -3187,7 +3294,7 @@
 	gap: 0.3rem;
 	padding: 1.6rem 1rem;
 	border: 1.5px dashed #c9c2b6;
-	border-radius: 14px;
+	border-radius: 10px;
 	background: #fbfaf7;
 	text-align: center;
 	cursor: pointer;
@@ -3196,8 +3303,8 @@
 
 .xl-root .xl-drop:hover,
 .xl-root .xl-drop.is-dragover {
-	border-color: var(--xl-accent);
-	background: rgba(201, 138, 63, 0.06);
+	border-color: var(--xl-accent-ink);
+	background: rgba(51, 103, 254, 0.06);
 }
 
 .xl-root .xl-drop:focus-within {
@@ -3275,7 +3382,7 @@
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	background: #111114;
+	background: #05070b;
 	color: #fff;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -3300,7 +3407,7 @@
 	width: 20px;
 	height: 20px;
 	margin: 2px 0 0;
-	accent-color: var(--xl-accent);
+	accent-color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-check a {
@@ -3421,9 +3528,6 @@
 	border-radius: calc(var(--xl-radius) + 10px);
 	background: var(--xl-dark);
 	color: var(--xl-on-dark);
-	--xl-heading: #ffffff;
-	--xl-muted: var(--xl-on-dark-muted);
-	--xl-accent-ink: var(--xl-accent);
 	isolation: isolate;
 }
 
@@ -3432,14 +3536,14 @@
 }
 
 .xl-root .xl-cta .xl-eyebrow {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-cta__glow {
 	position: absolute;
 	inset: auto -10% -60% -10%;
 	height: 120%;
-	background: radial-gradient(50% 50% at 50% 50%, rgba(201, 138, 63, 0.38), transparent 70%);
+	background: radial-gradient(50% 50% at 50% 50%, rgba(124, 152, 255, 0.38), transparent 70%);
 	z-index: -1;
 	pointer-events: none;
 }
@@ -3451,10 +3555,10 @@
 	left: 0;
 	right: 0;
 	height: 6px;
-	background-image: radial-gradient(circle, #ffd08a 0 2px, rgba(255, 208, 138, 0.3) 2.5px, transparent 5px);
+	background-image: radial-gradient(circle, #ffd79a 0 2px, rgba(255, 215, 154, 0.3) 2.5px, transparent 5px);
 	background-size: 30px 6px;
 	background-repeat: repeat-x;
-	filter: drop-shadow(0 0 4px rgba(255, 208, 138, 0.7));
+	filter: drop-shadow(0 0 4px rgba(255, 215, 154, 0.7));
 	opacity: 0.6;
 }
 
@@ -3474,7 +3578,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: rgba(8, 8, 10, var(--xl-overlay, 0.65));
+	background: rgba(9, 13, 22, var(--xl-overlay, 0.65));
 }
 
 .xl-root .xl-cta--band .xl-cta {
@@ -3491,9 +3595,15 @@
 .xl-root .xl-cta--band.xl-bg--light .xl-cta,
 .xl-root .xl-cta--band.xl-bg--warm .xl-cta {
 	color: var(--xl-text);
-	--xl-heading: #111114;
-	--xl-muted: #5f5a54;
-	--xl-accent-ink: #8a5b25;
+	--xl-heading: #05070b;
+	--xl-muted: #565d6b;
+	--xl-line: rgba(11, 17, 28, 0.12);
+	--xl-accent-ink: #2952cb;
+	--xl-accent-soft: rgba(51, 103, 254, 0.1);
+	--xl-btn-bg: var(--xl-ink);
+	--xl-btn-color: #ffffff;
+	--xl-btn-bg-hover: var(--xl-accent);
+	--xl-btn-color-hover: #ffffff;
 }
 
 .xl-root .xl-cta--band .xl-cta__glow {
@@ -3612,9 +3722,9 @@
 	gap: 1rem;
 	align-items: center;
 	padding: 1.15rem 1.35rem;
-	border: 1px solid rgba(201, 138, 63, 0.5);
+	border: 1px solid rgba(51, 103, 254, 0.5);
 	border-radius: 16px;
-	background: rgba(201, 138, 63, 0.08);
+	background: rgba(51, 103, 254, 0.08);
 	margin-bottom: 1.25rem;
 	flex-wrap: wrap;
 }
@@ -3632,7 +3742,7 @@
 .xl-root .xl-trust__seal .xl-icon {
 	width: 40px;
 	height: 40px;
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-root .xl-trust__items {
@@ -3655,6 +3765,8 @@
 
 .xl-root .xl-trust__items h3 {
 	font-family: var(--xl-font-display);
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
 	font-size: 1.05rem;
 	color: var(--xl-heading);
 }
@@ -3670,8 +3782,8 @@
 	height: 40px;
 	padding: 9px;
 	border-radius: 12px;
-	background: rgba(201, 138, 63, 0.14);
-	color: var(--xl-accent);
+	background: rgba(124, 152, 255, 0.14);
+	color: var(--xl-accent-ink);
 }
 
 /* -------------------------------------------------------------------------
@@ -3707,7 +3819,7 @@
 	}
 
 	.xl-root .xl-hero__media::after {
-		background: linear-gradient(180deg, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) * 0.7)) 0%, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) + 0.15)) 38%, rgba(8, 8, 10, calc(var(--xl-overlay, 0.6) + 0.3)) 100%);
+		background: linear-gradient(180deg, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.7)) 0%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) + 0.15)) 38%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) + 0.3)) 100%);
 	}
 
 	.xl-root .xl-hero__highlights {
@@ -3865,7 +3977,7 @@
 	z-index: 100000;
 	padding: 0.75rem 1rem;
 	border-radius: 8px;
-	background: #111114;
+	background: #05070b;
 	color: #fff !important;
 	font: 600 0.9rem system-ui, sans-serif;
 	text-decoration: none;
@@ -3880,8 +3992,8 @@
 }
 
 .xl-header {
-	--xl-header-bg: rgba(255, 255, 255, 0.96);
-	--xl-header-link: #1e1e22;
+	--xl-header-bg: #ffffff;
+	--xl-header-link: var(--xl-ink, #05070b);
 	position: relative;
 	z-index: 1000;
 	color: var(--xl-header-link);
@@ -3904,7 +4016,7 @@
 
 .xl-header__bar {
 	background: var(--xl-header-bg);
-	border-bottom: 1px solid rgba(17, 17, 20, 0.08);
+	border-bottom: 1px solid rgba(11, 17, 28, 0.06);
 	backdrop-filter: saturate(160%) blur(14px);
 	-webkit-backdrop-filter: saturate(160%) blur(14px);
 	transition: background-color 0.35s var(--xl-ease), border-color 0.35s, box-shadow 0.35s;
@@ -3917,8 +4029,13 @@
 .xl-header__inner {
 	display: flex;
 	align-items: center;
-	gap: 1.5rem;
+	gap: 1.25rem;
 	min-height: var(--xl-header-h);
+}
+
+.xl-header .xl-header__inner,
+.xl-footer .xl-container {
+	width: min(100% - 2 * var(--xl-gutter), 1400px);
 }
 
 .xl-header__brand {
@@ -3934,49 +4051,41 @@
 	align-items: center;
 }
 
-.xl-logo__img {
+/* Dealer lockup: official logo | MARKET NAME */
+.xl-lockup {
+	display: inline-flex;
+	align-items: center;
+	gap: 14px;
+}
+
+/* Two classes: must beat `.xl-root img { height: auto }` and `.elementor img`. */
+.xl-lockup .xl-logo__img {
+	display: block;
 	width: auto;
-	max-height: 44px;
-	max-width: 190px;
+	height: clamp(34px, 2.9vw, 44px);
+	max-width: 200px;
 	object-fit: contain;
+}
+
+.xl-lockup .xl-logo__img--invert {
+	filter: brightness(0) invert(1);
+}
+
+.xl-lockup__market {
+	padding: 3px 0 3px 14px;
+	border-left: 1px solid currentColor;
+	max-width: 9.5em;
+	font-family: var(--xl-font-ui);
+	font-size: 0.64rem;
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	line-height: 1.35;
+	text-transform: uppercase;
+	opacity: 0.72;
 }
 
 .xl-logo--overlay {
 	display: none;
-}
-
-.xl-wordmark {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.55rem;
-	font-family: var(--xl-font-display);
-	line-height: 1;
-}
-
-.xl-wordmark__x .xl-icon {
-	width: 34px;
-	height: 34px;
-	stroke-width: 2.6;
-	color: var(--xl-accent);
-}
-
-.xl-wordmark__text {
-	display: grid;
-	gap: 3px;
-}
-
-.xl-wordmark__text b {
-	font-size: 1.2rem;
-	font-weight: 800;
-	letter-spacing: 0.18em;
-}
-
-.xl-wordmark__text small {
-	font-size: 0.6rem;
-	font-weight: 600;
-	letter-spacing: 0.22em;
-	text-transform: uppercase;
-	opacity: 0.7;
 }
 
 .xl-nav {
@@ -4002,13 +4111,15 @@
 	display: inline-flex;
 	align-items: center;
 	min-height: 44px;
-	padding: 0.5rem 0.7rem;
-	font-family: var(--xl-font-display);
-	font-size: 0.9rem;
-	font-weight: 600;
+	padding: 0.5rem 0.6rem;
+	font-family: var(--xl-font-ui);
+	font-size: 0.78rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 	color: inherit;
 	text-decoration: none;
-	border-radius: 8px;
+	border-radius: 6px;
 	white-space: nowrap;
 	transition: color 0.2s;
 }
@@ -4020,7 +4131,7 @@
 .xl-nav__link:hover,
 .xl-nav__item.is-current > .xl-nav__link,
 .xl-nav__link[aria-current="page"] {
-	color: var(--xl-accent-ink, #8a5b25);
+	color: var(--xl-accent, #3367fe);
 }
 
 .xl-nav__toggle {
@@ -4050,13 +4161,13 @@
 	position: absolute;
 	top: calc(100% + 4px);
 	left: 0;
-	min-width: 260px;
+	min-width: 270px;
 	margin: 0;
 	padding: 0.5rem;
 	list-style: none;
-	border-radius: 14px;
-	background: #ffffff;
-	box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(17, 17, 20, 0.06);
+	border-radius: 10px;
+	background: var(--xl-dark, #131c2d);
+	box-shadow: 0 30px 60px -24px rgba(5, 7, 11, 0.6);
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(6px);
@@ -4077,7 +4188,7 @@
 	transform: none;
 }
 
-@media (hover: hover) and (min-width: 1101px) {
+@media (hover: hover) and (min-width: 1301px) {
 	.xl-nav__item.has-sub:hover > .xl-nav__sub {
 		opacity: 1;
 		visibility: visible;
@@ -4085,55 +4196,90 @@
 	}
 }
 
-.xl-nav__sublink {
+/* Two classes: must beat `.xl-root a { color: inherit }`. */
+.xl-header .xl-nav__sublink {
 	display: block;
-	padding: 0.7rem 0.85rem;
-	border-radius: 9px;
-	color: #1e1e22;
-	font-size: 0.92rem;
-	font-weight: 550;
+	padding: 0.75rem 0.9rem;
+	border-radius: 6px;
+	color: #ffffff;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
 	text-decoration: none;
 }
 
-.xl-nav__sublink:hover,
-.xl-nav__sublink:focus-visible,
-.xl-nav__sublink[aria-current="page"] {
-	background: #f5f1ea;
-	color: #8a5b25;
+.xl-header .xl-nav__sublink:hover,
+.xl-header .xl-nav__sublink:focus-visible,
+.xl-header .xl-nav__sublink[aria-current="page"] {
+	background: rgba(255, 255, 255, 0.07);
+	color: #c8d7fe;
 }
 
 .xl-header__actions {
 	display: flex;
 	align-items: center;
-	gap: 0.9rem;
+	gap: 0.75rem;
+}
+
+@media (max-width: 1439px) {
+	.xl-header .xl-nav__link {
+		padding-inline: 0.48rem;
+		letter-spacing: 0.06em;
+	}
+
+	.xl-header .xl-nav__item.has-sub > .xl-nav__link {
+		padding-right: 0.1rem;
+	}
+}
+
+/* Below 1500px the phone collapses to an icon button so the nav fits. */
+@media (max-width: 1499px) {
+	.xl-header__phone span {
+		display: none;
+	}
+
+	.xl-header__phone {
+		display: inline-grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border: 1px solid rgba(11, 17, 28, 0.16);
+		border-radius: 6px;
+	}
+
+	.xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone {
+		border-color: rgba(255, 255, 255, 0.35);
+	}
 }
 
 .xl-header__phone {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.45rem;
-	font-family: var(--xl-font-display);
-	font-size: 0.9rem;
-	font-weight: 650;
+	font-family: var(--xl-font-ui);
+	font-size: 0.86rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
 	color: inherit;
 	text-decoration: none;
 	white-space: nowrap;
 }
 
 .xl-header__phone .xl-icon {
-	width: 18px;
-	height: 18px;
+	width: 17px;
+	height: 17px;
 	color: var(--xl-accent);
 }
 
 .xl-header__phone:hover {
-	color: var(--xl-accent-ink, #8a5b25);
+	color: var(--xl-accent, #3367fe);
 }
 
 .xl-header .xl-btn {
 	min-height: 44px;
-	padding: 0.65em 1.25em;
-	font-size: 0.88rem;
+	padding: 0.7em 1.35em;
+	font-size: 0.74rem;
 	white-space: nowrap;
 }
 
@@ -4142,8 +4288,8 @@
 	place-items: center;
 	width: 46px;
 	height: 46px;
-	border: 1px solid rgba(17, 17, 20, 0.14);
-	border-radius: 12px;
+	border: 1px solid rgba(11, 17, 28, 0.16);
+	border-radius: 6px;
 	background: none;
 	color: inherit;
 	cursor: pointer;
@@ -4181,8 +4327,16 @@
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__item.is-current > .xl-nav__link,
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__link[aria-current="page"],
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__link:hover,
-.xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone:hover {
-	color: var(--xl-accent);
+.xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone:hover,
+.xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone .xl-icon {
+	color: #c8d7fe;
+}
+
+.xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) {
+	--xl-btn-bg: #ffffff;
+	--xl-btn-color: var(--xl-ink);
+	--xl-btn-bg-hover: #c8d7fe;
+	--xl-btn-color-hover: var(--xl-ink);
 }
 
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark {
@@ -4203,7 +4357,7 @@
 .xl-drawer__backdrop {
 	position: absolute;
 	inset: 0;
-	background: rgba(8, 8, 10, 0.55);
+	background: rgba(9, 13, 22, 0.55);
 	opacity: 0;
 	transition: opacity 0.3s;
 }
@@ -4220,8 +4374,14 @@
 	display: flex;
 	flex-direction: column;
 	width: min(420px, 100%);
-	background: var(--xl-dark, #0e0e10);
-	color: #f5f0e8;
+	background: var(--xl-dark, #131c2d);
+	color: #eef1f7;
+	--xl-heading: #ffffff;
+	--xl-accent-ink: var(--xl-accent-on-dark);
+	--xl-btn-bg: #ffffff;
+	--xl-btn-color: var(--xl-ink);
+	--xl-btn-bg-hover: var(--xl-accent-on-dark);
+	--xl-btn-color-hover: var(--xl-ink);
 	box-shadow: -30px 0 60px rgba(0, 0, 0, 0.35);
 	transform: translateX(100%);
 	transition: transform 0.35s var(--xl-ease);
@@ -4247,7 +4407,7 @@
 	place-items: center;
 	width: 46px;
 	height: 46px;
-	border-radius: 50%;
+	border-radius: 6px;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	background: none;
 	color: #fff;
@@ -4276,16 +4436,25 @@
 
 .xl-drawer__nav .xl-nav__link {
 	flex: 1;
-	min-height: 56px;
+	min-height: 60px;
 	padding-left: 0;
-	font-size: 1.05rem;
-	color: #f5f0e8;
+	font-family: var(--xl-font-display);
+	font-size: 1.65rem;
+	font-weight: 300;
+	letter-spacing: 0.02em;
+	color: #eef1f7;
+}
+
+.xl-drawer__nav .xl-nav__link:hover,
+.xl-drawer__nav .xl-nav__item.is-current > .xl-nav__link,
+.xl-drawer__nav .xl-nav__link[aria-current="page"] {
+	color: #c8d7fe;
 }
 
 .xl-drawer__nav .xl-nav__toggle {
 	width: 48px;
 	height: 56px;
-	color: #f5f0e8;
+	color: #eef1f7;
 }
 
 .xl-drawer__nav .xl-nav__sub {
@@ -4306,14 +4475,14 @@
 }
 
 .xl-drawer__nav .xl-nav__sublink {
-	color: rgba(245, 240, 232, 0.8);
+	color: rgba(238, 241, 247, 0.8);
 	padding: 0.75rem 1rem;
 }
 
 .xl-drawer__nav .xl-nav__sublink:hover,
 .xl-drawer__nav .xl-nav__sublink[aria-current="page"] {
 	background: rgba(255, 255, 255, 0.06);
-	color: #c98a3f;
+	color: var(--xl-accent-on-dark, #c8d7fe);
 }
 
 .xl-drawer__actions {
@@ -4335,16 +4504,13 @@
 	color: #fff;
 }
 
-.xl-drawer .xl-btn--primary {
-	background: var(--xl-accent);
-	color: #111114;
-}
+
 
 html.xl-scroll-lock {
 	overflow: hidden;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
 	.xl-header .xl-nav,
 	.xl-header__phone span {
 		display: none;
@@ -4363,8 +4529,8 @@ html.xl-scroll-lock {
 		place-items: center;
 		width: 46px;
 		height: 46px;
-		border: 1px solid rgba(17, 17, 20, 0.14);
-		border-radius: 12px;
+		border: 1px solid rgba(11, 17, 28, 0.16);
+		border-radius: 6px;
 	}
 
 	.xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone {
@@ -4377,8 +4543,14 @@ html.xl-scroll-lock {
 		display: none;
 	}
 
-	.xl-wordmark__text b {
-		font-size: 1.05rem;
+	.xl-lockup {
+		gap: 10px;
+	}
+
+	.xl-lockup__market {
+		padding-left: 10px;
+		font-size: 0.58rem;
+		letter-spacing: 0.18em;
 	}
 }
 
@@ -4387,7 +4559,7 @@ html.xl-scroll-lock {
  * ---------------------------------------------------------------------- */
 .xl-footer {
 	background: var(--xl-dark);
-	color: rgba(245, 240, 232, 0.78);
+	color: rgba(238, 241, 247, 0.78);
 	font-size: 0.95rem;
 	--xl-heading: #ffffff;
 	--xl-line: rgba(255, 255, 255, 0.12);
@@ -4399,12 +4571,12 @@ html.xl-scroll-lock {
 }
 
 .xl-footer a:hover {
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-footer__cta {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-	background: radial-gradient(60% 120% at 50% 0%, rgba(201, 138, 63, 0.16), transparent 70%);
+	background: radial-gradient(60% 120% at 50% 0%, rgba(124, 152, 255, 0.16), transparent 70%);
 }
 
 .xl-footer__cta-inner {
@@ -4419,11 +4591,12 @@ html.xl-scroll-lock {
 .xl-footer__cta-text {
 	margin: 0;
 	font-family: var(--xl-font-display);
-	font-size: clamp(1.35rem, 1rem + 1.4vw, 2rem);
-	font-weight: 650;
-	letter-spacing: -0.02em;
+	font-size: clamp(1.9rem, 1.2rem + 2vw, 2.9rem);
+	font-weight: 300;
+	line-height: 1.04;
+	text-transform: uppercase;
 	color: #ffffff;
-	max-width: 620px;
+	max-width: 680px;
 }
 
 .xl-footer__cta .xl-actions {
@@ -4444,12 +4617,29 @@ html.xl-scroll-lock {
 }
 
 .xl-footer__title {
-	margin: 0 0 1rem;
-	font-size: 0.82rem !important;
-	font-weight: 700;
-	letter-spacing: 0.16em;
+	margin: 0 0 1.1rem;
+	font-family: var(--xl-font-ui);
+	font-size: 0.72rem !important;
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	line-height: 1.3;
 	text-transform: uppercase;
-	color: var(--xl-accent) !important;
+	color: var(--xl-accent-on-dark, #c8d7fe) !important;
+}
+
+/* Menu columns: large, light, condensed caps (as on the X LIGHTS website). */
+.xl-footer__col:not(:last-child) ul a {
+	font-family: var(--xl-font-display);
+	font-size: 1.3rem;
+	font-weight: 300;
+	letter-spacing: 0.03em;
+	line-height: 1.15;
+	text-transform: uppercase;
+	color: rgba(238, 241, 247, 0.88);
+}
+
+.xl-footer__col:not(:last-child) ul a:hover {
+	color: #ffffff;
 }
 
 .xl-footer__title--sub {
@@ -4475,7 +4665,7 @@ html.xl-scroll-lock {
 	width: 18px;
 	height: 18px;
 	margin-top: 2px;
-	color: var(--xl-accent);
+	color: var(--xl-accent-ink);
 }
 
 .xl-footer__areas {
@@ -4488,14 +4678,14 @@ html.xl-scroll-lock {
 	place-items: center;
 	width: 40px;
 	height: 40px;
-	border-radius: 50%;
+	border-radius: 6px;
 	border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .xl-footer .xl-social a:hover {
 	background: var(--xl-accent);
-	color: #111114;
-	border-color: var(--xl-accent);
+	color: #ffffff;
+	border-color: var(--xl-accent-ink);
 }
 
 .xl-footer .xl-social .xl-icon {
@@ -4559,7 +4749,7 @@ html.xl-scroll-lock {
 	align-items: center;
 	padding: 0.4rem 0.8rem;
 	border-radius: 999px;
-	background: #f5f1ea;
+	background: #eef0f3;
 	font-size: 0.85rem;
 	font-weight: 600;
 }
@@ -4567,7 +4757,7 @@ html.xl-scroll-lock {
 .xl-project-single .xl-project-meta .xl-icon {
 	width: 1em;
 	height: 1em;
-	color: #8a5b25;
+	color: #2952cb;
 }
 
 .xl-project-single .xl-project-gallery {

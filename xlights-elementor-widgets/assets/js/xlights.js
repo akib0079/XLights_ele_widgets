@@ -494,7 +494,8 @@
 		// Transparent over a dark first section.
 		if (header.classList.contains('xl-header--overlay-capable') && document.body.classList.contains('xl-header-overlay')) {
 			var first = document.querySelector('.xl-main .xl-section, .xl-root--page .xl-section');
-			if (first && first.classList.contains('xl-bg--dark')) {
+			// Inset (framed) heroes sit below a solid header.
+			if (first && first.classList.contains('xl-bg--dark') && !first.classList.contains('xl-hero--inset')) {
 				var gap = first.getBoundingClientRect().top - header.getBoundingClientRect().bottom;
 				if (gap < 60) {
 					header.classList.add('is-over-dark');
@@ -550,7 +551,7 @@
 			});
 			if (!item.closest('.xl-drawer')) {
 				item.addEventListener('mouseenter', function () {
-					if (window.matchMedia('(hover: hover) and (min-width: 1101px)').matches) {
+					if (window.matchMedia('(hover: hover) and (min-width: 1301px)').matches) {
 						btn.setAttribute('aria-expanded', 'true');
 					}
 				});
@@ -654,7 +655,7 @@
 			});
 		});
 		window.addEventListener('resize', function () {
-			if (window.innerWidth > 1100 && !drawer.hidden) {
+			if (window.innerWidth > 1300 && !drawer.hidden) {
 				closeDrawer(false);
 			}
 		});

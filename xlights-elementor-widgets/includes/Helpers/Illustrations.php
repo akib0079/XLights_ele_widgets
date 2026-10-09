@@ -111,7 +111,7 @@ final class Illustrations {
 	private static function bulb_string( $x1, $y1, $x2, $y2, $sag, $count, array $colors, $glow ) {
 		$cx    = ( $x1 + $x2 ) / 2;
 		$cy    = max( $y1, $y2 ) + $sag;
-		$wire  = sprintf( '<path d="M%.1f %.1fQ%.1f %.1f %.1f %.1f" stroke="#2b2b30" stroke-width="2" fill="none"/>', $x1, $y1, $cx, $cy, $x2, $y2 );
+		$wire  = sprintf( '<path d="M%.1f %.1fQ%.1f %.1f %.1f %.1f" stroke="#2a303c" stroke-width="2" fill="none"/>', $x1, $y1, $cx, $cy, $x2, $y2 );
 		$halo  = '';
 		$bulbs = '';
 		for ( $i = 1; $i < $count; $i++ ) {
@@ -120,7 +120,7 @@ final class Illustrations {
 			$y      = pow( 1 - $t, 2 ) * $y1 + 2 * ( 1 - $t ) * $t * $cy + $t * $t * $y2;
 			$c      = $colors[ $i % count( $colors ) ];
 			$halo  .= sprintf( '<circle cx="%.1f" cy="%.1f" r="16" fill="%s"/>', $x, $y + 12, $c );
-			$bulbs .= sprintf( '<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#2b2b30" stroke-width="2"/><ellipse cx="%.1f" cy="%.1f" rx="5" ry="7" fill="%s"/>', $x, $y, $x, $y + 6, $x, $y + 12, $c );
+			$bulbs .= sprintf( '<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="#2a303c" stroke-width="2"/><ellipse cx="%.1f" cy="%.1f" rx="5" ry="7" fill="%s"/>', $x, $y, $x, $y + 6, $x, $y + 12, $c );
 		}
 		return $wire . '<g opacity=".5" filter="url(#' . $glow . ')">' . $halo . '</g>' . $bulbs;
 	}
@@ -165,31 +165,31 @@ final class Illustrations {
 			case 'daytime':
 				// Close-up of a fascia with the low-profile track: lights barely visible by day.
 				$body .= '<path d="M0 0h800v600H0z" fill="url(#' . $id . 's)"/>';
-				$body .= '<path d="M0 230 800 120v120L0 350z" fill="#5c5650"/><path d="M0 350 800 240v26L0 376z" fill="#4a4540"/>';
-				$body .= '<path d="M0 376 800 266v334H0z" fill="#d9d2c7"/>';
-				$body .= '<path d="M0 363 800 253" stroke="#3f3a35" stroke-width="10"/>';
+				$body .= '<path d="M0 230 800 120v120L0 350z" fill="#4b5361"/><path d="M0 350 800 240v26L0 376z" fill="#3d4450"/>';
+				$body .= '<path d="M0 376 800 266v334H0z" fill="#d6dbe2"/>';
+				$body .= '<path d="M0 363 800 253" stroke="#343b47" stroke-width="10"/>';
 				foreach ( array( 70, 230, 390, 550, 710 ) as $x ) {
 					$y     = 363 - ( $x * 110 / 800 );
-					$body .= sprintf( '<circle cx="%d" cy="%.1f" r="7" fill="#e8e3da" stroke="#77716a" stroke-width="1.5"/>', $x, $y );
+					$body .= sprintf( '<circle cx="%d" cy="%.1f" r="7" fill="#e6eaf0" stroke="#6f7785" stroke-width="1.5"/>', $x, $y );
 				}
 				$body .= '<path d="M0 376h800" stroke="none"/>';
 				break;
 
 			case 'patio':
 				$body .= '<path d="M0 0h800v600H0z" fill="url(#' . $id . 's)"/>' . $stars;
-				$body .= '<path d="M0 430h800v170H0z" fill="#1f1d22"/><path d="M0 430h800" stroke="#38343a" stroke-width="3"/>';
-				$body .= '<path d="M70 150v290M730 150v290M400 160v270" stroke="#2f2c31" stroke-width="10"/>';
+				$body .= '<path d="M0 430h800v170H0z" fill="#161d2a"/><path d="M0 430h800" stroke="#2c3442" stroke-width="3"/>';
+				$body .= '<path d="M70 150v290M730 150v290M400 160v270" stroke="#2a303c" stroke-width="10"/>';
 				$body .= self::bulb_string( 70, 160, 400, 170, 70, 8, $colors, $id );
 				$body .= self::bulb_string( 400, 170, 730, 160, 70, 8, $colors, $id );
 				$body .= self::bulb_string( 70, 240, 730, 240, 60, 14, $colors, $id );
 				$body .= '<ellipse cx="400" cy="470" rx="250" ry="40" fill="url(#' . $id . 'w)" opacity=".45"/>';
-				$body .= '<path d="M300 430h200v12H300zM315 442v58M485 442v58" stroke="#121115" stroke-width="8" fill="#121115"/>';
-				$body .= '<path d="M240 420v80M240 440h40v60M560 420v80M560 440h-40v60" stroke="#121115" stroke-width="7" fill="none"/>';
+				$body .= '<path d="M300 430h200v12H300zM315 442v58M485 442v58" stroke="#0b0f17" stroke-width="8" fill="#0b0f17"/>';
+				$body .= '<path d="M240 420v80M240 440h40v60M560 420v80M560 440h-40v60" stroke="#0b0f17" stroke-width="7" fill="none"/>';
 				break;
 
 			case 'deck':
 				$body .= '<path d="M0 0h800v600H0z" fill="url(#' . $id . 's)"/>' . $stars;
-				$body .= '<path d="M0 250h800v350H0z" fill="#1c1a1e"/>';
+				$body .= '<path d="M0 250h800v350H0z" fill="#161d2a"/>';
 				$body .= '<path d="M120 250h560v40H120z" fill="#3a2f28"/>';
 				for ( $i = 0; $i < 5; $i++ ) {
 					$y     = 290 + $i * 52;
@@ -197,7 +197,7 @@ final class Illustrations {
 					$body .= sprintf( '<path d="M%d %dh%d v14 H%dz" fill="#4a3c32"/><path d="M%d %dh%d v38 H%dz" fill="#2c241f"/>', $x, $y, 400 - $i * 60, $x, $x, $y + 14, 400 - $i * 60, $x );
 					$body .= self::light_run( array( array( $x + 30, $y + 26 ), array( $x + 400 - $i * 60 - 20, $y + 26 ) ), 70, $colors, $id, 3 );
 				}
-				$body .= '<path d="M120 130v120M680 130v120M120 150h560M120 200h560" stroke="#2f2c31" stroke-width="8"/>';
+				$body .= '<path d="M120 130v120M680 130v120M120 150h560M120 200h560" stroke="#2a303c" stroke-width="8"/>';
 				foreach ( array( 120, 307, 493, 680 ) as $x ) {
 					$body .= self::light_run( array( array( $x, 136 ), array( $x + 1, 136 ) ), 10, $colors, $id, 4 );
 				}
@@ -206,14 +206,14 @@ final class Illustrations {
 			case 'landscape':
 				$body .= '<path d="M0 0h800v600H0z" fill="url(#' . $id . 's)"/>' . $stars;
 				$body .= '<path d="M0 420c160-30 360-40 800-20v200H0z" fill="#16201a"/>';
-				$body .= '<path d="M520 420V260l120-90 120 90v160z" fill="#25232a"/><path d="M570 330h40v40h-40z" fill="#ffcf87" opacity=".8"/>';
+				$body .= '<path d="M520 420V260l120-90 120 90v160z" fill="#222a37"/><path d="M570 330h40v40h-40z" fill="#ffcf87" opacity=".8"/>';
 				$body .= '<path d="M200 470 140 230h120z" fill="url(#' . $id . 'u)"/>';
 				$body .= '<path d="M200 470V330" stroke="#2a221d" stroke-width="12"/>';
 				$body .= '<path d="M200 140c-70 0-110 50-110 100 0 55 50 90 110 90s110-35 110-90c0-50-40-100-110-100z" fill="#1f3326"/>';
 				$body .= '<path d="M200 140c-70 0-110 50-110 100 0 55 50 90 110 90s110-35 110-90c0-50-40-100-110-100z" fill="' . $colors[0] . '" opacity=".22"/>';
-				$body .= '<path d="M300 600c40-80 120-130 260-170" stroke="#3a3530" stroke-width="40" fill="none" opacity=".8"/>';
+				$body .= '<path d="M300 600c40-80 120-130 260-170" stroke="#343a44" stroke-width="40" fill="none" opacity=".8"/>';
 				foreach ( array( array( 290, 560 ), array( 350, 505 ), array( 430, 465 ), array( 500, 440 ) ) as $p ) {
-					$body .= sprintf( '<path d="M%d %dv-26" stroke="#2f2c31" stroke-width="4"/>', $p[0] - 30, $p[1] );
+					$body .= sprintf( '<path d="M%d %dv-26" stroke="#2a303c" stroke-width="4"/>', $p[0] - 30, $p[1] );
 					$body .= self::light_run( array( array( $p[0] - 30, $p[1] - 30 ), array( $p[0] - 29, $p[1] - 30 ) ), 10, $colors, $id, 4 );
 				}
 				$body .= self::light_run( array( array( 200, 470 ), array( 201, 470 ) ), 10, $colors, $id, 4 );
@@ -221,23 +221,23 @@ final class Illustrations {
 
 			case 'commercial':
 				$body .= '<path d="M0 0h800v600H0z" fill="url(#' . $id . 's)"/>' . $stars;
-				$body .= '<path d="M90 180h620v300H90z" fill="#24222a"/><path d="M70 160h660v24H70z" fill="#1a191e"/>';
+				$body .= '<path d="M90 180h620v300H90z" fill="#222a37"/><path d="M70 160h660v24H70z" fill="#171e2b"/>';
 				$body .= '<path d="M140 280h200v200H140zM460 280h200v200H460z" fill="#ffcf87" opacity=".18"/>';
-				$body .= '<path d="M130 250h540l-30 30H160z" fill="#3a2f2a"/>';
+				$body .= '<path d="M130 250h540l-30 30H160z" fill="#343b48"/>';
 				$body .= self::light_run( array( array( 70, 172 ), array( 730, 172 ) ), 34, $colors, $id, 3.4 );
-				$body .= '<path d="M0 480h800v120H0z" fill="#1a191d"/>';
+				$body .= '<path d="M0 480h800v120H0z" fill="#151b27"/>';
 				$body .= self::bulb_string( 0, 400, 400, 410, 50, 8, $colors, $id );
 				$body .= self::bulb_string( 400, 410, 800, 400, 50, 8, $colors, $id );
-				$body .= '<path d="M180 540h120v10H180zM500 540h120v10H500z" fill="#0f0e12"/>';
+				$body .= '<path d="M180 540h120v10H180zM500 540h120v10H500z" fill="#0b0f17"/>';
 				break;
 
 			case 'roofline':
 			default:
 				$body .= '<path d="M0 0h800v600H0z" fill="url(#' . $id . 's)"/>' . $stars;
-				$body .= '<path d="M90 300 300 160l210 140V520H90z" fill="#24222a"/>';
-				$body .= '<path d="M440 330 600 220l160 110v190H440z" fill="#2a2830"/>';
+				$body .= '<path d="M90 300 300 160l210 140V520H90z" fill="#222a37"/>';
+				$body .= '<path d="M440 330 600 220l160 110v190H440z" fill="#262e3b"/>';
 				$body .= '<path d="M150 380h70v70h-70zM360 380h90v140h-90zM520 380h60v60h-60zM650 380h60v60h-60z" fill="#ffcf87" opacity=".85"/>';
-				$body .= '<path d="M0 520h800v80H0z" fill="#16151a"/>';
+				$body .= '<path d="M0 520h800v80H0z" fill="#121823"/>';
 				$body .= '<ellipse cx="300" cy="540" rx="300" ry="30" fill="url(#' . $id . 'w)" opacity=".3"/>';
 				$body .= self::light_run( array( array( 70, 312 ), array( 300, 158 ), array( 530, 312 ) ), 30, $colors, $id );
 				$body .= self::light_run( array( array( 425, 340 ), array( 600, 218 ), array( 775, 340 ) ), 30, $colors, $id );
@@ -295,7 +295,7 @@ final class Illustrations {
 
 		$out  = '<div class="' . esc_attr( $class ) . ' xl-phone--mock" role="img" aria-label="' . esc_attr( $label ) . '">';
 		$out .= '<div class="xl-phone__screen" aria-hidden="true">';
-		$out .= '<div class="xl-app__bar"><span class="xl-app__time">9:41</span><span class="xl-app__logo">X LIGHTS</span><span class="xl-app__dots"></span></div>';
+		$out .= '<div class="xl-app__bar"><span class="xl-app__time">9:41</span><img class="xl-app__logo" src="' . esc_url( XLIGHTS_URL . 'assets/images/brand/xlights-logo.png' ) . '" width="70" height="21" alt=""><span class="xl-app__dots"></span></div>';
 		$out .= '<div class="xl-app xl-app--' . esc_attr( $screen ) . '">' . self::screen_body( $screen ) . '</div>';
 		$out .= '<div class="xl-app__tabs"><i></i><i></i><i></i><i></i><i></i></div>';
 		$out .= '</div></div>';

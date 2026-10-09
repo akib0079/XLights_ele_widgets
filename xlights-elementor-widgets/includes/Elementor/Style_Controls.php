@@ -111,7 +111,7 @@ final class Style_Controls {
 			'xl_c_accent_ink' => array( __( 'Accent text on light backgrounds', 'xlights-elementor-widgets' ), '--xl-accent-ink' ),
 			'xl_c_dark'      => array( __( 'Dark surface', 'xlights-elementor-widgets' ), '--xl-dark' ),
 			'xl_c_light'     => array( __( 'Light surface', 'xlights-elementor-widgets' ), '--xl-light' ),
-			'xl_c_surface'   => array( __( 'Warm neutral surface', 'xlights-elementor-widgets' ), '--xl-surface' ),
+			'xl_c_surface'   => array( __( 'Light grey surface', 'xlights-elementor-widgets' ), '--xl-surface' ),
 			'xl_c_heading'   => array( __( 'Headings', 'xlights-elementor-widgets' ), '--xl-heading' ),
 			'xl_c_text'      => array( __( 'Body text', 'xlights-elementor-widgets' ), '--xl-text' ),
 			'xl_c_muted'     => array( __( 'Muted text', 'xlights-elementor-widgets' ), '--xl-muted' ),
@@ -298,7 +298,7 @@ final class Style_Controls {
 			'xl_bg_note',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'Each section chooses Light, Warm neutral or Dark in its content settings. Customize what those backgrounds look like here.', 'xlights-elementor-widgets' ),
+				'raw'             => esc_html__( 'Each section chooses Light, Light grey or Dark (navy) in its content settings. Customize what those backgrounds look like here.', 'xlights-elementor-widgets' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			)
 		);
@@ -315,7 +315,7 @@ final class Style_Controls {
 			Group_Control_Background::get_type(),
 			array(
 				'name'     => 'xl_bg_warm',
-				'label'    => __( 'Warm sections', 'xlights-elementor-widgets' ),
+				'label'    => __( 'Light grey sections', 'xlights-elementor-widgets' ),
 				'types'    => array( 'classic', 'gradient' ),
 				'selector' => $root . ' .xl-section.xl-bg--warm',
 			)

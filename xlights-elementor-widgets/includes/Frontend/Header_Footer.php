@@ -251,33 +251,44 @@ final class Header_Footer {
 	 * ---------------------------------------------------------------- */
 
 	/**
-	 * Logo markup.
+	 * Logo lockup: the uploaded logo or the bundled official X LIGHTS logo,
+	 * optionally followed by the market name ("Southern California").
 	 *
-	 * @param string $variant dark|light background.
+	 * @param string $variant light|dark — the background the logo sits on.
 	 * @return string
 	 */
 	public static function logo( $variant = 'light' ) {
-		$id = (int) Settings::get( 'dark' === $variant ? 'logo_light' : 'logo' );
-		if ( ! $id ) {
-			$id = (int) Settings::get( 'logo' );
+		$on_dark = 'dark' === $variant;
+		$id      = (int) Settings::get( $on_dark ? 'logo_light' : 'logo' );
+		$invert  = false;
+		if ( ! $id && $on_dark && (int) Settings::get( 'logo' ) ) {
+			// Only a logo for light backgrounds exists: show it reversed.
+			$id     = (int) Settings::get( 'logo' );
+			$invert = true;
 		}
-		$name = (string) Settings::get( 'dealer_name' );
+
 		if ( $id && wp_attachment_is_image( $id ) ) {
-			return wp_get_attachment_image(
+			$img = wp_get_attachment_image(
 				$id,
 				'medium',
 				false,
 				array(
-					'class'    => 'xl-logo__img',
-					'alt'      => $name,
+					'class'    => 'xl-logo__img' . ( $invert ? ' xl-logo__img--invert' : '' ),
+					'alt'      => (string) Settings::get( 'dealer_name' ),
 					'loading'  => 'eager',
 					'decoding' => 'async',
 				)
 			);
+		} else {
+			$img = sprintf(
+				'<img class="xl-logo__img" src="%1$s" width="376" height="112" alt="%2$s" decoding="async">',
+				esc_url( XLIGHTS_URL . 'assets/images/brand/' . ( $on_dark ? 'xlights-logo-white.png' : 'xlights-logo.png' ) ),
+				esc_attr__( 'X LIGHTS Outdoor Lighting', 'xlights-elementor-widgets' )
+			);
 		}
-		$brand  = (string) Settings::get( 'brand_name' );
-		$market = (string) Settings::get( 'market_name' );
-		return '<span class="xl-wordmark"><span class="xl-wordmark__x" aria-hidden="true">' . Icons::svg( 'close' ) . '</span><span class="xl-wordmark__text"><b>' . esc_html( preg_replace( '/^X\s+/i', '', $brand ) ) . '</b><small>' . esc_html( $market ) . '</small></span></span>';
+
+		$market = Settings::enabled( 'logo_show_market' ) ? trim( (string) Settings::get( 'market_name' ) ) : '';
+		return '<span class="xl-lockup">' . $img . ( '' !== $market ? '<span class="xl-lockup__market">' . esc_html( $market ) . '</span>' : '' ) . '</span>';
 	}
 
 	/**

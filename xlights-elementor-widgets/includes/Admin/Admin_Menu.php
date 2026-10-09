@@ -84,8 +84,8 @@ final class Admin_Menu {
 			return (int) $q->found_posts;
 		};
 		return array(
-			array( (int) $s['logo'] > 0, __( 'Official logo files', 'xlights-elementor-widgets' ), __( 'Settings → Brand', 'xlights-elementor-widgets' ) ),
-			array( false, __( 'Approved brand guidelines (colors & fonts)', 'xlights-elementor-widgets' ), __( 'Defaults follow the supplied brochures; confirm with the client.', 'xlights-elementor-widgets' ) ),
+			array( (int) $s['logo'] > 0, __( 'Official logo files (SVG)', 'xlights-elementor-widgets' ), __( 'The PNG logo from the live X LIGHTS website is used until vector files are uploaded in Settings → Brand.', 'xlights-elementor-widgets' ) ),
+			array( false, __( 'Approved brand guidelines (colors & fonts)', 'xlights-elementor-widgets' ), __( 'Defaults follow the live X LIGHTS website; confirm with the client, including the dealer logo lockup.', 'xlights-elementor-widgets' ) ),
 			array( '' !== trim( $s['service_areas'] ), __( 'Confirmed service areas', 'xlights-elementor-widgets' ), __( 'Settings → Dealer', 'xlights-elementor-widgets' ) ),
 			array( '' !== trim( $s['legal_name'] ), __( 'Dealer legal / business name', 'xlights-elementor-widgets' ), __( 'Settings → Dealer', 'xlights-elementor-widgets' ) ),
 			array( ! empty( $s['trust_verified'] ), __( 'License details and insurance wording', 'xlights-elementor-widgets' ), __( 'Settings → Credentials & Financing', 'xlights-elementor-widgets' ) ),

@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,11 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.1.0 =
+* Design system aligned with the live X LIGHTS website: official logo with a dealer lockup, black/white, navy and slate surfaces, signal-blue accent, Barlow and Barlow Condensed typography, inset hero frame, rectangular buttons.
+* Colors still on the 1.0.0 defaults are migrated automatically; customized colors are kept.
+* New hero "Frame" option (inset or full bleed).
 
 = 1.0.0 =
 * Initial release.

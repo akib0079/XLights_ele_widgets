@@ -174,10 +174,20 @@ final class Assets {
 	 * Preload the bundled heading font on pages that use the plugin styles.
 	 */
 	public static function preload_font() {
-		if ( ! wp_style_is( self::STYLE, 'enqueued' ) || '' !== trim( (string) Settings::get( 'font_heading' ) ) ) {
+		if ( ! wp_style_is( self::STYLE, 'enqueued' ) ) {
 			return;
 		}
-		echo '<link rel="preload" href="' . esc_url( XLIGHTS_URL . 'assets/fonts/montserrat-latin-variable.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+		// The two faces visible above the fold: hero display (Light) and body text.
+		$files = array();
+		if ( '' === trim( (string) Settings::get( 'font_heading' ) ) ) {
+			$files[] = 'barlow-condensed-300.woff2';
+		}
+		if ( '' === trim( (string) Settings::get( 'font_body' ) ) ) {
+			$files[] = 'barlow-400.woff2';
+		}
+		foreach ( $files as $file ) {
+			echo '<link rel="preload" href="' . esc_url( XLIGHTS_URL . 'assets/fonts/' . $file ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+		}
 	}
 
 	/**

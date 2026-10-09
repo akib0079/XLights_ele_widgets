@@ -97,8 +97,8 @@ abstract class Component {
 	public static function background_labels() {
 		return array(
 			'light' => __( 'Light', 'xlights-elementor-widgets' ),
-			'warm'  => __( 'Warm neutral', 'xlights-elementor-widgets' ),
-			'dark'  => __( 'Dark', 'xlights-elementor-widgets' ),
+			'warm'  => __( 'Light grey', 'xlights-elementor-widgets' ),
+			'dark'  => __( 'Dark (navy)', 'xlights-elementor-widgets' ),
 		);
 	}
 

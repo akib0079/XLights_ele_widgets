@@ -35,7 +35,7 @@ class Hero extends Component {
 			'layout'        => self::select(
 				__( 'Layout', 'xlights-elementor-widgets' ),
 				array(
-					'media'    => __( 'Full-width image', 'xlights-elementor-widgets' ),
+					'media'    => __( 'Photo background', 'xlights-elementor-widgets' ),
 					'split'    => __( 'Split: text + visual', 'xlights-elementor-widgets' ),
 					'centered' => __( 'Centered editorial', 'xlights-elementor-widgets' ),
 				),
@@ -92,6 +92,17 @@ class Hero extends Component {
 					'center',
 					array( 'condition' => array( 'layout' => 'media' ) )
 				),
+				'frame'       => self::select(
+					__( 'Frame', 'xlights-elementor-widgets' ),
+					array(
+						'inset' => __( 'Inset with rounded corners', 'xlights-elementor-widgets' ),
+						'bleed' => __( 'Full bleed (edge to edge)', 'xlights-elementor-widgets' ),
+					),
+					'inset',
+					array(
+						'description' => __( 'The transparent header (X LIGHTS → Settings → Header & Footer) only overlays full-bleed heroes.', 'xlights-elementor-widgets' ),
+					)
+				),
 				'height'      => self::select(
 					__( 'Height', 'xlights-elementor-widgets' ),
 					array(
@@ -137,6 +148,7 @@ class Hero extends Component {
 	public function wrapper_classes( array $data ) {
 		$layout = isset( $data['layout'] ) ? $data['layout'] : 'media';
 		$out    = array( 'xl-hero--' . $layout );
+		$out[]  = 'bleed' === ( isset( $data['frame'] ) ? $data['frame'] : 'inset' ) ? 'xl-hero--bleed' : 'xl-hero--inset';
 		if ( 'media' === $layout ) {
 			$out[] = 'xl-hero--h-' . ( isset( $data['height'] ) ? $data['height'] : 'tall' );
 		}

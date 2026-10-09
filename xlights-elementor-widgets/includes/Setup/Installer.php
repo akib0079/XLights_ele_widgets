@@ -82,7 +82,38 @@ final class Installer {
 		if ( ! wp_next_scheduled( self::CRON_HOOK ) ) {
 			wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', self::CRON_HOOK );
 		}
+		if ( $stored && version_compare( (string) $stored, '1.1.0', '<' ) ) {
+			self::migrate_brand_defaults();
+		}
 		update_option( self::VERSION_OPTION, XLIGHTS_VERSION );
+	}
+
+	/**
+	 * 1.1.0 moved the default palette from the brochure amber to the live
+	 * X LIGHTS website palette. Colors still equal to the old defaults follow
+	 * the new defaults; values a dealer changed are left untouched.
+	 */
+	private static function migrate_brand_defaults() {
+		$stored = get_option( Settings::OPTION, array() );
+		if ( ! is_array( $stored ) ) {
+			return;
+		}
+		$legacy  = array(
+			'color_accent'  => '#C98A3F',
+			'color_dark'    => '#0E0E10',
+			'color_surface' => '#F5F1EA',
+			'color_text'    => '#1E1E22',
+		);
+		$fields  = Settings::fields();
+		$changed = array();
+		foreach ( $legacy as $key => $old ) {
+			if ( isset( $stored[ $key ], $fields[ $key ] ) && 0 === strcasecmp( (string) $stored[ $key ], $old ) ) {
+				$changed[ $key ] = $fields[ $key ]['default'];
+			}
+		}
+		if ( $changed ) {
+			Settings::update( $changed );
+		}
 	}
 
 	/**
