@@ -331,7 +331,7 @@ final class Header_Footer {
 					</nav>
 					<div class="xl-header__actions">
 						<?php if ( $opts['show_phone'] && '' !== trim( $phone ) ) : ?>
-							<a class="xl-header__phone" href="<?php echo esc_url( Tokens::tel_href( $phone ) ); ?>"><?php echo Icons::svg( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $phone ); ?></span></a>
+							<a class="xl-header__phone" href="<?php echo esc_url( Tokens::tel_href( $phone ) ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: phone number */ __( 'Call %s', 'xlights-elementor-widgets' ), $phone ) ); ?>"><?php echo Icons::svg( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span aria-hidden="true"><?php echo esc_html( $phone ); ?></span></a>
 						<?php endif; ?>
 						<?php echo $cta; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						<button type="button" class="xl-header__toggle" aria-expanded="false" aria-controls="<?php echo esc_attr( $uid ); ?>-drawer" data-xl-menu-open>

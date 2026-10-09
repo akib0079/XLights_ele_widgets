@@ -136,6 +136,12 @@
 	border-radius: 4px;
 }
 
+.xl-root [hidden],
+.xl-header [hidden],
+.xl-footer [hidden] {
+	display: none !important;
+}
+
 .xl-sr {
 	position: absolute !important;
 	width: 1px !important;

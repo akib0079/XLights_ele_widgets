@@ -38,6 +38,10 @@ final class Upload_Handler {
 	 * @return string Absolute base directory (no trailing slash).
 	 */
 	public static function base_dir() {
+		// Recommended on Nginx (which ignores .htaccess): a directory outside the web root.
+		if ( defined( 'XLIGHTS_LEADS_DIR' ) && '' !== (string) XLIGHTS_LEADS_DIR ) {
+			return untrailingslashit( (string) XLIGHTS_LEADS_DIR );
+		}
 		$uploads = wp_upload_dir( null, false );
 		return untrailingslashit( $uploads['basedir'] ) . '/' . self::DIR;
 	}
