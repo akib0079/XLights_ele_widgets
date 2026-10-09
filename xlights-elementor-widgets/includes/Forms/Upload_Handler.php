@@ -71,6 +71,85 @@ final class Upload_Handler {
 	}
 
 	/**
+	 * Drop a blank index.php into each folder so servers with directory
+	 * listing enabled cannot enumerate stored photos.
+	 *
+	 * @param string $relative Folder relative to the base dir, e.g. 2026/10/abc….
+	 */
+	private static function guard_subdirs( $relative ) {
+		$path = self::base_dir();
+		foreach ( explode( '/', $relative ) as $segment ) {
+			$path .= '/' . $segment;
+			if ( is_dir( $path ) && ! file_exists( $path . '/index.php' ) ) {
+				file_put_contents( $path . '/index.php', "<?php\n// Silence is golden.\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+			}
+		}
+	}
+
+	/**
+	 * Public URL of the storage directory when it sits inside the web root.
+	 *
+	 * @return string URL without trailing slash, or '' when outside the web root.
+	 */
+	public static function public_base_url() {
+		$base    = wp_normalize_path( self::base_dir() );
+		$uploads = wp_upload_dir( null, false );
+		$roots   = array(
+			wp_normalize_path( untrailingslashit( $uploads['basedir'] ) ) => untrailingslashit( $uploads['baseurl'] ),
+			wp_normalize_path( untrailingslashit( ABSPATH ) )             => untrailingslashit( site_url() ),
+		);
+		foreach ( $roots as $root => $url ) {
+			if ( 0 === strpos( $base . '/', $root . '/' ) ) {
+				return $url . substr( $base, strlen( $root ) );
+			}
+		}
+		return '';
+	}
+
+	/**
+	 * Whether files in the private directory can be downloaded over HTTP
+	 * (e.g. Nginx ignoring .htaccess). Uses a loopback request with a
+	 * throw-away probe file; cached for a day.
+	 *
+	 * @param bool $force Ignore the cached result.
+	 * @return bool|null True when public, false when protected, null when unknown.
+	 */
+	public static function is_publicly_accessible( $force = false ) {
+		$url = self::public_base_url();
+		if ( '' === $url ) {
+			return false;
+		}
+		$cached = get_transient( 'xlights_leads_dir_public' );
+		if ( ! $force && false !== $cached ) {
+			return 'yes' === $cached ? true : ( 'no' === $cached ? false : null );
+		}
+		if ( ! self::ensure_dir() ) {
+			return null;
+		}
+		$name   = 'probe-' . bin2hex( random_bytes( 8 ) ) . '.txt';
+		$file   = self::base_dir() . '/' . $name;
+		$marker = 'xlights-access-probe';
+		file_put_contents( $file, $marker ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		$response = wp_remote_get(
+			$url . '/' . $name,
+			array(
+				'timeout'     => 5,
+				'redirection' => 0,
+				'sslverify'   => apply_filters( 'https_local_ssl_verify', false ), // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- core filter.
+			)
+		);
+		wp_delete_file( $file );
+
+		if ( is_wp_error( $response ) ) {
+			set_transient( 'xlights_leads_dir_public', 'unknown', HOUR_IN_SECONDS );
+			return null;
+		}
+		$public = 200 === (int) wp_remote_retrieve_response_code( $response ) && false !== strpos( (string) wp_remote_retrieve_body( $response ), $marker );
+		set_transient( 'xlights_leads_dir_public', $public ? 'yes' : 'no', DAY_IN_SECONDS );
+		return $public;
+	}
+
+	/**
 	 * Resolve a stored relative path safely (prevents traversal).
 	 *
 	 * @param string $relative Relative path stored in lead meta.
@@ -210,6 +289,7 @@ final class Upload_Handler {
 		if ( ! wp_mkdir_p( $dir ) ) {
 			return new WP_Error( 'storage', __( 'We could not save your photos. Please try again or email them to us.', 'xlights-elementor-widgets' ) );
 		}
+		self::guard_subdirs( $folder );
 
 		$stored = array();
 		foreach ( $files as $file ) {

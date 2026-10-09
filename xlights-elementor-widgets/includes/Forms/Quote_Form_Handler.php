@@ -232,6 +232,9 @@ final class Quote_Form_Handler {
 	public static function ajax() {
 		nocache_headers();
 		$result = self::handle( $_POST, $_FILES ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in handle().
+		// Never expose the lead ID: it would leak lead volume and let bots tell
+		// a real success from the honeypot/time-trap fake success.
+		unset( $result['lead_id'] );
 		if ( $result['success'] ) {
 			wp_send_json_success( $result, 200 );
 		}

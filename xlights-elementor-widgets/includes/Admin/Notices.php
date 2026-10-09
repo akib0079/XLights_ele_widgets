@@ -7,6 +7,7 @@
 
 namespace XLights\Admin;
 
+use XLights\Forms\Upload_Handler;
 use XLights\PostTypes\Leads;
 
 defined( 'ABSPATH' ) || exit;
@@ -26,6 +27,8 @@ final class Notices {
 		if ( ! current_user_can( Leads::CAP ) ) {
 			return;
 		}
+		self::leads_dir_notice();
+
 		$failed = get_transient( 'xlights_failed_leads' );
 		if ( false === $failed ) {
 			$q      = new \WP_Query(
@@ -55,5 +58,22 @@ final class Notices {
 				)
 			) . '</p></div>';
 		}
+	}
+
+	/**
+	 * Warn when lead photos can be downloaded directly (servers that ignore
+	 * .htaccess, such as Nginx). The loopback probe only runs on X LIGHTS
+	 * screens, at most once a day; the warning shows everywhere until fixed.
+	 */
+	private static function leads_dir_notice() {
+		$screen  = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		$on_ours = $screen && false !== strpos( (string) $screen->id, 'xlights' );
+		$public  = $on_ours ? Upload_Handler::is_publicly_accessible() : ( 'yes' === get_transient( 'xlights_leads_dir_public' ) );
+		if ( true !== $public ) {
+			return;
+		}
+		echo '<div class="notice notice-error"><p><strong>' . esc_html__( 'Customer photos are publicly accessible.', 'xlights-elementor-widgets' ) . '</strong> '
+			. esc_html__( 'This web server ignores the .htaccess protection on the lead photo folder (common on Nginx). Block the folder in the server configuration or define XLIGHTS_LEADS_DIR in wp-config.php to store photos outside the web root (see docs/DEPLOYMENT.md, section 7).', 'xlights-elementor-widgets' )
+			. '</p><p><code>' . esc_html( Upload_Handler::public_base_url() . '/' ) . '</code></p></div>';
 	}
 }

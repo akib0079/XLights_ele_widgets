@@ -198,10 +198,25 @@ final class Leads {
 		if ( ! is_array( $files ) ) {
 			return;
 		}
+		$folders = array();
 		foreach ( $files as $file ) {
 			$path = \XLights\Forms\Upload_Handler::absolute_path( isset( $file['path'] ) ? $file['path'] : '' );
 			if ( $path && is_file( $path ) ) {
 				wp_delete_file( $path );
+			}
+			if ( $path ) {
+				$folders[ dirname( $path ) ] = true;
+			}
+		}
+		// Remove the lead's own random folder once empty (YYYY/MM folders are shared).
+		foreach ( array_keys( $folders ) as $folder ) {
+			if ( ! preg_match( '#/[a-f0-9]{32}$#', $folder ) || ! is_dir( $folder ) ) {
+				continue;
+			}
+			$left = array_diff( (array) scandir( $folder ), array( '.', '..', 'index.php' ) );
+			if ( ! $left ) {
+				wp_delete_file( $folder . '/index.php' );
+				@rmdir( $folder ); // phpcs:ignore WordPress.PHP.NoSilencedErrors, WordPress.WP.AlternativeFunctions.file_system_operations_rmdir
 			}
 		}
 	}
