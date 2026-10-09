@@ -2327,6 +2327,9 @@
 .xl-project-single .xl-ba {
 	position: relative;
 	aspect-ratio: 4 / 3;
+	/* Keep the whole comparison (and its handle) within one screen. */
+	width: min(100%, calc(min(78vh, 720px) * 4 / 3));
+	margin-inline: auto;
 	overflow: hidden;
 	border-radius: var(--xl-img-radius, 18px);
 	background: #111;
@@ -2340,8 +2343,11 @@
 	inset: 0;
 }
 
-.xl-ba__layer img {
+/* Two classes so Elementor's `.elementor img { height: auto }` cannot win. */
+.xl-ba .xl-ba__layer img {
+	display: block;
 	width: 100%;
+	max-width: none;
 	height: 100%;
 	object-fit: cover;
 }

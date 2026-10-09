@@ -73,6 +73,7 @@
 | Lead photo folders listable on servers with autoindex; empty folders left after deletion | `index.php` in every folder; folder removed with the lead |
 | Exposed lead folder only caught if someone read the deploy guide | Loopback self-check → admin notice + `wp xlights status` warning |
 | `wp xlights settings set <unknown>` gave a usage error | Explicit "Unknown setting" message |
+| Before/after photos kept their natural height inside Elementor (`.elementor img { height: auto }` won), leaving a black band when before/after aspect ratios differ; comparison could exceed one screen | Higher-specificity rule; comparison capped to fit the viewport at 4:3 |
 
 ## Not covered automatically
 
