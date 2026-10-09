@@ -16,6 +16,7 @@ namespace XLights\CLI;
 
 use WP_CLI;
 use XLights\Forms\Mailer;
+use XLights\Forms\Upload_Handler;
 use XLights\Pages\Page_Registry;
 use XLights\Settings\Settings;
 use XLights\Setup\Installer;
@@ -46,6 +47,16 @@ final class Command {
 			);
 		}
 		\WP_CLI\Utils\format_items( 'table', $rows, array( 'template', 'path', 'id', 'status', 'composer' ) );
+
+		$public = Upload_Handler::is_publicly_accessible( true );
+		$line   = 'Lead photos: ' . Upload_Handler::base_dir() . ' — ';
+		if ( true === $public ) {
+			WP_CLI::warning( $line . 'PUBLICLY ACCESSIBLE. Block it in the web server or define XLIGHTS_LEADS_DIR (docs/DEPLOYMENT.md §7).' );
+		} elseif ( false === $public ) {
+			WP_CLI::log( $line . 'protected.' );
+		} else {
+			WP_CLI::log( $line . 'could not be verified (loopback request failed).' );
+		}
 	}
 
 	/**
@@ -117,8 +128,11 @@ final class Command {
 		$key    = isset( $args[1] ) ? $args[1] : '';
 		$fields = Settings::fields();
 		if ( 'set' === $action ) {
-			if ( ! isset( $fields[ $key ] ) || ! array_key_exists( 2, $args ) ) {
+			if ( '' === $key || ! array_key_exists( 2, $args ) ) {
 				WP_CLI::error( 'Usage: wp xlights settings set <key> <value>' );
+			}
+			if ( ! isset( $fields[ $key ] ) ) {
+				WP_CLI::error( sprintf( 'Unknown setting "%s". Run `wp xlights settings get` to list keys.', $key ) );
 			}
 			Settings::update( array( $key => $args[2] ) );
 			WP_CLI::success( sprintf( '%s = %s', $key, wp_json_encode( Settings::get( $key ) ) ) );

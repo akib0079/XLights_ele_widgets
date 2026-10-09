@@ -43,7 +43,7 @@ final class Integration {
 	 * @return string[] Widget classes.
 	 */
 	public static function widget_classes() {
-		return array(
+		$classes = array(
 			Widgets\Page_Composer::class,
 			Widgets\Header::class,
 			Widgets\Footer::class,
@@ -66,6 +66,12 @@ final class Integration {
 			Widgets\Specs_Widget::class,
 			Widgets\Trust_Widget::class,
 		);
+		/**
+		 * Filter the Elementor widget classes registered by the plugin.
+		 *
+		 * @param string[] $classes Widget classes (extend \Elementor\Widget_Base).
+		 */
+		return (array) apply_filters( 'xlights/elementor/widgets', $classes );
 	}
 
 	/**
@@ -76,7 +82,9 @@ final class Integration {
 			return;
 		}
 		foreach ( self::widget_classes() as $class ) {
-			$manager->register( new $class() );
+			if ( is_string( $class ) && is_subclass_of( $class, 'Elementor\\Widget_Base' ) ) {
+				$manager->register( new $class() );
+			}
 		}
 	}
 
