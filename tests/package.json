@@ -1,0 +1,17 @@
+{
+  "name": "xlights-elementor-widgets-tests",
+  "private": true,
+  "description": "Browser tests for the X LIGHTS Elementor Widgets plugin.",
+  "scripts": {
+    "pages": "node browser/pages.js",
+    "interactions": "node browser/interactions.js",
+    "form": "node browser/form.js",
+    "a11y": "node browser/a11y.js",
+    "editor": "node browser/editor.js",
+    "test": "node browser/pages.js && node browser/interactions.js && node browser/form.js && node browser/a11y.js"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "playwright": "1.56.1"
+  }
+}
