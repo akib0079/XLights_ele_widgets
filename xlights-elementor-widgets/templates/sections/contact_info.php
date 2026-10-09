@@ -41,7 +41,7 @@ $social = 'yes' === $data['show_social'] ? Social_Links::render() : '';
 ?>
 <div class="xl-container">
 	<?php echo Html::section_head( $data, array( 'class' => 'xl-head--center' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-	<ul class="xl-grid xl-grid--<?php echo count( $cards ) >= 4 ? '4' : max( 1, count( $cards ) ); ?> xl-contact-cards" role="list">
+	<ul class="xl-grid xl-grid--<?php echo esc_attr( (string) min( 4, max( 1, count( $cards ) ) ) ); ?> xl-contact-cards" role="list">
 		<?php foreach ( $cards as $card ) : ?>
 			<li class="xl-card xl-contact-card" data-xl-reveal>
 				<span class="xl-card__icon"><?php echo Icons::svg( $card[0] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>

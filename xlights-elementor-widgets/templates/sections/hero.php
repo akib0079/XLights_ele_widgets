@@ -78,7 +78,7 @@ if ( 'media' === $layout ) :
 	<div class="xl-hero__media xl-focal--<?php echo esc_attr( $focal ); ?>" style="--xl-overlay:<?php echo esc_attr( max( 0, min( 95, $overlay ) ) / 100 ); ?>">
 		<?php
 		if ( $has_img ) {
-			echo Html::image( // phpcs:ignore WordPress.Security.EscapeOutput
+			$hero_img = Html::image(
 				$data['image'],
 				array(
 					'size'  => 'full',
@@ -88,6 +88,7 @@ if ( 'media' === $layout ) :
 					'alt'   => ( empty( $data['image']['id'] ) && isset( $data['image_alt'] ) ) ? $data['image_alt'] : null,
 				)
 			);
+			echo $hero_img; // phpcs:ignore WordPress.Security.EscapeOutput -- Built with escaped attributes.
 		} else {
 			echo Section_Renderer::visual( array_merge( $data, array( 'visual' => 'illustration' ) ), $ctx ); // phpcs:ignore WordPress.Security.EscapeOutput
 		}

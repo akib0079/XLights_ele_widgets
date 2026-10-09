@@ -25,7 +25,7 @@ $email  = (string) Settings::get( 'email' );
 		<div class="xl-quote__main" data-xl-reveal>
 			<?php echo Html::section_head( $data ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			<?php
-			echo Quote_Form_Handler::render_form( // phpcs:ignore WordPress.Security.EscapeOutput
+			$form_html = Quote_Form_Handler::render_form(
 				array(
 					'variant'      => $data['variant'],
 					'submit_label' => $data['submit_label'],
@@ -33,6 +33,7 @@ $email  = (string) Settings::get( 'email' );
 					'source'       => $ctx->template ? $ctx->template : 'widget',
 				)
 			);
+			echo $form_html; // phpcs:ignore WordPress.Security.EscapeOutput -- Escaped in the form partial.
 			?>
 		</div>
 		<?php if ( $aside ) : ?>

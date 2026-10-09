@@ -145,7 +145,7 @@ class Header extends Widget_Base {
 
 	protected function render() {
 		$s = $this->get_settings_for_display();
-		echo Header_Footer::header( // phpcs:ignore WordPress.Security.EscapeOutput
+		$html = Header_Footer::header(
 			array(
 				'sticky'      => 'yes' === $s['sticky'],
 				'transparent' => 'yes' === $s['transparent'],
@@ -154,5 +154,6 @@ class Header extends Widget_Base {
 				'cta_link'    => $s['cta_link'],
 			)
 		);
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput -- Escaped in Header_Footer::header().
 	}
 }
