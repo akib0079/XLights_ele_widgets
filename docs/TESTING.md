@@ -1,6 +1,36 @@
-# Testing report — v1.0.0
+# Testing report — v1.1.0
 
-**TL;DR:** 500 automated checks across 8 suites, **all passing**. One expected warning: the PHP dev server ignores `.htaccess`, so lead photos were reachable by direct URL in the test environment. Production needs the Nginx rule or `XLIGHTS_LEADS_DIR` (the plugin now detects this and warns in wp-admin). Email *delivery* can't be verified in a sandbox and must be checked on the real host.
+**TL;DR:** the 1.1.0 brand redesign was re-verified with every suite: **all passing**. The same expected warning remains: PHP's dev server ignores `.htaccess`, so production needs the Nginx rule or `XLIGHTS_LEADS_DIR` (the plugin detects this and warns in wp-admin). Email *delivery* still has to be checked on the real host.
+
+## v1.1.0 — design system aligned with the live X LIGHTS website
+
+| Suite | Result |
+|---|---|
+| Render (`tests/php/render-pages.php`) | ✅ 84/84 |
+| Elementor (`tests/php/elementor.php`) | ✅ 32/32, with and without published projects/reviews |
+| Security (`tests/security.sh`) | ✅ 34/34, 1 expected warning |
+| Pages — 12 pages × 5 widths: overflow, JS errors, one H1, title, meta, JSON-LD | ✅ 276/276 |
+| Interactions (incl. new: inset hero, solid header, dealer lockup, open-dropdown contrast) | ✅ 30/30 |
+| Form | ✅ 13/13 |
+| Accessibility — axe WCAG 2.0/2.1/2.2 A+AA, 12 pages × 1440/375 | ✅ 24/24, zero violations |
+| Editor round-trip | ✅ 9/9 |
+| Header width check at 1920/1440/1366/1320/1301/1300/1280/1024/390 px | ✅ no overflow |
+| WPCS security sniffs | ✅ clean |
+
+Issues found and fixed during the redesign:
+
+| Issue | Fix |
+|---|---|
+| Logo rendered at natural size (`.xl-root img { height: auto }` outranked the logo rule), widening the page | Two-class selector for the logo |
+| Uppercase nav + lockup + phone + CTA overflowed between 1181 and 1290 px | Wider header container, tighter tracking below 1440 px, phone collapses to an icon below 1500 px, drawer below 1300 px |
+| Desktop dropdown links were dark text on navy (`.xl-root a { color: inherit }` won) | Two-class selector; regression check added to `interactions.js` |
+| Dark panels inside light sections (CTA, quote sidebar, footer) inherited light-context tokens (black button on navy) | One shared on-dark token set for all dark surfaces |
+| "Call us / Email" labels in the quote sidebar below 4.5:1 | Explicit muted color instead of stacked opacity |
+| Font preload still pointed at the removed Montserrat file | Preloads Barlow Condensed 300 + Barlow 400 |
+
+---
+
+# Testing report — v1.0.0
 
 ## Environment
 

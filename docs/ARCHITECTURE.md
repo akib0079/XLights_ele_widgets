@@ -114,7 +114,8 @@ Order and visibility are a per-template repeater (`{template}__order`); `Section
 
 - **CSS**: one stylesheet (`assets/css/xlights.css`) scoped under `.xl-root` / `.xl-header` / `.xl-footer`, driven by CSS custom properties (`--xl-accent`, `--xl-dark`, …) that Settings and the Style tab override. No theme CSS resets leak in or out.
 - **JS**: `xlights.js` (nav dropdowns, mobile drawer with focus trap, ARIA tabs, FAQ, gallery filters with URL state, `<dialog>` lightbox, before/after slider, reveal-on-scroll, click-to-load map) and `xlights-form.js` (validation, previews, AJAX submit, token refresh). Vanilla, no jQuery, enqueued only on pages that use them.
-- **Fonts**: self-hosted Montserrat variable (latin subset, 38 KB, preloaded). No external CDNs.
+- **Fonts**: self-hosted Barlow (400/500/600) and Barlow Condensed (300/500), latin subset, ~20 KB per face; only the faces a page uses are downloaded, and the two above-the-fold faces are preloaded. No external CDNs.
+- **Brand tokens**: palette from the live X LIGHTS website — ink `#05070B`, navy `#131C2D`, slate `#39414E`, light grey `#E9EAED`, signal blue `#3367FE` (interactive only; darkened to `#2952CB` for small text on light backgrounds), periwinkle `#C8D7FE` on dark. Warm light `#FFD79A` is used only for light effects (soffit-dot line, glows). Dark surfaces that are not dark sections (footer, CTA panels, quote sidebar, bento cards) share one on-dark token set.
 - **Progressive enhancement**: all content is server-rendered; filters work without JS via `?xl_filter=`; the form works without JS via `admin-post.php`.
 
 ## Extension points

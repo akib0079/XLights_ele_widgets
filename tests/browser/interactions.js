@@ -65,13 +65,29 @@ const { BASE_URL, OUT_DIR, ok, launch, trackErrors, done } = require('./lib');
 	ok((await page.locator('.xl-section--reviews').count()) === 1, 'reviews section visible with permitted reviews');
 	ok(!(await page.content()).includes('must NOT render'), 'review without permission is not rendered');
 	ok((await page.locator('.xl-review__brand').count()) >= 1, 'brand-level review is labeled as such');
-	ok(await page.locator('[data-xl-header]').evaluate((h) => h.classList.contains('is-over-dark')), 'header is transparent over the dark hero');
+	ok(await page.locator('.xl-section--hero.xl-hero--inset').count() === 1, 'home hero uses the inset frame');
+	ok(!(await page.locator('[data-xl-header]').evaluate((h) => h.classList.contains('is-over-dark'))), 'header stays solid above the framed hero');
+	ok((await page.locator('.xl-header .xl-lockup__market').first().textContent()).trim().length > 0, 'header shows the dealer lockup (logo + market)');
 
 	// Dropdown keyboard.
 	const toggle = page.locator('.xl-nav .xl-nav__toggle').first();
 	await toggle.focus();
 	await page.keyboard.press('Enter');
 	ok((await toggle.getAttribute('aria-expanded')) === 'true', 'dropdown opens with Enter');
+	const ratio = await page.evaluate(() => {
+		const link = document.querySelector('.xl-header .xl-nav__item.is-open .xl-nav__sublink');
+		const lum = (c) => {
+			const [r, g, b] = c.match(/[\d.]+/g).slice(0, 3).map(Number).map((v) => {
+				v /= 255;
+				return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+			});
+			return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+		};
+		const fg = lum(getComputedStyle(link).color);
+		const bg = lum(getComputedStyle(link.closest('.xl-nav__sub')).backgroundColor);
+		return (Math.max(fg, bg) + 0.05) / (Math.min(fg, bg) + 0.05);
+	});
+	ok(ratio >= 4.5, `open dropdown text contrast ${ratio.toFixed(1)}:1 (needs 4.5:1)`);
 	await page.keyboard.press('Escape');
 	ok((await toggle.getAttribute('aria-expanded')) === 'false', 'Escape closes the dropdown');
 

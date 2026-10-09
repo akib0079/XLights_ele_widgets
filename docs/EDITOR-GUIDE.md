@@ -22,6 +22,14 @@ Tips:
 - Lists (cards, FAQs, steps, specs) use repeaters: **+ Add Item**, drag to reorder, duplicate, delete.
 - Links accept a full URL or a page token like `{page:contact}` so links keep working if a page slug changes.
 
+## Brand look (what the design system does for you)
+
+- **Headlines** are set in Barlow Condensed capitals. Wrap the phrase to stress in `<em>…</em>`: it switches from Light to Medium weight (no color change). Example: `Beautiful every night. <em>Ready for every celebration.</em>`
+- **Hero frame**: each hero has a *Frame* option — *Inset with rounded corners* (default, like the X LIGHTS website) or *Full bleed*. The transparent header only appears over full-bleed heroes.
+- **Colors** follow the live X LIGHTS website: black/white, navy and light grey sections, and signal blue for links and active states. Warm light appears only as light (the dotted soffit line, glows) — not as text or button color.
+- **Section backgrounds**: *Light*, *Light grey* or *Dark (navy)* per section.
+- **Logo**: the official X LIGHTS logo with "Southern California" beside it. Upload SVG versions or turn the market label off under **X LIGHTS → Settings → Brand**.
+
 ## Placeholders (tokens)
 
 Write these in any text field; they're replaced with the current values from **X LIGHTS → Settings**:
@@ -55,7 +63,7 @@ Using tokens is what makes the same pages work for the next dealer without rewri
 **Style** tab of the Page Composer (applies to this page; set the same values on each page or use Elementor's *Site Settings → Global Colors / Fonts*, which the color pickers accept):
 
 - **Global Layout** — content width, section padding, side gutter, grid gap (all responsive).
-- **Colors** — accent, dark/light/warm surfaces, headings, body, muted, text-on-dark.
+- **Colors** — accent, dark (navy) / light / light-grey surfaces, headings, body, muted, text-on-dark.
 - **Typography** — H1, H2, card titles, eyebrows, body.
 - **Buttons** — radius, padding, primary/secondary colors.
 - **Cards** — background, border, radius, shadow.

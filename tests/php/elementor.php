@@ -93,6 +93,13 @@ $xl_ok( false !== strpos( $html, 'id="xl-soffit-cta"' ), 'sections missing from 
 $xl_ok( 1 === substr_count( $html, '<h1' ), 'exactly one H1 when the hero is not first' );
 
 $gated_ok = array( 'xlights-financing', 'xlights-team', 'xlights-specs', 'xlights-before-after' );
+// Content-driven widgets hide themselves when there is nothing approved to show.
+if ( ! wp_count_posts( 'xlights_project' )->publish ) {
+	$gated_ok[] = 'xlights-projects';
+}
+if ( ! get_posts( array( 'post_type' => 'xlights_review', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_xl_permission', 'meta_value' => '1' ) ) ) { // phpcs:ignore WordPress.DB.SlowDBQuery
+	$gated_ok[] = 'xlights-reviews';
+}
 foreach ( $ours as $name ) {
 	if ( 'xlights-page-composer' === $name ) {
 		continue;

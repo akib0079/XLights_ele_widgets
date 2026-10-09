@@ -33,8 +33,9 @@
 
 | # | Item | Status |
 |---|---|---|
-| 8 | Official logo files (SVG preferred, dark + light versions) and favicon | Text wordmark fallback until uploaded |
-| 9 | Brand colors & fonts confirmation | Defaults taken from the supplied brochures: gold `#C98A3F`, near-black `#0E0E10`, warm white `#F5F1EA`; Montserrat |
+| 8 | Official logo files (SVG preferred, dark + light versions) and favicon; approval of the dealer lockup (logo + "Southern California") | The PNG logo from the live website is bundled (plus a white version for dark backgrounds). The lockup can be turned off in Settings → Brand |
+| 9 | Brand colors & fonts confirmation | Defaults follow the live X LIGHTS website: black/white, navy `#131C2D`, slate `#39414E`, light grey `#E9EAED`, signal blue `#3367FE`; Barlow / Barlow Condensed. The amber in the dealer flyers is not used as a UI color |
+| 9a | **Phone number** | The live corporate contact page lists (949) 685-7173; this site uses 949-795-2206 from the content plan. Confirm which number belongs to the Southern California dealer |
 
 ### Product facts
 

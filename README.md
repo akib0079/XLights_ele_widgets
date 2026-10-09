@@ -33,7 +33,7 @@ First deployment: **X LIGHTS Southern California** (`socal.xlightsled.com`). The
 │   │   ├── sections/                   markup for each component
 │   │   ├── partials/                   quote form
 │   │   └── email/                      lead notification + confirmation emails
-│   └── assets/                         CSS, JS, Montserrat (OFL), default client imagery
+│   └── assets/                         CSS, JS, Barlow fonts (OFL), official logo, default client imagery
 ├── docs/                         installation, deployment, onboarding, editor guide, approvals, testing
 ├── tests/                        smoke, security and browser test scripts
 └── bin/build-zip.sh              produces dist/xlights-elementor-widgets-<version>.zip
@@ -69,4 +69,4 @@ WordPress 6.4+ · PHP 7.4+ · Elementor 3.20+ (tested with Elementor 4.0.8 on Wo
 
 ## License
 
-GPL-2.0-or-later. Montserrat is licensed under the SIL Open Font License 1.1 (`assets/fonts/OFL-Montserrat.txt`).
+GPL-2.0-or-later. Barlow and Barlow Condensed are licensed under the SIL Open Font License 1.1 (`assets/fonts/OFL-Barlow.txt`). The X LIGHTS logo is the client's trademark, bundled for X LIGHTS dealer sites only.
