@@ -1,0 +1,194 @@
+<?php
+/**
+ * Page template: Lighting Solutions.
+ *
+ * @package XLights
+ */
+
+use XLights\Pages\Defaults;
+
+defined( 'ABSPATH' ) || exit;
+
+return array(
+	'hero'      => array(
+		'type'     => 'hero',
+		'label'    => __( 'Lighting Solutions Hero', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'layout'          => 'media',
+			'height'          => 'tall',
+			'eyebrow'         => __( 'Lighting Solutions', 'xlights-elementor-widgets' ),
+			'heading'         => __( 'Outdoor lighting for every part <em>of your property.</em>', 'xlights-elementor-widgets' ),
+			'text'            => __( 'Permanent soffit, hanging bulb bistro, deck and landscape lighting — designed together and controlled from one app.', 'xlights-elementor-widgets' ),
+			'primary_label'   => '{cta}',
+			'primary_link'    => '{quote_url}',
+			'secondary_label' => __( 'View projects', 'xlights-elementor-widgets' ),
+			'secondary_link'  => '{page:projects}',
+			'visual'          => 'image',
+			'image'           => Defaults::img( 'home-single-story-dusk.jpg' ),
+			'image_alt'       => __( 'Home at dusk with permanent roofline lighting and landscape accents', 'xlights-elementor-widgets' ),
+			'scene'           => 'roofline',
+			'overlay'         => 60,
+		),
+	),
+	'overview'  => array(
+		'type'     => 'cards',
+		'label'    => __( 'System Overview', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow' => __( 'The X LIGHTS system', 'xlights-elementor-widgets' ),
+			'heading' => __( 'Four ways to light your home. <em>One connected experience.</em>', 'xlights-elementor-widgets' ),
+			'text'    => __( 'Start with one category or plan them together. Compatible lighting can be grouped in the X LIGHTS app.', 'xlights-elementor-widgets' ),
+			'style'   => 'bento',
+			'columns' => '4',
+			'items'   => array(
+				array(
+					'title'      => __( 'Permanent Soffit Lighting', 'xlights-elementor-widgets' ),
+					'text'       => __( 'Our signature roofline system: discreet by day, warm white every night, festive whenever you like.', 'xlights-elementor-widgets' ),
+					'image'      => Defaults::img( 'home-two-story-night.jpg' ),
+					'scene'      => 'roofline',
+					'link_label' => __( 'Explore', 'xlights-elementor-widgets' ),
+					'link'       => '#xl-solutions-soffit',
+				),
+				array(
+					'title'      => __( 'Hanging Bulb Bistro Lighting', 'xlights-elementor-widgets' ),
+					'text'       => __( 'A warm, welcoming glow for patios and outdoor dining.', 'xlights-elementor-widgets' ),
+					'scene'      => 'patio',
+					'link_label' => __( 'Explore', 'xlights-elementor-widgets' ),
+					'link'       => '#xl-solutions-bistro',
+				),
+				array(
+					'title'      => __( 'Deck Lighting', 'xlights-elementor-widgets' ),
+					'text'       => __( 'Steps, railings and walkways that are easier to enjoy after dark.', 'xlights-elementor-widgets' ),
+					'scene'      => 'deck',
+					'link_label' => __( 'Explore', 'xlights-elementor-widgets' ),
+					'link'       => '#xl-solutions-deck',
+				),
+				array(
+					'title'      => __( 'Landscape Lighting', 'xlights-elementor-widgets' ),
+					'text'       => __( 'Trees, gardens and paths that shine after sunset.', 'xlights-elementor-widgets' ),
+					'scene'      => 'landscape',
+					'link_label' => __( 'Explore', 'xlights-elementor-widgets' ),
+					'link'       => '#xl-solutions-landscape',
+				),
+			),
+			'bg'      => 'light',
+		),
+	),
+	'soffit'    => array(
+		'type'     => 'split',
+		'label'    => __( 'Permanent Soffit Lighting', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow'         => __( 'Permanent soffit lighting', 'xlights-elementor-widgets' ),
+			'heading'         => __( 'Beautiful every night. <em>Ready for every celebration.</em>', 'xlights-elementor-widgets' ),
+			'text'            => __( '<p>A low-profile light and track system mounted along the roofline. Choose warm white to highlight your home’s architecture every evening, then switch to color and patterns for holidays and special occasions.</p>', 'xlights-elementor-widgets' ),
+			'points'          => __( "Low-profile, color-matched track\nWarm white and full color\nApp scheduling and saved favorites", 'xlights-elementor-widgets' ),
+			'primary_label'   => __( 'Permanent Soffit Lighting', 'xlights-elementor-widgets' ),
+			'primary_link'    => '{page:soffit}',
+			'secondary_label' => __( 'Request a soffit quote', 'xlights-elementor-widgets' ),
+			'secondary_link'  => '{page:contact}?service=soffit#quote',
+			'visual'          => 'image',
+			'image'           => Defaults::img( 'home-two-story-night.jpg' ),
+			'image_alt'       => __( 'Two-story home with permanent soffit lighting outlining each roofline', 'xlights-elementor-widgets' ),
+			'scene'           => 'roofline',
+			'image_position'  => 'right',
+			'bg'              => 'warm',
+		),
+	),
+	'bistro'    => array(
+		'type'     => 'split',
+		'label'    => __( 'Hanging Bulb Bistro Lighting', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow'         => __( 'Hanging bulb bistro lighting', 'xlights-elementor-widgets' ),
+			'heading'         => __( 'The patio everyone wants to spend time on.', 'xlights-elementor-widgets' ),
+			'text'            => __( '<p>Bistro lighting designed around your patio, pergola or outdoor dining area — for relaxed evenings at home or a memorable atmosphere for guests.</p>', 'xlights-elementor-widgets' ),
+			'points'          => __( "Custom layouts for your space\nWarm, ambient glow\nResidential and commercial installations", 'xlights-elementor-widgets' ),
+			'primary_label'   => __( 'Bistro Lighting', 'xlights-elementor-widgets' ),
+			'primary_link'    => '{page:bistro}',
+			'secondary_label' => __( 'Request a bistro quote', 'xlights-elementor-widgets' ),
+			'secondary_link'  => '{page:contact}?service=bistro#quote',
+			'visual'          => 'image',
+			'scene'           => 'patio',
+			'image_position'  => 'left',
+			'bg'              => 'light',
+		),
+	),
+	'deck'      => array(
+		'type'     => 'split',
+		'label'    => __( 'Deck Lighting', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow'         => __( 'Deck lighting', 'xlights-elementor-widgets' ),
+			'heading'         => __( 'The details that bring an outdoor space together.', 'xlights-elementor-widgets' ),
+			'text'            => __( '<p>Subtle light on deck steps, railings and walkways helps outdoor spaces feel welcoming and easier to use after sunset, with a finished look that never overpowers the space.</p>', 'xlights-elementor-widgets' ),
+			'points'          => __( "Step and stair lighting\nRailing and edge lighting\nApp-controlled color and schedules on compatible products", 'xlights-elementor-widgets' ),
+			'primary_label'   => __( 'Deck Lighting', 'xlights-elementor-widgets' ),
+			'primary_link'    => '{page:deck}',
+			'secondary_label' => __( 'Request a deck quote', 'xlights-elementor-widgets' ),
+			'secondary_link'  => '{page:contact}?service=deck#quote',
+			'visual'          => 'image',
+			'scene'           => 'deck',
+			'image_position'  => 'right',
+			'bg'              => 'warm',
+		),
+	),
+	'landscape' => array(
+		'type'     => 'split',
+		'label'    => __( 'Landscape Lighting', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow'         => __( 'Landscape lighting', 'xlights-elementor-widgets' ),
+			'heading'         => __( 'Let your home and garden shine after dark.', 'xlights-elementor-widgets' ),
+			'text'            => __( '<p>Highlight a favorite tree, softly light a path, or bring depth to planting and outdoor features — so the parts of your property you love don’t disappear when the sun goes down.</p>', 'xlights-elementor-widgets' ),
+			'points'          => __( "Tree and architectural accents\nGarden-bed and pathway lighting\nColor, brightness and schedules in the app", 'xlights-elementor-widgets' ),
+			'primary_label'   => __( 'Landscape Lighting', 'xlights-elementor-widgets' ),
+			'primary_link'    => '{page:landscape}',
+			'secondary_label' => __( 'Request a landscape quote', 'xlights-elementor-widgets' ),
+			'secondary_link'  => '{page:contact}?service=landscape#quote',
+			'visual'          => 'image',
+			'scene'           => 'landscape',
+			'image_position'  => 'left',
+			'bg'              => 'light',
+		),
+	),
+	'connected' => array(
+		'type'     => 'connected',
+		'label'    => __( 'One Connected Outdoor Lighting System', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow' => __( 'Better together', 'xlights-elementor-widgets' ),
+			'heading' => __( 'One connected outdoor lighting system.', 'xlights-elementor-widgets' ),
+			'text'    => __( '<p>When your lighting is planned together, it can work together: one schedule for the whole property, coordinated holiday themes, and a single app to manage compatible products.</p>', 'xlights-elementor-widgets' ),
+			'items'   => Defaults::connected_items(),
+			'note'    => Defaults::compatibility_note(),
+			'bg'      => 'dark',
+		),
+	),
+	'app'       => array(
+		'type'     => 'app_showcase',
+		'label'    => __( 'App Showcase', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow'    => __( 'The X LIGHTS app', 'xlights-elementor-widgets' ),
+			'heading'    => __( 'Control it all from your phone.', 'xlights-elementor-widgets' ),
+			'items'      => Defaults::app_tabs( array( 'color', 'schedule', 'patterns' ) ),
+			'show_store' => 'yes',
+			'link_label' => __( 'Explore the app', 'xlights-elementor-widgets' ),
+			'link'       => '{page:app}',
+			'bg'         => 'warm',
+		),
+	),
+	'benefits'  => array(
+		'type'     => 'cards',
+		'label'    => __( 'Benefits & Differentiators', 'xlights-elementor-widgets' ),
+		'defaults' => array(
+			'eyebrow' => __( 'Why X LIGHTS', 'xlights-elementor-widgets' ),
+			'heading' => __( 'What sets our lighting apart.', 'xlights-elementor-widgets' ),
+			'style'   => 'icon',
+			'columns' => '3',
+			'items'   => Defaults::why_items(),
+			'bg'      => 'light',
+		),
+	),
+	'financing' => Defaults::financing( 'warm' ),
+	'projects'  => Defaults::projects( 'featured', __( 'Recent installations', 'xlights-elementor-widgets' ) ),
+	'cta'       => Defaults::cta(
+		__( 'Not sure where to start?', 'xlights-elementor-widgets' ),
+		__( 'Tell us about your property and we will recommend the right mix of lighting for it.', 'xlights-elementor-widgets' ),
+		array( 'bg' => 'warm' )
+	),
+);
