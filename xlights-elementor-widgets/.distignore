@@ -1,0 +1,6 @@
+# Files excluded from the distributable ZIP.
+.distignore
+.DS_Store
+*.map
+node_modules
+tests

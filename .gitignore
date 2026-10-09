@@ -4,3 +4,6 @@
 .DS_Store
 *.log
 .phpunit.result.cache
+/tests/node_modules/
+/tests/package-lock.json
+/test-results/
