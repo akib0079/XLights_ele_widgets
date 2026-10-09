@@ -1,0 +1,4 @@
+/* Elementor editor panel tweaks for X LIGHTS widgets */
+.elementor-panel .elementor-control-page_help .elementor-panel-alert p { margin: 0 0 6px; font-size: 12px; line-height: 1.5; }
+.elementor-panel .elementor-control-page_help .elementor-panel-alert p:last-child { margin-bottom: 0; }
+.elementor-element .icon .eicon-site-identity { color: #c98a3f; }

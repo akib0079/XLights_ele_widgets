@@ -1,0 +1,34 @@
+/* X LIGHTS admin screens */
+.xl-admin__sub { font-weight: 400; color: #646970; font-size: 0.6em; margin-left: 0.5em; }
+.xl-admin__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0 28px; }
+.xl-admin__card { background: #fff; border: 1px solid #dcdcde; border-radius: 10px; padding: 18px 20px; }
+.xl-admin__card h2 { margin: 0 0 6px; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: #646970; }
+.xl-admin__card p { margin: 0 0 12px; }
+.xl-admin__num { font-size: 32px !important; font-weight: 700; line-height: 1.1; color: #1d2327; margin-bottom: 2px !important; }
+.xl-admin__checklist td { vertical-align: middle; }
+.xl-admin__state { width: 90px; }
+.xl-admin__state .dashicons { color: #00a32a; }
+.xl-admin__todo { display: inline-block; padding: 2px 8px; border-radius: 4px; background: #fcf0d4; color: #6b4e00; font-size: 12px; font-weight: 600; }
+.xl-approval-tag { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 3px; background: #fcf0d4; color: #6b4e00; font-size: 11px; font-weight: 600; vertical-align: middle; }
+.xl-settings__intro { max-width: 760px; font-size: 14px; }
+.xl-media-field__preview img { max-width: 180px; max-height: 120px; display: block; margin: 0 0 8px; border-radius: 6px; border: 1px solid #dcdcde; }
+.xl-gallery-field__list { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; padding: 0; list-style: none; }
+.xl-gallery-field__list li { position: relative; width: 96px; height: 96px; cursor: move; }
+.xl-gallery-field__list img { width: 96px; height: 96px; object-fit: cover; border-radius: 6px; border: 1px solid #dcdcde; }
+.xl-gallery-field__remove { position: absolute; top: -6px; right: -6px; width: 24px; height: 24px; border-radius: 50%; border: 0; background: #d63638; color: #fff; cursor: pointer; line-height: 22px; font-size: 16px; }
+.xl-ba-fields { display: flex; flex-wrap: wrap; gap: 24px; }
+.xl-review-permission { padding: 12px 14px; margin: 6px 0 4px; border-left: 4px solid #dba617; background: #fcf9e8; }
+.xl-lead-table th { width: 30%; text-align: left; }
+.xl-lead-actions { margin-top: 14px; }
+.xl-lead-photos { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.xl-lead-photos li { width: 160px; }
+.xl-lead-photos img { width: 160px; height: 120px; object-fit: cover; border-radius: 6px; border: 1px solid #dcdcde; display: block; }
+.xl-lead-photos span { display: block; margin-top: 4px; font-size: 12px; color: #646970; word-break: break-all; }
+.xl-lead-status { display: inline-block; padding: 2px 8px; border-radius: 10px; background: #f0f0f1; font-size: 12px; font-weight: 600; }
+.xl-lead-status--new { background: #e5f1ff; color: #0a4b78; }
+.xl-lead-status--won { background: #e6f4ea; color: #00521c; }
+.xl-lead-status--lost, .xl-lead-status--spam { background: #f6e9e9; color: #8a2424; }
+.xl-report--success::before { content: "✓ "; color: #00a32a; font-weight: 700; }
+.xl-report--error::before { content: "✕ "; color: #d63638; font-weight: 700; }
+.xl-report--info::before { content: "• "; color: #646970; }
+.xl-setup-options p { margin: 6px 0; }
