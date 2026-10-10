@@ -2463,36 +2463,35 @@
 
 .xl-root .xl-store {
 	display: inline-flex;
-	align-items: center;
-	gap: 0.7rem;
-	min-height: 52px;
-	padding: 0.55rem 1.15rem 0.55rem 0.9rem;
-	border-radius: 12px;
-	background: #0b0d12;
-	color: #ffffff;
-	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 9px;
+	background: transparent;
+	color: inherit;
+	line-height: 0;
 	text-decoration: none;
-	font-family: var(--xl-font-ui);
-	font-weight: 650;
-	line-height: 1.15;
-	transition: transform 0.2s var(--xl-ease), border-color 0.2s;
+	transition: transform 0.2s var(--xl-ease);
 }
 
-.xl-root .xl-store:hover {
-	transform: translateY(-2px);
-	border-color: var(--xl-accent-ink);
-}
-
-.xl-root .xl-store small {
+/* Official badge artwork: shown as supplied, never recolored or stretched. */
+.xl-root .xl-store__badge {
 	display: block;
-	font-size: 0.68rem;
-	font-weight: 500;
-	opacity: 0.8;
+	width: auto;
+	height: 48px;
 }
 
-.xl-root .xl-store__icon .xl-icon {
-	width: 26px;
-	height: 26px;
+@media (hover: hover) and (pointer: fine) {
+	.xl-root a.xl-store:hover {
+		transform: translateY(-2px);
+	}
+}
+
+.xl-root a.xl-store:focus-visible {
+	outline: 2px solid var(--xl-accent);
+	outline-offset: 3px;
+}
+
+.xl-root .xl-bg--dark a.xl-store:focus-visible,
+.xl-root .xl-cta a.xl-store:focus-visible {
+	outline-color: #ffffff;
 }
 
 /* -------------------------------------------------------------------------
@@ -6583,12 +6582,8 @@ html .xl-root .xl-tabs__tab[aria-selected="true"] {
 }
 
 html .xl-root .xl-store {
-	background: #0b0d12;
-	color: #ffffff;
-}
-
-html .xl-root .xl-store:hover {
-	border-color: var(--xl-accent-ink);
+	background: transparent;
+	color: inherit;
 }
 
 html .xl-root .xl-filter {

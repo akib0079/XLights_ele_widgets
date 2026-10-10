@@ -1,8 +1,7 @@
 <?php
 /**
- * App download buttons. Uses neutral buttons rather than Apple/Google badge
- * artwork (official badges have their own usage guidelines; swap in approved
- * badge files via the xlights/store_badges filter if desired).
+ * App download badges: the official App Store and Google Play badge artwork,
+ * linked to the X LIGHTS LED app (Settings → App & Social).
  *
  * @package XLights
  */
@@ -10,7 +9,7 @@
 namespace XLights\Frontend;
 
 use XLights\Helpers\Context;
-use XLights\Helpers\Icons;
+use XLights\Helpers\Html;
 use XLights\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
@@ -24,33 +23,41 @@ final class Store_Badges {
 	public static function render( $pending = false ) {
 		$apple  = (string) Settings::get( 'app_store_url' );
 		$google = (string) Settings::get( 'google_play_url' );
-		$out    = '';
-		if ( $pending && '' === $apple && '' === $google ) {
-			$out .= '<div class="xl-stores xl-is-pending">' . Context::pending_badge( 'app_links' );
-			$out .= '<span class="xl-store"><span class="xl-store__icon">' . Icons::svg( 'apple' ) . '</span><span><small>' . esc_html__( 'Get the app for', 'xlights-elementor-widgets' ) . '</small>iPhone</span></span>';
-			$out .= '<span class="xl-store"><span class="xl-store__icon">' . Icons::svg( 'google-play' ) . '</span><span><small>' . esc_html__( 'Get the app for', 'xlights-elementor-widgets' ) . '</small>Android</span></span>';
+		$badges = array(
+			array( $apple, 'badge-app-store.webp', __( 'Download on the App Store', 'xlights-elementor-widgets' ), 432 ),
+			array( $google, 'badge-google-play.webp', __( 'Get it on Google Play', 'xlights-elementor-widgets' ), 486 ),
+		);
+		if ( '' === $apple && '' === $google ) {
+			if ( ! $pending ) {
+				return '';
+			}
+			$out = '<div class="xl-stores xl-is-pending">' . Context::pending_badge( 'app_links' );
+			foreach ( $badges as $b ) {
+				$out .= '<span class="xl-store">' . self::img( $b ) . '</span>';
+			}
 			return $out . '</div>';
 		}
-		$links = array();
-		if ( '' !== $apple ) {
-			$links[] = array( $apple, 'apple', 'iPhone' );
-		}
-		if ( '' !== $google ) {
-			$links[] = array( $google, 'google-play', 'Android' );
-		}
-		if ( ! $links ) {
-			return '';
-		}
-		$out .= '<div class="xl-stores">';
-		foreach ( $links as $l ) {
-			$out .= '<a class="xl-store" href="' . esc_url( $l[0] ) . '" target="_blank" rel="noopener"><span class="xl-store__icon">' . Icons::svg( $l[1] ) . '</span><span><small>' . esc_html__( 'Get the app for', 'xlights-elementor-widgets' ) . '</small>' . esc_html( $l[2] ) . '</span><span class="xl-sr"> ' . esc_html__( '(opens in a new tab)', 'xlights-elementor-widgets' ) . '</span></a>';
+		$out = '<div class="xl-stores">';
+		foreach ( $badges as $b ) {
+			if ( '' === $b[0] ) {
+				continue;
+			}
+			$out .= '<a class="xl-store" href="' . esc_url( $b[0] ) . '" target="_blank" rel="noopener">' . self::img( $b ) . '<span class="xl-sr"> ' . esc_html__( '(opens in a new tab)', 'xlights-elementor-widgets' ) . '</span></a>';
 		}
 		$out .= '</div>';
 		/**
-		 * Filter app store button markup.
+		 * Filter app store badge markup.
 		 *
 		 * @param string $out Markup.
 		 */
 		return apply_filters( 'xlights/store_badges', $out );
+	}
+
+	/**
+	 * @param array $b [url, file, label, width at 144 px height].
+	 * @return string
+	 */
+	private static function img( array $b ) {
+		return '<img class="xl-store__badge" src="' . esc_url( Html::asset_image( 'brand/' . $b[1] ) ) . '" width="' . (int) round( $b[3] / 3 ) . '" height="48" alt="' . esc_attr( $b[2] ) . '" loading="lazy" decoding="async">';
 	}
 }

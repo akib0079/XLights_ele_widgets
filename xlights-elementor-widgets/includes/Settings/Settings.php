@@ -15,6 +15,10 @@ defined( 'ABSPATH' ) || exit;
 
 final class Settings {
 
+	/** Official X LIGHTS LED app listings. */
+	const APP_STORE_URL   = 'https://apps.apple.com/ca/app/x-lights-led/id6462840352';
+	const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.goulyled.xlights&hl=en_CA';
+
 	const OPTION = 'xlights_settings';
 
 	/** @var array|null Request cache. */
@@ -471,16 +475,14 @@ final class Settings {
 				'intro'  => __( 'Leave a field blank to hide it. Do not enter placeholder URLs.', 'xlights-elementor-widgets' ),
 				'fields' => array(
 					'app_store_url'      => array(
-						'type'     => 'url',
-						'label'    => __( 'Apple App Store URL', 'xlights-elementor-widgets' ),
-						'default'  => '',
-						'approval' => true,
+						'type'    => 'url',
+						'label'   => __( 'Apple App Store URL', 'xlights-elementor-widgets' ),
+						'default' => self::APP_STORE_URL,
 					),
 					'google_play_url'    => array(
-						'type'     => 'url',
-						'label'    => __( 'Google Play URL', 'xlights-elementor-widgets' ),
-						'default'  => '',
-						'approval' => true,
+						'type'    => 'url',
+						'label'   => __( 'Google Play URL', 'xlights-elementor-widgets' ),
+						'default' => self::GOOGLE_PLAY_URL,
 					),
 					'google_reviews_url' => array(
 						'type'        => 'url',
