@@ -85,43 +85,43 @@ final class Defaults {
 			'color'    => array(
 				'label'  => __( 'Color & brightness', 'xlights-elementor-widgets' ),
 				'icon'   => 'palette',
-				'title'  => __( 'Every color, any brightness', 'xlights-elementor-widgets' ),
-				'text'   => __( 'Choose warm white for everyday elegance or pick from a full spectrum of color, then dial in the brightness that suits the moment.', 'xlights-elementor-widgets' ),
+				'title'  => __( 'Pick any color, set the brightness', 'xlights-elementor-widgets' ),
+				'text'   => __( 'Choose a shade on the color selector or enter exact RGB values, set the brightness with a slider, or tap one of the common colors — from soft warm whites to full color.', 'xlights-elementor-widgets' ),
 				'screen' => 'color',
 			),
-			'schedule' => array(
-				'label'  => __( 'Schedules', 'xlights-elementor-widgets' ),
-				'icon'   => 'timer',
-				'title'  => __( 'Set it once with smart schedules', 'xlights-elementor-widgets' ),
-				'text'   => __( 'Create timers so your lights turn on and off when you choose — every evening, on weekends, or for a whole season.', 'xlights-elementor-widgets' ),
-				'screen' => 'schedule',
-			),
 			'patterns' => array(
-				'label'  => __( 'Seasonal patterns', 'xlights-elementor-widgets' ),
+				'label'  => __( 'Patterns', 'xlights-elementor-widgets' ),
 				'icon'   => 'sparkles',
-				'title'  => __( 'Seasonal light shows and patterns', 'xlights-elementor-widgets' ),
-				'text'   => __( 'Switch to holiday colors and patterns for Christmas, Halloween, birthdays, game days and other celebrations — no ladders required.', 'xlights-elementor-widgets' ),
+				'title'  => __( 'Built-in patterns for every occasion', 'xlights-elementor-widgets' ),
+				'text'   => __( 'Tap a pattern for Christmas, Easter, Halloween, Thanksgiving, St. Patrick’s Day and more, use architectural warm or bright white looks, keep favorites, or add your own.', 'xlights-elementor-widgets' ),
 				'screen' => 'patterns',
 			),
-			'saved'    => array(
-				'label'  => __( 'Saved favorites', 'xlights-elementor-widgets' ),
-				'icon'   => 'heart',
-				'title'  => __( 'Save the looks you love', 'xlights-elementor-widgets' ),
-				'text'   => __( 'Save and customize your preferences so a favorite scene is always one tap away.', 'xlights-elementor-widgets' ),
-				'screen' => 'scenes',
+			'music'    => array(
+				'label'  => __( 'Music mode', 'xlights-elementor-widgets' ),
+				'icon'   => 'music',
+				'title'  => __( 'Lights that dance to the music', 'xlights-elementor-widgets' ),
+				'text'   => __( 'Switch to Music, pick a song from your list and choose an effect — the lights move with the music.', 'xlights-elementor-widgets' ),
+				'screen' => 'music',
 			),
-			'remote'   => array(
-				'label'  => __( 'Remote control', 'xlights-elementor-widgets' ),
-				'icon'   => 'globe',
-				'title'  => __( 'Manage your lights from anywhere', 'xlights-elementor-widgets' ),
-				'text'   => __( 'Turn lights on, change colors or adjust a schedule when you are away from home.', 'xlights-elementor-widgets' ),
-				'screen' => 'remote',
+			'schedule' => array(
+				'label'  => __( 'Timers', 'xlights-elementor-widgets' ),
+				'icon'   => 'timer',
+				'title'  => __( 'Timers for every day and every season', 'xlights-elementor-widgets' ),
+				'text'   => __( 'Set lights to turn on and off every day, or schedule a holiday look for specific dates — each timer with its own colors.', 'xlights-elementor-widgets' ),
+				'screen' => 'schedule',
+			),
+			'zones'    => array(
+				'label'  => __( 'Controllers', 'xlights-elementor-widgets' ),
+				'icon'   => 'smartphone',
+				'title'  => __( 'Every zone in one list', 'xlights-elementor-widgets' ),
+				'text'   => __( 'Soffit, deck, yard and backyard controllers each appear in My Controller with their online status — switch any zone on or off with a tap.', 'xlights-elementor-widgets' ),
+				'screen' => 'zones',
 			),
 			'share'    => array(
-				'label'  => __( 'Shared access', 'xlights-elementor-widgets' ),
+				'label'  => __( 'Family sharing', 'xlights-elementor-widgets' ),
 				'icon'   => 'users',
-				'title'  => __( 'Share control with your household', 'xlights-elementor-widgets' ),
-				'text'   => __( 'Give family members access so everyone can enjoy — and control — the lighting.', 'xlights-elementor-widgets' ),
+				'title'  => __( 'Share control with your family', 'xlights-elementor-widgets' ),
+				'text'   => __( 'Add family members under Family Management so everyone at home can use the lights from their own phone.', 'xlights-elementor-widgets' ),
 				'screen' => 'share',
 			),
 		);
@@ -200,6 +200,38 @@ final class Defaults {
 					'primary_link'  => '{quote_url}',
 					'show_phone'    => 'yes',
 					'bg'            => 'light',
+				),
+				$extra
+			),
+		);
+	}
+
+	/**
+	 * Bond Bridge smart-home integration (official X LIGHTS copy).
+	 *
+	 * @param array $extra Extra defaults (bg, image_position, layout).
+	 * @return array
+	 */
+	public static function bond_bridge( array $extra = array() ) {
+		return array(
+			'type'     => 'split',
+			'label'    => __( 'Smart-Home Integration (Bond Bridge)', 'xlights-elementor-widgets' ),
+			'defaults' => array_merge(
+				array(
+					'eyebrow'        => __( 'Bond Bridge integration', 'xlights-elementor-widgets' ),
+					'heading'        => __( 'Seamless integration with <em>luxury home automation.</em>', 'xlights-elementor-widgets' ),
+					'text'           => __( '<p>X LIGHTS now integrates with Bond Bridge, syncing your outdoor lighting with luxury home automation systems like Control4 and Savant. You can now manage lights, shades, and fans through a single app or remote, while still using the X Lights app for advanced color customization.</p><p>Your lighting works alongside other automated patio features such as louvers, shades, screens, awnings and fans, with scheduling and scene creation from the remote or smart-home app you already use.</p>', 'xlights-elementor-widgets' ),
+					'points'         => __( "Alexa and Google Home
+Control4, Savant and Crestron
+Loxone, RTI and Josh.ai
+Advanced colors and patterns stay in the X LIGHTS app", 'xlights-elementor-widgets' ),
+					'visual'         => 'image',
+					'image'          => self::photo( 'bond-integrations' ),
+					'image_alt'      => __( 'Bond works with Alexa, Google Home, Samsung SmartThings, Josh.ai, Control4, Nice, Crestron, Savant, RTI, Hubitat, Homebridge, URC and Loxone', 'xlights-elementor-widgets' ),
+					'image_fit'      => 'contain',
+					'scene'          => 'roofline',
+					'image_position' => 'right',
+					'bg'             => 'warm',
 				),
 				$extra
 			),

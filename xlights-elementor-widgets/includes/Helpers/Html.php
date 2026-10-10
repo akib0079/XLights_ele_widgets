@@ -277,7 +277,7 @@ final class Html {
 		$set = array();
 		if ( preg_match( '/^(.+)\.(webp|jpe?g|png)$/i', $url, $m ) ) {
 			$rel = ltrim( substr( $m[1], strlen( XLIGHTS_URL ) ), '/' );
-			foreach ( array( 640, 1024, 1600 ) as $w ) {
+			foreach ( array( 320, 640, 1024, 1600 ) as $w ) {
 				if ( $w < $width && is_readable( XLIGHTS_PATH . $rel . '-' . $w . '.' . $m[2] ) ) {
 					$set[] = esc_url( $m[1] . '-' . $w . '.' . $m[2] ) . ' ' . $w . 'w';
 				}

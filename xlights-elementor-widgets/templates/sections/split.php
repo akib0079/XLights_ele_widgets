@@ -84,6 +84,7 @@ if ( '' !== $visual && 'cinematic' !== $layout ) {
 	$frame = (string) ob_get_clean();
 }
 $pending = Context::PENDING === $data['visibility'] ? Context::pending_badge( $data['gate'] ) : '';
+$fit     = isset( $data['image_fit'] ) && 'contain' === $data['image_fit'] ? ' xl-media--contain' : '';
 $side    = isset( $data['image_position'] ) && 'left' === $data['image_position'] ? 'left' : 'right';
 
 if ( 'cinematic' === $layout ) :
@@ -108,7 +109,7 @@ elseif ( 'offset' === $layout ) :
 	<div class="xl-container">
 		<?php echo $pending; // phpcs:ignore WordPress.Security.EscapeOutput ?>
 		<div class="xl-offset xl-offset--media-<?php echo esc_attr( $side ); ?>">
-			<figure class="<?php echo esc_attr( Section_Renderer::visual_class( $data ) ); ?> xl-offset__media" data-xl-reveal><?php echo $frame; // phpcs:ignore WordPress.Security.EscapeOutput ?></figure>
+			<figure class="<?php echo esc_attr( Section_Renderer::visual_class( $data ) . $fit ); ?> xl-offset__media" data-xl-reveal><?php echo $frame; // phpcs:ignore WordPress.Security.EscapeOutput ?></figure>
 			<div class="xl-offset__card" data-xl-reveal style="--xl-i:2"><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 		</div>
 	</div>
@@ -120,7 +121,7 @@ else :
 		<div class="xl-split<?php echo '' === $visual ? ' xl-split--no-visual' : ''; ?>">
 			<div class="xl-split__content" data-xl-reveal><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 			<?php if ( '' !== $frame ) : ?>
-				<figure class="<?php echo esc_attr( Section_Renderer::visual_class( $data ) ); ?> xl-split__visual" data-xl-reveal><?php echo $frame; // phpcs:ignore WordPress.Security.EscapeOutput ?></figure>
+				<figure class="<?php echo esc_attr( Section_Renderer::visual_class( $data ) . $fit ); ?> xl-split__visual" data-xl-reveal><?php echo $frame; // phpcs:ignore WordPress.Security.EscapeOutput ?></figure>
 			<?php endif; ?>
 		</div>
 	</div>

@@ -141,7 +141,7 @@ return array(
 			'eyebrow'        => __( 'The X LIGHTS app', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'Your lighting, <em>in the palm of your hand.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( 'Change colors, save favorites, set schedules and switch to seasonal patterns from your phone.', 'xlights-elementor-widgets' ),
-			'items'          => Defaults::app_tabs( array( 'color', 'schedule', 'patterns', 'saved', 'remote', 'share' ) ),
+			'items'          => Defaults::app_tabs( array( 'color', 'patterns', 'music', 'schedule', 'zones', 'share' ) ),
 			'phone_position' => 'right',
 			'show_store'     => 'yes',
 			'link_label'     => __( 'Explore the X LIGHTS app', 'xlights-elementor-widgets' ),

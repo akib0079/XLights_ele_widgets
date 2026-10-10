@@ -226,19 +226,45 @@ return array(
 	),
 	'specs'       => array(
 		'type'     => 'specs',
-		'label'    => __( 'Bistro Product Details (approval-gated)', 'xlights-elementor-widgets' ),
+		'label'    => __( 'Bistro Product Details', 'xlights-elementor-widgets' ),
 		'defaults' => array(
 			'eyebrow'     => __( 'Product details', 'xlights-elementor-widgets' ),
 			'heading'     => __( 'Bistro lighting details', 'xlights-elementor-widgets' ),
 			'rows'        => array(
-				array( 'label' => __( 'Product name', 'xlights-elementor-widgets' ) ),
-				array( 'label' => __( 'Bulb style & spacing', 'xlights-elementor-widgets' ) ),
-				array( 'label' => __( 'Color capability', 'xlights-elementor-widgets' ) ),
-				array( 'label' => __( 'App control', 'xlights-elementor-widgets' ) ),
+				array(
+					'label'    => __( 'Product', 'xlights-elementor-widgets' ),
+					'value'    => __( 'X LIGHTS string bulb lights', 'xlights-elementor-widgets' ),
+					'approved' => 'yes',
+				),
+				array(
+					'label'    => __( 'Bulb spacing & drop', 'xlights-elementor-widgets' ),
+					'value'    => __( '31" spacing, 4" drop', 'xlights-elementor-widgets' ),
+					'approved' => 'yes',
+				),
+				array(
+					'label'    => __( 'Color', 'xlights-elementor-widgets' ),
+					'value'    => __( 'Full RGBW', 'xlights-elementor-widgets' ),
+					'approved' => 'yes',
+				),
+				array(
+					'label'    => __( 'App control', 'xlights-elementor-widgets' ),
+					'value'    => __( 'X LIGHTS app, including the dance-to-the-music feature', 'xlights-elementor-widgets' ),
+					'approved' => 'yes',
+				),
+				array(
+					'label'    => __( 'Output', 'xlights-elementor-widgets' ),
+					'value'    => __( '60 lumens, 1 W per bulb, 24 V', 'xlights-elementor-widgets' ),
+					'approved' => 'yes',
+				),
+				array(
+					'label'    => __( 'Bulbs', 'xlights-elementor-widgets' ),
+					'value'    => __( 'Impact-resistant', 'xlights-elementor-widgets' ),
+					'approved' => 'yes',
+				),
 			),
 			'spacing'     => 'compact',
 			'bg'          => 'warm',
-			'editor_note' => __( 'Confirm the exact bistro product, bulb specifications and app-control capabilities with the dealer, then fill in and verify each row.', 'xlights-elementor-widgets' ),
+			'editor_note' => __( 'Values from the X LIGHTS website (string bulb lights). Update them if the dealer sells a different bistro product.', 'xlights-elementor-widgets' ),
 		),
 	),
 	'cta'         => Defaults::cta(

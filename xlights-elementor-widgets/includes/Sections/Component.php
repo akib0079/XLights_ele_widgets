@@ -347,7 +347,7 @@ abstract class Component {
 	protected static function visual_fields( $default = 'image', $allow_none = false ) {
 		$options = array(
 			'image'        => __( 'Photo', 'xlights-elementor-widgets' ),
-			'phone'        => __( 'App screen mockup', 'xlights-elementor-widgets' ),
+			'phone'        => __( 'X LIGHTS app screen', 'xlights-elementor-widgets' ),
 			'illustration' => __( 'Illustration', 'xlights-elementor-widgets' ),
 		);
 		if ( $allow_none ) {
@@ -365,7 +365,7 @@ abstract class Component {
 			),
 			'screen'     => self::select( __( 'App screen', 'xlights-elementor-widgets' ), Illustrations::screens(), 'zones', array( 'condition' => array( 'visual' => 'phone' ) ) ),
 			'screenshot' => self::media(
-				__( 'Real app screenshot (optional)', 'xlights-elementor-widgets' ),
+				__( 'Your own app screenshot (optional)', 'xlights-elementor-widgets' ),
 				'',
 				array( 'condition' => array( 'visual' => 'phone' ) )
 			),

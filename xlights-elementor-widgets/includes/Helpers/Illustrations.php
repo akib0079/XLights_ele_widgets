@@ -248,32 +248,54 @@ final class Illustrations {
 	}
 
 	/**
+	 * Official X LIGHTS app screens (screenshots of the real app, as published
+	 * on the X LIGHTS website). Keys are kept from earlier versions so saved
+	 * pages keep working; retired keys map to the closest real screen.
+	 *
 	 * @return array screen => label
 	 */
 	public static function screens() {
 		return array(
-			'zones'    => __( 'Lighting zones', 'xlights-elementor-widgets' ),
-			'patterns' => __( 'Patterns & themes', 'xlights-elementor-widgets' ),
+			'zones'    => __( 'Controllers & zones', 'xlights-elementor-widgets' ),
+			'patterns' => __( 'Patterns & holidays', 'xlights-elementor-widgets' ),
 			'color'    => __( 'Color & brightness', 'xlights-elementor-widgets' ),
-			'schedule' => __( 'Schedules & timers', 'xlights-elementor-widgets' ),
-			'scenes'   => __( 'Saved scenes', 'xlights-elementor-widgets' ),
-			'remote'   => __( 'Remote control', 'xlights-elementor-widgets' ),
-			'share'    => __( 'Shared access', 'xlights-elementor-widgets' ),
+			'schedule' => __( 'Timers & schedules', 'xlights-elementor-widgets' ),
+			'music'    => __( 'Music mode', 'xlights-elementor-widgets' ),
+			'share'    => __( 'Family management', 'xlights-elementor-widgets' ),
 		);
 	}
 
 	/**
-	 * Phone mockup with an illustrative app screen or an uploaded screenshot.
+	 * Bundled screenshot file for a screen key.
+	 *
+	 * @param string $screen Screen key.
+	 * @return string File name in assets/images/app/.
+	 */
+	private static function screen_file( $screen ) {
+		$files = array(
+			'zones'    => 'app-controllers.webp',
+			'remote'   => 'app-controllers.webp',
+			'patterns' => 'app-patterns.webp',
+			'scenes'   => 'app-patterns.webp',
+			'color'    => 'app-color.webp',
+			'schedule' => 'app-timers.webp',
+			'music'    => 'app-music.webp',
+			'share'    => 'app-family.webp',
+		);
+		return isset( $files[ $screen ] ) ? $files[ $screen ] : $files['zones'];
+	}
+
+	/**
+	 * The X LIGHTS app on a phone: an uploaded screenshot (framed by CSS), or
+	 * the official screenshot for the chosen screen (already in its device frame).
 	 *
 	 * @param string $screen     Screen key.
-	 * @param mixed  $screenshot Optional MEDIA value; replaces the mock screen.
-	 * @param array  $args       class, eager.
+	 * @param mixed  $screenshot Optional MEDIA value (a plain screenshot).
+	 * @param array  $args       eager, class.
 	 * @return string
 	 */
 	public static function phone( $screen, $screenshot = null, array $args = array() ) {
-		$screens = self::screens();
-		$screen  = isset( $screens[ $screen ] ) ? $screen : 'zones';
-		$class   = 'xl-phone' . ( ! empty( $args['class'] ) ? ' ' . $args['class'] : '' );
+		$class = 'xl-phone' . ( ! empty( $args['class'] ) ? ' ' . $args['class'] : '' );
 
 		if ( $screenshot && Html::has_image( $screenshot ) ) {
 			$inner = Html::image(
@@ -287,120 +309,18 @@ final class Illustrations {
 			return '<div class="' . esc_attr( $class ) . '"><div class="xl-phone__screen">' . $inner . '</div></div>';
 		}
 
-		$label = sprintf(
-			/* translators: %s: app screen name */
-			__( 'Illustration of the X LIGHTS app: %s', 'xlights-elementor-widgets' ),
-			$screens[ $screen ]
+		$screens = self::screens();
+		$label   = isset( $screens[ $screen ] ) ? $screens[ $screen ] : $screens['zones'];
+		$img     = Html::image(
+			Html::asset_image( 'app/' . self::screen_file( $screen ) ),
+			array(
+				'class' => 'xl-phone__device',
+				'sizes' => '(max-width: 767px) 74vw, 300px',
+				'eager' => ! empty( $args['eager'] ),
+				/* translators: %s: app screen name, e.g. "Color & brightness" */
+				'alt'   => sprintf( __( 'X LIGHTS app: %s screen', 'xlights-elementor-widgets' ), $label ),
+			)
 		);
-
-		$out  = '<div class="' . esc_attr( $class ) . ' xl-phone--mock" role="img" aria-label="' . esc_attr( $label ) . '">';
-		$out .= '<div class="xl-phone__screen" aria-hidden="true">';
-		$out .= '<div class="xl-app__bar"><span class="xl-app__time">9:41</span><img class="xl-app__logo" src="' . esc_url( XLIGHTS_URL . 'assets/images/brand/xlights-logo.png' ) . '" width="70" height="21" alt=""><span class="xl-app__dots"></span></div>';
-		$out .= '<div class="xl-app xl-app--' . esc_attr( $screen ) . '">' . self::screen_body( $screen ) . '</div>';
-		$out .= '<div class="xl-app__tabs"><i></i><i></i><i></i><i></i><i></i></div>';
-		$out .= '</div></div>';
-		return $out;
-	}
-
-	/**
-	 * @param string $screen Screen key.
-	 * @return string
-	 */
-	private static function screen_body( $screen ) {
-		$t = static function ( $s ) {
-			return esc_html( $s );
-		};
-		switch ( $screen ) {
-			case 'patterns':
-				$items = array(
-					array( 'star', __( 'Favorites', 'xlights-elementor-widgets' ), '#e9e2d6' ),
-					array( 'home', __( 'Architectural', 'xlights-elementor-widgets' ), '#ffd08a' ),
-					array( 'sparkles', __( 'Star Twinkle', 'xlights-elementor-widgets' ), '#f6f2e8' ),
-					array( 'tree', __( 'Christmas', 'xlights-elementor-widgets' ), '#45d483' ),
-					array( 'moon', __( 'Halloween', 'xlights-elementor-widgets' ), '#ff8a1f' ),
-					array( 'leaf', __( 'Thanksgiving', 'xlights-elementor-widgets' ), '#e0a050' ),
-					array( 'heart', __( 'Valentine’s', 'xlights-elementor-widgets' ), '#ff5c8a' ),
-					array( 'flag', __( 'Independence', 'xlights-elementor-widgets' ), '#4d7dff' ),
-					array( 'cake', __( 'Birthday', 'xlights-elementor-widgets' ), '#b07cff' ),
-				);
-				$out   = '<p class="xl-app__title">' . $t( __( 'Patterns', 'xlights-elementor-widgets' ) ) . '</p><div class="xl-app__grid">';
-				foreach ( $items as $i ) {
-					$out .= '<span class="xl-app__tile" style="--c:' . esc_attr( $i[2] ) . '">' . Icons::svg( $i[0] ) . '<b>' . $t( $i[1] ) . '</b></span>';
-				}
-				return $out . '</div>';
-
-			case 'color':
-				$out  = '<p class="xl-app__title">' . $t( __( 'Roofline', 'xlights-elementor-widgets' ) ) . '</p>';
-				$out .= '<div class="xl-app__wheel"><span></span></div>';
-				$out .= '<div class="xl-app__slider"><em>' . $t( __( 'Brightness', 'xlights-elementor-widgets' ) ) . '</em><span style="--v:72%"></span></div>';
-				$out .= '<div class="xl-app__slider xl-app__slider--white"><em>' . $t( __( 'White', 'xlights-elementor-widgets' ) ) . '</em><span style="--v:38%"></span></div>';
-				$out .= '<div class="xl-app__swatches"><i style="--c:#ffd08a"></i><i style="--c:#ff4d4d"></i><i style="--c:#45d483"></i><i style="--c:#4d7dff"></i><i style="--c:#b07cff"></i><i style="--c:#ff8a1f"></i></div>';
-				return $out;
-
-			case 'schedule':
-				$rows = array(
-					array( __( 'Every evening', 'xlights-elementor-widgets' ), __( '7:00 PM – 11:00 PM · Warm White', 'xlights-elementor-widgets' ), true ),
-					array( __( 'Holiday season', 'xlights-elementor-widgets' ), __( 'Dec 1 – Jan 1 · Christmas', 'xlights-elementor-widgets' ), true ),
-					array( __( 'Halloween week', 'xlights-elementor-widgets' ), __( 'Oct 25 – 31 · Halloween', 'xlights-elementor-widgets' ), false ),
-					array( __( 'Weekend patio', 'xlights-elementor-widgets' ), __( 'Fri – Sun · 6:00 PM – Midnight', 'xlights-elementor-widgets' ), true ),
-				);
-				$out  = '<p class="xl-app__title">' . $t( __( 'Timers', 'xlights-elementor-widgets' ) ) . '</p>';
-				foreach ( $rows as $r ) {
-					$out .= '<div class="xl-app__row">' . Icons::svg( 'clock' ) . '<span><b>' . $t( $r[0] ) . '</b><small>' . $t( $r[1] ) . '</small></span><i class="xl-app__switch' . ( $r[2] ? ' is-on' : '' ) . '"></i></div>';
-				}
-				return $out;
-
-			case 'scenes':
-				$rows = array(
-					array( __( 'Welcome Home', 'xlights-elementor-widgets' ), array( '#ffd08a', '#ffd08a', '#f6f2e8' ) ),
-					array( __( 'Dinner Party', 'xlights-elementor-widgets' ), array( '#ffb86b', '#ffd08a', '#ff8a5c' ) ),
-					array( __( 'Game Day', 'xlights-elementor-widgets' ), array( '#4d7dff', '#ff8a1f', '#4d7dff' ) ),
-					array( __( 'Birthday', 'xlights-elementor-widgets' ), array( '#ff5c8a', '#ffc93c', '#3cc4ff' ) ),
-				);
-				$out  = '<p class="xl-app__title">' . $t( __( 'My Scenes', 'xlights-elementor-widgets' ) ) . '</p>';
-				foreach ( $rows as $r ) {
-					$out .= '<div class="xl-app__row"><span class="xl-app__chips">';
-					foreach ( $r[1] as $c ) {
-						$out .= '<i style="--c:' . esc_attr( $c ) . '"></i>';
-					}
-					$out .= '</span><span><b>' . $t( $r[0] ) . '</b></span>' . Icons::svg( 'play' ) . '</div>';
-				}
-				return $out;
-
-			case 'remote':
-				$out  = '<p class="xl-app__title">' . $t( __( 'Away from home', 'xlights-elementor-widgets' ) ) . '</p>';
-				$out .= '<div class="xl-app__card">' . Icons::svg( 'globe' ) . '<span><b>' . $t( __( 'Connected', 'xlights-elementor-widgets' ) ) . '</b><small>' . $t( __( 'Control from anywhere', 'xlights-elementor-widgets' ) ) . '</small></span></div>';
-				$out .= '<div class="xl-app__row">' . Icons::svg( 'roofline' ) . '<span><b>' . $t( __( 'Roofline', 'xlights-elementor-widgets' ) ) . '</b><small>' . $t( __( 'On · Warm White', 'xlights-elementor-widgets' ) ) . '</small></span><i class="xl-app__switch is-on"></i></div>';
-				$out .= '<div class="xl-app__row">' . Icons::svg( 'tree' ) . '<span><b>' . $t( __( 'Yard', 'xlights-elementor-widgets' ) ) . '</b><small>' . $t( __( 'Off', 'xlights-elementor-widgets' ) ) . '</small></span><i class="xl-app__switch"></i></div>';
-				return $out;
-
-			case 'share':
-				$rows = array(
-					array( __( 'You', 'xlights-elementor-widgets' ), __( 'Owner', 'xlights-elementor-widgets' ) ),
-					array( __( 'Family member', 'xlights-elementor-widgets' ), __( 'Can control', 'xlights-elementor-widgets' ) ),
-					array( __( 'House sitter', 'xlights-elementor-widgets' ), __( 'Can control', 'xlights-elementor-widgets' ) ),
-				);
-				$out  = '<p class="xl-app__title">' . $t( __( 'Shared Access', 'xlights-elementor-widgets' ) ) . '</p>';
-				foreach ( $rows as $r ) {
-					$out .= '<div class="xl-app__row">' . Icons::svg( 'user' ) . '<span><b>' . $t( $r[0] ) . '</b><small>' . $t( $r[1] ) . '</small></span></div>';
-				}
-				$out .= '<span class="xl-app__btn">' . Icons::svg( 'plus' ) . $t( __( 'Invite', 'xlights-elementor-widgets' ) ) . '</span>';
-				return $out;
-
-			case 'zones':
-			default:
-				$rows = array(
-					array( 'roofline', __( 'Soffit / Roofline', 'xlights-elementor-widgets' ), true ),
-					array( 'string-lights', __( 'Patio Bistro', 'xlights-elementor-widgets' ), true ),
-					array( 'stairs', __( 'Deck', 'xlights-elementor-widgets' ), false ),
-					array( 'tree', __( 'Landscape', 'xlights-elementor-widgets' ), true ),
-				);
-				$out  = '<p class="xl-app__title">' . $t( __( 'My Controller', 'xlights-elementor-widgets' ) ) . '</p>';
-				$out .= '<div class="xl-app__row xl-app__row--all"><span><b>' . $t( __( 'All of the lights', 'xlights-elementor-widgets' ) ) . '</b></span><i class="xl-app__switch is-on"></i></div>';
-				foreach ( $rows as $r ) {
-					$out .= '<div class="xl-app__row">' . Icons::svg( $r[0] ) . '<span><b>' . $t( $r[1] ) . '</b><small class="xl-app__online">' . $t( __( 'Online', 'xlights-elementor-widgets' ) ) . '</small></span><i class="xl-app__switch' . ( $r[2] ? ' is-on' : '' ) . '"></i></div>';
-				}
-				return $out;
-		}
+		return '<div class="' . esc_attr( $class ) . ' xl-phone--device">' . $img . '</div>';
 	}
 }

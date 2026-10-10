@@ -68,6 +68,15 @@ class Split extends Component {
 					),
 					'default' => 'right',
 				),
+				'image_fit'      => self::select(
+					__( 'Photo fit', 'xlights-elementor-widgets' ),
+					array(
+						'cover'   => __( 'Fill the frame (crop edges)', 'xlights-elementor-widgets' ),
+						'contain' => __( 'Show the whole image (logos, products)', 'xlights-elementor-widgets' ),
+					),
+					'cover',
+					array( 'condition' => array( 'visual' => 'image' ) )
+				),
 				'badge'          => self::text( __( 'Visual badge', 'xlights-elementor-widgets' ) ),
 				'caption'        => self::text( __( 'Visual caption', 'xlights-elementor-widgets' ) ),
 				'gate'           => self::gate_field(),

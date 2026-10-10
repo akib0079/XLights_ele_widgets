@@ -115,7 +115,7 @@ return array(
 		'defaults' => array(
 			'eyebrow'    => __( 'The X LIGHTS app', 'xlights-elementor-widgets' ),
 			'heading'    => __( 'Control it all from your phone.', 'xlights-elementor-widgets' ),
-			'items'      => Defaults::app_tabs( array( 'color', 'schedule', 'patterns' ) ),
+			'items'      => Defaults::app_tabs( array( 'color', 'patterns', 'schedule' ) ),
 			'show_store' => 'yes',
 			'link_label' => __( 'Explore the app', 'xlights-elementor-widgets' ),
 			'link'       => '{page:app}',
