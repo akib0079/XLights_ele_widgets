@@ -179,6 +179,58 @@ final class Defaults {
 	}
 
 	/**
+	 * "All fixtures are" feature strip from the official X LIGHTS deck and
+	 * landscape product sheets.
+	 *
+	 * @param string $bg Background.
+	 * @return array
+	 */
+	public static function fixture_features( $bg = 'light' ) {
+		return array(
+			'type'     => 'cards',
+			'label'    => __( 'Fixture Features', 'xlights-elementor-widgets' ),
+			'defaults' => array(
+				'eyebrow' => __( 'All fixtures are', 'xlights-elementor-widgets' ),
+				'heading' => __( 'Premium lighting. <em>Endless possibilities.</em>', 'xlights-elementor-widgets' ),
+				'style'   => 'strip',
+				'items'   => array(
+					array(
+						'icon'  => 'palette',
+						'title' => __( 'Individually programmable RGBW', 'xlights-elementor-widgets' ),
+						'text'  => __( 'Control every fixture with millions of colors, dynamic effects and custom scenes.', 'xlights-elementor-widgets' ),
+					),
+					array(
+						'icon'  => 'droplet',
+						'title' => __( 'IP67 weatherproof', 'xlights-elementor-widgets' ),
+						'text'  => __( 'Engineered to perform in the harshest outdoor environments.', 'xlights-elementor-widgets' ),
+					),
+					array(
+						'icon'  => 'link',
+						'title' => __( 'Quick connect technology', 'xlights-elementor-widgets' ),
+						'text'  => __( 'Plug-and-play connections for fast, clean and secure installation.', 'xlights-elementor-widgets' ),
+					),
+					array(
+						'icon'  => 'shield',
+						'title' => __( 'Premium build quality', 'xlights-elementor-widgets' ),
+						'text'  => __( 'Durable materials and professional design for long-lasting reliability.', 'xlights-elementor-widgets' ),
+					),
+					array(
+						'icon'  => 'plus',
+						'title' => __( 'Expandable system', 'xlights-elementor-widgets' ),
+						'text'  => __( 'Easily add fixtures, zones and controllers as your project grows.', 'xlights-elementor-widgets' ),
+					),
+					array(
+						'icon'  => 'bolt',
+						'title' => __( 'Low voltage', 'xlights-elementor-widgets' ),
+						'text'  => __( 'Safe and efficient 12V–24V system with advanced LED technology.', 'xlights-elementor-widgets' ),
+					),
+				),
+				'bg'      => $bg,
+			),
+		);
+	}
+
+	/**
 	 * Final consultation CTA.
 	 *
 	 * @param string $heading Heading.

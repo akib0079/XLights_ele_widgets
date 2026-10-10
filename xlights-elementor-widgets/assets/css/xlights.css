@@ -1908,6 +1908,26 @@
 	transform: scale(1.05);
 }
 
+.xl-root .xl-card__media--icon {
+	display: grid;
+	place-items: center;
+	background: radial-gradient(120% 90% at 50% 100%, rgb(var(--xl-accent-glow-rgb) / 0.24), transparent 60%), var(--xl-dark-2);
+}
+
+.xl-root .xl-card__media--icon .xl-card__icon {
+	width: 72px;
+	height: 72px;
+	margin: 0;
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.xl-root .xl-card__media--icon .xl-card__icon svg {
+	width: 34px;
+	height: 34px;
+}
+
 .xl-root .xl-cards--image .xl-card__body {
 	padding: clamp(20px, 2.4vw, 30px);
 }
@@ -3339,10 +3359,11 @@
 	inset: 0;
 }
 
-.xl-root .xl-map__placeholder .xl-illus {
+.xl-root .xl-map__placeholder .xl-map__photo {
 	width: 100%;
 	height: 100%;
-	opacity: 0.55;
+	object-fit: cover;
+	opacity: 0.6;
 }
 
 .xl-root .xl-map__cta {

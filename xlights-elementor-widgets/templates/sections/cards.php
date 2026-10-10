@@ -41,10 +41,14 @@ $count   = count( $data['items'] );
 				?>
 				<li class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-xl-reveal style="--xl-i:<?php echo (int) $i; ?>">
 					<?php if ( in_array( $style, array( 'image', 'overlay', 'bento', 'stack' ), true ) ) : ?>
-						<div class="xl-card__media<?php echo $has_image ? '' : ' xl-media--illustration'; ?>">
+						<?php $icon_panel = ! $has_image && ( '' !== $item['icon'] || ! empty( $item['icon_custom']['value'] ) ); ?>
+						<div class="xl-card__media<?php echo $has_image ? '' : ( $icon_panel ? ' xl-card__media--icon' : ' xl-media--illustration' ); ?>">
 							<?php
 							if ( $has_image ) {
 								echo Html::image( $item['image'], array( 'size' => 'large', 'sizes' => '(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 33vw' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+							} elseif ( $icon_panel ) {
+								// No photo yet: a tinted panel with the product icon rather than a drawn scene.
+								echo '<span class="xl-card__icon">' . Html::icon( $item['icon'], isset( $item['icon_custom'] ) ? $item['icon_custom'] : null ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput
 							} else {
 								echo Illustrations::scene( $item['scene'], $item['palette'] ); // phpcs:ignore WordPress.Security.EscapeOutput
 							}

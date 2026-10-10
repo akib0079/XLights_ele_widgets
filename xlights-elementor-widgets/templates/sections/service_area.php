@@ -10,7 +10,6 @@
 use XLights\Helpers\Context;
 use XLights\Helpers\Html;
 use XLights\Helpers\Icons;
-use XLights\Helpers\Illustrations;
 
 defined( 'ABSPATH' ) || exit;
 ?>
@@ -35,7 +34,17 @@ defined( 'ABSPATH' ) || exit;
 		<?php if ( $data['map_url'] ) : ?>
 			<div class="xl-map" data-xl-map="<?php echo esc_url( $data['map_url'] ); ?>" data-xl-reveal>
 				<div class="xl-map__placeholder">
-					<?php echo Illustrations::scene( 'roofline', 'warm', __( 'Decorative illustration', 'xlights-elementor-widgets' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php
+					// Decorative backdrop behind the click-to-load button (empty alt).
+					echo Html::image(
+						Html::asset_image( 'photos/soffit-house-dusk-wide.webp' ),
+						array(
+							'alt'   => '',
+							'sizes' => '(max-width: 1024px) 100vw, 50vw',
+							'class' => 'xl-map__photo',
+						)
+					); // phpcs:ignore WordPress.Security.EscapeOutput
+					?>
 					<div class="xl-map__cta">
 						<button type="button" class="xl-btn xl-btn--light" data-xl-map-load><?php echo Icons::svg( 'map-pin' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php esc_html_e( 'Show service-area map', 'xlights-elementor-widgets' ); ?></span></button>
 						<p><?php esc_html_e( 'Loads Google Maps, which may set cookies.', 'xlights-elementor-widgets' ); ?></p>
