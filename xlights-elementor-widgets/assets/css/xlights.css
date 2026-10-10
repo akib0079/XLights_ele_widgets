@@ -722,6 +722,11 @@
 	border-radius: 0;
 	color: var(--xl-accent-ink);
 	background: none;
+}
+
+/* The underline runs under the label only (never under the arrow or a stretched box). */
+.xl-root .xl-btn--text > span {
+	padding-bottom: 3px;
 	background-image: linear-gradient(currentColor, currentColor);
 	background-size: 0% 1.5px;
 	background-position: 0 100%;
@@ -729,7 +734,8 @@
 	transition: background-size 0.3s var(--xl-ease);
 }
 
-.xl-root .xl-btn--text:hover {
+.xl-root .xl-btn--text:hover > span,
+.xl-root .xl-btn--text:focus-visible > span {
 	background-size: 100% 1.5px;
 }
 
@@ -1732,6 +1738,7 @@
 }
 
 .xl-root .xl-card__more {
+	align-self: flex-start;
 	text-transform: uppercase;
 	letter-spacing: 0.14em;
 	font-size: 0.74rem;
@@ -1937,6 +1944,17 @@
 
 .xl-root .xl-cards--bento .xl-card:nth-child(2) {
 	grid-column: span 2;
+}
+
+/* Smaller bento tiles: a compact "Explore" line that stays on one row. */
+.xl-root .xl-cards--bento .xl-card:nth-child(n+3) .xl-card__more {
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	white-space: nowrap;
+}
+
+.xl-root .xl-cards--bento .xl-card:nth-child(n+3) .xl-card__body {
+	padding: clamp(20px, 2.2vw, 28px);
 }
 
 @media (max-width: 1024px) {
@@ -4673,11 +4691,13 @@
 	}
 }
 
-.xl-root.xl-anim.xl-js .xl-section:not(.xl-section--lead) [data-xl-reveal]:not(.is-visible) :is(.xl-media__frame > img, .xl-media__frame > .xl-illus, .xl-card__media > img, .xl-card__media > .xl-illus, .xl-quote__aside-media > img) {
+.xl-root.xl-anim.xl-js .xl-section:not(.xl-section--lead) [data-xl-reveal]:not(.is-visible) :is(.xl-media__frame > img, .xl-media__frame > .xl-illus, .xl-card__media > img, .xl-card__media > .xl-illus, .xl-quote__aside-media > img),
+.xl-root.xl-anim.xl-js .xl-section:not(.xl-section--lead) .xl-cine__media[data-xl-reveal]:not(.is-visible) > img {
 	clip-path: inset(100% 0 0 0);
 }
 
-.xl-root.xl-anim.xl-js .xl-section:not(.xl-section--lead) [data-xl-reveal].is-visible :is(.xl-media__frame > img, .xl-media__frame > .xl-illus, .xl-card__media > img, .xl-card__media > .xl-illus, .xl-quote__aside-media > img) {
+.xl-root.xl-anim.xl-js .xl-section:not(.xl-section--lead) [data-xl-reveal].is-visible :is(.xl-media__frame > img, .xl-media__frame > .xl-illus, .xl-card__media > img, .xl-card__media > .xl-illus, .xl-quote__aside-media > img),
+.xl-root.xl-anim.xl-js .xl-section:not(.xl-section--lead) .xl-cine__media[data-xl-reveal].is-visible > img {
 	animation: xl-wipe 1.35s cubic-bezier(0.65, 0, 0.15, 1) backwards;
 	animation-delay: calc(var(--xl-i, 0) * 90ms + 120ms);
 }
@@ -5715,6 +5735,516 @@ html.xl-scroll-lock {
 }
 
 /* -------------------------------------------------------------------------
+ * Layouts (1.5.0): editorial offset, cinematic band, feature explorer.
+ * They break up runs of side-by-side sections; all reuse the section tokens,
+ * so light, grey and navy backgrounds and the Colors & Fonts settings apply.
+ * ---------------------------------------------------------------------- */
+
+/* Editorial offset: a large photo with the text card overlapping its edge. */
+.xl-root .xl-offset {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	align-items: center;
+}
+
+.xl-root .xl-offset__media {
+	grid-column: 1 / span 8;
+	grid-row: 1;
+	margin: 0;
+}
+
+.xl-root .xl-offset--media-right .xl-offset__media {
+	grid-column: 5 / -1;
+}
+
+.xl-root .xl-offset__media .xl-media__frame {
+	aspect-ratio: 5 / 4;
+	border-radius: var(--xl-radius-lg);
+}
+
+.xl-root .xl-offset__card {
+	position: relative;
+	z-index: 1;
+	grid-column: 7 / -1;
+	grid-row: 1;
+	padding: clamp(28px, 3.6vw, 56px);
+	border-radius: var(--xl-radius-lg);
+	background: var(--xl-card-bg);
+	box-shadow: 0 0 0 1px var(--xl-line), 0 44px 90px -50px rgb(var(--xl-deep-rgb) / 0.5);
+}
+
+.xl-root .xl-offset--media-right .xl-offset__card {
+	grid-column: 1 / span 6;
+}
+
+.xl-root .xl-offset__card .xl-head {
+	margin-bottom: 1.25rem;
+}
+
+.xl-root .xl-offset__card .xl-actions {
+	margin-top: 1.75rem;
+}
+
+/* Cinematic: a full-width inset photo (like the hero frame) with a glass text panel. */
+.xl-root .xl-layout--cinematic {
+	padding-block: calc(var(--xl-section-y) * 0.55);
+}
+
+.xl-root .xl-cine {
+	display: grid;
+}
+
+.xl-root .xl-cine__media {
+	position: relative;
+	grid-area: 1 / 1;
+	min-height: clamp(560px, 84vh, 860px);
+	margin-inline: var(--xl-frame);
+	overflow: hidden;
+	isolation: isolate;
+	border-radius: var(--xl-radius-lg);
+	background: var(--xl-dark);
+}
+
+.xl-root .xl-cine__media > img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Darkens the side the panel sits on; the far side stays bright. */
+.xl-root .xl-cine__media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: linear-gradient(90deg, rgb(var(--xl-deep-rgb) / 0.62) 0%, rgb(var(--xl-deep-rgb) / 0.28) 42%, rgb(var(--xl-deep-rgb) / 0) 68%), linear-gradient(0deg, rgb(var(--xl-deep-rgb) / 0.45) 0%, rgb(var(--xl-deep-rgb) / 0) 40%);
+}
+
+.xl-root .xl-cine--panel-right .xl-cine__media::after {
+	background: linear-gradient(270deg, rgb(var(--xl-deep-rgb) / 0.62) 0%, rgb(var(--xl-deep-rgb) / 0.28) 42%, rgb(var(--xl-deep-rgb) / 0) 68%), linear-gradient(0deg, rgb(var(--xl-deep-rgb) / 0.45) 0%, rgb(var(--xl-deep-rgb) / 0) 40%);
+}
+
+.xl-root .xl-cine__media .xl-media__badge {
+	z-index: 2;
+	left: auto;
+	right: 20px;
+	top: 20px;
+}
+
+.xl-root .xl-cine--panel-right .xl-cine__media .xl-media__badge {
+	left: 20px;
+	right: auto;
+}
+
+.xl-root .xl-cine__inner {
+	position: relative;
+	z-index: 1;
+	grid-area: 1 / 1;
+	display: flex;
+	align-items: flex-end;
+	padding-block: clamp(28px, 5vw, 72px);
+	pointer-events: none;
+}
+
+.xl-root .xl-cine--panel-right .xl-cine__inner {
+	justify-content: flex-end;
+}
+
+.xl-root .xl-cine__panel {
+	width: min(100%, 540px);
+	padding: clamp(28px, 3.4vw, 48px);
+	border-radius: var(--xl-radius-lg);
+	color: var(--xl-on-dark);
+	background: rgb(var(--xl-deep-rgb) / 0.84);
+	-webkit-backdrop-filter: blur(18px) saturate(1.2);
+	backdrop-filter: blur(18px) saturate(1.2);
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 40px 80px -40px rgb(var(--xl-ink-rgb) / 0.7);
+	pointer-events: auto;
+	--xl-on-heading: var(--xl-ink);
+	--xl-heading: #ffffff;
+	--xl-muted: var(--xl-on-dark-muted);
+	--xl-line: var(--xl-line-dark);
+	--xl-accent-ink: var(--xl-accent-on-dark);
+	--xl-accent-soft: var(--xl-tint-on-dark);
+	--xl-btn-bg: #ffffff;
+	--xl-btn-color: var(--xl-ink);
+	--xl-btn-bg-hover: var(--xl-accent-on-dark);
+	--xl-btn-color-hover: var(--xl-ink);
+}
+
+.xl-root .xl-cine__panel .xl-eyebrow {
+	color: var(--xl-accent-ink);
+}
+
+.xl-root .xl-cine__panel .xl-checklist li {
+	color: var(--xl-on-dark);
+}
+
+.xl-root .xl-cine__panel .xl-head {
+	margin-bottom: 1.1rem;
+}
+
+.xl-root .xl-cine__panel .xl-actions {
+	margin-top: 1.6rem;
+}
+
+/* Feature explorer: numbered tabs beside a large photo with a caption card. */
+.xl-root .xl-showcase {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	gap: clamp(32px, 5.5vw, 88px);
+	align-items: start;
+}
+
+.xl-root .xl-showcase--media-left {
+	grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
+.xl-root .xl-showcase--media-left .xl-showcase__stage {
+	order: -1;
+}
+
+.xl-root .xl-showcase__aside {
+	position: sticky;
+	top: calc(var(--xl-header-inset) + var(--xl-header-h) + 24px);
+}
+
+.xl-root .xl-showcase__aside .xl-head {
+	margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.xl-root .xl-showcase__tabs {
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid var(--xl-line);
+}
+
+.xl-root .xl-showcase__tabs[hidden] {
+	display: none;
+}
+
+.xl-root .xl-showcase .xl-showcase__tab {
+	position: relative;
+	display: flex;
+	background: transparent;
+	align-items: baseline;
+	gap: 1.1rem;
+	width: 100%;
+	padding: 1.1rem 0;
+	border-bottom: 1px solid var(--xl-line);
+	color: var(--xl-muted);
+	font-family: var(--xl-font-display);
+	font-size: calc(clamp(1.2rem, 0.95rem + 0.7vw, 1.55rem) * var(--xl-heading-scale));
+	font-weight: 400;
+	line-height: 1.15;
+	letter-spacing: 0.01em;
+	text-align: left;
+	text-transform: var(--xl-heading-case);
+	transition: color 0.3s var(--xl-ease);
+}
+
+.xl-root .xl-showcase .xl-showcase__tab::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -1px;
+	height: 2px;
+	background: var(--xl-accent);
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform 0.55s var(--xl-ease);
+}
+
+.xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"] {
+	color: var(--xl-heading);
+}
+
+.xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"]::after {
+	transform: scaleX(1);
+}
+
+.xl-root .xl-showcase .xl-showcase__tab:focus-visible {
+	outline: 2px solid var(--xl-accent);
+	outline-offset: 3px;
+	border-radius: 4px;
+}
+
+.xl-root .xl-showcase__num {
+	flex: none;
+	font-family: var(--xl-font-ui);
+	font-size: 0.74rem;
+	font-weight: 650;
+	letter-spacing: 0.14em;
+	color: var(--xl-accent-ink);
+	font-variant-numeric: tabular-nums;
+}
+
+.xl-root .xl-showcase__aside .xl-actions {
+	margin-top: clamp(24px, 3vw, 36px);
+}
+
+.xl-root .xl-showcase__stage {
+	display: grid;
+	gap: clamp(36px, 5vw, 72px);
+}
+
+.xl-root .xl-showcase__panel {
+	position: relative;
+	min-width: 0;
+}
+
+.xl-root .xl-showcase__media {
+	position: relative;
+	aspect-ratio: 5 / 4;
+	overflow: hidden;
+	isolation: isolate;
+	border-radius: var(--xl-radius-lg);
+	background: var(--xl-dark-2);
+	box-shadow: var(--xl-shadow-lg);
+}
+
+.xl-root .xl-showcase__media > img,
+.xl-root .xl-showcase__media > .xl-illus {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.xl-root .xl-showcase__copy {
+	position: relative;
+	z-index: 1;
+	width: min(100% - 32px, 470px);
+	margin: -96px clamp(16px, 3vw, 36px) 0 auto;
+	padding: clamp(22px, 2.6vw, 34px);
+	border-radius: var(--xl-radius);
+	background: var(--xl-card-bg);
+	box-shadow: 0 0 0 1px var(--xl-line), 0 30px 60px -36px rgb(var(--xl-deep-rgb) / 0.55);
+}
+
+.xl-root .xl-showcase--media-left .xl-showcase__copy {
+	margin-left: clamp(16px, 3vw, 36px);
+	margin-right: auto;
+}
+
+.xl-root .xl-showcase__count {
+	margin: 0 0 0.6rem;
+	font-family: var(--xl-font-ui);
+	font-size: 0.72rem;
+	font-weight: 650;
+	letter-spacing: 0.16em;
+	color: var(--xl-accent-ink);
+	font-variant-numeric: tabular-nums;
+}
+
+.xl-root .xl-showcase__title {
+	margin: 0;
+	font-family: var(--xl-font-display);
+	font-size: calc(clamp(1.45rem, 1.1rem + 0.9vw, 1.95rem) * var(--xl-heading-scale));
+	font-weight: 500;
+	line-height: 1.08;
+	text-transform: var(--xl-heading-case);
+	color: var(--xl-heading);
+}
+
+.xl-root .xl-showcase__text {
+	margin: 0.75rem 0 0;
+	color: var(--xl-muted);
+	line-height: 1.65;
+}
+
+.xl-root .xl-showcase__copy .xl-checklist {
+	margin-top: 1rem;
+}
+
+.xl-root .xl-showcase__copy .xl-btn--text {
+	margin-top: 0.9rem;
+}
+
+/* Tabs mode (JavaScript): panels share one cell and cross-fade. */
+.xl-root .xl-showcase.is-tabs .xl-showcase__stage {
+	gap: 0;
+}
+
+.xl-root .xl-showcase.is-tabs .xl-showcase__panel {
+	grid-area: 1 / 1;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.5s var(--xl-ease), visibility 0s linear 0.5s;
+}
+
+.xl-root .xl-showcase.is-tabs .xl-showcase__panel.is-active {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.5s var(--xl-ease), visibility 0s;
+}
+
+.xl-root .xl-showcase.is-tabs .xl-showcase__media > img {
+	transform: scale(1.06);
+	transition: transform 1.4s var(--xl-ease);
+}
+
+.xl-root .xl-showcase.is-tabs .xl-showcase__panel.is-active .xl-showcase__media > img {
+	transform: none;
+}
+
+.xl-root .xl-showcase.is-tabs .xl-showcase__copy {
+	transform: translateY(12px);
+	transition: transform 0.6s var(--xl-ease);
+}
+
+.xl-root .xl-showcase.is-tabs .xl-showcase__panel.is-active .xl-showcase__copy {
+	transform: none;
+}
+
+@media (max-width: 1024px) {
+	.xl-root .xl-offset {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.xl-root .xl-offset__media,
+	.xl-root .xl-offset--media-right .xl-offset__media,
+	.xl-root .xl-offset__card,
+	.xl-root .xl-offset--media-right .xl-offset__card {
+		grid-column: 1 / -1;
+	}
+
+	.xl-root .xl-offset__card {
+		grid-row: 2;
+		margin: -72px clamp(12px, 4vw, 40px) 0;
+	}
+
+	.xl-root .xl-offset__media .xl-media__frame {
+		aspect-ratio: 4 / 3;
+	}
+
+	.xl-root .xl-showcase,
+	.xl-root .xl-showcase--media-left {
+		grid-template-columns: minmax(0, 1fr);
+		gap: clamp(24px, 4vw, 36px);
+	}
+
+	/* Stacked: heading, tab chips, the panel they control, then the button. */
+	.xl-root .xl-showcase__aside {
+		display: contents;
+	}
+
+	.xl-root .xl-showcase__aside > .xl-head {
+		order: 1;
+		margin-bottom: 0;
+	}
+
+	.xl-root .xl-showcase__tabs {
+		order: 2;
+	}
+
+	.xl-root .xl-showcase__stage,
+	.xl-root .xl-showcase--media-left .xl-showcase__stage {
+		order: 3;
+	}
+
+	.xl-root .xl-showcase__aside > .xl-actions {
+		order: 4;
+		margin-top: 0;
+	}
+
+	/* Tabs become a row of chips that scrolls sideways. */
+	.xl-root .xl-showcase__tabs {
+		flex-direction: row;
+		gap: 8px;
+		margin-inline: calc(-1 * var(--xl-gutter));
+		padding: 2px var(--xl-gutter) 6px;
+		overflow-x: auto;
+		border-top: 0;
+		scrollbar-width: none;
+	}
+
+	.xl-root .xl-showcase__tabs::-webkit-scrollbar {
+		display: none;
+	}
+
+	.xl-root .xl-showcase .xl-showcase__tab {
+		flex: none;
+		width: auto;
+		gap: 0.55rem;
+		padding: 0.7rem 1.05rem;
+		border: 1px solid var(--xl-line);
+		border-radius: 999px;
+		font-size: 1rem;
+		white-space: nowrap;
+		transition: color 0.3s var(--xl-ease), background-color 0.3s var(--xl-ease), border-color 0.3s var(--xl-ease);
+	}
+
+	.xl-root .xl-showcase .xl-showcase__tab::after {
+		display: none;
+	}
+
+	.xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"] {
+		background: var(--xl-heading);
+		border-color: var(--xl-heading);
+		color: var(--xl-on-heading);
+	}
+
+	.xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"] .xl-showcase__num {
+		color: inherit;
+	}
+
+	.xl-root .xl-showcase__media {
+		aspect-ratio: 4 / 3;
+	}
+}
+
+@media (max-width: 767px) {
+	.xl-root .xl-cine__media {
+		min-height: 0;
+		aspect-ratio: 4 / 3;
+	}
+
+	.xl-root .xl-cine__media::after {
+		display: none;
+	}
+
+	.xl-root .xl-cine__inner {
+		grid-area: 2 / 1;
+		margin-top: -56px;
+		padding-block: 0;
+	}
+
+	.xl-root .xl-cine__panel {
+		width: 100%;
+	}
+
+	.xl-root .xl-showcase__copy,
+	.xl-root .xl-showcase--media-left .xl-showcase__copy {
+		width: auto;
+		margin: -56px 12px 0;
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.xl-root .xl-showcase .xl-showcase__tab:hover {
+		color: var(--xl-heading);
+	}
+
+	.xl-root .xl-showcase .xl-showcase__tab:hover::after {
+		transform: scaleX(0.35);
+	}
+
+	.xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"]:hover::after {
+		transform: scaleX(1);
+	}
+}
+
+@media (max-width: 1024px) and (hover: hover) and (pointer: fine) {
+	.xl-root .xl-showcase .xl-showcase__tab:hover {
+		border-color: var(--xl-heading);
+	}
+}
+
+/* -------------------------------------------------------------------------
  * Interaction layer (1.4.0)
  * Hover motion runs only with a mouse or trackpad and never with reduced
  * motion; keyboard focus gets the same feedback. Effects animate transform and
@@ -5746,10 +6276,11 @@ html.xl-scroll-lock {
 	transition: opacity 0.6s var(--xl-ease);
 }
 
-/* The "Explore" line draws its underline in step with the card. */
-.xl-root .xl-card__more {
+/* The "Explore" label (not the arrow) draws its underline in step with the card. */
+.xl-root .xl-card__more-label {
+	padding-bottom: 3px;
 	background-image: linear-gradient(currentColor, currentColor);
-	background-size: 0% 1px;
+	background-size: 0% 1.5px;
 	background-position: 0 100%;
 	background-repeat: no-repeat;
 	transition: background-size 0.35s var(--xl-ease);
@@ -5760,8 +6291,8 @@ html.xl-scroll-lock {
 		opacity: 1;
 	}
 
-	.xl-root .xl-card--linked:hover .xl-card__more {
-		background-size: 100% 1px;
+	.xl-root .xl-card--linked:hover .xl-card__more-label {
+		background-size: 100% 1.5px;
 	}
 }
 
@@ -5769,8 +6300,8 @@ html.xl-scroll-lock {
 	opacity: 1;
 }
 
-.xl-root .xl-card--linked:has(:focus-visible) .xl-card__more {
-	background-size: 100% 1px;
+.xl-root .xl-card--linked:has(:focus-visible) .xl-card__more-label {
+	background-size: 100% 1.5px;
 }
 
 /* Primary and light buttons: a soft sheen sweeps across on hover. */
@@ -6276,6 +6807,35 @@ html .xl-footer .xl-social a {
 html .xl-footer .xl-social a:hover {
 	background: #ffffff;
 	color: var(--xl-ink);
+}
+
+html .xl-root .xl-showcase .xl-showcase__tab {
+	background: transparent;
+	color: var(--xl-muted);
+}
+
+html .xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"] {
+	color: var(--xl-heading);
+}
+
+@media (max-width: 1024px) {
+	html .xl-root .xl-showcase .xl-showcase__tab[aria-selected="true"] {
+		background: var(--xl-heading);
+		border-color: var(--xl-heading);
+		color: var(--xl-on-heading);
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	html .xl-root .xl-showcase .xl-showcase__tab:hover {
+		color: var(--xl-heading);
+	}
+}
+
+@media (max-width: 1024px) and (hover: hover) and (pointer: fine) {
+	html .xl-root .xl-showcase .xl-showcase__tab:hover {
+		border-color: var(--xl-heading);
+	}
 }
 
 html .xl-sticky-cta .xl-sticky-cta__btn--call {

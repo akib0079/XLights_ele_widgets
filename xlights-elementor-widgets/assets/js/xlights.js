@@ -118,6 +118,77 @@
 	}
 
 	/* ------------------------------------------------------------------
+	 * Feature explorer: numbered tabs swap the photo panel (WAI-ARIA tabs,
+	 * automatic activation). Without JS every panel stays listed.
+	 * ---------------------------------------------------------------- */
+	function initShowcase(root) {
+		$all(root, '[data-xl-showcase]').forEach(function (wrap) {
+			if (!once(wrap, 'Showcase')) {
+				return;
+			}
+			var list = wrap.querySelector('[data-xl-showcase-tabs]');
+			var tabs = $all(wrap, '[data-xl-showcase-tab]');
+			var panels = $all(wrap, '[data-xl-showcase-panel]');
+			if (!list || tabs.length < 2 || tabs.length !== panels.length) {
+				return;
+			}
+			list.hidden = false;
+			list.setAttribute('role', 'tablist');
+			if (list.getAttribute('data-label')) {
+				list.setAttribute('aria-label', list.getAttribute('data-label'));
+			}
+			tabs.forEach(function (tab, i) {
+				var panel = panels[i];
+				tab.setAttribute('role', 'tab');
+				panel.setAttribute('role', 'tabpanel');
+				panel.setAttribute('aria-labelledby', tab.id);
+				if (!panel.querySelector('a[href], button, input, select, textarea')) {
+					panel.tabIndex = 0;
+				}
+			});
+			function select(index, focus) {
+				tabs.forEach(function (tab, i) {
+					var on = i === index;
+					tab.setAttribute('aria-selected', on ? 'true' : 'false');
+					tab.tabIndex = on ? 0 : -1;
+					panels[i].classList.toggle('is-active', on);
+					panels[i].inert = !on;
+				});
+				if (focus) {
+					tabs[index].focus();
+				}
+			}
+			tabs.forEach(function (tab, i) {
+				tab.addEventListener('click', function () {
+					select(i, false);
+				});
+				tab.addEventListener('keydown', function (e) {
+					var next = null;
+					if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+						next = (i + 1) % tabs.length;
+					} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+						next = (i - 1 + tabs.length) % tabs.length;
+					} else if (e.key === 'Home') {
+						next = 0;
+					} else if (e.key === 'End') {
+						next = tabs.length - 1;
+					}
+					if (next !== null) {
+						e.preventDefault();
+						select(next, true);
+						// Keep the chosen chip in view in the horizontal mobile row.
+						if (tabs[next].scrollIntoView && list.scrollWidth > list.clientWidth) {
+							tabs[next].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+						}
+					}
+				});
+			});
+			wrap.classList.add('is-tabs');
+			select(0, false);
+		});
+	}
+
+	/* ------------------------------------------------------------------
 	 * FAQ: one item open at a time (native <details> keeps working without JS)
 	 * ---------------------------------------------------------------- */
 	function initAccordion(root) {
@@ -803,6 +874,7 @@
 	function init(root) {
 		root = root || document;
 		initTabs(root);
+		initShowcase(root);
 		initAccordion(root);
 		initCarousels(root);
 		initCompare(root);

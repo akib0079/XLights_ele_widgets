@@ -51,6 +51,7 @@ return array(
 		'type'     => 'split',
 		'label'    => __( 'Premium Patio Atmosphere', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'         => 'offset',
 			'eyebrow'        => __( 'Atmosphere', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'Light that makes you <em>stay a little longer.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>The right string of bulbs turns a patio into an outdoor room — soft enough for conversation, bright enough for dinner, and beautiful in photos.</p>', 'xlights-elementor-widgets' ),
@@ -100,6 +101,7 @@ return array(
 		'type'     => 'split',
 		'label'    => __( 'Restaurants & Outdoor Dining', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'         => 'cinematic',
 			'eyebrow'        => __( 'Restaurants & hospitality', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'Patio lighting that <em>brings guests outside.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>For restaurants, wineries and hospitality venues, bistro lighting sets the tone before guests sit down. We plan layouts that work with seating, walkways and the architecture of your building.</p>', 'xlights-elementor-widgets' ),
@@ -163,6 +165,7 @@ return array(
 		'type'     => 'split',
 		'label'    => __( 'Special-Event Lighting (where supported)', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'         => 'offset',
 			'eyebrow'        => __( 'Special occasions', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'Change the mood for <em>special occasions.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>With compatible color-capable bistro products, you can switch to festive colors for birthdays, holidays and game nights using the X LIGHTS app.</p>', 'xlights-elementor-widgets' ),

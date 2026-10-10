@@ -13,7 +13,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'           => array(
+	'hero'         => array(
 		'type'     => 'hero',
 		'label'    => __( 'Premium Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -37,7 +37,7 @@ return array(
 			'estimate'        => 'yes',
 		),
 	),
-	'intro'          => array(
+	'intro'        => array(
 		'type'     => 'intro',
 		'label'    => __( 'Local Introduction', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -51,10 +51,11 @@ return array(
 			'bg'         => 'light',
 		),
 	),
-	'soffit'         => array(
+	'soffit'       => array(
 		'type'     => 'split',
 		'label'    => __( 'Permanent Soffit Lighting Feature', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'          => 'offset',
 			'eyebrow'         => __( 'Our signature system', 'xlights-elementor-widgets' ),
 			'heading'         => __( 'Permanent soffit lighting that <em>disappears by day.</em>', 'xlights-elementor-widgets' ),
 			'text'            => __( '<p>X LIGHTS permanent soffit lighting gives your home an elegant glow without the hassle of putting up and taking down holiday lights. The low-profile track is color-matched to blend into your roofline during the day.</p>', 'xlights-elementor-widgets' ),
@@ -72,37 +73,36 @@ return array(
 			'bg'              => 'warm',
 		),
 	),
-	'bistro'         => array(
-		'type'     => 'split',
-		'label'    => __( 'Hanging Bulb Bistro Lighting', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Hanging bulb bistro lighting', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Make the patio <em>everyone wants to spend time on.</em>', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Hanging bulb bistro lights bring a welcoming glow to outdoor dining areas, patios and gathering spaces. We design the layout around your space to create the atmosphere you want after dark.</p>', 'xlights-elementor-widgets' ),
-			'points'         => __( "Warm, inviting light for dining and entertaining\nLayouts designed around your patio\nColor options for special occasions where supported", 'xlights-elementor-widgets' ),
-			'primary_label'  => __( 'Explore Bistro Lighting', 'xlights-elementor-widgets' ),
-			'primary_link'   => '{page:bistro}',
-			'visual'         => 'image',
-			'image'          => Defaults::photo( 'firepit-lounge-string-lights' ),
-			'image_alt'      => __( 'Overhead view of a backyard lounge with a fire table under string lights', 'xlights-elementor-widgets' ),
-			'scene'          => 'patio',
-			'image_position' => 'left',
-			'bg'             => 'light',
-		),
-	),
-	'deck_landscape' => array(
+	'spaces'       => array(
 		'type'     => 'cards',
-		'label'    => __( 'Deck & Landscape Lighting', 'xlights-elementor-widgets' ),
+		'label'    => __( 'Outdoor Spaces (Bistro, Commercial, Deck, Landscape)', 'xlights-elementor-widgets' ),
 		'defaults' => array(
-			'eyebrow' => __( 'Deck & landscape lighting', 'xlights-elementor-widgets' ),
-			'heading' => __( 'Finish every outdoor detail.', 'xlights-elementor-widgets' ),
-			'text'    => __( 'Subtle light on steps, railings, trees and pathways completes the picture — and makes your outdoor spaces easier to enjoy after sunset.', 'xlights-elementor-widgets' ),
-			'style'   => 'image',
-			'columns' => '2',
+			'eyebrow' => __( 'Beyond the roofline', 'xlights-elementor-widgets' ),
+			'heading' => __( 'Light every part of <em>your property.</em>', 'xlights-elementor-widgets' ),
+			'text'    => __( 'Patios, decks, gardens and customer-facing spaces — each lit for the way you use it after dark.', 'xlights-elementor-widgets' ),
+			'style'   => 'bento',
+			'columns' => '4',
+			'align'   => 'left',
 			'items'   => array(
 				array(
+					'title'      => __( 'Hanging Bulb Bistro Lighting', 'xlights-elementor-widgets' ),
+					'text'       => __( 'A welcoming glow for outdoor dining areas, patios and gathering spaces.', 'xlights-elementor-widgets' ),
+					'image'      => Defaults::photo( 'firepit-lounge-string-lights' ),
+					'scene'      => 'patio',
+					'link_label' => __( 'Explore bistro lighting', 'xlights-elementor-widgets' ),
+					'link'       => '{page:bistro}',
+				),
+				array(
+					'title'      => __( 'Commercial Lighting', 'xlights-elementor-widgets' ),
+					'text'       => __( 'Restaurant patios, dealerships and customer-facing spaces that look their best after dark.', 'xlights-elementor-widgets' ),
+					'image'      => Defaults::photo( 'pergola-bar' ),
+					'scene'      => 'commercial',
+					'link_label' => __( 'Explore commercial lighting', 'xlights-elementor-widgets' ),
+					'link'       => '{page:commercial}',
+				),
+				array(
 					'title'      => __( 'Deck Lighting', 'xlights-elementor-widgets' ),
-					'text'       => __( 'Light for deck steps, railings and walkways that fits the space and gives it a finished look without overpowering it.', 'xlights-elementor-widgets' ),
+					'text'       => __( 'Steps, railings and walkways with a finished look.', 'xlights-elementor-widgets' ),
 					'image'      => Defaults::photo( 'deck-stairs-dot-lights' ),
 					'scene'      => 'deck',
 					'link_label' => __( 'Explore deck lighting', 'xlights-elementor-widgets' ),
@@ -110,17 +110,17 @@ return array(
 				),
 				array(
 					'title'      => __( 'Landscape Lighting', 'xlights-elementor-widgets' ),
-					'text'       => __( 'Highlight a favorite tree, softly light a path, or bring depth to planting and outdoor features after dark.', 'xlights-elementor-widgets' ),
+					'text'       => __( 'Trees, garden beds and pathways after dark.', 'xlights-elementor-widgets' ),
 					'image'      => Defaults::photo( 'entry-steps-night' ),
 					'scene'      => 'landscape',
 					'link_label' => __( 'Explore landscape lighting', 'xlights-elementor-widgets' ),
 					'link'       => '{page:landscape}',
 				),
 			),
-			'bg'      => 'warm',
+			'bg'      => 'light',
 		),
 	),
-	'connected'      => array(
+	'connected'    => array(
 		'type'     => 'connected',
 		'label'    => __( 'One Connected Lighting System', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -134,7 +134,7 @@ return array(
 			'bg'         => 'dark',
 		),
 	),
-	'app'            => array(
+	'app'          => array(
 		'type'     => 'app_showcase',
 		'label'    => __( 'X LIGHTS App Showcase', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -149,36 +149,7 @@ return array(
 			'bg'             => 'warm',
 		),
 	),
-	'entry'          => array(
-		'type'     => 'cards',
-		'label'    => __( 'Residential & Commercial Entry Points', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow' => __( 'Homes & businesses', 'xlights-elementor-widgets' ),
-			'heading' => __( 'Lighting for every kind of property.', 'xlights-elementor-widgets' ),
-			'style'   => 'overlay',
-			'columns' => '2',
-			'items'   => array(
-				array(
-					'title'      => __( 'Residential Lighting', 'xlights-elementor-widgets' ),
-					'text'       => __( 'Permanent soffit, patio, deck and landscape lighting for homes in {area}.', 'xlights-elementor-widgets' ),
-					'image'      => Defaults::img( 'home-two-story-night.jpg' ),
-					'scene'      => 'roofline',
-					'link_label' => __( 'Explore residential lighting', 'xlights-elementor-widgets' ),
-					'link'       => '{page:solutions}',
-				),
-				array(
-					'title'      => __( 'Commercial Lighting', 'xlights-elementor-widgets' ),
-					'text'       => __( 'Restaurant patios, dealerships and customer-facing spaces that look their best after dark.', 'xlights-elementor-widgets' ),
-					'image'      => Defaults::photo( 'pergola-bar' ),
-					'scene'      => 'commercial',
-					'link_label' => __( 'Explore commercial lighting', 'xlights-elementor-widgets' ),
-					'link'       => '{page:commercial}',
-				),
-			),
-			'bg'      => 'light',
-		),
-	),
-	'why'            => array(
+	'why'          => array(
 		'type'     => 'cards',
 		'label'    => __( 'Why Choose X LIGHTS', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -187,16 +158,17 @@ return array(
 			'style'   => 'icon',
 			'columns' => '3',
 			'items'   => Defaults::why_items(),
-			'bg'      => 'warm',
+			'bg'      => 'light',
 		),
 	),
-	'financing'      => Defaults::financing( 'light' ),
-	'projects'       => Defaults::projects(
+	'financing'    => Defaults::financing( 'warm' ),
+	'projects'     => Defaults::projects(
 		'featured',
 		__( 'Featured projects', 'xlights-elementor-widgets' ),
-		__( 'A look at recent installations by {dealer}.', 'xlights-elementor-widgets' )
+		__( 'A look at recent installations by {dealer}.', 'xlights-elementor-widgets' ),
+		array( 'bg' => 'warm' )
 	),
-	'reviews'        => array(
+	'reviews'      => array(
 		'type'     => 'reviews',
 		'label'    => __( 'Reviews', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -207,10 +179,10 @@ return array(
 			'count'      => 6,
 			'link_label' => __( 'Read more reviews', 'xlights-elementor-widgets' ),
 			'link'       => '{page:reviews}',
-			'bg'         => 'warm',
+			'bg'         => 'light',
 		),
 	),
-	'service_area'   => array(
+	'service_area' => array(
 		'type'     => 'service_area',
 		'label'    => __( 'Service Area Preview', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -219,12 +191,12 @@ return array(
 			'text'       => __( '<p>{dealer} designs and installs outdoor lighting for homes and businesses throughout our local service area.</p>', 'xlights-elementor-widgets' ),
 			'link_label' => '{cta}',
 			'link'       => '{quote_url}',
-			'bg'         => 'light',
+			'bg'         => 'warm',
 		),
 	),
-	'cta'            => Defaults::cta(
+	'cta'          => Defaults::cta(
 		__( 'Ready to see your home <em>in a new light?</em>', 'xlights-elementor-widgets' ),
 		__( 'Schedule a consultation and we will recommend a lighting plan for your property. Sharing your address and a few photos helps us prepare.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'warm' )
+		array( 'bg' => 'light' )
 	),
 );

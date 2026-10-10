@@ -22,6 +22,7 @@ final class Component_Registry {
 			'hero'          => Components\Hero::class,
 			'intro'         => Components\Intro::class,
 			'split'         => Components\Split::class,
+			'showcase'      => Components\Showcase::class,
 			'cards'         => Components\Cards::class,
 			'connected'     => Components\Connected::class,
 			'app_showcase'  => Components\App_Showcase::class,

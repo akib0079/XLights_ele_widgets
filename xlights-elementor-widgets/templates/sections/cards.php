@@ -77,7 +77,7 @@ $count   = count( $data['items'] );
 							<p class="xl-card__text"><?php echo Html::text( $item['text'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></p>
 						<?php endif; ?>
 						<?php if ( $link && '' !== trim( $item['link_label'] ) ) : ?>
-							<span class="xl-card__more" aria-hidden="true"><?php echo Html::text( $item['link_label'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php echo Icons::svg( 'arrow-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+							<span class="xl-card__more" aria-hidden="true"><span class="xl-card__more-label"><?php echo Html::text( $item['link_label'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><?php echo Icons::svg( 'arrow-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
 						<?php endif; ?>
 					</div>
 				</li>

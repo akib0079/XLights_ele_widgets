@@ -27,7 +27,7 @@ const CLASSES = [
 	'xl-accordion__q', 'xl-btn', 'xl-card__link', 'xl-filter', 'xl-header__brand', 'xl-header__cta', 'xl-header__phone',
 	'xl-header__toggle', 'xl-icon-btn', 'xl-lightbox__btn', 'xl-nav__link', 'xl-nav__sublink', 'xl-nav__toggle',
 	'xl-phone-link', 'xl-project__open', 'xl-quote__contact-link', 'xl-reach', 'xl-skip', 'xl-stepper__btn', 'xl-store',
-	'xl-tabs__tab', 'xl-sticky-cta__btn',
+	'xl-tabs__tab', 'xl-sticky-cta__btn', 'xl-showcase__tab',
 ];
 const PROPS = ['color', 'background', 'background-color', 'border-color'];
 

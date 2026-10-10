@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,13 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.5.0 =
+* Layout system: Split sections gain an Editorial layout (large photo with an overlapping text card) and a Cinematic layout (full-width inset photo with a glass text panel).
+* New Feature Explorer section and widget: numbered, keyboard-accessible tabs beside a large photo that cross-fades between features; chips on phones; a plain list without JavaScript.
+* Pages recomposed so no page shows two side-by-side sections in a row: Home (editorial soffit feature + bento of bistro, commercial, deck and landscape), Solutions (cinematic signature section instead of four repeated splits), Soffit, Bistro, Commercial and About (editorial and cinematic sections), Deck and Landscape (feature explorers instead of three splits each), App (removed six splits that repeated the app showcase tabs).
+* Fix: the hover underline on card "Explore" links spanned the whole card and ran under the arrow; it now hugs the label. Text links underline the label only.
+* Existing pages pick up the new layouts automatically; edits to removed sections are no longer shown (their content now lives in the new sections).
 
 = 1.4.0 =
 * Real client photos replace the illustrations on every service page (21 photos, metadata and GPS removed, house numbers removed, compressed WebP with 640/1024 px copies served through srcset). See docs/PHOTOS.md.

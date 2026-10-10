@@ -1,5 +1,5 @@
 /*
- * 1.4.0 photos & interaction layer: bundled photos load with srcset and carry
+ * 1.4.0/1.5.0 photos, layouts & interaction: bundled photos load with srcset and carry
  * no metadata, theme-style shield is current, hover motion only for fine
  * pointers, keyboard focus mirrors hover, whole overlay cards are clickable,
  * focus rings are not clipped, reduced motion disables the button sheen,
@@ -65,14 +65,14 @@ function webpChunks(file) {
 
 	await d.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
 	await settle(d);
-	const card = d.locator('.xl-cards--overlay .xl-card--linked').first();
+	const card = d.locator('.xl-cards--bento .xl-card--linked, .xl-cards--overlay .xl-card--linked').first();
 	await card.scrollIntoViewIfNeeded();
 	const box = await card.boundingBox();
 	const hit = await d.evaluate(([x, y]) => {
 		const el = document.elementFromPoint(x, y);
 		return el && el.closest('a') ? el.closest('a').className : '';
 	}, [box.x + box.width / 2, box.y + 24]);
-	ok(/xl-card__link/.test(hit), 'overlay card: the photo area is part of the card link');
+	ok(/xl-card__link/.test(hit), 'photo tile: the photo area is part of the card link');
 	await d.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
 	await d.waitForTimeout(100);
 	const hov = await card.evaluate((c) => ({
@@ -92,7 +92,7 @@ function webpChunks(file) {
 		return { fv: a.matches(':focus-visible'), glow: getComputedStyle(c.querySelector('.xl-card__media'), '::before').opacity, ring: after.outlineStyle, off: parseFloat(after.outlineOffset) };
 	});
 	ok(foc.fv && foc.glow === '1', 'keyboard focus mirrors hover (glow)');
-	ok(foc.ring === 'solid' && foc.off < 0, 'overlay card focus ring is drawn inside the clipped card');
+	ok(foc.ring === 'solid' && foc.off < 0, 'photo tile focus ring is drawn inside the clipped card');
 
 	// Image cards: focus ring not clipped either.
 	await d.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
@@ -106,6 +106,90 @@ function webpChunks(file) {
 		return parseFloat(getComputedStyle(a, '::after').outlineOffset);
 	});
 	ok(imgCardRing === null || imgCardRing <= 0, 'image card focus ring is drawn inside the card');
+
+	// Hover underline hugs the "Explore" label (it used to span the whole card).
+	await d.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
+	await settle(d);
+	const more = d.locator('.xl-cards--bento .xl-card--linked').nth(1);
+	await more.scrollIntoViewIfNeeded();
+	const mb = await more.boundingBox();
+	await d.mouse.move(mb.x + mb.width / 2, mb.y + mb.height / 2);
+	const ul = await more.evaluate((c) => {
+		const box = c.querySelector('.xl-card__more').getBoundingClientRect();
+		const label = c.querySelector('.xl-card__more-label');
+		const lb = label.getBoundingClientRect();
+		return { more: box.width, card: c.getBoundingClientRect().width, label: lb.width, size: getComputedStyle(label).backgroundSize, arrowOutside: c.querySelector('.xl-card__more .xl-icon').getBoundingClientRect().left >= lb.right - 1 };
+	});
+	ok(ul.more < ul.card * 0.8 && ul.size.startsWith(ul.label > 0 ? '100%' : 'x') && ul.arrowOutside, `hover underline hugs the label, not the card or arrow (${Math.round(ul.more)} of ${Math.round(ul.card)} px)`);
+	const textLink = await d.evaluate(() => {
+		const a = document.querySelector('.xl-btn--text');
+		const st = getComputedStyle(a);
+		return { anchorBg: st.backgroundImage, spanBg: getComputedStyle(a.querySelector('span')).backgroundImage };
+	});
+	ok(textLink.anchorBg === 'none' && textLink.spanBg !== 'none', 'text links underline the label span only');
+
+	// Layout rhythm: never two side-by-side splits in a row.
+	for (const p of ['/', '/about-us/', '/x-lights-app/', '/lighting-solutions/', '/lighting-solutions/permanent-soffit-lighting/', '/lighting-solutions/bistro-lighting/', '/lighting-solutions/deck-lighting/', '/lighting-solutions/landscape-lighting/', '/commercial-lighting/']) {
+		await d.goto(BASE_URL + p, { waitUntil: 'domcontentloaded' });
+		const run = await d.evaluate(() => {
+			let max = 0;
+			let cur = 0;
+			document.querySelectorAll('.xl-root--page > section').forEach((sec) => {
+				cur = sec.classList.contains('xl-layout--standard') ? cur + 1 : 0;
+				max = Math.max(max, cur);
+			});
+			return { max, layouts: [...document.querySelectorAll('.xl-root--page > section')].map((x) => (x.className.match(/xl-layout--(\w+)|xl-cards--(\w+)|xl-showcase-section/) || [''])[0]).filter(Boolean) };
+		});
+		ok(run.max <= 1, `${p}: no back-to-back side-by-side splits (${run.layouts.join(' ')})`);
+	}
+
+	// Cinematic + editorial layouts render with readable panels.
+	await d.goto(BASE_URL + '/lighting-solutions/permanent-soffit-lighting/', { waitUntil: 'networkidle' });
+	await settle(d);
+	const lay = await d.evaluate(() => {
+		const panel = document.querySelector('.xl-cine__panel');
+		const li = panel && panel.querySelector('.xl-checklist li');
+		return { cine: document.querySelectorAll('.xl-cine').length, offset: document.querySelectorAll('.xl-offset').length, li: li ? getComputedStyle(li).color : '', panelBg: panel ? getComputedStyle(panel).backgroundColor : '' };
+	});
+	ok(lay.cine >= 1 && lay.offset >= 1, `soffit: cinematic (${lay.cine}) and editorial (${lay.offset}) layouts`);
+	ok(/^rgb\((2[3-5]\d), (2[3-5]\d), (2[3-5]\d)\)/.test(lay.li), 'cinematic panel checklist text is light on the dark panel (' + lay.li + ')');
+
+	// Feature explorer: ARIA tabs, keyboard, cross-fade panels.
+	await d.goto(BASE_URL + '/lighting-solutions/deck-lighting/', { waitUntil: 'networkidle' });
+	await settle(d);
+	const ex = await d.evaluate(() => {
+		const w = document.querySelector('[data-xl-showcase]');
+		const list = w.querySelector('[role="tablist"]');
+		const tabs = [...w.querySelectorAll('[role="tab"]')];
+		const panels = [...w.querySelectorAll('[role="tabpanel"]')];
+		return { list: !!list && !list.hidden, label: list && list.getAttribute('aria-label'), tabs: tabs.length, panels: panels.length, sel: tabs.map((t) => t.getAttribute('aria-selected')).join(','), controls: tabs.every((t) => document.getElementById(t.getAttribute('aria-controls'))), vis: panels.map((p) => getComputedStyle(p).visibility).join(',') };
+	});
+	ok(ex.list && ex.label && ex.tabs === 3 && ex.panels === 3 && ex.controls, 'explorer: labelled tablist with 3 tabs controlling 3 panels');
+	ok(ex.sel === 'true,false,false' && ex.vis === 'visible,hidden,hidden', 'explorer: first feature shown, others hidden');
+	await d.focus('[data-xl-showcase] [role="tab"][aria-selected="true"]');
+	await d.keyboard.press('ArrowDown');
+	const ex2 = await d.evaluate(() => {
+		const w = document.querySelector('[data-xl-showcase]');
+		const tabs = [...w.querySelectorAll('[role="tab"]')];
+		const panels = [...w.querySelectorAll('[role="tabpanel"]')];
+		return { sel: tabs.map((t) => t.getAttribute('aria-selected')).join(','), focus: document.activeElement === tabs[1], vis: panels.map((p) => getComputedStyle(p).visibility).join(','), inert: panels.map((p) => p.inert).join(',') };
+	});
+	ok(ex2.sel === 'false,true,false' && ex2.focus && ex2.vis === 'hidden,visible,hidden' && ex2.inert === 'true,false,true', 'explorer: ArrowDown moves to the next feature (focus, panel, inert)');
+	await d.keyboard.press('End');
+	ok((await d.evaluate(() => [...document.querySelectorAll('[data-xl-showcase] [role="tab"]')].map((t) => t.getAttribute('aria-selected')).join(','))) === 'false,false,true', 'explorer: End jumps to the last feature');
+	await d.click('[data-xl-showcase] [role="tab"] >> nth=0');
+	ok((await d.evaluate(() => document.querySelector('[data-xl-showcase] [role="tabpanel"]').classList.contains('is-active'))), 'explorer: click selects a feature');
+
+	// Without JavaScript every feature is listed (nothing hidden).
+	const nojs = await browser.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+	const nj = await nojs.newPage();
+	await nj.goto(BASE_URL + '/lighting-solutions/landscape-lighting/', { waitUntil: 'domcontentloaded' });
+	const njs = await nj.evaluate(() => {
+		const w = document.querySelector('[data-xl-showcase]');
+		return { tabsHidden: w.querySelector('[data-xl-showcase-tabs]').hidden, visible: [...w.querySelectorAll('[data-xl-showcase-panel]')].filter((p) => getComputedStyle(p).visibility === 'visible' && getComputedStyle(p).opacity === '1').length };
+	});
+	ok(njs.tabsHidden && njs.visible === 3, 'explorer without JS: all 3 features listed, tab buttons hidden');
+	await nojs.close();
 
 	// Everyday / Holiday comparison on the soffit page.
 	await d.goto(BASE_URL + '/lighting-solutions/permanent-soffit-lighting/', { waitUntil: 'networkidle' });
@@ -164,12 +248,20 @@ function webpChunks(file) {
 	// Touch never gets stuck hover motion.
 	await m.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
 	await settle(m);
-	const media = m.locator('.xl-split .xl-media__frame').first();
+	const media = m.locator('.xl-split .xl-media__frame, .xl-offset .xl-media__frame').first();
 	await media.scrollIntoViewIfNeeded();
 	await media.tap();
 	await m.waitForTimeout(100);
 	const tz = await media.evaluate((f) => getComputedStyle(f.querySelector('img')).transform);
 	ok(tz === 'none', 'touch: tapping a photo does not leave a hover zoom');
+
+	await m.goto(BASE_URL + '/lighting-solutions/deck-lighting/', { waitUntil: 'networkidle' });
+	const order = await m.evaluate(() => {
+		const w = document.querySelector('[data-xl-showcase]');
+		const y = (el) => el.getBoundingClientRect().top;
+		return y(w.querySelector('[data-xl-showcase-tabs]')) < y(w.querySelector('.xl-showcase__stage')) && y(w.querySelector('.xl-showcase__stage')) < y(w.querySelector('.xl-showcase__aside > .xl-actions'));
+	});
+	ok(order, 'phone: explorer chips, then the panel they control, then the button');
 
 	await m.goto(BASE_URL + '/contact-us/', { waitUntil: 'networkidle' });
 	await m.evaluate(() => window.scrollTo(0, 1000));

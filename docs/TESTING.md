@@ -1,3 +1,28 @@
+# Testing report — v1.5.0
+
+**TL;DR:** the new layout system (editorial and cinematic splits, Feature Explorer, Home bento) and the hover-underline fix pass every suite on the Hello Elementor setup and after upgrading a 1.4.0 install from the ZIP. No page renders two side-by-side sections in a row (now a test). Under a deliberately garish Elementor *Theme Style*, the explorer tabs, editorial card and cinematic panel buttons keep their own colors.
+
+| Suite | Hello theme dev site | Fresh 1.4.0 → 1.5.0 upgrade (Twenty Twenty-Five) |
+|---|---|---|
+| **Photos, layouts & interaction** (`ux.js`, extended) | ✅ 50/50 | ✅ 50/50 |
+| Render | ✅ all passed | — |
+| Elementor (incl. new standalone Feature Explorer widget) | ✅ all passed | — |
+| Security | ✅ 34/34, 1 expected warning | — |
+| Pages — 12 pages × 5 widths | ✅ 276/276 | ✅ 276/276 |
+| Interactions | ✅ 45/45 | — |
+| Form | ✅ 31/31 | — |
+| Accessibility — axe, 12 pages × 2 widths | ✅ 24/24 | ✅ 24/24 |
+| Design settings | ✅ all passed | — |
+| Editor round-trip (real Elementor editor) | ✅ 9/9 | — |
+| Theme-style shield `--check` | ✅ up to date | — |
+| Garish Theme Style kit vs default (explorer tabs, editorial/cinematic buttons, text link hover) | ✅ identical | — |
+
+New checks in `ux.js`: hover underline hugs the label (not the card or the arrow) and text links underline only their label; no back-to-back side-by-side splits on 9 pages; cinematic and editorial layouts render and the cinematic checklist is light on the dark panel; Feature Explorer has a labelled tablist (3 tabs → 3 panels), first feature visible and others hidden, ArrowDown/End/click select with focus and `inert` handled, all features listed without JavaScript, and on phones chips → panel → button order.
+
+Two existing tests targeted sections that the redesign replaced (Home's overlay cards → bento tiles; Solutions' side-by-side photo → cinematic photo) and were pointed at the new sections; they test the same behaviour.
+
+---
+
 # Testing report — v1.4.0
 
 **TL;DR:** client photos, the interaction layer and the mobile call & quote bar pass every suite on the staging setup (Hello Elementor theme + Elementor kit) and after upgrading a clean 1.3.0 install from the ZIP. Under a deliberately garish Elementor *Theme Style* (red links, magenta/cyan buttons, orange borders) the widgets' links, buttons, cards and the new bar keep exactly their own colors.

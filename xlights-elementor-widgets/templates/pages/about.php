@@ -14,7 +14,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'       => array(
+	'hero'          => array(
 		'type'     => 'hero',
 		'label'    => __( 'About Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -30,7 +30,7 @@ return array(
 			'bg'              => 'dark',
 		),
 	),
-	'meet'       => array(
+	'meet'          => array(
 		'type'     => 'intro',
 		'label'    => __( 'Meet X LIGHTS', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -41,7 +41,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'local'      => array(
+	'local'         => array(
 		'type'     => 'split',
 		'label'    => __( 'Local Operation', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -60,10 +60,11 @@ return array(
 			'bg'             => 'warm',
 		),
 	),
-	'brand'      => array(
+	'brand'         => array(
 		'type'     => 'split',
 		'label'    => __( 'About the X LIGHTS Brand (Company Story)', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'         => 'offset',
 			'eyebrow'        => __( 'About the X LIGHTS brand', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'A brand that started with <em>a designer’s eye.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>The X LIGHTS brand was founded in Calgary, Canada, by Laura Ericson. Her background in interior design shaped the way the company approached permanent outdoor lighting: it should look as considered during the day as it does when it is lit at night.</p><p>That idea led to a low-profile light and track system designed to blend into the architecture of a home, paired with smart controls that make it useful every night of the year.</p>', 'xlights-elementor-widgets' ),
@@ -77,7 +78,7 @@ return array(
 			'bg'             => 'light',
 		),
 	),
-	'philosophy' => array(
+	'philosophy'    => array(
 		'type'     => 'intro',
 		'label'    => __( 'Design-First Philosophy', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -105,7 +106,7 @@ return array(
 			'bg'             => 'light',
 		),
 	),
-	'technology' => array(
+	'technology'    => array(
 		'type'     => 'cards',
 		'label'    => __( 'Product & Technology Philosophy', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -138,7 +139,7 @@ return array(
 			'bg'      => 'dark',
 		),
 	),
-	'team'       => array(
+	'team'          => array(
 		'type'     => 'team',
 		'label'    => __( 'Local Team Photos & Bios', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -149,7 +150,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'reasons'    => array(
+	'reasons'       => array(
 		'type'     => 'cards',
 		'label'    => __( 'Reasons Customers Choose X LIGHTS', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -178,7 +179,7 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'trust'      => array(
+	'trust'         => array(
 		'type'     => 'trust',
 		'label'    => __( 'Licensed & Insured Trust Section', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -207,8 +208,8 @@ return array(
 			'bg'           => 'dark',
 		),
 	),
-	'financing'  => Defaults::financing( 'light' ),
-	'cta'        => Defaults::cta(
+	'financing'     => Defaults::financing( 'light' ),
+	'cta'           => Defaults::cta(
 		__( 'Let’s design your outdoor lighting.', 'xlights-elementor-widgets' ),
 		__( 'Tell us about your home or business and we will set up a consultation.', 'xlights-elementor-widgets' ),
 		array( 'bg' => 'warm' )

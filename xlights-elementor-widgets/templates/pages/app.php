@@ -13,7 +13,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'        => array(
+	'hero'       => array(
 		'type'     => 'hero',
 		'label'    => __( 'App Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -31,7 +31,7 @@ return array(
 			'bg'              => 'dark',
 		),
 	),
-	'connected'   => array(
+	'connected'  => array(
 		'type'     => 'connected',
 		'label'    => __( 'One Connected Lighting System', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -43,7 +43,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'showcase'    => array(
+	'showcase'   => array(
 		'type'     => 'app_showcase',
 		'label'    => __( 'App Interface Showcase', 'xlights-elementor-widgets' ),
 		'anchor'   => 'xl-app-showcase',
@@ -58,7 +58,7 @@ return array(
 			'bg'             => 'dark',
 		),
 	),
-	'categories'  => array(
+	'categories' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Supported Lighting Categories', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -100,87 +100,7 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'preferences' => array(
-		'type'     => 'split',
-		'label'    => __( 'Save & Customize Preferences', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Saved preferences', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Save the looks you love.', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Found the perfect warm white? A color palette for your team? Save it, name it and bring it back with one tap.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'phone',
-			'screen'         => 'scenes',
-			'image_position' => 'right',
-			'bg'             => 'light',
-		),
-	),
-	'scheduling'  => array(
-		'type'     => 'split',
-		'label'    => __( 'Smart Scheduling & Timers', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Scheduling & timers', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Set it once. <em>Enjoy it every night.</em>', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Create timers for everyday lighting, weekend entertaining and holiday seasons, so your lights turn on and off without a second thought.</p>', 'xlights-elementor-widgets' ),
-			'points'         => __( "Everyday on/off timers\nSeasonal schedules for the holidays\nDifferent schedules for different zones", 'xlights-elementor-widgets' ),
-			'visual'         => 'phone',
-			'screen'         => 'schedule',
-			'image_position' => 'left',
-			'bg'             => 'warm',
-		),
-	),
-	'seasonal'    => array(
-		'type'     => 'split',
-		'label'    => __( 'Seasonal Light Shows & Patterns', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Seasonal light shows', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Ready for <em>every celebration.</em>', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Christmas, Halloween, Valentine’s Day, birthdays, game days — choose a pattern or build your own and switch back to warm white when the celebration is over.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'phone',
-			'screen'         => 'patterns',
-			'image_position' => 'right',
-			'bg'             => 'dark',
-		),
-	),
-	'remote'      => array(
-		'type'     => 'split',
-		'label'    => __( 'Remote Management', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Remote management', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'In control, even when you are away.', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Turn the lights on before you get home, adjust a schedule while traveling, or check that everything is set from wherever you are.</p>', 'xlights-elementor-widgets' ),
-			'note'           => __( 'Remote access requires the controller to be connected to your home Wi-Fi.', 'xlights-elementor-widgets' ),
-			'visual'         => 'phone',
-			'screen'         => 'remote',
-			'image_position' => 'left',
-			'bg'             => 'light',
-		),
-	),
-	'sharing'     => array(
-		'type'     => 'split',
-		'label'    => __( 'Shared Access', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Shared access', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Everyone at home can join in.', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Share access with family members so everyone can turn on the lights or pick tonight’s colors from their own phone.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'phone',
-			'screen'         => 'share',
-			'image_position' => 'right',
-			'bg'             => 'warm',
-		),
-	),
-	'color'       => array(
-		'type'     => 'split',
-		'label'    => __( 'Color & Brightness Control', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Color & brightness', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'From soft warm white <em>to full color.</em>', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Choose the exact shade of white that suits your home, or pick vivid colors for a celebration. Brightness is adjustable so the lighting always feels right.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'phone',
-			'screen'         => 'color',
-			'image_position' => 'left',
-			'bg'             => 'light',
-		),
-	),
-	'scenes'      => array(
+	'scenes'     => array(
 		'type'     => 'cards',
 		'label'    => __( 'Custom Scenes & Patterns', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -211,10 +131,10 @@ return array(
 					'palette' => 'celebration',
 				),
 			),
-			'bg'      => 'warm',
+			'bg'      => 'light',
 		),
 	),
-	'smart_home'  => array(
+	'smart_home' => array(
 		'type'     => 'split',
 		'label'    => __( 'Smart-Home Integration (Bond Bridge)', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -226,11 +146,11 @@ return array(
 			'scene'          => 'landscape',
 			'image_position' => 'right',
 			'gate'           => '',
-			'bg'             => 'light',
+			'bg'             => 'warm',
 			'editor_note'    => __( 'Confirm Bond Bridge compatibility for each product sold by this dealer before publishing. Set "Publication" to pending to hide this section until then.', 'xlights-elementor-widgets' ),
 		),
 	),
-	'download'    => array(
+	'download'   => array(
 		'type'     => 'cta',
 		'label'    => __( 'App Download', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -246,7 +166,7 @@ return array(
 			'bg'            => 'dark',
 		),
 	),
-	'cta'         => Defaults::cta(
+	'cta'        => Defaults::cta(
 		__( 'Design a connected lighting system.', 'xlights-elementor-widgets' ),
 		__( 'We will plan your soffit, patio, deck and landscape lighting so it all works together from day one.', 'xlights-elementor-widgets' ),
 		array( 'bg' => 'warm' )

@@ -28,6 +28,20 @@
 | 10 | **Mobile Call / Get a Quote bar** | Phones only; appears after the first screen; hides while a quote form or the footer is on screen, while typing, and while the menu is open; 48 px targets; safe-area aware; `scroll-padding-bottom` so focused elements are not hidden (WCAG 2.4.11). Toggle: Settings → Header & Footer | Click-to-call matters for local services (Google/Ipsos 2013, self-reported). **Evidence for sticky bars specifically is weak** (no controlled home-services test found) — measure calls/quotes by source and keep it only if it helps |
 | 11 | **Theme isolation** | Generated "theme-style shield" so Hello Elementor / Elementor Theme Style colors can't recolor widget links and buttons on hover | Fixes the invisible About CTA hover, pink dropdown toggles and dark-blue overlay links seen on staging |
 
+## 1.5.0 — layout rhythm
+
+The 1.4.0 pages leaned on one pattern: 33 image-and-text "split" sections, often three to six in a row, alternating left and right, plus two-column card grids. Zig-zag sections are easy to scan once or twice; repeated, they flatten the page and make every product look the same. 1.5.0 introduces a small set of layouts and gives each page its own rhythm:
+
+| Layout | Use | Where |
+|---|---|---|
+| Side by side | Detail with a supporting photo or app mockup | Soffit daytime, app controls, Commercial landscape |
+| Editorial (offset) | A signature message with a large photo | Home soffit, Soffit everyday, Bistro atmosphere, Commercial architectural, About brand |
+| Cinematic | Emotional moment; one per page at most | Solutions, Soffit holiday, Bistro restaurants, Commercial patios |
+| Feature explorer | Three or more related features | Deck (steps, edges, details), Landscape (trees, beds, paths) |
+| Bento | Several destinations at a glance | Home outdoor spaces |
+
+Rules the templates follow (and `tests/browser/ux.js` checks the first): never two side-by-side splits in a row; at most one cinematic band per page; content that repeats another section on the same page is removed rather than restyled (App lost six splits that duplicated its own showcase tabs; Solutions lost three splits that repeated its overview cards).
+
 ## Recommended next (not built)
 
 - **Trust next to the submit button:** Google rating, warranty, licensed & insured — once confirmed (all gated today). Baymard: reassurance beside the action raises perceived security.

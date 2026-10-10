@@ -137,7 +137,7 @@ const { BASE_URL, OUT_DIR, ok, launch, trackErrors, done } = require('./lib');
 	ok((await page.locator('.xl-cards--stack .xl-card__index').first().textContent()).trim().startsWith('01'), 'cards are numbered 01…');
 
 	// Image reveal settles fully (no lingering clip).
-	const img = page.locator('.xl-section:not(.xl-section--lead) .xl-media__frame > img').first();
+	const img = page.locator('.xl-section:not(.xl-section--lead) :is(.xl-media__frame, .xl-cine__media) > img').first();
 	await img.scrollIntoViewIfNeeded();
 	await page.waitForTimeout(2200);
 	ok((await img.evaluate((i) => getComputedStyle(i).clipPath)) === 'none', 'revealed image is not left clipped');

@@ -97,6 +97,13 @@ Site-wide colors and fonts are set once in **X LIGHTS → Settings → Colors & 
 - Google fonts are loaded by Elementor. To serve them from your own server instead of Google, turn on **Elementor → Settings → Performance → Load Google Fonts Locally**.
 - Page caching: purge the cache after changing colors or fonts.
 
+## Layout variety (keep pages from feeling repetitive)
+
+- **Split sections** have a **Layout** control: *Side by side*, *Editorial* (large photo, overlapping text card) and *Cinematic* (full-width photo with a text panel). Avoid two *Side by side* splits in a row — the defaults never do this, and the test suite checks it.
+- **Cinematic** shows the photo large, so use sharp photos at least 1600 px wide. Put the subject on the side away from the text panel (*Visual position* decides which side the panel sits on).
+- **Feature Explorer** (Deck and Landscape pages) holds several related features in one block: each feature has a title, text, optional checklist, photo, photo description and link. Add or reorder features in its section settings.
+- The Home page's **Outdoor Spaces** bento: the first card is large, the second wide, the next two small; keep the small cards' text short.
+
 ## Photos
 
 - Every service page ships with the client's photos as defaults (list and sources in `docs/PHOTOS.md`). To use another photo: section → **Image** → choose from the Media Library. Your pick always wins over the default.

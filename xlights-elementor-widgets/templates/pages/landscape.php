@@ -10,7 +10,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'      => array(
+	'hero'     => array(
 		'type'     => 'hero',
 		'label'    => __( 'Landscape Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -32,7 +32,7 @@ return array(
 			'editor_note'     => __( 'Add a real nighttime landscaping photo from an approved project here.', 'xlights-elementor-widgets' ),
 		),
 	),
-	'intro'     => array(
+	'intro'    => array(
 		'type'     => 'intro',
 		'label'    => __( 'Introduction', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -44,53 +44,42 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'trees'     => array(
-		'type'     => 'split',
-		'label'    => __( 'Tree & Architectural Accent Lighting', 'xlights-elementor-widgets' ),
+	'explore'  => array(
+		'type'     => 'showcase',
+		'label'    => __( 'Trees, Garden Beds & Pathways (Feature Explorer)', 'xlights-elementor-widgets' ),
 		'defaults' => array(
-			'eyebrow'        => __( 'Trees & architecture', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Give your favorite tree <em>the spotlight.</em>', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Uplighting a mature tree or a stone wall adds depth and drama to the whole property. Accent lights on columns and entries highlight the architecture you love.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'image',
-			'image'          => Defaults::photo( 'tree-spotlight' ),
-			'image_alt'      => __( 'In-ground spotlight in a rock bed lighting up a tree', 'xlights-elementor-widgets' ),
-			'scene'          => 'landscape',
-			'image_position' => 'right',
+			'eyebrow'        => __( 'Around the garden', 'xlights-elementor-widgets' ),
+			'heading'        => __( 'Trees, planting and paths, <em>each lit its own way.</em>', 'xlights-elementor-widgets' ),
+			'items'          => array(
+				array(
+					'title'     => __( 'Give your favorite tree the spotlight', 'xlights-elementor-widgets' ),
+					'text'      => __( 'Uplighting a mature tree or a stone wall adds depth and drama to the whole property. Accent lights on columns and entries highlight the architecture you love.', 'xlights-elementor-widgets' ),
+					'image'     => Defaults::photo( 'tree-spotlight' ),
+					'image_alt' => __( 'In-ground spotlight in a rock bed lighting up a tree', 'xlights-elementor-widgets' ),
+					'scene'     => 'landscape',
+				),
+				array(
+					'title'     => __( 'Planting that looks beautiful day and night', 'xlights-elementor-widgets' ),
+					'text'      => __( 'Soft light across garden beds brings out texture and color in your landscaping, so the investment you made in your yard keeps paying off after dark.', 'xlights-elementor-widgets' ),
+					'image'     => Defaults::photo( 'garden-steps-path-lights' ),
+					'image_alt' => __( 'Stone garden steps with step lights, path lights and uplit shrubs at night', 'xlights-elementor-widgets' ),
+					'scene'     => 'landscape',
+				),
+				array(
+					'title'     => __( 'A welcoming way home', 'xlights-elementor-widgets' ),
+					'text'      => __( 'Pathway lights guide guests from the driveway to the door and through the garden, with low, soft light that keeps the focus on the landscape.', 'xlights-elementor-widgets' ),
+					'image'     => Defaults::photo( 'path-lights-walkway' ),
+					'image_alt' => __( 'Path light casting a warm pool of light across a walkway at dusk', 'xlights-elementor-widgets' ),
+					'scene'     => 'landscape',
+				),
+			),
+			'media_position' => 'left',
+			'primary_label'  => __( 'Get a landscape lighting quote', 'xlights-elementor-widgets' ),
+			'primary_link'   => '{quote_url}',
 			'bg'             => 'dark',
 		),
 	),
-	'garden'    => array(
-		'type'     => 'split',
-		'label'    => __( 'Garden-Bed Illumination', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Garden beds', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'Planting that looks beautiful <em>day and night.</em>', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Soft light across garden beds brings out texture and color in your landscaping, so the investment you made in your yard keeps paying off after dark.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'image',
-			'image'          => Defaults::photo( 'garden-steps-path-lights' ),
-			'image_alt'      => __( 'Stone garden steps with step lights, path lights and uplit shrubs at night', 'xlights-elementor-widgets' ),
-			'scene'          => 'landscape',
-			'palette'        => 'warm',
-			'image_position' => 'left',
-			'bg'             => 'warm',
-		),
-	),
-	'paths'     => array(
-		'type'     => 'split',
-		'label'    => __( 'Pathway Lighting', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'        => __( 'Pathways', 'xlights-elementor-widgets' ),
-			'heading'        => __( 'A welcoming way home.', 'xlights-elementor-widgets' ),
-			'text'           => __( '<p>Pathway lights guide guests from the driveway to the door and through the garden, with low, soft light that keeps the focus on the landscape.</p>', 'xlights-elementor-widgets' ),
-			'visual'         => 'image',
-			'image'          => Defaults::photo( 'path-lights-walkway' ),
-			'image_alt'      => __( 'Path light casting a warm pool of light across a walkway at dusk', 'xlights-elementor-widgets' ),
-			'scene'          => 'landscape',
-			'image_position' => 'right',
-			'bg'             => 'light',
-		),
-	),
-	'features'  => array(
+	'features' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Outdoor Feature Highlights', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -123,7 +112,7 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'benefits'  => array(
+	'benefits' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Lighting Design Benefits', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -148,7 +137,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'control'   => array(
+	'control'  => array(
 		'type'     => 'split',
 		'label'    => __( 'Smart Color & Brightness Control', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -164,7 +153,7 @@ return array(
 			'bg'              => 'dark',
 		),
 	),
-	'products'  => array(
+	'products' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Product Options', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -194,11 +183,11 @@ return array(
 			'editor_note' => __( 'Add approved product photos to each card and switch the style to "Image cards" when available.', 'xlights-elementor-widgets' ),
 		),
 	),
-	'projects'  => array_merge(
+	'projects' => array_merge(
 		Defaults::projects( 'landscape', __( 'Landscape lighting projects', 'xlights-elementor-widgets' ), '', array( 'bg' => 'light' ) ),
 		array( 'anchor' => 'xl-landscape-projects' )
 	),
-	'faq'       => array(
+	'faq'      => array(
 		'type'     => 'faq',
 		'label'    => __( 'FAQ', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -225,7 +214,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'cta'       => Defaults::cta(
+	'cta'      => Defaults::cta(
 		__( 'Bring your landscape to life after dark.', 'xlights-elementor-widgets' ),
 		__( 'Share a few photos of your yard and we will recommend a lighting plan.', 'xlights-elementor-widgets' ),
 		array(

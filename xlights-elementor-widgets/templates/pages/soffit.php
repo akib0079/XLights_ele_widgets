@@ -14,7 +14,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'        => array(
+	'hero'      => array(
 		'type'     => 'hero',
 		'label'    => __( 'Soffit Lighting Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -36,7 +36,7 @@ return array(
 			'overlay'         => 55,
 		),
 	),
-	'intro'       => array(
+	'intro'     => array(
 		'type'     => 'intro',
 		'label'    => __( 'Product Introduction', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -48,7 +48,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'daytime'     => array(
+	'daytime'   => array(
 		'type'     => 'split',
 		'label'    => __( 'Daytime Appearance / Low-Profile Design', 'xlights-elementor-widgets' ),
 		'anchor'   => 'xl-soffit-daytime',
@@ -67,10 +67,11 @@ return array(
 			'bg'             => 'warm',
 		),
 	),
-	'everyday'    => array(
+	'everyday'  => array(
 		'type'     => 'split',
 		'label'    => __( 'Architectural Everyday Lighting', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'         => 'offset',
 			'eyebrow'        => __( 'Every night', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'Warm white that <em>celebrates your architecture.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>Soft, even light along the roofline brings out the shape of your home and makes it feel welcoming when you pull into the driveway. Set the brightness you like and let a schedule take care of the rest.</p>', 'xlights-elementor-widgets' ),
@@ -82,10 +83,11 @@ return array(
 			'bg'             => 'light',
 		),
 	),
-	'seasonal'    => array(
+	'seasonal'  => array(
 		'type'     => 'split',
 		'label'    => __( 'Seasonal & Holiday Lighting', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'         => 'cinematic',
 			'eyebrow'        => __( 'Every celebration', 'xlights-elementor-widgets' ),
 			'heading'        => __( 'Holiday lights, <em>without the ladder.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>Switch to red and green for Christmas, orange and purple for Halloween, team colors for game day or a festive pattern for a birthday — then go back to warm white with a tap.</p>', 'xlights-elementor-widgets' ),
@@ -99,7 +101,7 @@ return array(
 			'bg'             => 'dark',
 		),
 	),
-	'track'       => array(
+	'track'     => array(
 		'type'     => 'cards',
 		'label'    => __( 'Color-Matched Track Benefits', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -127,7 +129,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'app'         => array(
+	'app'       => array(
 		'type'     => 'split',
 		'label'    => __( 'Smart App Control', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -143,7 +145,7 @@ return array(
 			'bg'              => 'warm',
 		),
 	),
-	'features'    => array(
+	'features'  => array(
 		'type'     => 'cards',
 		'label'    => __( 'Key Product Features', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -199,13 +201,13 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'specs'       => array(
+	'specs'     => array(
 		'type'     => 'specs',
 		'label'    => __( 'Technical Specifications (approval-gated)', 'xlights-elementor-widgets' ),
 		'defaults' => array(
-			'eyebrow' => __( 'Specifications', 'xlights-elementor-widgets' ),
-			'heading' => __( 'Technical details', 'xlights-elementor-widgets' ),
-			'rows'    => array(
+			'eyebrow'     => __( 'Specifications', 'xlights-elementor-widgets' ),
+			'heading'     => __( 'Technical details', 'xlights-elementor-widgets' ),
+			'rows'        => array(
 				array(
 					'label'    => __( 'System voltage', 'xlights-elementor-widgets' ),
 					'value'    => __( '48-volt', 'xlights-elementor-widgets' ),
@@ -240,10 +242,10 @@ return array(
 			'note'        => __( 'Specifications for your system are confirmed in your proposal.', 'xlights-elementor-widgets' ),
 			'spacing'     => 'compact',
 			'editor_note' => __( 'Pre-filled values come from the corporate X LIGHTS website (48-volt system, up to 200 lights per run, 6 diodes per light). Verify each against the exact product sold in this market before switching a row to "Verified". IP rating, warranty and installation time are intentionally blank.', 'xlights-elementor-widgets' ),
-			'bg'      => 'warm',
+			'bg'          => 'warm',
 		),
 	),
-	'lifestyle'   => array(
+	'lifestyle' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Lifestyle & Home Examples', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -277,7 +279,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'compare'     => array(
+	'compare'   => array(
 		'type'     => 'before_after',
 		'label'    => __( 'Everyday / Holiday Comparison', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -293,7 +295,7 @@ return array(
 			'editor_note'  => __( 'Shows the same home in two looks. To use your own, upload two photos of one home taken from the same spot (for example day and night, or warm white and holiday color).', 'xlights-elementor-widgets' ),
 		),
 	),
-	'permanent'   => array(
+	'permanent' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Why Permanent Installation Makes Sense', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -322,21 +324,21 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'financing'   => Defaults::financing( 'light' ),
-	'projects'    => Defaults::projects(
+	'financing' => Defaults::financing( 'light' ),
+	'projects'  => Defaults::projects(
 		'soffit',
 		__( 'Permanent soffit lighting projects', 'xlights-elementor-widgets' ),
 		__( 'Recent roofline installations by {dealer}.', 'xlights-elementor-widgets' ),
 		array( 'bg' => 'light' )
 	),
-	'faq'         => array(
+	'faq'       => array(
 		'type'     => 'faq',
 		'label'    => __( 'FAQ', 'xlights-elementor-widgets' ),
 		'defaults' => array(
-			'eyebrow'    => __( 'FAQ', 'xlights-elementor-widgets' ),
-			'heading'    => __( 'Permanent soffit lighting questions', 'xlights-elementor-widgets' ),
-			'text'       => __( 'Don’t see your question? Call us at {phone}.', 'xlights-elementor-widgets' ),
-			'items'      => array(
+			'eyebrow' => __( 'FAQ', 'xlights-elementor-widgets' ),
+			'heading' => __( 'Permanent soffit lighting questions', 'xlights-elementor-widgets' ),
+			'text'    => __( 'Don’t see your question? Call us at {phone}.', 'xlights-elementor-widgets' ),
+			'items'   => array(
 				array(
 					'question' => __( 'Will the lights be noticeable during the day?', 'xlights-elementor-widgets' ),
 					'answer'   => __( 'The X LIGHTS track is low-profile and color-matched, so it is designed to blend into your roofline when the lights are off. We are happy to show you examples during your consultation.', 'xlights-elementor-widgets' ),
@@ -367,10 +369,10 @@ return array(
 					'gate'     => 'financing',
 				),
 			),
-			'bg'         => 'light',
+			'bg'      => 'light',
 		),
 	),
-	'cta'         => Defaults::cta(
+	'cta'       => Defaults::cta(
 		__( 'Get your permanent soffit lighting quote.', 'xlights-elementor-widgets' ),
 		__( 'Share your address and a photo of your roofline, and we will prepare recommendations for your home.', 'xlights-elementor-widgets' ),
 		array(

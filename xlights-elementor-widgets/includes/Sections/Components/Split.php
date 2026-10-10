@@ -8,6 +8,7 @@
 namespace XLights\Sections\Components;
 
 use XLights\Helpers\Context;
+use XLights\Helpers\Html;
 use XLights\Sections\Component;
 use XLights\Sections\Render_Context;
 
@@ -39,6 +40,17 @@ class Split extends Component {
 				'secondary_label' => self::text( __( 'Text link', 'xlights-elementor-widgets' ) ),
 				'secondary_link'  => self::url( __( 'Text link URL', 'xlights-elementor-widgets' ) ),
 			),
+			array(
+				'layout' => self::select(
+					__( 'Layout', 'xlights-elementor-widgets' ),
+					self::layouts(),
+					'standard',
+					array(
+						'separator'   => 'before',
+						'description' => __( 'Editorial and Cinematic need a photo; app mockups and illustrations always show side by side. Cinematic works best with photos at least 1600 px wide.', 'xlights-elementor-widgets' ),
+					)
+				),
+			),
 			self::visual_fields( 'image', true ),
 			array(
 				'image_position' => array(
@@ -63,6 +75,30 @@ class Split extends Component {
 		);
 	}
 
+	/**
+	 * @return array Layout key => label.
+	 */
+	public static function layouts() {
+		return array(
+			'standard'  => __( 'Side by side', 'xlights-elementor-widgets' ),
+			'offset'    => __( 'Editorial — large photo, overlapping text card', 'xlights-elementor-widgets' ),
+			'cinematic' => __( 'Cinematic — full-width photo, text panel', 'xlights-elementor-widgets' ),
+		);
+	}
+
+	/**
+	 * Layout to render: offset and cinematic only with a photo.
+	 *
+	 * @param array $data Section data.
+	 * @return string standard|offset|cinematic
+	 */
+	public static function layout( array $data ) {
+		$layouts = self::layouts();
+		$layout  = isset( $data['layout'] ) && is_string( $data['layout'] ) && isset( $layouts[ $data['layout'] ] ) ? $data['layout'] : 'standard';
+		$photo   = ( ! isset( $data['visual'] ) || 'image' === $data['visual'] ) && isset( $data['image'] ) && Html::has_image( $data['image'] );
+		return $photo ? $layout : 'standard';
+	}
+
 	public function prepare( array $data, Render_Context $ctx ) {
 		$data['visibility'] = Context::visibility( isset( $data['gate'] ) ? $data['gate'] : '' );
 		if ( Context::HIDE === $data['visibility'] ) {
@@ -72,7 +108,7 @@ class Split extends Component {
 	}
 
 	public function wrapper_classes( array $data ) {
-		$out = array( 'xl-split--' . ( isset( $data['image_position'] ) && 'left' === $data['image_position'] ? 'left' : 'right' ) );
+		$out = array( 'xl-split--' . ( isset( $data['image_position'] ) && 'left' === $data['image_position'] ? 'left' : 'right' ), 'xl-layout--' . self::layout( $data ) );
 		if ( isset( $data['visual'] ) && 'none' === $data['visual'] ) {
 			$out[] = 'xl-split--text';
 		}

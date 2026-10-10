@@ -12,7 +12,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'         => array(
+	'hero'          => array(
 		'type'     => 'hero',
 		'label'    => __( 'Commercial Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -33,7 +33,7 @@ return array(
 			'overlay'         => 50,
 		),
 	),
-	'why'          => array(
+	'why'           => array(
 		'type'     => 'intro',
 		'label'    => __( 'Why Commercial Exterior Lighting Matters', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -45,10 +45,11 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'patio'        => array(
+	'patio'         => array(
 		'type'     => 'split',
 		'label'    => __( 'Restaurant Patio & Bistro Lighting', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'          => 'cinematic',
 			'eyebrow'         => __( 'Restaurant patios', 'xlights-elementor-widgets' ),
 			'heading'         => __( 'Patios that fill up <em>after sunset.</em>', 'xlights-elementor-widgets' ),
 			'text'            => __( '<p>Hanging bulb bistro lighting creates the warm atmosphere guests look for in outdoor dining. We plan layouts around seating, service paths and your building’s architecture.</p>', 'xlights-elementor-widgets' ),
@@ -66,6 +67,7 @@ return array(
 		'type'     => 'split',
 		'label'    => __( 'Permanent Architectural Lighting', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'          => 'offset',
 			'eyebrow'         => __( 'Architectural lighting', 'xlights-elementor-widgets' ),
 			'heading'         => __( 'Outline your building, <em>year-round.</em>', 'xlights-elementor-widgets' ),
 			'text'            => __( '<p>Permanent lighting along rooflines and facades gives your building a polished nighttime presence in warm white, with the option to switch to brand colors or seasonal themes from the app.</p>', 'xlights-elementor-widgets' ),
@@ -79,7 +81,7 @@ return array(
 			'bg'              => 'light',
 		),
 	),
-	'landscape'    => array(
+	'landscape'     => array(
 		'type'     => 'split',
 		'label'    => __( 'Commercial Landscape & Pathway Lighting', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -96,7 +98,7 @@ return array(
 			'bg'              => 'warm',
 		),
 	),
-	'management'   => array(
+	'management'    => array(
 		'type'     => 'connected',
 		'label'    => __( 'Connected Lighting Management', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -129,7 +131,7 @@ return array(
 			'bg'      => 'dark',
 		),
 	),
-	'process'      => array(
+	'process'       => array(
 		'type'     => 'cards',
 		'label'    => __( 'Custom Design & Layout Process', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -158,7 +160,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'applications' => array(
+	'applications'  => array(
 		'type'     => 'cards',
 		'label'    => __( 'Commercial Property Applications', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -201,7 +203,7 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'install'      => array(
+	'install'       => array(
 		'type'     => 'cards',
 		'label'    => __( 'Benefits of Professional Installation', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -229,7 +231,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'trust'        => array(
+	'trust'         => array(
 		'type'     => 'trust',
 		'label'    => __( 'Local Dealer Trust Section', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -258,12 +260,12 @@ return array(
 			'bg'           => 'dark',
 		),
 	),
-	'financing'    => Defaults::financing( 'light' ),
-	'projects'     => array_merge(
+	'financing'     => Defaults::financing( 'light' ),
+	'projects'      => array_merge(
 		Defaults::projects( 'commercial', __( 'Commercial projects', 'xlights-elementor-widgets' ), '', array( 'bg' => 'warm' ) ),
 		array( 'anchor' => 'xl-commercial-projects' )
 	),
-	'faq'          => array(
+	'faq'           => array(
 		'type'     => 'faq',
 		'label'    => __( 'Commercial FAQ', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -291,7 +293,7 @@ return array(
 			'editor_note' => __( 'Confirm commercial warranty, maintenance, timelines, minimums and financing with the dealer before adding specifics.', 'xlights-elementor-widgets' ),
 		),
 	),
-	'form'         => array(
+	'form'          => array(
 		'type'     => 'quote_form',
 		'label'    => __( 'Commercial Consultation Form', 'xlights-elementor-widgets' ),
 		'anchor'   => 'quote',

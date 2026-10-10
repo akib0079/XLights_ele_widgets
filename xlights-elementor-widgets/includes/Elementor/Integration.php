@@ -50,6 +50,7 @@ final class Integration {
 			Widgets\Hero_Widget::class,
 			Widgets\Intro_Widget::class,
 			Widgets\Split_Widget::class,
+			Widgets\Showcase_Widget::class,
 			Widgets\Cards_Widget::class,
 			Widgets\Connected_Widget::class,
 			Widgets\App_Showcase_Widget::class,
