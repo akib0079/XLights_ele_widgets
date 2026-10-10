@@ -26,7 +26,7 @@ The script lints every PHP file, honours `xlights-elementor-widgets/.distignore`
 ## 3. Install
 
 1. **Plugins → Add New → Upload Plugin** → choose the ZIP → **Install** → **Activate**.
-   - Or WP-CLI: `wp plugin install dist/xlights-elementor-widgets-1.0.0.zip --activate`
+   - Or WP-CLI: `wp plugin install dist/xlights-elementor-widgets-<version>.zip --activate`
 2. Install and activate **Elementor** if it isn't already. Without it an admin notice explains what is missing; pages still render their default content through the `[xlights_page]` shortcode but can't be edited visually.
 3. Activation:
    - creates the private lead-photo folder (`wp-content/uploads/xlights-leads/`, denied to web requests) — or uses `XLIGHTS_LEADS_DIR` if defined;
@@ -44,7 +44,8 @@ The script lints every PHP file, honours `xlights-elementor-widgets/.distignore`
 | Contact & CTAs | Phone, public email, address (hidden unless *Show address* is on), hours, CTA labels |
 | Leads & Form | **Lead recipients**, From name/address (must be allowed by your SMTP provider), privacy policy URL, retention days |
 | Credentials & Financing | Leave *Verified* and *Financing enabled* **off** until the client supplies written details |
-| Brand | Logo (dark + light), favicon. Colors/fonts default to the brochure palette |
+| Brand | Logo (dark + light), favicon, dealer lockup on/off |
+| Colors & Fonts | Five brand colors (accent, headings & buttons, body text, dark sections, light grey sections) and the heading/body fonts, heading case and size — for every widget, the header and the footer at once. Defaults follow the live X LIGHTS website; leave them unless the client asks |
 | App & Social | App Store / Google Play / Google Reviews URLs — leave blank until confirmed; related blocks stay hidden |
 | Map & SEO | Map on/off, LocalBusiness schema, business type, meta fallback, breadcrumbs |
 | Header & Footer | Mode (see below), sticky/transparent header, phone in header, footer note |

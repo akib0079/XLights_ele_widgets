@@ -11,6 +11,7 @@ Run against a **local or staging** WordPress site with Elementor and this plugin
 | Interactions | `node tests/browser/interactions.js` | Gallery filters + URL state + no-JS fallback, lightbox keyboard/focus, before/after, ARIA tabs, dropdown keyboard, mobile drawer + scroll lock |
 | Form | `node tests/browser/form.js` | Preselect, inline errors + focus + `aria-invalid`, commercial fields, client file checks, previews, AJAX success, no delivery claim |
 | Accessibility | `node tests/browser/a11y.js` | axe-core WCAG 2.0/2.1/2.2 A + AA on all pages at 1440 px and 375 px |
+| Design settings | `WP="wp …" node tests/browser/design.js` | No hard-coded brand colors; a new palette + fonts reach every widget/header/footer (computed-style scan), contrast still passes, no overflow with a wide font, Elementor global and Google fonts, settings screen preview/warnings/reset. Restores settings afterwards |
 | Editor | `HOME_ID=<id> node tests/browser/editor.js` | Real Elementor editor: panel scope, live preview, pending badges editor-only, save → live, then reverts |
 
 ## Setup
@@ -28,9 +29,9 @@ Environment variables:
 | Variable | Default | Used by |
 |---|---|---|
 | `BASE_URL` | `http://localhost:8080` | all HTTP/browser suites |
-| `WP` | `wp` | `security.sh` (e.g. `WP="wp --path=/srv/www --allow-root"`) |
+| `WP` | `wp` | `security.sh`, `design.js` (e.g. `WP="wp --path=/srv/www --allow-root"`) |
 | `OUT_DIR` | `test-results/` | screenshots |
-| `ADMIN_USER` / `ADMIN_PASS` | `admin` / `admin` | `editor.js` |
+| `ADMIN_USER` / `ADMIN_PASS` | `admin` / `admin` | `editor.js`, `design.js` |
 | `HOME_ID` | — | `editor.js` (from `wp xlights status`) |
 | `PLAYWRIGHT_MODULE`, `CHROMIUM_PATH`, `AXE_PATH` | resolved from `tests/node_modules` | override tool locations |
 

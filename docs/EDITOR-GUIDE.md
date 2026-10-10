@@ -25,6 +25,7 @@ Tips:
 ## Brand look (what the design system does for you)
 
 - **Headlines** are set in Barlow Condensed capitals. Wrap the phrase to stress in `<em>…</em>`: it switches from Light to Medium weight (no color change). Example: `Beautiful every night. <em>Ready for every celebration.</em>`
+- **Colors and fonts** for the whole site: **X LIGHTS → Settings → Colors & Fonts** (see below).
 - **Hero frame**: each hero has a *Frame* option — *Inset with rounded corners* (default, like the X LIGHTS website) or *Full bleed*. Over an inset hero the header floats inside the frame as a white card; over a full-bleed hero it turns transparent. Both follow **X LIGHTS → Settings → Header & Footer → Header overlaps the first hero**.
 - **Quick estimate card** (photo heroes): *Hero → Quick estimate card* adds a small card with a lighting-type dropdown and a ZIP field. It opens the quote form at step 1 with both answers filled in. You can change its title, text, button and a preselected lighting type. It is on by default on Home.
 - **Quote form**: the form runs in three steps (*Project → Property → Details*). Visitors can go back without losing anything, and errors are shown on the step where they happen. The Contact page shows it as a booking card with a photo; change the photo under *Quote Form → Side panel photo*.
@@ -74,7 +75,27 @@ Using tokens is what makes the same pages work for the next dealer without rewri
 
 The **Advanced** tab (margins, custom CSS classes, motion, responsive) works as with any Elementor widget.
 
-Brand-wide defaults (accent color, logo, fonts) are in **X LIGHTS → Settings → Brand** and apply to every page and the header/footer.
+Site-wide colors and fonts are set once in **X LIGHTS → Settings → Colors & Fonts** (logo and favicon under **Brand**) and apply to every widget, the header and the footer. Use the widget's **Style** tab only when one widget should look different from the rest.
+
+## Colors & fonts (one place for the whole site)
+
+**X LIGHTS → Settings → Colors & Fonts** — a live preview on the right shows the result before you save.
+
+| Setting | What it changes |
+|---|---|
+| **Accent** | Links, active states, highlights, button hover. Where the accent is small text it is darkened automatically so it stays readable; on dark panels a light version is used. |
+| **Headings & buttons** | Headlines and primary buttons on light backgrounds (button text is white). |
+| **Body text** | Paragraphs and form fields; secondary text is derived from it. |
+| **Dark sections** | Navy sections, footer, panels, dropdown menus. Lighter/darker shades are derived. |
+| **Light grey sections** | Sections set to *Light grey* and light panels. |
+| **Heading font / Body font** | Bundled Barlow (default, self-hosted), device fonts, **Elementor → Site Settings → Global Fonts** (Primary, Secondary, Text, Accent), any Google font from Elementor's list, or *Another font family…* for a font your theme already loads. |
+| **Heading letter case** | UPPERCASE (X LIGHTS style) or as typed. |
+| **Heading size (%)** | Scales all large headings. Wider fonts than Barlow Condensed usually look best at 80–90. |
+
+- If a combination is hard to read (e.g. white text on a light "dark sections" color), the preview and the save message say so and give the contrast ratio. The setting still saves — fix it before launch.
+- **Reset colors & fonts to X LIGHTS defaults** fills in the defaults; nothing changes until you save.
+- Google fonts are loaded by Elementor. To serve them from your own server instead of Google, turn on **Elementor → Settings → Performance → Load Google Fonts Locally**.
+- Page caching: purge the cache after changing colors or fonts.
 
 ## Projects gallery
 

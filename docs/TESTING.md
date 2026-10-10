@@ -1,3 +1,32 @@
+# Testing report — v1.3.0
+
+**TL;DR:** the new **Colors & Fonts** settings were verified end to end — a completely different palette and fonts reach every widget, the header and the footer, contrast still passes, and nothing overflows — and every existing suite still passes. The default look is pixel-identical on desktop (0.00–0.03 % changed pixels on the compared pages); on phones the header is now the intended 68 px (it was stuck at 80 px).
+
+## v1.3.0 — global colors & fonts
+
+| Suite | Result |
+|---|---|
+| **Design settings** (`tests/browser/design.js`, new) | ✅ 30/30 |
+| Render | ✅ 84/84 |
+| Elementor | ✅ 32/32 |
+| Security | ✅ 34/34, 1 expected warning |
+| Pages — 12 pages × 5 widths | ✅ 276/276 |
+| Interactions | ✅ 45/45 |
+| Form | ✅ 31/31 |
+| Accessibility — axe, 12 pages × 2 widths | ✅ 24/24 |
+| Editor round-trip (real Elementor editor) | ✅ 9/9 |
+| WPCS security sniffs | ✅ 0 errors |
+
+What `design.js` proves:
+
+- The stylesheet contains no default brand color outside its token block (static check).
+- With accent `#E4002B`, headings `#14110F`, text `#2B2522`, dark `#0F3D2E`, surface `#EFE9DF`, serif headings, device sans body, headings as typed at 85 %: a computed-style scan of every visible element on 7 pages finds **0** leftover default colors (the same scan finds 146 on the default palette, so it does detect them); footer, buttons and button hover use the new colors; headings scale to 85 %; axe color-contrast passes.
+- A wide device font at 100 % in uppercase causes no horizontal scrolling on any page at 375 px.
+- Elementor Global Font (Primary) and a Google font (Montserrat, requested through Elementor) apply; a theme-loaded custom family applies as-is; a CSS-injection attempt is rejected.
+- Settings screen: live preview follows color changes, warns about unreadable combinations, "Another font family…" field, save shows the readability warning, reset fills in defaults. Original settings are restored afterwards.
+
+---
+
 # Testing report — v1.2.0
 
 **TL;DR:** the 1.2.0 UX upgrade (stepped quote form, floating header, hero quick-estimate card, stacked cards, FAQ rows, footer, motion) passes every suite. Same expected warning as before: PHP's dev server ignores `.htaccess` (production needs the Nginx rule or `XLIGHTS_LEADS_DIR`). Email *delivery* still has to be checked on the real host.
