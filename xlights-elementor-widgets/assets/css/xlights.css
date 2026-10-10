@@ -107,6 +107,8 @@
 	--xl-btn-line: currentColor;
 	--xl-heading-case: uppercase;
 	--xl-heading-scale: 1;
+	/* Text on a fill of the heading color (ghost/secondary button hover). */
+	--xl-on-heading: #ffffff;
 	--xl-container: 1240px;
 	--xl-gutter: clamp(20px, 4vw, 40px);
 	--xl-frame: clamp(8px, 1.4vw, 20px);
@@ -183,17 +185,61 @@
 	text-underline-offset: 3px;
 }
 
-.xl-root button {
+.xl-root button,
+.xl-lightbox button {
 	font: inherit;
 	color: inherit;
 	background: none;
 	border: 0;
+	border-radius: 0;
 	padding: 0;
 	cursor: pointer;
 	text-transform: none;
 	letter-spacing: inherit;
+	white-space: normal;
 	box-shadow: none;
 	min-height: 0;
+	transition: none;
+}
+
+/* Theme shield. Base styles in common themes (Hello Elementor, the recommended
+ * theme, in particular) reach inside the widgets: every <button> turns pink on
+ * :hover/:focus, labels get line-height 1, figure captions turn #333 italic and
+ * focus rings get a white halo. Neutral values at the same specificity as those
+ * theme rules; component rules later in this file restyle on top. */
+:where(.xl-root, .xl-lightbox) :is(button, [type="button"], [type="submit"], [type="reset"]):is(:hover, :focus, :active) {
+	background-color: transparent;
+	color: inherit;
+	text-decoration: none;
+}
+
+:where(.xl-root, .xl-lightbox) :is(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+	box-shadow: none;
+}
+
+/* Hello outlines [tabindex] elements in black with a higher specificity. */
+:where(.xl-root) [tabindex]:not([tabindex="-1"]):focus-visible {
+	outline: 2px solid var(--xl-accent);
+	outline-offset: 3px;
+}
+
+:where(.xl-root) label {
+	display: inline;
+	line-height: inherit;
+	vertical-align: baseline;
+}
+
+:where(.xl-root) legend {
+	display: block;
+	max-width: 100%;
+}
+
+:where(.xl-root, .xl-lightbox) figcaption {
+	color: inherit;
+	font-size: inherit;
+	font-style: normal;
+	font-weight: inherit;
+	line-height: inherit;
 }
 
 .xl-root .xl-icon {
@@ -279,6 +325,7 @@
 	--xl-card-bg: var(--xl-dark-2);
 	--xl-accent-ink: var(--xl-accent-on-dark);
 	--xl-accent-soft: var(--xl-tint-on-dark);
+	--xl-on-heading: var(--xl-ink);
 	--xl-btn-bg: #ffffff;
 	--xl-btn-color: var(--xl-ink);
 	--xl-btn-bg-hover: var(--xl-accent-on-dark);
@@ -292,7 +339,9 @@
 .xl-root .xl-quote__aside,
 .xl-root .xl-financing,
 .xl-root .xl-cards--bento .xl-card,
+.xl-root .xl-cards--overlay .xl-card,
 .xl-root .xl-map {
+	--xl-on-heading: var(--xl-ink);
 	--xl-heading: #ffffff;
 	--xl-muted: var(--xl-on-dark-muted);
 	--xl-line: var(--xl-line-dark);
@@ -622,7 +671,7 @@
 .xl-root .xl-btn--secondary:hover {
 	background: var(--xl-heading);
 	border-color: var(--xl-heading);
-	color: var(--xl-light);
+	color: var(--xl-on-heading);
 }
 
 .xl-root .xl-bg--dark .xl-btn--secondary:hover {
@@ -652,7 +701,7 @@
 .xl-root .xl-bg--warm .xl-btn--ghost:hover {
 	border-color: var(--xl-heading);
 	background: var(--xl-heading);
-	color: #ffffff;
+	color: var(--xl-on-heading);
 }
 
 .xl-root .xl-btn--light {
@@ -2605,7 +2654,7 @@
 	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
-.xl-lightbox__btn {
+.xl-lightbox .xl-lightbox__btn {
 	position: absolute;
 	display: grid;
 	place-items: center;
@@ -2618,8 +2667,8 @@
 	cursor: pointer;
 }
 
-.xl-lightbox__btn:hover,
-.xl-lightbox__btn:focus-visible {
+.xl-lightbox .xl-lightbox__btn:hover,
+.xl-lightbox .xl-lightbox__btn:focus-visible {
 	background: rgba(255, 255, 255, 0.18);
 	outline: 2px solid var(--xl-accent-on-dark);
 	outline-offset: 2px;
@@ -3306,6 +3355,7 @@
 	--xl-line: rgb(var(--xl-deep-rgb) / 0.12);
 	--xl-accent-ink: var(--xl-accent-text);
 	--xl-accent-soft: rgb(var(--xl-accent-rgb) / 0.1);
+	--xl-on-heading: #ffffff;
 	--xl-btn-bg: var(--xl-ink);
 	--xl-btn-color: #ffffff;
 	--xl-btn-bg-hover: var(--xl-accent);
@@ -4219,6 +4269,7 @@
 	--xl-line: rgb(var(--xl-deep-rgb) / 0.12);
 	--xl-accent-ink: var(--xl-accent-text);
 	--xl-accent-soft: rgb(var(--xl-accent-rgb) / 0.1);
+	--xl-on-heading: #ffffff;
 	--xl-btn-bg: var(--xl-ink);
 	--xl-btn-color: #ffffff;
 	--xl-btn-bg-hover: var(--xl-accent);
@@ -4384,6 +4435,8 @@
 
 .xl-root .xl-trust__items h3 {
 	font-family: var(--xl-font-display);
+	font-weight: 500;
+	line-height: 1.2;
 	text-transform: var(--xl-heading-case);
 	letter-spacing: 0.02em;
 	font-size: 1.05rem;
@@ -4869,7 +4922,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 	transform-origin: left center;
 }
 
-.xl-nav__toggle {
+.xl-root .xl-nav__toggle {
 	display: inline-grid;
 	place-items: center;
 	width: 30px;
@@ -4882,13 +4935,13 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 	border-radius: 6px;
 }
 
-.xl-nav__toggle .xl-icon {
+.xl-root .xl-nav__toggle .xl-icon {
 	width: 16px;
 	height: 16px;
 	transition: transform 0.25s var(--xl-ease);
 }
 
-.xl-nav__toggle[aria-expanded="true"] .xl-icon {
+.xl-root .xl-nav__toggle[aria-expanded="true"] .xl-icon {
 	transform: rotate(180deg);
 }
 
@@ -5617,3 +5670,369 @@ html.xl-scroll-lock {
 .xl-project-single .xl-ba {
 	margin: 2rem 0;
 }
+
+/* BEGIN generated theme-style shield (bin/build-theme-shield.js) */
+/* Do not edit by hand: run `node bin/build-theme-shield.js` after changing link or button styles.
+ * Elementor Theme Style (.elementor-kit-N a:hover, button:focus) must not recolor the widgets.
+ * Plain links inside widgets keep their color on hover/focus unless a rule below says otherwise. */
+
+:where(html) .xl-root a:is(:hover, :focus, :active) {
+	color: inherit;
+}
+
+html .xl-root a {
+	color: inherit;
+}
+
+html .xl-root button,
+html .xl-lightbox button {
+	color: inherit;
+	background: none;
+}
+
+html :where(.xl-root, .xl-lightbox) :is(button, [type="button"], [type="submit"], [type="reset"]):is(:hover, :focus, :active) {
+	background-color: transparent;
+	color: inherit;
+}
+
+html .xl-root .xl-prose a,
+html .xl-root .xl-lead a {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-btn--primary {
+	background: var(--xl-btn-bg);
+	border-color: var(--xl-btn-bg);
+	color: var(--xl-btn-color);
+}
+
+html .xl-root .xl-btn--primary:hover,
+html .xl-root .xl-btn--primary:focus-visible {
+	background: var(--xl-btn-bg-hover);
+	border-color: var(--xl-btn-bg-hover);
+	color: var(--xl-btn-color-hover);
+}
+
+html .xl-root .xl-btn--secondary {
+	border-color: currentColor;
+	color: var(--xl-heading);
+	background: transparent;
+}
+
+html .xl-root .xl-btn--secondary:hover {
+	background: var(--xl-heading);
+	border-color: var(--xl-heading);
+	color: var(--xl-on-heading);
+}
+
+html .xl-root .xl-bg--dark .xl-btn--secondary:hover {
+	color: var(--xl-ink);
+}
+
+html .xl-root .xl-btn--ghost {
+	border-color: rgba(255, 255, 255, 0.55);
+	color: #ffffff;
+	background: transparent;
+}
+
+html .xl-root .xl-btn--ghost:hover {
+	border-color: #ffffff;
+	background: #ffffff;
+	color: var(--xl-ink);
+}
+
+html .xl-root .xl-bg--light .xl-btn--ghost,
+html .xl-root .xl-bg--warm .xl-btn--ghost {
+	border-color: currentColor;
+	color: var(--xl-heading);
+	background: transparent;
+}
+
+html .xl-root .xl-bg--light .xl-btn--ghost:hover,
+html .xl-root .xl-bg--warm .xl-btn--ghost:hover {
+	border-color: var(--xl-heading);
+	background: var(--xl-heading);
+	color: var(--xl-on-heading);
+}
+
+html .xl-root .xl-btn--light {
+	background: #ffffff;
+	border-color: #ffffff;
+	color: var(--xl-ink);
+}
+
+html .xl-root .xl-btn--light:hover {
+	background: var(--xl-accent-on-dark);
+	border-color: var(--xl-accent-on-dark);
+}
+
+html .xl-root .xl-btn--text {
+	color: var(--xl-accent-ink);
+	background: none;
+}
+
+html .xl-root .xl-icon-btn {
+	color: var(--xl-heading);
+}
+
+html .xl-root .xl-icon-btn:hover {
+	background: var(--xl-heading);
+	border-color: var(--xl-heading);
+	color: var(--xl-light);
+}
+
+html .xl-root .xl-hero__call a {
+	color: var(--xl-heading);
+}
+
+html .xl-root .xl-hero__call a:hover {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-crumbs a:hover {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-tabs__tab {
+	color: var(--xl-muted);
+}
+
+html .xl-root .xl-tabs__tab:hover {
+	color: var(--xl-heading);
+	border-color: var(--xl-heading);
+}
+
+html .xl-root .xl-tabs__tab[aria-selected="true"] {
+	background: var(--xl-accent);
+	border-color: var(--xl-accent-ink);
+	color: var(--xl-on-accent);
+}
+
+html .xl-root .xl-store {
+	background: #0b0d12;
+	color: #ffffff;
+}
+
+html .xl-root .xl-store:hover {
+	border-color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-filter {
+	color: var(--xl-muted);
+}
+
+html .xl-root .xl-filter:hover {
+	color: var(--xl-heading);
+	border-color: var(--xl-heading);
+}
+
+html .xl-root .xl-filter[aria-current="true"] {
+	background: var(--xl-heading);
+	border-color: var(--xl-heading);
+	color: var(--xl-light);
+}
+
+html .xl-root .xl-project__open {
+	background: var(--xl-dark-2);
+}
+
+html .xl-root .xl-project__title a:hover {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-lightbox .xl-lightbox__btn {
+	background: rgba(255, 255, 255, 0.06);
+	color: #fff;
+}
+
+html .xl-lightbox .xl-lightbox__btn:hover,
+html .xl-lightbox .xl-lightbox__btn:focus-visible {
+	background: rgba(255, 255, 255, 0.18);
+}
+
+html .xl-root .xl-accordion__q {
+	color: var(--xl-heading);
+}
+
+html .xl-root .xl-map__cta a {
+	color: #fff;
+}
+
+html .xl-root .xl-contact-card .xl-card__text a {
+	color: var(--xl-heading);
+}
+
+html .xl-root .xl-contact-card .xl-card__text a:hover {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-social a:hover {
+	background: var(--xl-accent);
+	border-color: var(--xl-accent-ink);
+	color: var(--xl-on-accent);
+}
+
+html .xl-root .xl-quote__contact-link:hover {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-btn--back {
+	color: var(--xl-heading);
+	background: none;
+	border-color: transparent;
+}
+
+html .xl-root .xl-btn--back:hover {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-root .xl-file button {
+	background: var(--xl-ink);
+	color: #fff;
+}
+
+html .xl-root .xl-check a {
+	color: var(--xl-accent-ink);
+}
+
+html .xl-skip {
+	background: var(--xl-ink);
+	color: #fff !important;
+}
+
+html .xl-header__brand {
+	color: inherit;
+}
+
+html .xl-nav__link {
+	color: inherit;
+}
+
+html .xl-nav__link:hover,
+html .xl-nav__item.is-current > .xl-nav__link,
+html .xl-nav__link[aria-current="page"] {
+	color: var(--xl-accent-link);
+}
+
+html .xl-root .xl-nav__toggle {
+	background: none;
+	color: inherit;
+}
+
+html .xl-header .xl-nav__sublink {
+	color: #ffffff;
+}
+
+html .xl-header .xl-nav__sublink:hover,
+html .xl-header .xl-nav__sublink:focus-visible,
+html .xl-header .xl-nav__sublink[aria-current="page"] {
+	background: rgba(255, 255, 255, 0.07);
+	color: var(--xl-accent-on-dark);
+}
+
+@media (max-width: 1499px) {
+	html .xl-header .xl-header__phone {
+		background: var(--xl-surface-soft);
+	}
+}
+
+@media (max-width: 1499px) {
+	html .xl-header .xl-header__phone:hover,
+	html .xl-header .xl-header__phone:focus-visible {
+		background: var(--xl-accent-soft);
+	}
+}
+
+@media (max-width: 1499px) {
+	html .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone {
+		background: rgba(255, 255, 255, 0.12);
+	}
+}
+
+html .xl-header__phone {
+	color: inherit;
+}
+
+html .xl-header__phone:hover {
+	color: var(--xl-accent-link);
+}
+
+html .xl-header .xl-header__toggle {
+	background: var(--xl-ink);
+	color: #ffffff;
+}
+
+html .xl-header .xl-header__toggle:hover {
+	background: var(--xl-accent);
+	color: var(--xl-on-accent);
+}
+
+html .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__toggle {
+	background: #ffffff;
+	color: var(--xl-ink);
+}
+
+html .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__item.is-current > .xl-nav__link,
+html .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__link[aria-current="page"],
+html .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__link:hover,
+html .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone:hover {
+	color: var(--xl-accent-on-dark);
+}
+
+html .xl-drawer .xl-icon-btn {
+	background: none;
+	color: #fff;
+}
+
+html .xl-drawer__nav .xl-nav__link {
+	color: #eef1f7;
+}
+
+html .xl-drawer__nav .xl-nav__link:hover,
+html .xl-drawer__nav .xl-nav__item.is-current > .xl-nav__link,
+html .xl-drawer__nav .xl-nav__link[aria-current="page"] {
+	color: var(--xl-accent-on-dark);
+}
+
+html .xl-drawer__nav .xl-nav__toggle {
+	color: #eef1f7;
+}
+
+html .xl-drawer__nav .xl-nav__sublink {
+	color: rgba(238, 241, 247, 0.8);
+}
+
+html .xl-drawer__nav .xl-nav__sublink:hover,
+html .xl-drawer__nav .xl-nav__sublink[aria-current="page"] {
+	background: rgba(255, 255, 255, 0.06);
+	color: var(--xl-accent-on-dark);
+}
+
+html .xl-drawer .xl-btn--ghost {
+	border-color: rgba(255, 255, 255, 0.35);
+	color: #fff;
+}
+
+html .xl-footer a {
+	color: inherit;
+}
+
+html .xl-footer a:hover {
+	color: #ffffff;
+}
+
+html .xl-footer__col:not(.xl-footer__col--reach) ul a {
+	color: rgba(238, 241, 247, 0.88);
+}
+
+html .xl-footer .xl-social a {
+	background: var(--xl-tint-on-dark);
+	color: #ffffff;
+}
+
+html .xl-footer .xl-social a:hover {
+	background: #ffffff;
+	color: var(--xl-ink);
+}
+
+/* END generated theme-style shield */
