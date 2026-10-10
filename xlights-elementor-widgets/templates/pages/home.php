@@ -34,6 +34,7 @@ return array(
 			'overlay'         => 55,
 			'focal'           => 'center',
 			'breadcrumbs'     => '',
+			'estimate'        => 'yes',
 		),
 	),
 	'intro'          => array(

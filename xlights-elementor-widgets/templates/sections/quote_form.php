@@ -37,7 +37,22 @@ $email  = (string) Settings::get( 'email' );
 			?>
 		</div>
 		<?php if ( $aside ) : ?>
-			<aside class="xl-quote__aside" data-xl-reveal>
+			<?php $aside_photo = ! empty( $data['aside_image'] ) && Html::has_image( $data['aside_image'] ); ?>
+			<aside class="xl-quote__aside<?php echo $aside_photo ? ' xl-quote__aside--photo' : ''; ?>" data-xl-reveal>
+				<?php if ( $aside_photo ) : ?>
+					<div class="xl-quote__aside-media" aria-hidden="true">
+						<?php
+						$aside_img = Html::image(
+							$data['aside_image'],
+							array(
+								'alt'   => '',
+								'sizes' => '(max-width: 900px) 100vw, 40vw',
+							)
+						);
+						echo $aside_img; // phpcs:ignore WordPress.Security.EscapeOutput -- Built by Html::image().
+						?>
+					</div>
+				<?php endif; ?>
 				<?php if ( '' !== trim( $data['aside_heading'] ) ) : ?>
 					<h3 class="xl-quote__aside-title"><?php echo Html::text( $data['aside_heading'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h3>
 				<?php endif; ?>

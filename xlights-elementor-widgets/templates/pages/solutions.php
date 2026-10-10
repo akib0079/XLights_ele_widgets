@@ -37,7 +37,7 @@ return array(
 			'eyebrow' => __( 'The X LIGHTS system', 'xlights-elementor-widgets' ),
 			'heading' => __( 'Four ways to light your home. <em>One connected experience.</em>', 'xlights-elementor-widgets' ),
 			'text'    => __( 'Start with one category or plan them together. Compatible lighting can be grouped in the X LIGHTS app.', 'xlights-elementor-widgets' ),
-			'style'   => 'bento',
+			'style'   => 'stack',
 			'columns' => '4',
 			'items'   => array(
 				array(

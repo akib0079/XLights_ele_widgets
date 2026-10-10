@@ -100,7 +100,7 @@ class Hero extends Component {
 					),
 					'inset',
 					array(
-						'description' => __( 'The transparent header (X LIGHTS → Settings → Header & Footer) only overlays full-bleed heroes.', 'xlights-elementor-widgets' ),
+						'description' => __( 'Inset: the header floats inside the rounded frame. Full bleed: the header turns transparent over the photo. Both follow "Header overlaps the first hero" in X LIGHTS → Settings → Header & Footer; when it is off the header sits above the hero.', 'xlights-elementor-widgets' ),
 					)
 				),
 				'height'      => self::select(
@@ -132,9 +132,57 @@ class Hero extends Component {
 				'string_line' => self::toggle( __( 'Decorative light-string accent', 'xlights-elementor-widgets' ), true ),
 			)
 		);
+
+		// Quick estimate card (photo-background heroes only).
+		$on_card = array(
+			'condition' => array(
+				'layout'   => 'media',
+				'estimate' => 'yes',
+			),
+		);
+		$fields = array_merge(
+			$fields,
+			array(
+				'estimate'         => self::toggle(
+					__( 'Quick estimate card', 'xlights-elementor-widgets' ),
+					false,
+					array(
+						'separator'   => 'before',
+						'condition'   => array( 'layout' => 'media' ),
+						'description' => __( 'A small form (lighting type + ZIP) that opens step 1 of the quote form, prefilled.', 'xlights-elementor-widgets' ),
+					)
+				),
+				'estimate_title'   => self::text( __( 'Card title', 'xlights-elementor-widgets' ), __( 'Start your lighting quote', 'xlights-elementor-widgets' ), $on_card ),
+				'estimate_text'    => self::text( __( 'Card text', 'xlights-elementor-widgets' ), __( 'Three short steps. We will follow up to arrange a consultation.', 'xlights-elementor-widgets' ), $on_card ),
+				'estimate_service' => self::select(
+					__( 'Preselected lighting type', 'xlights-elementor-widgets' ),
+					array_merge( array( '' => __( '— None —', 'xlights-elementor-widgets' ) ), self::estimate_services() ),
+					'',
+					$on_card
+				),
+				'estimate_button'  => self::text( __( 'Card button', 'xlights-elementor-widgets' ), __( 'Start my quote', 'xlights-elementor-widgets' ), $on_card ),
+			)
+		);
 		$fields['primary_label']['default'] = '{cta}';
 		$fields['primary_link']['default']  = '{quote_url}';
 		return $fields;
+	}
+
+	/**
+	 * Lighting types offered by the quick estimate card (values match the
+	 * quote form's ?service= preselect).
+	 *
+	 * @return array
+	 */
+	public static function estimate_services() {
+		return array(
+			'soffit'     => __( 'Permanent soffit / roofline lighting', 'xlights-elementor-widgets' ),
+			'bistro'     => __( 'Hanging bulb bistro lighting', 'xlights-elementor-widgets' ),
+			'deck'       => __( 'Deck lighting', 'xlights-elementor-widgets' ),
+			'landscape'  => __( 'Landscape lighting', 'xlights-elementor-widgets' ),
+			'commercial' => __( 'Commercial property', 'xlights-elementor-widgets' ),
+			'not_sure'   => __( 'Not sure yet', 'xlights-elementor-widgets' ),
+		);
 	}
 
 	public function prepare( array $data, Render_Context $ctx ) {

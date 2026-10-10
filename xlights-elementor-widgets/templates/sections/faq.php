@@ -32,10 +32,12 @@ $split = 'split' === $data['layout'];
 						<?php echo Icons::svg( 'plus', 'xl-accordion__icon' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 					</summary>
 					<div class="xl-accordion__a">
-						<?php if ( Context::PENDING === $item['visibility'] ) : ?>
-							<?php echo Context::pending_badge( $item['gate'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-						<?php endif; ?>
-						<?php echo Html::rich( $item['answer'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						<div class="xl-accordion__inner">
+							<?php if ( Context::PENDING === $item['visibility'] ) : ?>
+								<?php echo Context::pending_badge( $item['gate'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<?php endif; ?>
+							<?php echo Html::rich( $item['answer'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						</div>
 					</div>
 				</details>
 			<?php endforeach; ?>

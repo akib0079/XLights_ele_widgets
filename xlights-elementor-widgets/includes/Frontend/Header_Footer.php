@@ -525,34 +525,41 @@ final class Header_Footer {
 						</ul>
 					</nav>
 				<?php endforeach; ?>
-				<div class="xl-footer__col">
-					<h2 class="xl-footer__title"><?php esc_html_e( 'Contact', 'xlights-elementor-widgets' ); ?></h2>
-					<ul role="list" class="xl-footer__contact">
+				<div class="xl-footer__col xl-footer__col--reach">
+					<h2 class="xl-footer__title"><?php esc_html_e( 'Get in touch', 'xlights-elementor-widgets' ); ?></h2>
+					<ul role="list" class="xl-footer__reach">
 						<?php if ( '' !== trim( $s['phone'] ) ) : ?>
-							<li><a href="<?php echo esc_url( Tokens::tel_href( $s['phone'] ) ); ?>"><?php echo Icons::svg( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $s['phone'] ); ?></span></a></li>
+							<li><a class="xl-reach" href="<?php echo esc_url( Tokens::tel_href( $s['phone'] ) ); ?>"><span class="xl-reach__icon"><?php echo Icons::svg( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><span class="xl-reach__text"><small><?php esc_html_e( 'Call', 'xlights-elementor-widgets' ); ?></small><span><?php echo esc_html( $s['phone'] ); ?></span></span></a></li>
 						<?php endif; ?>
 						<?php if ( ! empty( $s['show_email'] ) && is_email( $s['email'] ) ) : ?>
-							<li><a href="<?php echo esc_url( 'mailto:' . antispambot( $s['email'] ) ); ?>"><?php echo Icons::svg( 'mail' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( antispambot( $s['email'] ) ); ?></span></a></li>
+							<li><a class="xl-reach" href="<?php echo esc_url( 'mailto:' . antispambot( $s['email'] ) ); ?>"><span class="xl-reach__icon"><?php echo Icons::svg( 'mail' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><span class="xl-reach__text"><small><?php esc_html_e( 'Email', 'xlights-elementor-widgets' ); ?></small><span><?php echo esc_html( antispambot( $s['email'] ) ); ?></span></span></a></li>
 						<?php endif; ?>
 						<?php if ( ! empty( $s['show_address'] ) && '' !== trim( $s['address_street'] ) ) : ?>
-							<li><?php echo Icons::svg( 'map-pin' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( $s['address_street'] ); ?><br><?php echo esc_html( trim( $s['address_city'] . ', ' . $s['address_state'] . ' ' . $s['address_zip'], ', ' ) ); ?></span></li>
+							<li><span class="xl-reach"><span class="xl-reach__icon"><?php echo Icons::svg( 'map-pin' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><span class="xl-reach__text"><small><?php esc_html_e( 'Address', 'xlights-elementor-widgets' ); ?></small><span><?php echo esc_html( $s['address_street'] ); ?><br><?php echo esc_html( trim( $s['address_city'] . ', ' . $s['address_state'] . ' ' . $s['address_zip'], ', ' ) ); ?></span></span></span></li>
+						<?php endif; ?>
+						<?php if ( $areas ) : ?>
+							<li><span class="xl-reach"><span class="xl-reach__icon"><?php echo Icons::svg( 'compass' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><span class="xl-reach__text"><small><?php esc_html_e( 'Service areas', 'xlights-elementor-widgets' ); ?></small><span><?php echo esc_html( implode( ' · ', $areas ) ); ?></span></span></span></li>
+						<?php endif; ?>
+						<?php
+						$hours = Settings::lines( 'hours' );
+						if ( $hours ) :
+							?>
+							<li><span class="xl-reach"><span class="xl-reach__icon"><?php echo Icons::svg( 'clock' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><span class="xl-reach__text"><small><?php esc_html_e( 'Hours', 'xlights-elementor-widgets' ); ?></small><span><?php echo implode( '<br>', array_map( 'esc_html', $hours ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span></span></span></li>
 						<?php endif; ?>
 					</ul>
-					<?php if ( $areas ) : ?>
-						<h2 class="xl-footer__title xl-footer__title--sub"><?php esc_html_e( 'Service Areas', 'xlights-elementor-widgets' ); ?></h2>
-						<p class="xl-footer__areas"><?php echo esc_html( implode( ' · ', $areas ) ); ?></p>
-					<?php endif; ?>
 				</div>
 			</div>
 			<div class="xl-footer__legal">
 				<div class="xl-container xl-footer__legal-inner">
-					<p>&copy; <?php echo esc_html( gmdate( 'Y' ) . ' ' . $owner ); ?>. <?php esc_html_e( 'All rights reserved.', 'xlights-elementor-widgets' ); ?></p>
 					<?php if ( '' !== trim( $s['footer_note'] ) ) : ?>
 						<p class="xl-footer__note"><?php echo esc_html( Tokens::replace( $s['footer_note'] ) ); ?></p>
 					<?php endif; ?>
-					<?php if ( $privacy ) : ?>
-						<p><a href="<?php echo esc_url( $privacy ); ?>"><?php esc_html_e( 'Privacy Policy', 'xlights-elementor-widgets' ); ?></a></p>
-					<?php endif; ?>
+					<p>
+						<span>&copy; <?php echo esc_html( gmdate( 'Y' ) . ' ' . $owner ); ?>. <?php esc_html_e( 'All rights reserved.', 'xlights-elementor-widgets' ); ?></span>
+						<?php if ( $privacy ) : ?>
+							<a href="<?php echo esc_url( $privacy ); ?>"><?php esc_html_e( 'Privacy Policy', 'xlights-elementor-widgets' ); ?></a>
+						<?php endif; ?>
+					</p>
 				</div>
 			</div>
 		</footer>

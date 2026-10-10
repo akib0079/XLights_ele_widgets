@@ -69,6 +69,43 @@ $content = ob_get_clean();
 
 $string_line = 'yes' === $data['string_line'] ? '<div class="xl-string" aria-hidden="true"><span></span></div>' : '';
 
+// Quick estimate card: a plain GET form that opens step 1 of the quote form prefilled.
+$estimate = '';
+if ( 'media' === $layout && isset( $data['estimate'] ) && 'yes' === $data['estimate'] ) {
+	$services = \XLights\Sections\Components\Hero::estimate_services();
+	$chosen   = isset( $data['estimate_service'], $services[ $data['estimate_service'] ] ) ? $data['estimate_service'] : '';
+	$eid      = $ctx->id( 'estimate' );
+	ob_start();
+	?>
+	<form class="xl-estimate" action="<?php echo esc_url( Tokens::url( '{quote_url}' ) ); ?>" method="get" aria-labelledby="<?php echo esc_attr( $eid . '-title' ); ?>" data-xl-reveal>
+		<h2 class="xl-estimate__title" id="<?php echo esc_attr( $eid . '-title' ); ?>"><?php echo Html::text( $data['estimate_title'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
+		<?php if ( '' !== trim( (string) $data['estimate_text'] ) ) : ?>
+			<p class="xl-estimate__text"><?php echo Html::text( $data['estimate_text'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></p>
+		<?php endif; ?>
+		<ol class="xl-estimate__steps" aria-hidden="true">
+			<li class="is-current"><span>1</span><?php esc_html_e( 'Project', 'xlights-elementor-widgets' ); ?></li>
+			<li><span>2</span><?php esc_html_e( 'Property', 'xlights-elementor-widgets' ); ?></li>
+			<li><span>3</span><?php esc_html_e( 'Details', 'xlights-elementor-widgets' ); ?></li>
+		</ol>
+		<div class="xl-estimate__field">
+			<label for="<?php echo esc_attr( $eid . '-service' ); ?>"><?php esc_html_e( 'What would you like to light?', 'xlights-elementor-widgets' ); ?></label>
+			<select class="xl-input" id="<?php echo esc_attr( $eid . '-service' ); ?>" name="service">
+				<option value=""><?php esc_html_e( 'Choose a lighting type', 'xlights-elementor-widgets' ); ?></option>
+				<?php foreach ( $services as $key => $label ) : ?>
+					<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $chosen, $key ); ?>><?php echo esc_html( $label ); ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<div class="xl-estimate__field">
+			<label for="<?php echo esc_attr( $eid . '-zip' ); ?>"><?php esc_html_e( 'Property ZIP code', 'xlights-elementor-widgets' ); ?></label>
+			<input class="xl-input" id="<?php echo esc_attr( $eid . '-zip' ); ?>" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="\d{5}" placeholder="<?php esc_attr_e( 'e.g. 92672', 'xlights-elementor-widgets' ); ?>">
+		</div>
+		<button type="submit" class="xl-btn xl-btn--primary xl-btn--block"><span><?php echo Html::text( $data['estimate_button'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><?php echo Icons::svg( 'arrow-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+	</form>
+	<?php
+	$estimate = (string) ob_get_clean();
+}
+
 if ( 'media' === $layout ) :
 	$overlay = isset( $data['overlay'] ) ? ( is_array( $data['overlay'] ) ? (float) $data['overlay']['size'] : (float) $data['overlay'] ) : 60;
 	$focal   = in_array( $data['focal'], array( 'center', 'top', 'bottom', 'left', 'right' ), true ) ? $data['focal'] : 'center';
@@ -99,8 +136,13 @@ if ( 'media' === $layout ) :
 			</video>
 		<?php endif; ?>
 	</div>
-	<div class="xl-container xl-hero__inner xl-align--<?php echo esc_attr( $align ); ?>">
-		<?php echo $crumbs . $content; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+	<div class="xl-container xl-hero__inner xl-align--<?php echo esc_attr( $align ); ?><?php echo '' !== $estimate ? ' xl-hero__inner--estimate' : ''; ?>">
+		<?php echo $crumbs; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php if ( '' !== $estimate ) : ?>
+			<div class="xl-hero__row"><?php echo $content . $estimate; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+		<?php else : ?>
+			<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php endif; ?>
 	</div>
 	<?php
 	echo $string_line; // phpcs:ignore WordPress.Security.EscapeOutput

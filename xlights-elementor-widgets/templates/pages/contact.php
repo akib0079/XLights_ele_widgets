@@ -46,6 +46,7 @@ return array(
 			'text'          => '',
 			'variant'       => 'general',
 			'submit_label'  => __( 'Request My Quote', 'xlights-elementor-widgets' ),
+			'aside_image'   => Defaults::img( 'home-single-story-dusk.jpg' ),
 			'aside_heading' => __( 'Why we ask for your address and photos', 'xlights-elementor-widgets' ),
 			'aside_text'    => __( 'A few details up front help us prepare a more useful consultation.', 'xlights-elementor-widgets' ),
 			'aside_points'  => __( "Your address lets us look at the property before we meet\nPhotos of your roofline, patio or yard show us what you want to light\nWe can arrive with relevant ideas and better estimates", 'xlights-elementor-widgets' ),

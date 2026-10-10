@@ -11,7 +11,8 @@
 		return (cfg.i18n && cfg.i18n[key]) || fallback;
 	};
 	var ALLOWED = ['image/jpeg', 'image/png', 'image/webp'];
-	var SERVICES = ['soffit', 'bistro', 'deck', 'landscape'];
+	var SERVICES = ['soffit', 'bistro', 'deck', 'landscape', 'not_sure'];
+	var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 	function $all(root, sel) {
@@ -67,6 +68,10 @@
 				if (box) {
 					box.checked = true;
 				}
+			}
+			var zip = (params.get('zip') || '').trim();
+			if (/^\d{5}$/.test(zip) && form.elements.zip && !form.elements.zip.value) {
+				form.elements.zip.value = zip;
 			}
 			if (service === 'commercial' || params.get('type') === 'commercial') {
 				var com = form.querySelector('input[name="property_type"][value="commercial"]');
@@ -202,10 +207,146 @@
 			});
 		}
 		function focusFirstError() {
-			var first = form.querySelector('.has-error input:not([type="hidden"]), .has-error select, .has-error textarea');
+			var scope = stepped ? steps[current] : form;
+			var first = scope.querySelector('.has-error input:not([type="hidden"]), .has-error select, .has-error textarea');
 			if (first) {
 				first.focus();
 			}
+		}
+
+		// ---------------------------------------------------------------
+		// Steps: Project → Property → Details. Without JS every step shows
+		// as one long form; the server validates the full submission either way.
+		// ---------------------------------------------------------------
+		var steps = $all(form, '[data-xl-step]');
+		var stepper = form.querySelector('[data-xl-stepper]');
+		var live = form.querySelector('[data-xl-step-live]');
+		var stepped = steps.length > 1 && !!stepper;
+		var current = 0;
+		var reached = 0;
+
+		function stepFields(i) {
+			return $all(steps[i], '[data-xl-field]').map(function (el) {
+				return el.getAttribute('data-xl-field');
+			});
+		}
+		function stepOf(name) {
+			for (var i = 0; i < steps.length; i++) {
+				if (stepFields(i).indexOf(name) !== -1) {
+					return i;
+				}
+			}
+			return steps.length - 1;
+		}
+		function firstErrorStep(errors) {
+			var best = steps.length;
+			Object.keys(errors).forEach(function (name) {
+				best = Math.min(best, stepOf(name));
+			});
+			return best < steps.length ? best : -1;
+		}
+		function stepTitle(i) {
+			var title = steps[i].querySelector('.xl-step__title');
+			var count = title ? title.querySelector('.xl-step__count') : null;
+			var text = title ? title.textContent : '';
+			return count ? text.replace(count.textContent, '').trim() : text.trim();
+		}
+		function goTo(i, focus) {
+			if (!stepped || i < 0 || i >= steps.length) {
+				return;
+			}
+			var dir = i >= current ? 'fwd' : 'back';
+			current = i;
+			reached = Math.max(reached, i);
+			steps.forEach(function (s, n) {
+				s.classList.remove('is-active', 'is-enter-fwd', 'is-enter-back');
+				if (n === i) {
+					s.classList.add('is-active');
+					if (!REDUCED) {
+						void s.offsetWidth;
+						s.classList.add(dir === 'fwd' ? 'is-enter-fwd' : 'is-enter-back');
+					}
+				}
+			});
+			$all(stepper, '[data-xl-stepper-item]').forEach(function (li, n) {
+				li.classList.toggle('is-current', n === i);
+				li.classList.toggle('is-done', n < i);
+				if (n === i) {
+					li.setAttribute('aria-current', 'step');
+				} else {
+					li.removeAttribute('aria-current');
+				}
+				var btn = li.querySelector('[data-xl-goto]');
+				if (btn) {
+					btn.disabled = n >= i && n > reached;
+					if (n === i) {
+						btn.disabled = true;
+					}
+				}
+			});
+			stepper.style.setProperty('--xl-step-progress', String(i / (steps.length - 1)));
+			if (live) {
+				live.textContent = t('stepOf', 'Step %1$s of %2$s: %3$s').replace('%1$s', i + 1).replace('%2$s', steps.length).replace('%3$s', stepTitle(i));
+			}
+			if (focus) {
+				var top = form.getBoundingClientRect().top;
+				if (top < 0 || top > window.innerHeight * 0.6) {
+					form.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+				}
+				var title = steps[i].querySelector('.xl-step__title');
+				if (title) {
+					title.focus({ preventScroll: true });
+				}
+			}
+		}
+		function validateStep(i) {
+			attempted = true;
+			var errors = validate();
+			var names = stepFields(i);
+			var mine = {};
+			names.forEach(function (name) {
+				if (errors[name]) {
+					mine[name] = errors[name];
+					setError(name, errors[name]);
+				} else {
+					clearError(name);
+				}
+			});
+			return Object.keys(mine).length === 0;
+		}
+		function next() {
+			if (validateStep(current)) {
+				if (status && status.classList.contains('is-error')) {
+					status.hidden = true;
+				}
+				goTo(current + 1, true);
+			} else {
+				focusFirstError();
+			}
+		}
+		if (stepped) {
+			form.classList.add('is-stepped');
+			stepper.hidden = false;
+			$all(form, '[data-xl-step-nav], .xl-form__submit [data-xl-prev]').forEach(function (el) {
+				el.hidden = false;
+			});
+			$all(form, '[data-xl-next]').forEach(function (b) {
+				b.addEventListener('click', next);
+			});
+			$all(form, '[data-xl-prev]').forEach(function (b) {
+				b.addEventListener('click', function () {
+					goTo(current - 1, true);
+				});
+			});
+			$all(stepper, '[data-xl-goto]').forEach(function (b) {
+				b.addEventListener('click', function () {
+					var n = parseInt(b.getAttribute('data-xl-goto'), 10) - 1;
+					if (n < current || n <= reached) {
+						goTo(n, true);
+					}
+				});
+			});
+			goTo(0, false);
 		}
 
 		form.addEventListener('input', function (e) {
@@ -390,11 +531,18 @@
 			if (sending) {
 				return;
 			}
+			if (stepped && current < steps.length - 1) {
+				next();
+				return;
+			}
 			attempted = true;
 			var errors = validate();
 			render(errors);
 			if (Object.keys(errors).length) {
 				showStatus('error', t('fixErrors', 'Please review the highlighted fields.'));
+				if (stepped) {
+					goTo(firstErrorStep(errors), false);
+				}
 				focusFirstError();
 				return;
 			}
@@ -430,6 +578,9 @@
 				}
 				if (payload.fields) {
 					render(payload.fields);
+					if (stepped && Object.keys(payload.fields).length) {
+						goTo(firstErrorStep(payload.fields), false);
+					}
 					focusFirstError();
 				}
 				showStatus('error', payload.message || t('network', 'Something went wrong. Please try again.'));

@@ -14,10 +14,11 @@ use XLights\Helpers\Illustrations;
 
 defined( 'ABSPATH' ) || exit;
 
-$style   = in_array( $data['style'], array( 'icon', 'image', 'overlay', 'steps', 'minimal', 'bento', 'strip' ), true ) ? $data['style'] : 'icon';
+$style   = in_array( $data['style'], array( 'icon', 'image', 'overlay', 'steps', 'stack', 'minimal', 'bento', 'strip' ), true ) ? $data['style'] : 'icon';
 $columns = in_array( (string) $data['columns'], array( '2', '3', '4' ), true ) ? (string) $data['columns'] : '3';
 $align   = 'left' === $data['align'] ? '' : ' xl-head--center';
 $heading = 'h3';
+$count   = count( $data['items'] );
 ?>
 <div class="xl-container">
 	<?php echo Html::section_head( $data, array( 'class' => trim( $align ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
@@ -39,7 +40,7 @@ $heading = 'h3';
 				$has_image = Html::has_image( $item['image'] );
 				?>
 				<li class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-xl-reveal style="--xl-i:<?php echo (int) $i; ?>">
-					<?php if ( in_array( $style, array( 'image', 'overlay', 'bento' ), true ) ) : ?>
+					<?php if ( in_array( $style, array( 'image', 'overlay', 'bento', 'stack' ), true ) ) : ?>
 						<div class="xl-card__media<?php echo $has_image ? '' : ' xl-media--illustration'; ?>">
 							<?php
 							if ( $has_image ) {
@@ -55,6 +56,9 @@ $heading = 'h3';
 						<span class="xl-card__icon"><?php echo Html::icon( $item['icon'], isset( $item['icon_custom'] ) ? $item['icon_custom'] : null ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
 					<?php endif; ?>
 					<div class="xl-card__body">
+						<?php if ( 'stack' === $style ) : ?>
+							<span class="xl-card__index" aria-hidden="true"><?php echo esc_html( str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) ); ?><span>/ <?php echo esc_html( str_pad( (string) $count, 2, '0', STR_PAD_LEFT ) ); ?></span></span>
+						<?php endif; ?>
 						<?php if ( $pending ) : ?>
 							<?php echo Context::pending_badge( $item['gate'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						<?php endif; ?>

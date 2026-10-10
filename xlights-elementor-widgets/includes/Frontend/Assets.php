@@ -92,6 +92,8 @@ final class Assets {
 					'tooLarge'   => __( 'Each photo must be smaller than %d MB.', 'xlights-elementor-widgets' ),
 					'badType'    => __( 'Photos must be JPG, PNG or WEBP images.', 'xlights-elementor-widgets' ),
 					'fixErrors'  => __( 'Please review the highlighted fields.', 'xlights-elementor-widgets' ),
+					/* translators: 1: current step, 2: total steps, 3: step name */
+					'stepOf'     => __( 'Step %1$s of %2$s: %3$s', 'xlights-elementor-widgets' ),
 					'sending'    => __( 'Sending…', 'xlights-elementor-widgets' ),
 					'network'    => __( 'We could not reach the server. Please check your connection and try again.', 'xlights-elementor-widgets' ),
 					'remove'     => __( 'Remove', 'xlights-elementor-widgets' ),

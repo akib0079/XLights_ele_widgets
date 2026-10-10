@@ -47,6 +47,7 @@ class Quote_Form extends Component {
 				),
 				'submit_label'  => self::text( __( 'Submit button label', 'xlights-elementor-widgets' ), __( 'Request My Quote', 'xlights-elementor-widgets' ) ),
 				'show_aside'    => self::toggle( __( 'Show side panel', 'xlights-elementor-widgets' ), true, array( 'separator' => 'before' ) ),
+				'aside_image'   => self::media( __( 'Side panel photo (optional)', 'xlights-elementor-widgets' ), '', array( 'description' => __( 'Shown behind the panel text with a dark overlay. Leave empty for a plain navy panel.', 'xlights-elementor-widgets' ) ) ),
 				'aside_heading' => self::text( __( 'Side panel heading', 'xlights-elementor-widgets' ), __( 'Why we ask for your address and photos', 'xlights-elementor-widgets' ) ),
 				'aside_text'    => self::textarea( __( 'Side panel text', 'xlights-elementor-widgets' ) ),
 				'aside_points'  => self::textarea( __( 'Side panel points (one per line)', 'xlights-elementor-widgets' ), '', 4 ),

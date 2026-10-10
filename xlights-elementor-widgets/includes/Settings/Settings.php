@@ -575,7 +575,7 @@ final class Settings {
 					),
 					'header_transparent' => array(
 						'type'        => 'checkbox',
-						'label'       => __( 'Transparent header over dark heroes', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Header overlaps the first hero (floats inside framed heroes, transparent over full-bleed ones)', 'xlights-elementor-widgets' ),
 						'default'     => 1,
 					),
 					'header_show_phone'  => array(

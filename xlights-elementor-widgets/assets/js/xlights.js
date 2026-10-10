@@ -126,11 +126,55 @@
 				return;
 			}
 			var items = $all(acc, 'details');
+			// Animate the answer's height; native toggling stays the fallback.
+			function setOpen(item, open) {
+				var body = item.querySelector('.xl-accordion__a');
+				if (item.xlAnim) {
+					item.xlAnim.cancel();
+					item.xlAnim = null;
+				}
+				item.classList.remove('is-closing');
+				if (!body || !body.animate || reduceMotion) {
+					item.open = open;
+					return;
+				}
+				var opts = { duration: open ? 420 : 320, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)' };
+				if (open) {
+					item.open = true;
+					item.xlAnim = body.animate([{ height: '0px', opacity: 0 }, { height: body.scrollHeight + 'px', opacity: 1 }], opts);
+				} else {
+					item.classList.add('is-closing');
+					item.xlAnim = body.animate([{ height: body.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], opts);
+				}
+				item.xlAnim.onfinish = function () {
+					item.xlAnim = null;
+					if (!open) {
+						item.open = false;
+						item.classList.remove('is-closing');
+					}
+				};
+			}
 			items.forEach(function (item) {
+				var summary = item.querySelector('summary');
+				if (summary) {
+					summary.addEventListener('click', function (e) {
+						e.preventDefault();
+						var open = !item.open || item.classList.contains('is-closing');
+						if (open) {
+							items.forEach(function (other) {
+								if (other !== item && other.open && !other.classList.contains('is-closing')) {
+									setOpen(other, false);
+								}
+							});
+						}
+						setOpen(item, open);
+					});
+				}
+				// Opened some other way (find-in-page, hash): close the rest.
 				item.addEventListener('toggle', function () {
 					if (item.open) {
 						items.forEach(function (other) {
-							if (other !== item && other.open) {
+							if (other !== item && other.open && !other.classList.contains('is-closing')) {
 								other.open = false;
 							}
 						});
@@ -505,6 +549,16 @@
 					setOffset();
 					window.addEventListener('resize', setOffset);
 				}
+			}
+		}
+
+		// Floating over a framed hero is decided in CSS (:has); opt out when the
+		// hero is not the first thing below the header (e.g. other widgets above).
+		var lead = document.querySelector('.xl-section--lead.xl-hero--inset');
+		if (lead && header.classList.contains('xl-header--overlay-capable')) {
+			var leadTop = lead.getBoundingClientRect().top + window.scrollY;
+			if (leadTop > header.offsetHeight + 40) {
+				header.classList.add('is-static');
 			}
 		}
 

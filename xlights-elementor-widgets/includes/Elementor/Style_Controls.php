@@ -333,7 +333,7 @@ final class Style_Controls {
 		$w->add_control(
 			'xl_anim',
 			array(
-				'label'        => __( 'Fade-up entrance animations', 'xlights-elementor-widgets' ),
+				'label'        => __( 'Entrance animations (fade-up, image reveal, hero intro)', 'xlights-elementor-widgets' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',

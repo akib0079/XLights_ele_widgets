@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,6 +54,16 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.2.0 =
+* Quote form in three steps (Project, Property, Details) with a progress stepper, per-step validation and focus management; without JavaScript it stays one complete form.
+* Contact page booking card: photo panel beside the stepped form.
+* Floating header: a rounded white card that sits inside the framed hero and follows on scroll.
+* Optional quick-estimate card in photo heroes (lighting type + ZIP) that opens step 1 of the quote form prefilled; on by default on Home.
+* New card style "Stacked numbered cards" (used on Lighting Solutions): large numbered cards that stack as you scroll.
+* FAQ rows redesigned as rounded rows with a rotating plus and an animated open/close.
+* Footer redesigned as an inset navy panel with icon contact rows and a centered legal line.
+* Motion: images wipe in as they enter, a short opening sequence on the first hero, sliding nav underline, smooth in-page anchors that land below the header. All motion is off under "reduce motion".
 
 = 1.1.0 =
 * Design system aligned with the live X LIGHTS website: official logo with a dealer lockup, black/white, navy and slate surfaces, signal-blue accent, Barlow and Barlow Condensed typography, inset hero frame, rectangular buttons.

@@ -40,6 +40,7 @@ class Cards extends Component {
 						'image'   => __( 'Image cards', 'xlights-elementor-widgets' ),
 						'overlay' => __( 'Large photo cards (text over image)', 'xlights-elementor-widgets' ),
 						'steps'   => __( 'Numbered steps', 'xlights-elementor-widgets' ),
+						'stack'   => __( 'Stacked numbered cards (large, image right)', 'xlights-elementor-widgets' ),
 						'minimal' => __( 'Minimal list', 'xlights-elementor-widgets' ),
 						'bento'   => __( 'Bento (first card large)', 'xlights-elementor-widgets' ),
 						'strip'   => __( 'Icon strip', 'xlights-elementor-widgets' ),

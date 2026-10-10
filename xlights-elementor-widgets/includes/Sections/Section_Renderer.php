@@ -139,7 +139,8 @@ final class Section_Renderer {
 			if ( ! $component ) {
 				continue;
 			}
-			$classes = array();
+			// The first rendered section lets the floating header overlap it (CSS :has()).
+			$classes = 0 === $index ? array( 'xl-section--lead' ) : array();
 			foreach ( array( 'desktop', 'tablet', 'mobile' ) as $device ) {
 				if ( ! empty( $row[ 'hide_' . $device ] ) && 'yes' === $row[ 'hide_' . $device ] ) {
 					$classes[] = 'xl-hide-' . $device;

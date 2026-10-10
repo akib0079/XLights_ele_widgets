@@ -20,6 +20,7 @@ final class Icons {
 	private static function stroke() {
 		return array(
 			'arrow-right'    => '<path d="M5 12h14M13 6l6 6-6 6"/>',
+			'arrow-left'     => '<path d="M19 12H5M11 6l-6 6 6 6"/>',
 			'arrow-up-right' => '<path d="M7 17 17 7M8 7h9v9"/>',
 			'chevron-down'   => '<path d="m6 9 6 6 6-6"/>',
 			'chevron-left'   => '<path d="m15 18-6-6 6-6"/>',
@@ -139,7 +140,7 @@ final class Icons {
 	 */
 	public static function options() {
 		$names = array_keys( self::stroke() );
-		$skip  = array( 'arrow-right', 'arrow-up-right', 'chevron-down', 'chevron-left', 'chevron-right', 'menu', 'close', 'minus', 'external' );
+		$skip  = array( 'arrow-right', 'arrow-left', 'arrow-up-right', 'chevron-down', 'chevron-left', 'chevron-right', 'menu', 'close', 'minus', 'external' );
 		$out   = array( '' => __( '— None —', 'xlights-elementor-widgets' ) );
 		foreach ( $names as $name ) {
 			if ( in_array( $name, $skip, true ) ) {
