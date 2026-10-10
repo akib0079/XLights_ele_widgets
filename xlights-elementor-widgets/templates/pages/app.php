@@ -192,18 +192,21 @@ return array(
 				array(
 					'title'   => __( 'Everyday elegance', 'xlights-elementor-widgets' ),
 					'text'    => __( 'Warm white that highlights your architecture.', 'xlights-elementor-widgets' ),
+					'image'   => Defaults::photo( 'roofline-warm-white-modern' ),
 					'scene'   => 'roofline',
 					'palette' => 'warm',
 				),
 				array(
 					'title'   => __( 'Holiday seasons', 'xlights-elementor-widgets' ),
 					'text'    => __( 'Festive color without the ladder.', 'xlights-elementor-widgets' ),
+					'image'   => Defaults::photo( 'roofline-holiday-color-modern' ),
 					'scene'   => 'roofline',
 					'palette' => 'holiday',
 				),
 				array(
 					'title'   => __( 'Celebrations', 'xlights-elementor-widgets' ),
 					'text'    => __( 'Birthdays, parties, game days and more.', 'xlights-elementor-widgets' ),
+					'image'   => Defaults::photo( 'steps-color-celebration' ),
 					'scene'   => 'roofline',
 					'palette' => 'celebration',
 				),

@@ -37,6 +37,12 @@
 | 9 | Brand colors & fonts confirmation | Defaults follow the live X LIGHTS website: black/white, navy `#131C2D`, slate `#39414E`, light grey `#E9EAED`, signal blue `#3367FE`; Barlow / Barlow Condensed. The amber in the dealer flyers is not used as a UI color. Changeable in one place: Settings → Colors & Fonts |
 | 9a | **Phone number** | The live corporate contact page lists (949) 685-7173; this site uses 949-795-2206 from the content plan. Confirm which number belongs to the Southern California dealer |
 
+### Photos
+
+| # | Item | Status |
+|---|---|---|
+| 9b | **Usage rights for the 21 bundled photos** (several look like marketing renderings, one shows an installer) and higher-resolution originals for six low-res images | Used as page defaults with neutral alt text; never captioned as local projects. Details: `docs/PHOTOS.md` |
+
 ### Product facts
 
 | # | Item | Where | Status |

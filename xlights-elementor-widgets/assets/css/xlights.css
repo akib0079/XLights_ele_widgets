@@ -645,7 +645,7 @@
 }
 
 .xl-root .xl-btn:active {
-	transform: translateY(1px);
+	transform: scale(0.97);
 }
 
 /* Primary: ink on light backgrounds, white on dark; signal blue on hover. */
@@ -791,8 +791,11 @@
 	transition: transform 1.2s var(--xl-ease);
 }
 
-.xl-root.xl-hover .xl-media:hover .xl-media__frame > img {
-	transform: scale(1.035);
+/* Pointer devices only: on touch screens a tap would leave the hover state stuck. */
+@media (hover: hover) and (pointer: fine) {
+	.xl-root.xl-hover .xl-media:hover .xl-media__frame > img {
+		transform: scale(1.035);
+	}
 }
 
 .xl-root .xl-media--phone .xl-media__frame {
@@ -1795,9 +1798,20 @@
 	border-color: transparent;
 }
 
-.xl-root.xl-hover .xl-cards--icon .xl-card:hover,
-.xl-root.xl-hover .xl-cards--image .xl-card:hover,
-.xl-root.xl-hover .xl-cards--steps .xl-card:hover {
+/* Pointer devices only: on touch screens a tap would leave the hover state stuck. */
+@media (hover: hover) and (pointer: fine) {
+	.xl-root.xl-hover .xl-cards--icon .xl-card:hover,
+	.xl-root.xl-hover .xl-cards--image .xl-card:hover,
+	.xl-root.xl-hover .xl-cards--steps .xl-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--xl-shadow);
+	}
+}
+
+/* Keyboard focus gets the same lift as a pointer hover. */
+.xl-root.xl-hover .xl-cards--icon .xl-card:has(:focus-visible),
+.xl-root.xl-hover .xl-cards--image .xl-card:has(:focus-visible),
+.xl-root.xl-hover .xl-cards--steps .xl-card:has(:focus-visible) {
 	transform: translateY(-4px);
 	box-shadow: var(--xl-shadow);
 }
@@ -1824,6 +1838,7 @@
 
 .xl-root .xl-card__media {
 	position: relative;
+	isolation: isolate;
 	aspect-ratio: 16 / 11;
 	overflow: hidden;
 	background: var(--xl-dark-2);
@@ -1837,8 +1852,16 @@
 	transition: transform 1s var(--xl-ease);
 }
 
-.xl-root.xl-hover .xl-card:hover .xl-card__media img,
-.xl-root.xl-hover .xl-card:hover .xl-card__media .xl-illus {
+/* Pointer devices only: on touch screens a tap would leave the hover state stuck. */
+@media (hover: hover) and (pointer: fine) {
+	.xl-root.xl-hover .xl-card:hover .xl-card__media img,
+	.xl-root.xl-hover .xl-card:hover .xl-card__media .xl-illus {
+		transform: scale(1.05);
+	}
+}
+
+.xl-root.xl-hover .xl-card:has(:focus-visible) .xl-card__media img,
+.xl-root.xl-hover .xl-card:has(:focus-visible) .xl-card__media .xl-illus {
 	transform: scale(1.05);
 }
 
@@ -1851,6 +1874,7 @@
 .xl-root .xl-cards--bento .xl-card {
 	min-height: clamp(320px, 38vw, 520px);
 	overflow: hidden;
+	isolation: isolate;
 	color: #ffffff;
 	--xl-heading: #ffffff;
 	--xl-muted: rgba(255, 255, 255, 0.82);
@@ -1862,6 +1886,7 @@
 .xl-root .xl-cards--bento .xl-card__media {
 	position: absolute;
 	inset: 0;
+	z-index: -1;
 	aspect-ratio: auto;
 }
 
@@ -1870,12 +1895,15 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(180deg, rgb(var(--xl-deep-rgb) / 0) 25%, rgb(var(--xl-deep-rgb) / 0.88) 100%);
+	/* Dense where the text sits, so it stays readable over bright photos. */
+	background: linear-gradient(180deg, rgb(var(--xl-deep-rgb) / 0.08) 0%, rgb(var(--xl-deep-rgb) / 0.3) 32%, rgb(var(--xl-deep-rgb) / 0.8) 62%, rgb(var(--xl-deep-rgb) / 0.94) 100%);
+	z-index: 2;
 }
 
+/* Static, so the stretched title link covers the whole card (the photo sits at z-index -1). */
 .xl-root .xl-cards--overlay .xl-card__body,
 .xl-root .xl-cards--bento .xl-card__body {
-	position: relative;
+	position: static;
 	flex: none;
 	padding: clamp(24px, 3vw, 40px);
 }
@@ -2545,8 +2573,16 @@
 	transition: transform 1s var(--xl-ease);
 }
 
-.xl-root.xl-hover .xl-project__open:hover img,
-.xl-root .xl-project-gallery .xl-project__open:hover img {
+/* Pointer devices only: on touch screens a tap would leave the hover state stuck. */
+@media (hover: hover) and (pointer: fine) {
+	.xl-root.xl-hover .xl-project__open:hover img,
+	.xl-root .xl-project-gallery .xl-project__open:hover img {
+		transform: scale(1.05);
+	}
+}
+
+.xl-root.xl-hover .xl-project__open:focus-visible img,
+.xl-root .xl-project-gallery .xl-project__open:focus-visible img {
 	transform: scale(1.05);
 }
 
@@ -4616,17 +4652,24 @@
 	transform: none;
 }
 
-/* Images wipe up and settle as their block enters. The first section is left
- * alone so the largest image paints immediately (LCP). */
+/* Images wipe up, settle and "switch on" (dim to full brightness) as their
+ * block enters. The first section is left alone so the largest image paints
+ * immediately (LCP). */
 @keyframes xl-wipe {
 	from {
 		clip-path: inset(100% 0 0 0);
 		transform: scale(1.14);
+		filter: brightness(0.42) saturate(0.8);
+	}
+
+	55% {
+		filter: brightness(0.62) saturate(0.9);
 	}
 
 	to {
 		clip-path: inset(0 0 0 0);
 		transform: scale(1);
+		filter: none;
 	}
 }
 
@@ -5671,6 +5714,206 @@ html.xl-scroll-lock {
 	margin: 2rem 0;
 }
 
+/* -------------------------------------------------------------------------
+ * Interaction layer (1.4.0)
+ * Hover motion runs only with a mouse or trackpad and never with reduced
+ * motion; keyboard focus gets the same feedback. Effects animate transform and
+ * opacity only, so they stay on the compositor.
+ * ---------------------------------------------------------------------- */
+
+/* Cards clip their photo, so the whole-card focus ring is drawn inside the edge. */
+.xl-root :is(.xl-cards--image, .xl-cards--stack) .xl-card__link:focus-visible::after {
+	outline-width: 3px;
+	outline-offset: -3px;
+}
+
+.xl-root :is(.xl-cards--overlay, .xl-cards--bento) .xl-card__link:focus-visible::after {
+	outline: 2px solid #ffffff;
+	outline-offset: -8px;
+	border-radius: calc(var(--xl-radius) - 4px);
+}
+
+/* "Lights on": a warm glow blooms over a linked card's photo. */
+.xl-root .xl-card--linked .xl-card__media:has(> img)::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: radial-gradient(130% 85% at 50% 100%, rgb(255 186 112 / 0.32), rgb(255 186 112 / 0) 62%);
+	mix-blend-mode: screen;
+	opacity: 0;
+	transition: opacity 0.6s var(--xl-ease);
+}
+
+/* The "Explore" line draws its underline in step with the card. */
+.xl-root .xl-card__more {
+	background-image: linear-gradient(currentColor, currentColor);
+	background-size: 0% 1px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.35s var(--xl-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.xl-root.xl-hover .xl-card--linked:hover .xl-card__media::before {
+		opacity: 1;
+	}
+
+	.xl-root .xl-card--linked:hover .xl-card__more {
+		background-size: 100% 1px;
+	}
+}
+
+.xl-root.xl-hover .xl-card--linked:has(:focus-visible) .xl-card__media::before {
+	opacity: 1;
+}
+
+.xl-root .xl-card--linked:has(:focus-visible) .xl-card__more {
+	background-size: 100% 1px;
+}
+
+/* Primary and light buttons: a soft sheen sweeps across on hover. */
+.xl-root .xl-btn--primary,
+.xl-root .xl-btn--light {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+}
+
+.xl-root .xl-btn--primary::after,
+.xl-root .xl-btn--light::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background: linear-gradient(105deg, rgb(255 255 255 / 0) 30%, rgb(255 255 255 / 0.26) 50%, rgb(255 255 255 / 0) 70%);
+	transform: translateX(-101%);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+	.xl-root .xl-btn--primary:hover::after,
+	.xl-root .xl-btn--light:hover::after {
+		transform: translateX(101%);
+		transition: transform 0.8s var(--xl-ease);
+	}
+}
+
+/* Dropdowns: open on a short pause, stay a moment after the pointer leaves
+ * (prevents flicker when moving diagonally into the menu). */
+@media (hover: hover) and (min-width: 1301px) {
+	.xl-nav__item.has-sub > .xl-nav__sub {
+		transition-delay: 0.22s;
+	}
+
+	.xl-nav__item.has-sub:hover > .xl-nav__sub,
+	.xl-nav__item.is-open > .xl-nav__sub {
+		transition-delay: 0.06s;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Mobile call & quote bar
+ * ---------------------------------------------------------------------- */
+.xl-sticky-cta {
+	position: fixed;
+	left: 12px;
+	right: 12px;
+	bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+	z-index: 9990;
+	display: none;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+	gap: 8px;
+	padding: 8px;
+	border-radius: 16px;
+	background: rgb(var(--xl-deep-rgb) / 0.92);
+	box-shadow: 0 18px 40px -16px rgb(var(--xl-ink-rgb) / 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	transform: translateY(calc(100% + 28px));
+	visibility: hidden;
+	transition: transform 0.45s var(--xl-ease), visibility 0s linear 0.45s;
+}
+
+.xl-sticky-cta--single {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 767px) {
+	.xl-sticky-cta:not([hidden]) {
+		display: grid;
+	}
+}
+
+.xl-sticky-cta.is-shown {
+	transform: none;
+	visibility: visible;
+	transition: transform 0.45s var(--xl-ease), visibility 0s;
+}
+
+.xl-sticky-cta .xl-sticky-cta__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.55em;
+	min-height: 48px;
+	padding: 0 1rem;
+	border-radius: 10px;
+	font-family: var(--xl-font-ui);
+	font-size: 0.78rem;
+	font-weight: 650;
+	letter-spacing: 0.12em;
+	line-height: 1.1;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.xl-sticky-cta .xl-sticky-cta__btn .xl-icon {
+	width: 1.1em;
+	height: 1.1em;
+	flex: none;
+}
+
+.xl-sticky-cta .xl-sticky-cta__btn--call {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+}
+
+.xl-sticky-cta .xl-sticky-cta__btn--quote {
+	color: var(--xl-on-accent);
+	background: var(--xl-accent);
+}
+
+.xl-sticky-cta .xl-sticky-cta__btn:active {
+	transform: scale(0.97);
+}
+
+.xl-sticky-cta .xl-sticky-cta__btn:focus-visible {
+	outline: 2px solid #ffffff;
+	outline-offset: 2px;
+}
+
+/* Keep focused elements clear of the bar (WCAG 2.4.11). */
+html.xl-sticky-cta-on {
+	scroll-padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.xl-sticky-cta,
+	.xl-sticky-cta.is-shown {
+		transition: none;
+	}
+}
+
+@media print {
+	.xl-sticky-cta {
+		display: none !important;
+	}
+}
+
 /* BEGIN generated theme-style shield (bin/build-theme-shield.js) */
 /* Do not edit by hand: run `node bin/build-theme-shield.js` after changing link or button styles.
  * Elementor Theme Style (.elementor-kit-N a:hover, button:focus) must not recolor the widgets.
@@ -6033,6 +6276,16 @@ html .xl-footer .xl-social a {
 html .xl-footer .xl-social a:hover {
 	background: #ffffff;
 	color: var(--xl-ink);
+}
+
+html .xl-sticky-cta .xl-sticky-cta__btn--call {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+html .xl-sticky-cta .xl-sticky-cta__btn--quote {
+	color: var(--xl-on-accent);
+	background: var(--xl-accent);
 }
 
 /* END generated theme-style shield */

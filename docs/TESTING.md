@@ -1,3 +1,37 @@
+# Testing report — v1.4.0
+
+**TL;DR:** client photos, the interaction layer and the mobile call & quote bar pass every suite on the staging setup (Hello Elementor theme + Elementor kit) and after upgrading a clean 1.3.0 install from the ZIP. Under a deliberately garish Elementor *Theme Style* (red links, magenta/cyan buttons, orange borders) the widgets' links, buttons, cards and the new bar keep exactly their own colors.
+
+## v1.4.0 — client photos, hover & UX, theme isolation
+
+| Suite | Hello theme dev site | Fresh 1.3.0 → 1.4.0 upgrade (Twenty Twenty-Five) |
+|---|---|---|
+| **Photos & interaction** (`tests/browser/ux.js`, new) | ✅ 30/30 | ✅ 30/30 |
+| Render | ✅ all passed | — |
+| Elementor | ✅ 32/32 | — |
+| Security | ✅ 34/34, 1 expected warning | — |
+| Pages — 12 pages × 5 widths | ✅ 276/276 | ✅ 276/276 |
+| Interactions | ✅ 45/45 | — |
+| Form | ✅ 31/31 | — |
+| Accessibility — axe, 12 pages × 2 widths | ✅ 24/24 | ✅ 24/24 |
+| Design settings | ✅ all passed | — |
+| Editor round-trip (real Elementor editor) | ✅ 9/9 | — |
+| Theme-style shield (`bin/build-theme-shield.js --check`) | ✅ up to date | — |
+| Garish Theme Style kit vs default kit (computed colors of bar, cards, buttons on hover) | ✅ identical | — |
+
+What `ux.js` proves:
+
+- All bundled photos load, have width/height, larger ones ship a `srcset`, and none carries EXIF/XMP/ICC metadata (RIFF chunk scan of every WebP).
+- Mouse hover shows the "lights on" glow and zoom; keyboard focus shows the same; tapping a photo on a touch screen leaves no hover zoom.
+- The photo area of overlay cards is part of the card link; whole-card focus rings are drawn inside the clipped card edge.
+- Reduced motion: the button sheen stays parked.
+- Soffit: the Everyday / Holiday comparison shows both photos with a labelled range input.
+- Phone: the call & quote bar is hidden on the first screen, slides up after it, has ≥ 44 px targets and scroll padding, and steps aside at the footer and while the quote form is on screen. Desktop never shows it.
+
+Environment notes: the dev site's Hello Elementor copy was compiled locally from source and initially lacked its two small JavaScript files, which caused "Unexpected token '<'" errors in two suites; with the files in place both pass. A real Hello install ships them.
+
+---
+
 # Testing report — v1.3.0
 
 **TL;DR:** the new **Colors & Fonts** settings were verified end to end — a completely different palette and fonts reach every widget, the header and the footer, contrast still passes, and nothing overflows — and every existing suite still passes. The default look is pixel-identical on desktop (0.00–0.03 % changed pixels on the compared pages); on phones the header is now the intended 68 px (it was stuck at 80 px).

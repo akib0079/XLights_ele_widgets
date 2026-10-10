@@ -466,8 +466,9 @@ final class Header_Footer {
 			$opts,
 			array(
 				// Page Composer templates end with their own CTA; avoid a second one directly below it.
-				'show_cta' => ! self::is_composer_page(),
-				'menu'     => self::MENU_FOOTER,
+				'show_cta'   => ! self::is_composer_page(),
+				'menu'       => self::MENU_FOOTER,
+				'sticky_cta' => Settings::enabled( 'mobile_cta_bar' ),
 			)
 		);
 		$s     = Settings::all();
@@ -563,6 +564,31 @@ final class Header_Footer {
 				</div>
 			</div>
 		</footer>
+		<?php
+		if ( $opts['sticky_cta'] ) {
+			echo self::sticky_cta( $s ); // phpcs:ignore WordPress.Security.EscapeOutput
+		}
+		return (string) ob_get_clean();
+	}
+
+	/**
+	 * Mobile call & quote bar. Hidden until JavaScript decides it is useful
+	 * (phones only, after the first screen, never over a quote form).
+	 *
+	 * @param array $s Settings.
+	 * @return string
+	 */
+	private static function sticky_cta( array $s ) {
+		$phone = trim( (string) $s['phone'] );
+		$label = '' !== trim( (string) $s['primary_cta_label'] ) ? $s['primary_cta_label'] : __( 'Get a Quote', 'xlights-elementor-widgets' );
+		ob_start();
+		?>
+		<div class="xl-root xl-sticky-cta<?php echo '' === $phone ? ' xl-sticky-cta--single' : ''; ?>" data-xl-sticky-cta hidden>
+			<?php if ( '' !== $phone ) : ?>
+				<a class="xl-sticky-cta__btn xl-sticky-cta__btn--call" href="<?php echo esc_url( Tokens::tel_href( $phone ) ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: phone number */ __( 'Call %s', 'xlights-elementor-widgets' ), $phone ) ); ?>"><?php echo Icons::svg( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span aria-hidden="true"><?php esc_html_e( 'Call', 'xlights-elementor-widgets' ); ?></span></a>
+			<?php endif; ?>
+			<a class="xl-sticky-cta__btn xl-sticky-cta__btn--quote" href="<?php echo esc_url( Tokens::url( '{quote_url}' ) ); ?>"><?php echo esc_html( Tokens::replace( $label ) ); ?><?php echo Icons::svg( 'arrow-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
+		</div>
 		<?php
 		return (string) ob_get_clean();
 	}

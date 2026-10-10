@@ -1,4 +1,4 @@
-# X LIGHTS Elementor Widgets — Plugin Guide (v1.3.0)
+# X LIGHTS Elementor Widgets — Plugin Guide (v1.4.0)
 
 **TL;DR:** install the ZIP (Elementor required), fill in **X LIGHTS → Settings**, run **X LIGHTS → Page Setup** to create the 12 pages, then edit any page in Elementor through its **Page Composer** widget. Every phone number, color, font, link and approval switch lives in **Settings** and flows to every page, the header and the footer. Projects, reviews and incoming quote requests are managed under **X LIGHTS** in wp-admin.
 
@@ -31,7 +31,7 @@ Quote form ─► validation + spam checks ─► Lead saved (X LIGHTS → Leads
 ## 2. Install & first run
 
 1. **Requirements:** WordPress 6.4+, PHP 7.4+ (8.1+ recommended), **Elementor** (free; Pro optional). Hello Elementor theme recommended.
-2. **Plugins → Add New → Upload Plugin →** `xlights-elementor-widgets-1.3.0.zip` **→ Install → Activate.**
+2. **Plugins → Add New → Upload Plugin →** `xlights-elementor-widgets-1.4.0.zip` **→ Install → Activate.**
 3. **Settings → Permalinks → "Post name"** (readable URLs like `/contact-us/`; the plugin reminds you if this is off).
 4. **X LIGHTS → Settings:** at least *Dealer*, *Contact & CTAs* (phone) and *Leads & Form* (lead recipients). Leave approval switches off until the client confirms in writing.
 5. **X LIGHTS → Page Setup:** tick the pages → *Create pages* (drafts by default). Options: make Home the front page, create the header menu, page template.
@@ -219,6 +219,7 @@ Leave a field blank to hide it. Do not enter placeholder URLs.
 | **Sticky header** | On |  |
 | **Header overlaps the first hero (floats inside framed heroes, transparent over full-bleed ones)** | On |  |
 | **Show phone number in the header** | On |  |
+| **Mobile call & quote bar** | On | On phones, a Call / Get a Quote bar slides up after the first screen. It steps aside while a quote form is on screen or someone is typing. |
 | **Footer note (optional)** | — | Small print below the footer links, e.g. an independent-dealer statement. |
 
 
@@ -231,7 +232,7 @@ Leave a field blank to hide it. Do not enter placeholder URLs.
 | **X LIGHTS App** | `/x-lights-app/` | App Hero, One Connected Lighting System, App Interface Showcase, Supported Lighting Categories, Save & Customize Preferences, Smart Scheduling & Timers, Seasonal Light Shows & Patterns, Remote Management, Shared Access, Color & Brightness Control, Custom Scenes & Patterns, Smart-Home Integration, App Download, Final Consultation CTA |
 | **Reviews** | `/reviews/` | Reviews Hero, Trust Introduction, Featured Testimonials, Review Grid, Project Gallery, Local Review Attribution, Google Reviews Link, Final Consultation CTA |
 | **Lighting Solutions** | `/lighting-solutions/` | Lighting Solutions Hero, System Overview, Permanent Soffit Lighting, Hanging Bulb Bistro Lighting, Deck Lighting, Landscape Lighting, One Connected Outdoor Lighting System, App Showcase, Benefits & Differentiators, Financing, Project Gallery, Final Consultation CTA |
-| **Permanent Soffit Lighting** | `/lighting-solutions/permanent-soffit-lighting/` | Soffit Lighting Hero, Product Introduction, Daytime Appearance / Low-Profile Design, Architectural Everyday Lighting, Seasonal & Holiday Lighting, Color-Matched Track Benefits, Smart App Control, Key Product Features, Technical Specifications, Lifestyle & Home Examples, Day / Night Comparison, Why Permanent Installation Makes Sense, Financing, Project Gallery, FAQ, Final Consultation CTA |
+| **Permanent Soffit Lighting** | `/lighting-solutions/permanent-soffit-lighting/` | Soffit Lighting Hero, Product Introduction, Daytime Appearance / Low-Profile Design, Architectural Everyday Lighting, Seasonal & Holiday Lighting, Color-Matched Track Benefits, Smart App Control, Key Product Features, Technical Specifications, Lifestyle & Home Examples, Everyday / Holiday Comparison, Why Permanent Installation Makes Sense, Financing, Project Gallery, FAQ, Final Consultation CTA |
 | **Hanging Bulb Bistro Lighting** | `/lighting-solutions/bistro-lighting/` | Bistro Hero, Lifestyle Introduction, Premium Patio Atmosphere, Residential Applications, Restaurants & Outdoor Dining, Custom Installation Layouts, Warm Ambient Illumination, Special-Event Lighting, X LIGHTS Connected System, Project Gallery, FAQ, Bistro Product Details, Final Consultation CTA |
 | **Deck Lighting** | `/lighting-solutions/deck-lighting/` | Deck Lighting Hero, Service Introduction, Deck Step Lighting, Railing & Walkway Lighting, Outdoor Safety & Usability, Subtle Architectural Illumination, Compatible Smart Control, Product Style Options, Project Gallery, FAQ, Final Consultation CTA |
 | **Landscape Lighting** | `/lighting-solutions/landscape-lighting/` | Landscape Hero, Introduction, Tree & Architectural Accent Lighting, Garden-Bed Illumination, Pathway Lighting, Outdoor Feature Highlights, Lighting Design Benefits, Smart Color & Brightness Control, Product Options, Project Gallery, FAQ, Final Consultation CTA |
@@ -326,7 +327,9 @@ Type these in any text, heading, link or button field:
 | Requests to fonts.googleapis.com | Elementor's own default fonts or a Google font you chose: enable *Load Google Fonts Locally* (Elementor → Settings → Performance). |
 | Header/footer missing or doubled | Settings → Header & Footer → mode (Canvas pages / Every page / Off) and, for *Every page* with non-Hello themes, the selectors to hide. |
 | Content shows "pending" in the editor but not live | Working as designed — confirm with the client, then unlock (§11). |
+| Links/buttons change color on hover in a way the design doesn't (e.g. white-on-white, pink) | Your theme's or Elementor's *Theme Style* colors are leaking in. 1.4.0 shields the widgets; if a custom theme still wins, report the selector — don't change Theme Style just for the widgets. |
+| A section shows a different photo than expected | Bundled default photos are listed in `docs/PHOTOS.md`. Pick your own in Elementor → section → Image; a Media Library image always wins. |
 
 ## 14. Related documents (repository `docs/`)
 
-INSTALLATION.md (step by step) · EDITOR-GUIDE.md (editing in Elementor) · DEPLOYMENT.md (hosting, SMTP, Nginx, DNS) · DEALER-ONBOARDING.md (setting up another dealer) · CLIENT-APPROVALS.md (what the client must confirm) · ARCHITECTURE.md (code structure) · TESTING.md (test results).
+INSTALLATION.md (step by step) · EDITOR-GUIDE.md (editing in Elementor) · PHOTOS.md (bundled client photos and what to confirm) · UX-RESEARCH.md (hover & UX decisions with sources) · DEPLOYMENT.md (hosting, SMTP, Nginx, DNS) · DEALER-ONBOARDING.md (setting up another dealer) · CLIENT-APPROVALS.md (what the client must confirm) · ARCHITECTURE.md (code structure) · TESTING.md (test results).

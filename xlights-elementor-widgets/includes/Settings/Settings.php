@@ -629,6 +629,12 @@ final class Settings {
 						'label'   => __( 'Show phone number in the header', 'xlights-elementor-widgets' ),
 						'default' => 1,
 					),
+					'mobile_cta_bar'     => array(
+						'type'        => 'checkbox',
+						'label'       => __( 'Mobile call & quote bar', 'xlights-elementor-widgets' ),
+						'default'     => 1,
+						'description' => __( 'On phones, a Call / Get a Quote bar slides up after the first screen. It steps aside while a quote form is on screen or someone is typing.', 'xlights-elementor-widgets' ),
+					),
 					'footer_note'        => array(
 						'type'        => 'textarea',
 						'label'       => __( 'Footer note (optional)', 'xlights-elementor-widgets' ),

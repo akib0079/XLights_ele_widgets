@@ -21,6 +21,7 @@ use Elementor\Widget_Base;
 use XLights\Elementor\Controls_Builder;
 use XLights\Elementor\Integration;
 use XLights\Elementor\Style_Controls;
+use XLights\Helpers\Html;
 use XLights\Pages\Page_Registry;
 use XLights\Sections\Component_Registry;
 use XLights\Sections\Section_Renderer;
@@ -247,7 +248,7 @@ class Page_Composer extends Widget_Base {
 						$data[ $field ] = $value;
 					}
 				}
-				return $data;
+				return Page_Composer::backfill_photos( $data, $component->fields(), isset( $def['defaults'] ) ? (array) $def['defaults'] : array() );
 			},
 			$order,
 			array(
@@ -262,5 +263,54 @@ class Page_Composer extends Widget_Base {
 			esc_attr( $template ),
 			$html // phpcs:ignore WordPress.Security.EscapeOutput -- Components escape their own output.
 		);
+	}
+
+	/**
+	 * Elementor saves card lists whole (every row gets an _id), so a page that was
+	 * saved before an update keeps its old rows and never sees new default photos.
+	 * A row that still has its default title and no image gets the bundled photo
+	 * the template now pairs with it. Images an editor picked are never replaced,
+	 * and only the client photos added in 1.4.0 are filled in this way.
+	 *
+	 * @param array $data     Section data.
+	 * @param array $fields   Component field schema.
+	 * @param array $defaults Template defaults for the section.
+	 * @return array
+	 */
+	public static function backfill_photos( array $data, array $fields, array $defaults ) {
+		foreach ( $fields as $field => $spec ) {
+			if ( ! isset( $spec['type'] ) || 'repeater' !== $spec['type'] || empty( $data[ $field ] ) || ! is_array( $data[ $field ] ) || empty( $defaults[ $field ] ) || ! is_array( $defaults[ $field ] ) ) {
+				continue;
+			}
+			$photos = array();
+			foreach ( $defaults[ $field ] as $row ) {
+				if ( isset( $row['title'], $row['image'] ) && is_string( $row['image'] ) && false !== strpos( $row['image'], '/assets/images/photos/' ) ) {
+					$photos[ self::title_key( $row['title'] ) ] = $row['image'];
+				}
+			}
+			if ( ! $photos ) {
+				continue;
+			}
+			foreach ( $data[ $field ] as $i => $row ) {
+				if ( ! is_array( $row ) || ! isset( $row['title'] ) || ( isset( $row['image'] ) && Html::has_image( $row['image'] ) ) ) {
+					continue;
+				}
+				$key = self::title_key( $row['title'] );
+				if ( isset( $photos[ $key ] ) ) {
+					$data[ $field ][ $i ]['image'] = Controls_Builder::media_default( $photos[ $key ] );
+				}
+			}
+		}
+		return $data;
+	}
+
+	/**
+	 * Card title in a form that survives editor whitespace and markup changes.
+	 *
+	 * @param string $title Card title.
+	 * @return string Comparable form.
+	 */
+	private static function title_key( $title ) {
+		return strtolower( trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( (string) $title ) ) ) );
 	}
 }

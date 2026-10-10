@@ -12,6 +12,7 @@ Run against a **local or staging** WordPress site with Elementor and this plugin
 | Form | `node tests/browser/form.js` | Preselect, inline errors + focus + `aria-invalid`, commercial fields, client file checks, previews, AJAX success, no delivery claim |
 | Accessibility | `node tests/browser/a11y.js` | axe-core WCAG 2.0/2.1/2.2 A + AA on all pages at 1440 px and 375 px |
 | Design settings | `WP="wp …" node tests/browser/design.js` | No hard-coded brand colors; a new palette + fonts reach every widget/header/footer (computed-style scan), contrast still passes, no overflow with a wide font, Elementor global and Google fonts, settings screen preview/warnings/reset. Restores settings afterwards |
+| Photos & interaction | `node tests/browser/ux.js` | Bundled photos load with width/height and srcset and carry no EXIF/XMP/ICC metadata; theme-style shield up to date; hover motion only for mouse/trackpad, keyboard focus mirrors it, whole overlay cards clickable, focus rings not clipped, reduced motion; Everyday/Holiday comparison; mobile call & quote bar (first screen, footer, quote form) |
 | Editor | `HOME_ID=<id> node tests/browser/editor.js` | Real Elementor editor: panel scope, live preview, pending badges editor-only, save → live, then reverts |
 
 ## Setup
@@ -34,6 +35,15 @@ Environment variables:
 | `ADMIN_USER` / `ADMIN_PASS` | `admin` / `admin` | `editor.js`, `design.js` |
 | `HOME_ID` | — | `editor.js` (from `wp xlights status`) |
 | `PLAYWRIGHT_MODULE`, `CHROMIUM_PATH`, `AXE_PATH` | resolved from `tests/node_modules` | override tool locations |
+
+## Generated CSS
+
+The end of `assets/css/xlights.css` holds a generated block that keeps Elementor *Theme Style* colors off the widgets' links and buttons. After changing any link/button rule:
+
+```bash
+node bin/build-theme-shield.js          # regenerate
+node bin/build-theme-shield.js --check  # CI: exit 1 when stale (also checked by ux.js)
+```
 
 ## Clean up
 

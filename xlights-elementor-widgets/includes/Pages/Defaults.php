@@ -24,6 +24,16 @@ final class Defaults {
 	}
 
 	/**
+	 * Bundled client photo (assets/images/photos/<name>.webp, with -640/-1024 copies for srcset).
+	 *
+	 * @param string $name File name without extension.
+	 * @return string
+	 */
+	public static function photo( $name ) {
+		return Html::asset_image( 'photos/' . $name . '.webp' );
+	}
+
+	/**
 	 * Products in the connected system diagram.
 	 *
 	 * @return array

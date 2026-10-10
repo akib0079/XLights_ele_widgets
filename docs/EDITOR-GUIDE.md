@@ -97,6 +97,17 @@ Site-wide colors and fonts are set once in **X LIGHTS → Settings → Colors & 
 - Google fonts are loaded by Elementor. To serve them from your own server instead of Google, turn on **Elementor → Settings → Performance → Load Google Fonts Locally**.
 - Page caching: purge the cache after changing colors or fonts.
 
+## Photos
+
+- Every service page ships with the client's photos as defaults (list and sources in `docs/PHOTOS.md`). To use another photo: section → **Image** → choose from the Media Library. Your pick always wins over the default.
+- Photos you upload are served by WordPress in responsive sizes. Upload at least 1600 px wide for section images and 2400 px for full-width heroes; avoid phone screenshots.
+- Never upload photos that show house numbers, licence plates or a customer's full address. WordPress keeps the GPS location of phone photos in the original file — export or strip it first (the quote form does this automatically for customer uploads).
+- **Soffit → Everyday / Holiday comparison** needs two photos of one home from the same spot (warm white and holiday color, or day and night). Without both it stays hidden.
+
+## Mobile call & quote bar
+
+On phones, a bar with **Call** and **Get a Quote** slides up after the first screen and steps aside over quote forms, the footer, the menu and while someone types. Turn it off in **X LIGHTS → Settings → Header & Footer** if the site gets a chat bubble or cookie banner at the bottom of the screen.
+
 ## Projects gallery
 
 - Add projects in **X LIGHTS → Projects** — they appear automatically on Projects, Home ("Featured"), and each solution page (filtered by category).

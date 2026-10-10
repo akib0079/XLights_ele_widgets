@@ -252,8 +252,42 @@ final class Html {
 		if ( $dims ) {
 			$attrs['width']  = $dims[0];
 			$attrs['height'] = $dims[1];
+			$srcset          = self::local_srcset( $url, $dims[0] );
+			if ( '' !== $srcset ) {
+				$attrs['srcset'] = $srcset;
+				$attrs['sizes']  = $args['sizes'] ? $args['sizes'] : '100vw';
+			}
 		}
 		return '<img' . self::attrs( $attrs ) . '>';
+	}
+
+	/**
+	 * Smaller copies of a bundled image, named "photo-640.webp", "photo-1024.webp"
+	 * next to "photo.webp", as a srcset.
+	 *
+	 * @param string $url   Bundled image URL (already validated by local_dimensions()).
+	 * @param int    $width Width of the full-size file.
+	 * @return string
+	 */
+	private static function local_srcset( $url, $width ) {
+		static $cache = array();
+		if ( array_key_exists( $url, $cache ) ) {
+			return $cache[ $url ];
+		}
+		$set = array();
+		if ( preg_match( '/^(.+)\.(webp|jpe?g|png)$/i', $url, $m ) ) {
+			$rel = ltrim( substr( $m[1], strlen( XLIGHTS_URL ) ), '/' );
+			foreach ( array( 640, 1024, 1600 ) as $w ) {
+				if ( $w < $width && is_readable( XLIGHTS_PATH . $rel . '-' . $w . '.' . $m[2] ) ) {
+					$set[] = esc_url( $m[1] . '-' . $w . '.' . $m[2] ) . ' ' . $w . 'w';
+				}
+			}
+		}
+		if ( $set ) {
+			$set[] = esc_url( $url ) . ' ' . (int) $width . 'w';
+		}
+		$cache[ $url ] = implode( ', ', $set );
+		return $cache[ $url ];
 	}
 
 	/**

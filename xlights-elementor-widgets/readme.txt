@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,15 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.4.0 =
+* Real client photos replace the illustrations on every service page (21 photos, metadata and GPS removed, house numbers removed, compressed WebP with 640/1024 px copies served through srcset). See docs/PHOTOS.md.
+* Soffit page: Everyday ↔ Holiday comparison slider using two aligned photos of the same home.
+* Hover and focus: motion only for mouse/trackpad (no stuck hover on touch), keyboard focus gets the same feedback, whole overlay cards are clickable, "lights on" glow on card photos, photos brighten as they wipe in, button sheen and press, dropdowns open/close with a short intent delay.
+* Overlay cards: stronger scrim so text stays readable over bright photos; whole-card focus ring now visible (it was clipped).
+* New: mobile Call / Get a Quote bar (Settings → Header & Footer), shown after the first screen and hidden over quote forms, the footer, the menu and while typing.
+* Theme compatibility: widgets are shielded from Hello Elementor resets and Elementor Site Settings → Theme Style link/button colors (fixes an invisible secondary button on hover, pink dropdown toggles and dark-blue links on photos).
+* Pages saved before this update pick up the new card photos automatically; images picked in Elementor are never replaced.
 
 = 1.3.0 =
 * New Settings → Colors & Fonts tab: five brand colors and the heading/body fonts for every widget, the header and the footer, with a live preview and a reset to the X LIGHTS defaults.

@@ -732,6 +732,72 @@
 	}
 
 	/* ------------------------------------------------------------------
+	 * Mobile call & quote bar: phones only, after the first screen, and
+	 * out of the way of quote forms, the footer, the menu and the keyboard.
+	 * ---------------------------------------------------------------- */
+	function initStickyCta() {
+		var bar = document.querySelector('[data-xl-sticky-cta]');
+		if (!bar || isEditor || !once(bar, 'Sticky') || !('IntersectionObserver' in window) || !window.matchMedia) {
+			return;
+		}
+		var mq = window.matchMedia('(max-width: 767px)');
+		var docEl = document.documentElement;
+		var blockers = new Set();
+		var typing = false;
+		var shown = false;
+		var queued = false;
+
+		function update() {
+			queued = false;
+			var show = mq.matches && !typing && blockers.size === 0 &&
+				!docEl.classList.contains('xl-scroll-lock') &&
+				(window.pageYOffset || docEl.scrollTop) > window.innerHeight * 0.8;
+			if (show === shown) {
+				return;
+			}
+			shown = show;
+			bar.classList.toggle('is-shown', show);
+			docEl.classList.toggle('xl-sticky-cta-on', show);
+		}
+		function queue() {
+			if (!queued) {
+				queued = true;
+				window.requestAnimationFrame(update);
+			}
+		}
+
+		var io = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) {
+					blockers.add(entry.target);
+				} else {
+					blockers.delete(entry.target);
+				}
+			});
+			queue();
+		});
+		$all(document, '.xl-root form, .xl-footer').forEach(function (el) {
+			io.observe(el);
+		});
+
+		document.addEventListener('focusin', function (e) {
+			typing = !!(e.target && e.target.matches && e.target.matches('input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea, select'));
+			queue();
+		});
+		document.addEventListener('focusout', function () {
+			typing = false;
+			queue();
+		});
+		window.addEventListener('scroll', queue, { passive: true });
+		window.addEventListener('resize', queue);
+		if (window.MutationObserver) {
+			new MutationObserver(queue).observe(docEl, { attributes: true, attributeFilter: ['class'] });
+		}
+		bar.hidden = false;
+		queue();
+	}
+
+	/* ------------------------------------------------------------------
 	 * Boot
 	 * ---------------------------------------------------------------- */
 	function init(root) {
@@ -749,6 +815,7 @@
 	function boot() {
 		$all(document, '[data-xl-header]').forEach(initHeader);
 		initSkipTarget();
+		initStickyCta();
 		init(document);
 		document.addEventListener('click', onLightboxClick);
 	}
