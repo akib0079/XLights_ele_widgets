@@ -24,6 +24,8 @@ final class Notices {
 			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'X LIGHTS is active. Next: enter dealer details in X LIGHTS → Settings, then create the pages in X LIGHTS → Page Setup.', 'xlights-elementor-widgets' ) . ' <a href="' . esc_url( admin_url( 'admin.php?page=xlights-settings' ) ) . '">' . esc_html__( 'Open settings', 'xlights-elementor-widgets' ) . '</a></p></div>';
 		}
 
+		self::permalinks_notice();
+
 		if ( ! current_user_can( Leads::CAP ) ) {
 			return;
 		}
@@ -58,6 +60,21 @@ final class Notices {
 				)
 			) . '</p></div>';
 		}
+	}
+
+	/**
+	 * Plain permalinks work, but page URLs read ?page_id=12. Recommend "Post name"
+	 * on X LIGHTS screens and the Permalinks screen itself.
+	 */
+	private static function permalinks_notice() {
+		if ( ! current_user_can( 'manage_options' ) || '' !== (string) get_option( 'permalink_structure' ) ) {
+			return;
+		}
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( ! $screen || ( false === strpos( (string) $screen->id, 'xlights' ) && 'dashboard' !== $screen->id ) ) {
+			return;
+		}
+		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Page addresses currently look like ?page_id=12. For readable addresses such as /contact-us/ (better for visitors and search engines), choose "Post name" under Settings → Permalinks.', 'xlights-elementor-widgets' ) . ' <a href="' . esc_url( admin_url( 'options-permalink.php' ) ) . '">' . esc_html__( 'Open Permalinks', 'xlights-elementor-widgets' ) . '</a></p></div>';
 	}
 
 	/**

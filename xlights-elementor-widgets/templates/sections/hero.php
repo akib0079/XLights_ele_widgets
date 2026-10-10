@@ -75,9 +75,24 @@ if ( 'media' === $layout && isset( $data['estimate'] ) && 'yes' === $data['estim
 	$services = \XLights\Sections\Components\Hero::estimate_services();
 	$chosen   = isset( $data['estimate_service'], $services[ $data['estimate_service'] ] ) ? $data['estimate_service'] : '';
 	$eid      = $ctx->id( 'estimate' );
+	// A GET form replaces the action's query string, so carry it over as hidden
+	// fields (plain permalinks: ?page_id=12#quote).
+	$action = Tokens::url( '{quote_url}' );
+	$keep   = array();
+	$query  = (string) wp_parse_url( $action, PHP_URL_QUERY );
+	if ( '' !== $query ) {
+		parse_str( $query, $keep );
+		$action = remove_query_arg( array_keys( $keep ), $action );
+		unset( $keep['service'], $keep['zip'] );
+	}
 	ob_start();
 	?>
-	<form class="xl-estimate" action="<?php echo esc_url( Tokens::url( '{quote_url}' ) ); ?>" method="get" aria-labelledby="<?php echo esc_attr( $eid . '-title' ); ?>" data-xl-reveal>
+	<form class="xl-estimate" action="<?php echo esc_url( $action ); ?>" method="get" aria-labelledby="<?php echo esc_attr( $eid . '-title' ); ?>" data-xl-reveal>
+		<?php foreach ( $keep as $name => $value ) : ?>
+			<?php if ( is_scalar( $value ) ) : ?>
+				<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="<?php echo esc_attr( (string) $value ); ?>">
+			<?php endif; ?>
+		<?php endforeach; ?>
 		<h2 class="xl-estimate__title" id="<?php echo esc_attr( $eid . '-title' ); ?>"><?php echo Html::text( $data['estimate_title'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></h2>
 		<?php if ( '' !== trim( (string) $data['estimate_text'] ) ) : ?>
 			<p class="xl-estimate__text"><?php echo Html::text( $data['estimate_text'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></p>

@@ -63,6 +63,7 @@ No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 * The stylesheet no longer hard-codes any brand color outside its token block.
 * Fix: the compact 68 px header height on tablets and phones now applies.
 * Older free-text font settings are migrated to the new format automatically.
+* Fix: the hero quick-estimate card now reaches the quote form when WordPress uses plain permalinks (?page_id=…); an admin notice recommends "Post name" permalinks.
 
 = 1.2.0 =
 * Quote form in three steps (Project, Property, Details) with a progress stepper, per-step validation and focus management; without JavaScript it stays one complete form.

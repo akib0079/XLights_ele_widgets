@@ -48,7 +48,7 @@ First deployment: **X LIGHTS Southern California** (`socal.xlightsled.com`). The
 5. Open any page with Elementor → the **X LIGHTS — Page Composer** widget is already configured for that page.
 6. Add projects and reviews under **X LIGHTS → Projects / Reviews**.
 
-Full guides: [Installation](docs/INSTALLATION.md) · [Deployment & DNS](docs/DEPLOYMENT.md) · [Editor guide](docs/EDITOR-GUIDE.md) · [New dealer onboarding](docs/DEALER-ONBOARDING.md) · [Client approvals](docs/CLIENT-APPROVALS.md) · [Architecture](docs/ARCHITECTURE.md) · [Testing report](docs/TESTING.md)
+Full guides: **[Plugin guide — all settings, where everything is, how it works](docs/PLUGIN-GUIDE.md)** · [Installation](docs/INSTALLATION.md) · [Deployment & DNS](docs/DEPLOYMENT.md) · [Editor guide](docs/EDITOR-GUIDE.md) · [New dealer onboarding](docs/DEALER-ONBOARDING.md) · [Client approvals](docs/CLIENT-APPROVALS.md) · [Architecture](docs/ARCHITECTURE.md) · [Testing report](docs/TESTING.md)
 
 ## What's included
 
