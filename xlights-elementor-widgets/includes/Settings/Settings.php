@@ -24,7 +24,8 @@ final class Settings {
 	 * Settings schema grouped by admin tab.
 	 *
 	 * Field keys:
-	 *  - type: text|textarea|lines|email|emails|url|tel|color|media|select|checkbox|number|secret
+	 *  - type: text|textarea|lines|email|emails|url|tel|color|font|media|select|checkbox|number|secret
+	 *  - group: optional sub-heading on the settings screen.
 	 *  - approval: true marks values that need client confirmation before publication.
 	 *
 	 * @return array
@@ -359,7 +360,7 @@ final class Settings {
 			),
 			'brand'     => array(
 				'label'  => __( 'Brand', 'xlights-elementor-widgets' ),
-				'intro'  => __( 'Defaults follow the live X LIGHTS website (www.xlightsled.com): black and white, navy, slate and a signal-blue accent, with Barlow typography and the official X LIGHTS logo. Replace them only with values from official brand guidelines.', 'xlights-elementor-widgets' ),
+				'intro'  => __( 'Logos and favicon. Colors and fonts are under the Colors & Fonts tab.', 'xlights-elementor-widgets' ),
 				'fields' => array(
 					'logo'          => array(
 						'type'        => 'media',
@@ -386,37 +387,82 @@ final class Settings {
 						'default'     => 0,
 						'description' => __( 'Used only when no Site Icon is set under Appearance → Customize.', 'xlights-elementor-widgets' ),
 					),
+				),
+			),
+			'design'    => array(
+				'label'  => __( 'Colors & Fonts', 'xlights-elementor-widgets' ),
+				'intro'  => __( 'One place for the look of every X LIGHTS widget, the header and the footer. Pick five colors; hover shades, tints, text-safe accents and on-dark variants are derived automatically and checked for readable contrast. Defaults follow the live X LIGHTS website. Individual widgets can still override these under Style in Elementor.', 'xlights-elementor-widgets' ),
+				'fields' => array(
 					'color_accent'  => array(
-						'type'    => 'color',
-						'label'   => __( 'Accent (signal blue)', 'xlights-elementor-widgets' ),
-						'default' => '#3367FE',
+						'type'        => 'color',
+						'group'       => __( 'Colors', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Accent', 'xlights-elementor-widgets' ),
+						'default'     => '#3367FE',
+						'description' => __( 'Links, active states, highlights and button hover. A darker shade is used automatically wherever the accent is small text.', 'xlights-elementor-widgets' ),
 					),
-					'color_dark'    => array(
-						'type'    => 'color',
-						'label'   => __( 'Dark surface (navy)', 'xlights-elementor-widgets' ),
-						'default' => '#131C2D',
-					),
-					'color_surface' => array(
-						'type'    => 'color',
-						'label'   => __( 'Light neutral surface', 'xlights-elementor-widgets' ),
-						'default' => '#E9EAED',
+					'color_ink'     => array(
+						'type'        => 'color',
+						'group'       => __( 'Colors', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Headings & buttons', 'xlights-elementor-widgets' ),
+						'default'     => '#05070B',
+						'description' => __( 'Headlines and primary buttons on light backgrounds (button text is white).', 'xlights-elementor-widgets' ),
 					),
 					'color_text'    => array(
-						'type'    => 'color',
-						'label'   => __( 'Body text', 'xlights-elementor-widgets' ),
-						'default' => '#1B2130',
+						'type'        => 'color',
+						'group'       => __( 'Colors', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Body text', 'xlights-elementor-widgets' ),
+						'default'     => '#1B2130',
+						'description' => __( 'Paragraphs and form fields. Secondary (muted) text is derived from it.', 'xlights-elementor-widgets' ),
+					),
+					'color_dark'    => array(
+						'type'        => 'color',
+						'group'       => __( 'Colors', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Dark sections', 'xlights-elementor-widgets' ),
+						'default'     => '#131C2D',
+						'description' => __( 'Dark (navy) sections, the footer, panels and dropdown menus. Text on it is white.', 'xlights-elementor-widgets' ),
+					),
+					'color_surface' => array(
+						'type'        => 'color',
+						'group'       => __( 'Colors', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Light grey sections', 'xlights-elementor-widgets' ),
+						'default'     => '#E9EAED',
+						'description' => __( 'Sections set to "Light grey" and light panels.', 'xlights-elementor-widgets' ),
 					),
 					'font_heading'  => array(
-						'type'        => 'text',
-						'label'       => __( 'Heading font family (CSS)', 'xlights-elementor-widgets' ),
+						'type'        => 'font',
+						'role'        => 'heading',
+						'group'       => __( 'Fonts', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Heading font', 'xlights-elementor-widgets' ),
 						'default'     => '',
-						'description' => __( 'Optional CSS font-family. Blank uses the bundled Barlow Condensed. Any other font must be loaded by Elementor or the theme.', 'xlights-elementor-widgets' ),
+						'description' => __( 'Headlines, card titles and the footer menu. Google Fonts are loaded through Elementor; to keep them on your own server turn on Elementor → Settings → Performance → Load Google Fonts Locally.', 'xlights-elementor-widgets' ),
 					),
 					'font_body'     => array(
-						'type'        => 'text',
-						'label'       => __( 'Body font family (CSS)', 'xlights-elementor-widgets' ),
+						'type'        => 'font',
+						'role'        => 'body',
+						'group'       => __( 'Fonts', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Body font', 'xlights-elementor-widgets' ),
 						'default'     => '',
-						'description' => __( 'Blank uses the bundled Barlow.', 'xlights-elementor-widgets' ),
+						'description' => __( 'Paragraphs, navigation, buttons, labels and forms.', 'xlights-elementor-widgets' ),
+					),
+					'heading_case'  => array(
+						'type'    => 'select',
+						'group'   => __( 'Fonts', 'xlights-elementor-widgets' ),
+						'label'   => __( 'Heading letter case', 'xlights-elementor-widgets' ),
+						'options' => array(
+							'uppercase' => __( 'UPPERCASE (X LIGHTS style)', 'xlights-elementor-widgets' ),
+							'none'      => __( 'As typed', 'xlights-elementor-widgets' ),
+						),
+						'default' => 'uppercase',
+					),
+					'heading_scale' => array(
+						'type'        => 'number',
+						'group'       => __( 'Fonts', 'xlights-elementor-widgets' ),
+						'label'       => __( 'Heading size (%)', 'xlights-elementor-widgets' ),
+						'default'     => 100,
+						'min'         => 70,
+						'max'         => 130,
+						'step'        => 5,
+						'description' => __( '100 = X LIGHTS default. Barlow Condensed is narrow; wider fonts usually look best at 80–90.', 'xlights-elementor-widgets' ),
 					),
 				),
 			),
@@ -724,6 +770,10 @@ final class Settings {
 				continue;
 			}
 
+			if ( 'font' === $field['type'] && '__custom' === $input[ $key ] ) {
+				$input[ $key ] = isset( $input[ $key . '_custom' ] ) ? $input[ $key . '_custom' ] : '';
+			}
+
 			$clean[ $key ] = self::sanitize_value( $input[ $key ], $field );
 		}
 
@@ -772,6 +822,8 @@ final class Settings {
 				return $num;
 			case 'select':
 				return isset( $field['options'][ $value ] ) ? $value : $field['default'];
+			case 'font':
+				return \XLights\Frontend\Typography::sanitize( $value );
 			case 'secret':
 				return trim( sanitize_text_field( $value ) );
 			case 'text':

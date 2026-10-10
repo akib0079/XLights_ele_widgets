@@ -82,6 +82,10 @@ final class Installer {
 		if ( ! wp_next_scheduled( self::CRON_HOOK ) ) {
 			wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', self::CRON_HOOK );
 		}
+		// Fonts first: any Settings::update() below re-sanitizes the old free-text values.
+		if ( $stored && version_compare( (string) $stored, '1.3.0', '<' ) ) {
+			self::migrate_font_families();
+		}
 		if ( $stored && version_compare( (string) $stored, '1.1.0', '<' ) ) {
 			self::migrate_brand_defaults();
 		}
@@ -113,6 +117,33 @@ final class Installer {
 		}
 		if ( $changed ) {
 			Settings::update( $changed );
+		}
+	}
+
+	/**
+	 * Before 1.3.0 the font settings were free CSS (e.g. `"Montserrat", sans-serif`).
+	 * They now hold one family name; keep the first family of the old value.
+	 */
+	private static function migrate_font_families() {
+		$stored = get_option( Settings::OPTION, array() );
+		if ( ! is_array( $stored ) ) {
+			return;
+		}
+		$changed = false;
+		foreach ( array( 'font_heading', 'font_body' ) as $key ) {
+			if ( empty( $stored[ $key ] ) ) {
+				continue;
+			}
+			$parts  = explode( ',', (string) $stored[ $key ] );
+			$family = \XLights\Frontend\Typography::sanitize( trim( $parts[0], " \t\"'" ) );
+			if ( $family !== $stored[ $key ] ) {
+				$stored[ $key ] = $family;
+				$changed        = true;
+			}
+		}
+		if ( $changed ) {
+			update_option( Settings::OPTION, $stored );
+			Settings::flush_cache();
 		}
 	}
 

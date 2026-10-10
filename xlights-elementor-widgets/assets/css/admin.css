@@ -32,3 +32,53 @@
 .xl-report--error::before { content: "✕ "; color: #d63638; font-weight: 700; }
 .xl-report--info::before { content: "• "; color: #646970; }
 .xl-setup-options p { margin: 6px 0; }
+
+/* Colors & Fonts tab */
+@font-face { font-family: "XL Barlow"; src: url("../fonts/barlow-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "XL Barlow"; src: url("../fonts/barlow-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "XL Barlow Condensed"; src: url("../fonts/barlow-condensed-300.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "XL Barlow Condensed"; src: url("../fonts/barlow-condensed-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+.xl-settings__group th { padding: 24px 0 0; }
+.xl-settings__group h2 { margin: 0; font-size: 1.15em; }
+.xl-settings__reset { margin: 8px 0 0; }
+.xl-font-field__select { max-width: 100%; min-width: 320px; }
+.xl-font-field__custom { margin: 8px 0 0; }
+.xl-dp {
+	/* X LIGHTS default tokens; the preview script overrides them for other palettes. */
+	--xl-accent: #3367fe; --xl-accent-text: #2952cb; --xl-accent-link: #3367fe; --xl-accent-on-dark: #c8d7fe; --xl-on-accent: #ffffff;
+	--xl-ink: #05070b; --xl-text: #1b2130; --xl-text-muted: #565d6b; --xl-dark: #131c2d; --xl-surface: #e9eaed;
+	--xl-heading-case: uppercase; --xl-heading-scale: 1;
+	--xl-dp-display: var(--xl-font-heading, "XL Barlow Condensed", "Arial Narrow", sans-serif);
+	--xl-dp-text: var(--xl-font-body, "XL Barlow", ui-sans-serif, system-ui, sans-serif);
+	display: grid; gap: 10px; align-content: start; position: sticky; top: 46px;
+	font-family: var(--xl-dp-text); color: var(--xl-text);
+}
+.xl-dp__panel { border-radius: 12px; padding: 22px; background: #fff; box-shadow: 0 0 0 1px #dcdcde; }
+.xl-dp__panel p { margin: 0 0 10px; }
+.xl-dp__panel--grey { background: var(--xl-surface); box-shadow: none; }
+.xl-dp__panel--dark { background: var(--xl-dark); color: #eef1f7; box-shadow: none; }
+.xl-dp__eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--xl-accent-text); }
+.xl-dp__panel--dark .xl-dp__eyebrow { color: var(--xl-accent-on-dark); }
+.xl-dp__title, .xl-dp__card-title { font-family: var(--xl-dp-display); font-weight: 300; line-height: 1.02; text-transform: var(--xl-heading-case); color: var(--xl-ink); font-size: calc(30px * var(--xl-heading-scale)); }
+.xl-dp__card-title { font-weight: 500; font-size: calc(20px * var(--xl-heading-scale)); }
+.xl-dp__title em { font-style: normal; font-weight: 500; }
+.xl-dp__panel--dark .xl-dp__title { color: #fff; }
+.xl-dp__text { font-size: 14px; line-height: 1.55; }
+.xl-dp__muted { font-size: 13px; color: var(--xl-text-muted); }
+.xl-dp__link { color: var(--xl-accent-link); text-decoration: underline; }
+.xl-dp__buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px !important; }
+.xl-dp__btn { display: inline-block; padding: 10px 16px; border-radius: 6px; background: var(--xl-ink); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.xl-dp__btn.is-hover { background: var(--xl-accent); color: var(--xl-on-accent); }
+.xl-dp__panel--dark .xl-dp__btn { background: #fff; color: var(--xl-ink); }
+.xl-dp__panel--dark .xl-dp__btn.is-hover { background: var(--xl-accent-on-dark); color: var(--xl-ink); }
+.xl-dp__checks { grid-column: 1 / -1; }
+.xl-dp__checks p { margin: 4px 0; padding: 8px 12px; border-left: 4px solid #dba617; background: #fcf9e8; }
+.xl-dp__checks p.is-ok { border-left-color: #00a32a; background: #edfaef; }
+.xl-dp__note { grid-column: 1 / -1; margin: 0 !important; }
+.xl-design-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); gap: 28px; align-items: start; max-width: 1400px; }
+.xl-dp__panel { padding: 18px 20px; }
+.xl-dp__title { font-size: calc(26px * var(--xl-heading-scale)); }
+@media (max-width: 1279px) {
+	.xl-design-layout { grid-template-columns: minmax(0, 1fr); }
+	.xl-design-layout .xl-dp { position: static; order: -1; }
+}

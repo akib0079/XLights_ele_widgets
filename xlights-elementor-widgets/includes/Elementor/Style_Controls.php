@@ -106,6 +106,14 @@ final class Style_Controls {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
+		$w->add_control(
+			'xl_colors_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Site-wide colors are set once in X LIGHTS → Settings → Colors & Fonts. Pick a color here only to override it for this widget.', 'xlights-elementor-widgets' ),
+				'content_classes' => 'elementor-descriptor',
+			)
+		);
 		$colors = array(
 			'xl_c_accent'    => array( __( 'Accent', 'xlights-elementor-widgets' ), '--xl-accent' ),
 			'xl_c_accent_ink' => array( __( 'Accent text on light backgrounds', 'xlights-elementor-widgets' ), '--xl-accent-ink' ),
@@ -135,6 +143,14 @@ final class Style_Controls {
 			array(
 				'label' => __( 'Typography', 'xlights-elementor-widgets' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+		$w->add_control(
+			'xl_type_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Site-wide fonts, heading case and heading size are set in X LIGHTS → Settings → Colors & Fonts. Use these controls only to override this widget.', 'xlights-elementor-widgets' ),
+				'content_classes' => 'elementor-descriptor',
 			)
 		);
 		$type_groups = array(

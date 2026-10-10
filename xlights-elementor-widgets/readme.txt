@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,7 @@ X LIGHTS Elementor Widgets builds complete X LIGHTS dealer marketing sites (perm
 * **Page Composer** widget: choose one of 12 page templates (Home, About Us, X LIGHTS App, Reviews, Lighting Solutions, Permanent Soffit, Hanging Bulb Bistro, Deck, Landscape, Commercial, Projects, Contact) and edit every section, reorder sections, and hide them per device.
 * **18 section widgets** (Hero, Card Grid, App Showcase, Projects Gallery, Before/After, Reviews, FAQ, Quote Form …) plus Header and Footer widgets, all in the "X LIGHTS Widgets" category.
 * **Dealer settings**: name, market, service areas, phone, lead recipients, credentials, financing, app and social links. Nothing is hard-coded in page content, so the same plugin serves any dealer.
+* **Colors & Fonts** in one place: five brand colors (every other shade derived with contrast checks) and heading/body fonts, applied to every widget, the header and the footer.
 * **Approval gates**: unverified claims (licensing, financing, app links, product specs) stay hidden on the live site and show a "pending" badge in the editor.
 * **Projects and Reviews** content types with category filters, a lightbox gallery, before/after comparisons and permission-gated reviews.
 * **Quote form**: residential/commercial, multi-photo upload, nonce + honeypot + time trap + rate limiting + duplicate guard (optional Cloudflare Turnstile), private EXIF-stripped photo storage, HTML email notifications, lead manager with CSV export and retention.
@@ -54,6 +55,14 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.3.0 =
+* New Settings → Colors & Fonts tab: five brand colors and the heading/body fonts for every widget, the header and the footer, with a live preview and a reset to the X LIGHTS defaults.
+* Every other shade (text-safe accent, accent on dark, tints, hover text, lighter/darker navy, muted text) is derived automatically with WCAG contrast checks; saving an unreadable combination shows a warning.
+* Fonts: bundled Barlow (default), device fonts, Elementor Site Settings → Global Fonts, any font from Elementor's list (loaded through Elementor, so "Load Google Fonts Locally" applies), or a family the theme already loads. Heading letter case and heading size settings.
+* The stylesheet no longer hard-codes any brand color outside its token block.
+* Fix: the compact 68 px header height on tablets and phones now applies.
+* Older free-text font settings are migrated to the new format automatically.
 
 = 1.2.0 =
 * Quote form in three steps (Project, Property, Details) with a progress stepper, per-step validation and focus management; without JavaScript it stays one complete form.

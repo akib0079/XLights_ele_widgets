@@ -60,6 +60,7 @@ final class Admin_Menu {
 				'use'      => __( 'Use image', 'xlights-elementor-widgets' ),
 				'useMany'  => __( 'Add to gallery', 'xlights-elementor-widgets' ),
 				'remove'   => __( 'Remove', 'xlights-elementor-widgets' ),
+				'contrastOk' => __( 'Text contrast passes WCAG AA for this palette.', 'xlights-elementor-widgets' ),
 			)
 		);
 	}

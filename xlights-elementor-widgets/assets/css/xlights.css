@@ -60,36 +60,53 @@
 	--xl-dark: #131c2d;
 	--xl-surface: #e9eaed;
 	--xl-text: #1b2130;
+	--xl-ink: #05070b;
 }
 
 /* -------------------------------------------------------------------------
  * Tokens
  * ---------------------------------------------------------------------- */
+:root,
 .xl-root {
-	--xl-ink: #05070b;
-	--xl-navy-deep: #0b111c;
-	--xl-slate: #39414e;
-	--xl-accent-ink: #2952cb;
-	--xl-accent-soft: rgba(51, 103, 254, 0.1);
+	/* Derived from the five brand colors above. X LIGHTS → Settings → Colors &
+	 * Fonts outputs the same tokens computed (contrast-checked) for the chosen
+	 * colors; these are the X LIGHTS defaults. */
+	--xl-accent-rgb: 51 103 254;
+	--xl-accent-text: #2952cb;
+	--xl-accent-link: #3367fe;
+	--xl-accent-ink: var(--xl-accent-text);
+	--xl-accent-soft: rgb(var(--xl-accent-rgb) / 0.1);
 	--xl-accent-on-dark: #c8d7fe;
-	--xl-tint-on-dark: rgba(200, 215, 254, 0.12);
-	--xl-glow: #ffd79a;
-	--xl-glow-cool: rgba(110, 146, 255, 0.2);
+	--xl-accent-on-dark-rgb: 200 215 254;
+	--xl-accent-glow-rgb: 124 152 255;
+	--xl-on-accent: #ffffff;
+	--xl-tint-on-dark: rgb(var(--xl-accent-on-dark-rgb) / 0.12);
+	--xl-ink-rgb: 5 7 11;
+	--xl-dark-rgb: 19 28 45;
+	--xl-deep-rgb: 11 17 28;
+	--xl-navy-deep: #0b111c;
 	--xl-dark-2: #1a2436;
 	--xl-dark-3: #232d40;
+	--xl-surface-soft: #f1f3f6;
+	--xl-text-muted: #565d6b;
+	--xl-slate: #39414e;
+	--xl-glow: #ffd79a;
+	--xl-glow-cool: rgb(var(--xl-accent-glow-rgb) / 0.2);
 	--xl-light: #ffffff;
 	--xl-heading: var(--xl-ink);
-	--xl-muted: #565d6b;
+	--xl-muted: var(--xl-text-muted);
 	--xl-on-dark: #eef1f7;
 	--xl-on-dark-muted: rgba(238, 241, 247, 0.74);
-	--xl-line: rgba(11, 17, 28, 0.12);
+	--xl-line: rgb(var(--xl-deep-rgb) / 0.12);
 	--xl-line-dark: rgba(255, 255, 255, 0.14);
 	--xl-card-bg: #ffffff;
 	--xl-btn-bg: var(--xl-ink);
 	--xl-btn-color: #ffffff;
 	--xl-btn-bg-hover: var(--xl-accent);
-	--xl-btn-color-hover: #ffffff;
+	--xl-btn-color-hover: var(--xl-on-accent);
 	--xl-btn-line: currentColor;
+	--xl-heading-case: uppercase;
+	--xl-heading-scale: 1;
 	--xl-container: 1240px;
 	--xl-gutter: clamp(20px, 4vw, 40px);
 	--xl-frame: clamp(8px, 1.4vw, 20px);
@@ -100,8 +117,8 @@
 	--xl-radius-sm: 8px;
 	--xl-img-radius: 20px;
 	--xl-btn-radius: 6px;
-	--xl-shadow: 0 1px 2px rgba(11, 17, 28, 0.06), 0 24px 48px -28px rgba(19, 28, 45, 0.35);
-	--xl-shadow-lg: 0 40px 80px -36px rgba(11, 17, 28, 0.55);
+	--xl-shadow: 0 1px 2px rgb(var(--xl-deep-rgb) / 0.06), 0 24px 48px -28px rgb(var(--xl-dark-rgb) / 0.35);
+	--xl-shadow-lg: 0 40px 80px -36px rgb(var(--xl-deep-rgb) / 0.55);
 	--xl-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 	--xl-anim-duration: 700ms;
 	--xl-header-h: 80px;
@@ -110,7 +127,9 @@
 	--xl-font-display: var(--xl-font-heading, "XL Barlow Condensed", "Barlow Condensed", "Arial Narrow", ui-sans-serif, system-ui, sans-serif);
 	--xl-font-text: var(--xl-font-body, "XL Barlow", "Barlow", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
 	--xl-font-ui: var(--xl-font-text);
+}
 
+.xl-root {
 	color: var(--xl-text);
 	font-family: var(--xl-font-text);
 	font-size: 16px;
@@ -122,15 +141,8 @@
 }
 
 @media (max-width: 1300px) {
-	:root {
-		--xl-header-h: 68px;
-	}
-}
-
-@supports (color: color-mix(in srgb, red, blue)) {
 	.xl-root {
-		--xl-accent-ink: color-mix(in srgb, var(--xl-accent) 80%, #000);
-		--xl-accent-soft: color-mix(in srgb, var(--xl-accent) 10%, transparent);
+		--xl-header-h: 68px;
 	}
 }
 
@@ -359,8 +371,9 @@
 	font-weight: 300;
 	letter-spacing: 0.005em;
 	line-height: 1.04;
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	text-wrap: balance;
+	overflow-wrap: break-word;
 }
 
 .xl-root .xl-card__title,
@@ -382,18 +395,18 @@
 
 .xl-root .xl-h1,
 .xl-root .xl-hero__title {
-	font-size: clamp(2.7rem, 1.25rem + 5.2vw, 5.9rem);
+	font-size: calc(clamp(2.7rem, 1.25rem + 5.2vw, 5.9rem) * var(--xl-heading-scale));
 	line-height: 0.98;
 	letter-spacing: 0;
 	font-weight: 300;
 }
 
 .xl-root .xl-h2 {
-	font-size: clamp(2.15rem, 1.3rem + 2.9vw, 3.75rem);
+	font-size: calc(clamp(2.15rem, 1.3rem + 2.9vw, 3.75rem) * var(--xl-heading-scale));
 }
 
 .xl-root .xl-h3 {
-	font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem);
+	font-size: calc(clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem) * var(--xl-heading-scale));
 }
 
 .xl-root .xl-eyebrow {
@@ -735,7 +748,7 @@
 
 .xl-root .xl-media--phone .xl-media__frame {
 	aspect-ratio: auto;
-	background: radial-gradient(70% 60% at 50% 40%, rgba(124, 152, 255, 0.24), transparent 70%), var(--xl-dark);
+	background: radial-gradient(70% 60% at 50% 40%, rgb(var(--xl-accent-glow-rgb) / 0.24), transparent 70%), var(--xl-dark);
 	box-shadow: none;
 	display: grid;
 	place-items: center;
@@ -754,7 +767,7 @@
 	top: 16px;
 	padding: 0.45rem 0.85rem;
 	border-radius: 4px;
-	background: rgba(11, 17, 28, 0.72);
+	background: rgb(var(--xl-deep-rgb) / 0.72);
 	backdrop-filter: blur(8px);
 	color: #ffffff;
 	font-size: 0.7rem;
@@ -779,7 +792,7 @@
 	color: #111;
 	font-size: 0.72rem;
 	font-weight: 600;
-	border: 1px dashed #3367fe;
+	border: 1px dashed var(--xl-accent);
 }
 
 /* Phone mockup */
@@ -1175,7 +1188,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(180deg, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.75)) 0%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.35)) 35%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) + 0.2)) 100%), linear-gradient(90deg, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.9)) 0%, rgba(9, 13, 22, 0) 70%);
+	background: linear-gradient(180deg, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) * 0.75)) 0%, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) * 0.35)) 35%, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) + 0.2)) 100%), linear-gradient(90deg, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) * 0.9)) 0%, rgb(var(--xl-deep-rgb) / 0) 70%);
 }
 
 .xl-root .xl-hero__inner {
@@ -1306,7 +1319,7 @@
 	width: 70%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(124, 152, 255, 0.42), transparent 65%);
+	background: radial-gradient(circle, rgb(var(--xl-accent-glow-rgb) / 0.42), transparent 65%);
 	filter: blur(10px);
 }
 
@@ -1341,7 +1354,7 @@
 }
 
 .xl-root .xl-hero__inner--estimate .xl-hero__title {
-	font-size: clamp(2.6rem, 1.2rem + 4.3vw, 5.1rem);
+	font-size: calc(clamp(2.6rem, 1.2rem + 4.3vw, 5.1rem) * var(--xl-heading-scale));
 }
 
 .xl-root .xl-estimate {
@@ -1354,7 +1367,7 @@
 	gap: 14px;
 	padding: clamp(22px, 2.2vw, 30px);
 	border-radius: calc(var(--xl-radius-lg) * 0.8);
-	background: linear-gradient(160deg, rgba(19, 28, 45, 0.78), rgba(11, 17, 28, 0.66));
+	background: linear-gradient(160deg, rgb(var(--xl-dark-rgb) / 0.78), rgb(var(--xl-deep-rgb) / 0.66));
 	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 40px 80px -40px rgba(0, 0, 0, 0.7);
 	backdrop-filter: blur(20px) saturate(140%);
 	-webkit-backdrop-filter: blur(20px) saturate(140%);
@@ -1368,7 +1381,7 @@
 	font-weight: 300;
 	line-height: 1.05;
 	letter-spacing: 0.01em;
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	color: #ffffff;
 }
 
@@ -1437,7 +1450,7 @@
 
 .xl-root .xl-estimate .xl-input:focus {
 	border-color: var(--xl-accent);
-	box-shadow: 0 0 0 4px rgba(200, 215, 254, 0.38);
+	box-shadow: 0 0 0 4px rgb(var(--xl-accent-on-dark-rgb) / 0.38);
 }
 
 .xl-root .xl-estimate .xl-btn {
@@ -1643,7 +1656,7 @@
 
 .xl-root .xl-bg--dark .xl-card__icon {
 	color: var(--xl-accent-ink);
-	background: rgba(124, 152, 255, 0.14);
+	background: rgb(var(--xl-accent-glow-rgb) / 0.14);
 }
 
 .xl-root .xl-card__icon .xl-icon,
@@ -1808,7 +1821,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(180deg, rgba(9, 13, 22, 0) 25%, rgba(9, 13, 22, 0.88) 100%);
+	background: linear-gradient(180deg, rgb(var(--xl-deep-rgb) / 0) 25%, rgb(var(--xl-deep-rgb) / 0.88) 100%);
 }
 
 .xl-root .xl-cards--overlay .xl-card__body,
@@ -1819,7 +1832,7 @@
 }
 
 .xl-root .xl-cards--overlay .xl-card__title {
-	font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem);
+	font-size: calc(clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem) * var(--xl-heading-scale));
 }
 
 .xl-root .xl-cards--overlay .xl-card__text {
@@ -1842,7 +1855,7 @@
 }
 
 .xl-root .xl-cards--bento .xl-card:first-child .xl-card__title {
-	font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem);
+	font-size: calc(clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem) * var(--xl-heading-scale));
 }
 
 .xl-root .xl-cards--bento .xl-card:nth-child(2) {
@@ -1884,7 +1897,7 @@
 	padding: 10px;
 	border-radius: var(--xl-radius-lg);
 	background: var(--xl-card-bg);
-	box-shadow: 0 0 0 1px var(--xl-line), 0 30px 60px -44px rgba(11, 17, 28, 0.4);
+	box-shadow: 0 0 0 1px var(--xl-line), 0 30px 60px -44px rgb(var(--xl-deep-rgb) / 0.4);
 }
 
 .xl-root .xl-cards--stack .xl-card__media {
@@ -1921,7 +1934,7 @@
 }
 
 .xl-root .xl-cards--stack .xl-card__title {
-	font-size: clamp(1.7rem, 1.2rem + 1.5vw, 2.6rem);
+	font-size: calc(clamp(1.7rem, 1.2rem + 1.5vw, 2.6rem) * var(--xl-heading-scale));
 	line-height: 1.02;
 }
 
@@ -2088,15 +2101,15 @@
 	margin-inline: clamp(16px, 2.5vw, 32px);
 	border-radius: 50%;
 	text-align: center;
-	background: radial-gradient(circle at 50% 35%, rgba(124, 152, 255, 0.35), rgba(124, 152, 255, 0.05) 70%), var(--xl-dark-2);
-	border: 1px solid rgba(124, 152, 255, 0.45);
-	box-shadow: 0 0 0 10px rgba(124, 152, 255, 0.06), 0 0 0 22px rgba(124, 152, 255, 0.03), 0 20px 60px -20px rgba(124, 152, 255, 0.55);
+	background: radial-gradient(circle at 50% 35%, rgb(var(--xl-accent-glow-rgb) / 0.35), rgb(var(--xl-accent-glow-rgb) / 0.05) 70%), var(--xl-dark-2);
+	border: 1px solid rgb(var(--xl-accent-glow-rgb) / 0.45);
+	box-shadow: 0 0 0 10px rgb(var(--xl-accent-glow-rgb) / 0.06), 0 0 0 22px rgb(var(--xl-accent-glow-rgb) / 0.03), 0 20px 60px -20px rgb(var(--xl-accent-glow-rgb) / 0.55);
 	color: var(--xl-on-dark);
 }
 
 .xl-root .xl-bg--light .xl-connected__hub,
 .xl-root .xl-bg--warm .xl-connected__hub {
-	background: radial-gradient(circle at 50% 35%, rgba(124, 152, 255, 0.3), rgba(124, 152, 255, 0.04) 70%), var(--xl-dark);
+	background: radial-gradient(circle at 50% 35%, rgb(var(--xl-accent-glow-rgb) / 0.3), rgb(var(--xl-accent-glow-rgb) / 0.04) 70%), var(--xl-dark);
 }
 
 .xl-root .xl-connected__hub-icon .xl-icon {
@@ -2107,7 +2120,7 @@
 
 .xl-root .xl-connected__hub strong {
 	font-family: var(--xl-font-display);
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	letter-spacing: 0.04em;
 	font-size: 1rem;
 	letter-spacing: 0.02em;
@@ -2276,7 +2289,7 @@
 .xl-root .xl-tabs__tab[aria-selected="true"] {
 	background: var(--xl-accent);
 	border-color: var(--xl-accent-ink);
-	color: #ffffff;
+	color: var(--xl-on-accent);
 }
 
 .xl-root .xl-tabs__panel {
@@ -2316,7 +2329,7 @@
 	width: 80%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(124, 152, 255, 0.45), transparent 65%);
+	background: radial-gradient(circle, rgb(var(--xl-accent-glow-rgb) / 0.45), transparent 65%);
 	filter: blur(20px);
 }
 
@@ -2497,7 +2510,7 @@
 	align-items: center;
 	padding: 0.4rem 0.7rem;
 	border-radius: 4px;
-	background: rgba(11, 17, 28, 0.72);
+	background: rgb(var(--xl-deep-rgb) / 0.72);
 	color: #fff;
 	font-size: 0.78rem;
 	backdrop-filter: blur(6px);
@@ -2515,7 +2528,7 @@
 	padding: 0.35rem 0.7rem;
 	border-radius: 4px;
 	background: var(--xl-accent);
-	color: #ffffff;
+	color: var(--xl-on-accent);
 	font-size: 0.72rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
@@ -2568,13 +2581,13 @@
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background: rgba(9, 13, 22, 0.94);
+	background: rgb(var(--xl-deep-rgb) / 0.94);
 	color: #fff;
 	overflow: hidden;
 }
 
 .xl-lightbox::backdrop {
-	background: rgba(9, 13, 22, 0.8);
+	background: rgb(var(--xl-deep-rgb) / 0.8);
 }
 
 .xl-lightbox__stage {
@@ -2608,7 +2621,7 @@
 .xl-lightbox__btn:hover,
 .xl-lightbox__btn:focus-visible {
 	background: rgba(255, 255, 255, 0.18);
-	outline: 2px solid #c8d7fe;
+	outline: 2px solid var(--xl-accent-on-dark);
 	outline-offset: 2px;
 }
 
@@ -2705,7 +2718,7 @@
 	top: 14px;
 	padding: 0.35rem 0.75rem;
 	border-radius: 4px;
-	background: rgba(11, 17, 28, 0.72);
+	background: rgb(var(--xl-deep-rgb) / 0.72);
 	color: #fff;
 	font-size: 0.75rem;
 	font-weight: 700;
@@ -2756,7 +2769,7 @@
 }
 
 .xl-ba:focus-within .xl-ba__handle .xl-icon {
-	outline: 3px solid var(--xl-accent, #3367fe);
+	outline: 3px solid var(--xl-accent);
 	outline-offset: 2px;
 }
 
@@ -2933,7 +2946,7 @@
 	width: 50%;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(124, 152, 255, 0.35), transparent 65%);
+	background: radial-gradient(circle, rgb(var(--xl-accent-glow-rgb) / 0.35), transparent 65%);
 	pointer-events: none;
 }
 
@@ -2953,7 +2966,7 @@
 	width: 68px;
 	height: 68px;
 	border-radius: 20px;
-	background: rgba(124, 152, 255, 0.16);
+	background: rgb(var(--xl-accent-glow-rgb) / 0.16);
 	color: var(--xl-accent-ink);
 }
 
@@ -3024,11 +3037,11 @@
 }
 
 .xl-root.xl-hover .xl-accordion__item:hover {
-	box-shadow: 0 0 0 1px rgba(11, 17, 28, 0.26);
+	box-shadow: 0 0 0 1px rgb(var(--xl-deep-rgb) / 0.26);
 }
 
 .xl-root .xl-accordion__item[open] {
-	box-shadow: 0 0 0 1px var(--xl-line), 0 26px 50px -34px rgba(11, 17, 28, 0.38);
+	box-shadow: 0 0 0 1px var(--xl-line), 0 26px 50px -34px rgb(var(--xl-deep-rgb) / 0.38);
 }
 
 .xl-root .xl-bg--dark .xl-accordion__item[open],
@@ -3077,7 +3090,7 @@
 }
 
 .xl-root .xl-bg--light .xl-accordion__icon {
-	background: #f1f3f6;
+	background: var(--xl-surface-soft);
 }
 
 .xl-root .xl-bg--dark .xl-accordion__icon {
@@ -3094,7 +3107,7 @@
 .xl-root .xl-accordion__item[open]:not(.is-closing) .xl-accordion__icon {
 	transform: rotate(45deg);
 	background: var(--xl-accent);
-	color: #ffffff;
+	color: var(--xl-on-accent);
 }
 
 .xl-root .xl-accordion__a {
@@ -3258,7 +3271,7 @@
 .xl-root .xl-social a:hover {
 	background: var(--xl-accent);
 	border-color: var(--xl-accent-ink);
-	color: #ffffff;
+	color: var(--xl-on-accent);
 }
 
 .xl-root .xl-social .xl-icon {
@@ -3277,8 +3290,8 @@
 	padding: 10px;
 	border-radius: var(--xl-radius-lg);
 	background: var(--xl-light);
-	border: 1px solid rgba(11, 17, 28, 0.08);
-	box-shadow: 0 1px 2px rgba(11, 17, 28, 0.04), 0 50px 100px -60px rgba(19, 28, 45, 0.55);
+	border: 1px solid rgb(var(--xl-deep-rgb) / 0.08);
+	box-shadow: 0 1px 2px rgb(var(--xl-deep-rgb) / 0.04), 0 50px 100px -60px rgb(var(--xl-dark-rgb) / 0.55);
 }
 
 .xl-root .xl-quote__main {
@@ -3288,11 +3301,11 @@
 	border: 1px solid var(--xl-line);
 	box-shadow: var(--xl-shadow);
 	color: var(--xl-text);
-	--xl-heading: #05070b;
-	--xl-muted: #565d6b;
-	--xl-line: rgba(11, 17, 28, 0.12);
-	--xl-accent-ink: #2952cb;
-	--xl-accent-soft: rgba(51, 103, 254, 0.1);
+	--xl-heading: var(--xl-ink);
+	--xl-muted: var(--xl-text-muted);
+	--xl-line: rgb(var(--xl-deep-rgb) / 0.12);
+	--xl-accent-ink: var(--xl-accent-text);
+	--xl-accent-soft: rgb(var(--xl-accent-rgb) / 0.1);
 	--xl-btn-bg: var(--xl-ink);
 	--xl-btn-color: #ffffff;
 	--xl-btn-bg-hover: var(--xl-accent);
@@ -3355,7 +3368,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(180deg, rgba(11, 17, 28, 0.1) 0%, rgba(11, 17, 28, 0.55) 42%, rgba(11, 17, 28, 0.94) 100%);
+	background: linear-gradient(180deg, rgb(var(--xl-deep-rgb) / 0.1) 0%, rgb(var(--xl-deep-rgb) / 0.55) 42%, rgb(var(--xl-deep-rgb) / 0.94) 100%);
 }
 
 .xl-root .xl-quote__aside--photo {
@@ -3381,7 +3394,7 @@
 
 .xl-root .xl-quote__aside .xl-checklist .xl-icon {
 	color: var(--xl-accent-ink);
-	background: rgba(124, 152, 255, 0.16);
+	background: rgb(var(--xl-accent-glow-rgb) / 0.16);
 }
 
 .xl-root .xl-quote__contact {
@@ -3416,7 +3429,7 @@
 	height: 42px;
 	padding: 10px;
 	border-radius: 50%;
-	background: rgba(124, 152, 255, 0.16);
+	background: rgb(var(--xl-accent-glow-rgb) / 0.16);
 	color: var(--xl-accent-ink);
 }
 
@@ -3460,7 +3473,7 @@
 
 .xl-root .xl-stepper::before {
 	right: calc(100% / 6);
-	background: rgba(11, 17, 28, 0.1);
+	background: rgb(var(--xl-deep-rgb) / 0.1);
 }
 
 .xl-root .xl-stepper::after {
@@ -3496,7 +3509,7 @@
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	border: 1.5px solid rgba(11, 17, 28, 0.16);
+	border: 1.5px solid rgb(var(--xl-deep-rgb) / 0.16);
 	background: #ffffff;
 	color: var(--xl-muted);
 	font-family: var(--xl-font-ui);
@@ -3531,7 +3544,7 @@
 .xl-root .xl-stepper__item.is-current .xl-stepper__dot {
 	background: var(--xl-accent);
 	border-color: var(--xl-accent);
-	color: #ffffff;
+	color: var(--xl-on-accent);
 	box-shadow: 0 0 0 6px var(--xl-accent-soft);
 }
 
@@ -3556,7 +3569,7 @@
 }
 
 .xl-root .xl-stepper__btn:not(:disabled):hover .xl-stepper__dot {
-	box-shadow: 0 0 0 6px rgba(11, 17, 28, 0.08);
+	box-shadow: 0 0 0 6px rgb(var(--xl-deep-rgb) / 0.08);
 }
 
 /* Steps ------------------------------------------------------------------- */
@@ -3583,7 +3596,7 @@
 	font-weight: 500;
 	letter-spacing: 0.02em;
 	line-height: 1.1;
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	color: var(--xl-heading);
 }
 
@@ -3726,7 +3739,7 @@
 	border: 1.5px solid #d5d9e0;
 	border-radius: var(--xl-radius-sm);
 	background: #fff;
-	color: #1b2130;
+	color: var(--xl-text);
 	font: inherit;
 	font-size: 16px;
 	line-height: 1.4;
@@ -3756,7 +3769,7 @@
 .xl-root .xl-input:focus {
 	outline: none;
 	border-color: var(--xl-accent);
-	box-shadow: 0 0 0 4px rgba(51, 103, 254, 0.16);
+	box-shadow: 0 0 0 4px rgb(var(--xl-accent-rgb) / 0.16);
 }
 
 .xl-root .xl-input::placeholder {
@@ -3825,7 +3838,7 @@
 .xl-root .xl-segment input:checked + span,
 .xl-root .xl-chip input:checked + span {
 	border-color: var(--xl-accent-ink);
-	background: rgba(51, 103, 254, 0.1);
+	background: rgb(var(--xl-accent-rgb) / 0.1);
 	box-shadow: inset 0 0 0 1px var(--xl-accent);
 }
 
@@ -3890,7 +3903,7 @@
 .xl-root .xl-drop:hover,
 .xl-root .xl-drop.is-dragover {
 	border-color: var(--xl-accent-ink);
-	background: rgba(51, 103, 254, 0.06);
+	background: rgb(var(--xl-accent-rgb) / 0.06);
 }
 
 .xl-root .xl-drop:focus-within {
@@ -3968,7 +3981,7 @@
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	background: #05070b;
+	background: var(--xl-ink);
 	color: #fff;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -4149,7 +4162,7 @@
 	position: absolute;
 	inset: auto -10% -60% -10%;
 	height: 120%;
-	background: radial-gradient(50% 50% at 50% 50%, rgba(124, 152, 255, 0.38), transparent 70%);
+	background: radial-gradient(50% 50% at 50% 50%, rgb(var(--xl-accent-glow-rgb) / 0.38), transparent 70%);
 	z-index: -1;
 	pointer-events: none;
 }
@@ -4184,7 +4197,7 @@
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: rgba(9, 13, 22, var(--xl-overlay, 0.65));
+	background: rgb(var(--xl-deep-rgb) / var(--xl-overlay, 0.65));
 }
 
 .xl-root .xl-cta--band .xl-cta {
@@ -4201,11 +4214,11 @@
 .xl-root .xl-cta--band.xl-bg--light .xl-cta,
 .xl-root .xl-cta--band.xl-bg--warm .xl-cta {
 	color: var(--xl-text);
-	--xl-heading: #05070b;
-	--xl-muted: #565d6b;
-	--xl-line: rgba(11, 17, 28, 0.12);
-	--xl-accent-ink: #2952cb;
-	--xl-accent-soft: rgba(51, 103, 254, 0.1);
+	--xl-heading: var(--xl-ink);
+	--xl-muted: var(--xl-text-muted);
+	--xl-line: rgb(var(--xl-deep-rgb) / 0.12);
+	--xl-accent-ink: var(--xl-accent-text);
+	--xl-accent-soft: rgb(var(--xl-accent-rgb) / 0.1);
 	--xl-btn-bg: var(--xl-ink);
 	--xl-btn-color: #ffffff;
 	--xl-btn-bg-hover: var(--xl-accent);
@@ -4328,9 +4341,9 @@
 	gap: 1rem;
 	align-items: center;
 	padding: 1.15rem 1.35rem;
-	border: 1px solid rgba(51, 103, 254, 0.5);
+	border: 1px solid rgb(var(--xl-accent-rgb) / 0.5);
 	border-radius: 16px;
-	background: rgba(51, 103, 254, 0.08);
+	background: rgb(var(--xl-accent-rgb) / 0.08);
 	margin-bottom: 1.25rem;
 	flex-wrap: wrap;
 }
@@ -4371,7 +4384,7 @@
 
 .xl-root .xl-trust__items h3 {
 	font-family: var(--xl-font-display);
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	letter-spacing: 0.02em;
 	font-size: 1.05rem;
 	color: var(--xl-heading);
@@ -4388,7 +4401,7 @@
 	height: 40px;
 	padding: 9px;
 	border-radius: 12px;
-	background: rgba(124, 152, 255, 0.14);
+	background: rgb(var(--xl-accent-glow-rgb) / 0.14);
 	color: var(--xl-accent-ink);
 }
 
@@ -4425,7 +4438,7 @@
 	}
 
 	.xl-root .xl-hero__media::after {
-		background: linear-gradient(180deg, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) * 0.7)) 0%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) + 0.15)) 38%, rgba(9, 13, 22, calc(var(--xl-overlay, 0.6) + 0.3)) 100%);
+		background: linear-gradient(180deg, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) * 0.7)) 0%, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) + 0.15)) 38%, rgb(var(--xl-deep-rgb) / calc(var(--xl-overlay, 0.6) + 0.3)) 100%);
 	}
 
 	.xl-root .xl-hero__highlights {
@@ -4657,7 +4670,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 	z-index: 100000;
 	padding: 0.75rem 1rem;
 	border-radius: 8px;
-	background: #05070b;
+	background: var(--xl-ink);
 	color: #fff !important;
 	font: 600 0.9rem system-ui, sans-serif;
 	text-decoration: none;
@@ -4673,7 +4686,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 
 .xl-header {
 	--xl-header-bg: #ffffff;
-	--xl-header-link: var(--xl-ink, #05070b);
+	--xl-header-link: var(--xl-ink);
 	position: relative;
 	z-index: 1000;
 	padding: var(--xl-header-inset) var(--xl-header-inset) 0;
@@ -4708,12 +4721,12 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 	border-radius: clamp(12px, 1.2vw, 16px);
 	background: var(--xl-header-bg);
 	/* Ring instead of border keeps the card exactly --xl-header-h tall. */
-	box-shadow: 0 0 0 1px rgba(11, 17, 28, 0.07), 0 1px 2px rgba(11, 17, 28, 0.05);
+	box-shadow: 0 0 0 1px rgb(var(--xl-deep-rgb) / 0.07), 0 1px 2px rgb(var(--xl-deep-rgb) / 0.05);
 	transition: background-color 0.35s var(--xl-ease), box-shadow 0.45s var(--xl-ease);
 }
 
 .xl-header.is-scrolled .xl-header__bar {
-	box-shadow: 0 0 0 1px rgba(11, 17, 28, 0.06), 0 22px 44px -26px rgba(5, 7, 11, 0.42);
+	box-shadow: 0 0 0 1px rgb(var(--xl-deep-rgb) / 0.06), 0 22px 44px -26px rgb(var(--xl-ink-rgb) / 0.42);
 }
 
 .xl-header__inner {
@@ -4825,7 +4838,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-nav__link:hover,
 .xl-nav__item.is-current > .xl-nav__link,
 .xl-nav__link[aria-current="page"] {
-	color: var(--xl-accent, #3367fe);
+	color: var(--xl-accent-link);
 }
 
 .xl-header .xl-nav .xl-nav__link {
@@ -4888,8 +4901,8 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 	padding: 0.5rem;
 	list-style: none;
 	border-radius: 10px;
-	background: var(--xl-dark, #131c2d);
-	box-shadow: 0 30px 60px -24px rgba(5, 7, 11, 0.6);
+	background: var(--xl-dark);
+	box-shadow: 0 30px 60px -24px rgb(var(--xl-ink-rgb) / 0.6);
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(6px);
@@ -4935,7 +4948,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-header .xl-nav__sublink:focus-visible,
 .xl-header .xl-nav__sublink[aria-current="page"] {
 	background: rgba(255, 255, 255, 0.07);
-	color: #c8d7fe;
+	color: var(--xl-accent-on-dark);
 }
 
 .xl-header__actions {
@@ -4976,7 +4989,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 		width: 44px;
 		height: 44px;
 		border-radius: 10px;
-		background: #f1f3f6;
+		background: var(--xl-surface-soft);
 		transition: background-color 0.25s var(--xl-ease), color 0.25s;
 	}
 
@@ -5006,11 +5019,11 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-header__phone .xl-icon {
 	width: 17px;
 	height: 17px;
-	color: var(--xl-accent);
+	color: var(--xl-accent-link);
 }
 
 .xl-header__phone:hover {
-	color: var(--xl-accent, #3367fe);
+	color: var(--xl-accent-link);
 }
 
 .xl-header .xl-btn {
@@ -5037,6 +5050,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 
 .xl-header .xl-header__toggle:hover {
 	background: var(--xl-accent);
+	color: var(--xl-on-accent);
 }
 
 .xl-header__toggle .xl-icon {
@@ -5050,7 +5064,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 }
 
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__bar {
-	background: rgba(11, 17, 28, 0.28);
+	background: rgb(var(--xl-deep-rgb) / 0.28);
 	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
 	backdrop-filter: saturate(140%) blur(16px);
 	-webkit-backdrop-filter: saturate(140%) blur(16px);
@@ -5074,13 +5088,13 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-nav__link:hover,
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone:hover,
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) .xl-header__phone .xl-icon {
-	color: #c8d7fe;
+	color: var(--xl-accent-on-dark);
 }
 
 .xl-header-overlay .xl-header--overlay-capable.is-over-dark:not(.is-scrolled) {
 	--xl-btn-bg: #ffffff;
 	--xl-btn-color: var(--xl-ink);
-	--xl-btn-bg-hover: #c8d7fe;
+	--xl-btn-bg-hover: var(--xl-accent-on-dark);
 	--xl-btn-color-hover: var(--xl-ink);
 }
 
@@ -5119,7 +5133,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-drawer__backdrop {
 	position: absolute;
 	inset: 0;
-	background: rgba(9, 13, 22, 0.55);
+	background: rgb(var(--xl-deep-rgb) / 0.55);
 	opacity: 0;
 	transition: opacity 0.3s;
 }
@@ -5136,7 +5150,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 	display: flex;
 	flex-direction: column;
 	width: min(420px, 100%);
-	background: var(--xl-dark, #131c2d);
+	background: var(--xl-dark);
 	color: #eef1f7;
 	--xl-heading: #ffffff;
 	--xl-accent-ink: var(--xl-accent-on-dark);
@@ -5210,7 +5224,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-drawer__nav .xl-nav__link:hover,
 .xl-drawer__nav .xl-nav__item.is-current > .xl-nav__link,
 .xl-drawer__nav .xl-nav__link[aria-current="page"] {
-	color: #c8d7fe;
+	color: var(--xl-accent-on-dark);
 }
 
 .xl-drawer__nav .xl-nav__toggle {
@@ -5244,7 +5258,7 @@ body:not(.elementor-editor-active) .xl-root.xl-anim .xl-section--lead .xl-hero__
 .xl-drawer__nav .xl-nav__sublink:hover,
 .xl-drawer__nav .xl-nav__sublink[aria-current="page"] {
 	background: rgba(255, 255, 255, 0.06);
-	color: var(--xl-accent-on-dark, #c8d7fe);
+	color: var(--xl-accent-on-dark);
 }
 
 .xl-drawer__actions {
@@ -5355,10 +5369,10 @@ html.xl-scroll-lock {
 	margin: 0;
 	max-width: 760px;
 	font-family: var(--xl-font-display);
-	font-size: clamp(2.1rem, 1.2rem + 2.8vw, 3.6rem);
+	font-size: calc(clamp(2.1rem, 1.2rem + 2.8vw, 3.6rem) * var(--xl-heading-scale));
 	font-weight: 300;
 	line-height: 1;
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	color: #ffffff;
 }
 
@@ -5399,7 +5413,7 @@ html.xl-scroll-lock {
 	font-weight: 300;
 	letter-spacing: 0.03em;
 	line-height: 1.15;
-	text-transform: uppercase;
+	text-transform: var(--xl-heading-case);
 	color: rgba(238, 241, 247, 0.88);
 }
 
@@ -5586,7 +5600,7 @@ html.xl-scroll-lock {
 .xl-project-single .xl-project-meta .xl-icon {
 	width: 1em;
 	height: 1em;
-	color: #2952cb;
+	color: var(--xl-accent-text);
 }
 
 .xl-project-single .xl-project-gallery {

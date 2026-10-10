@@ -11,6 +11,7 @@
 namespace XLights\Frontend;
 
 use XLights\Forms\Quote_Form_Handler;
+use XLights\Helpers\Color;
 use XLights\PostTypes\Projects;
 use XLights\Settings\Settings;
 
@@ -25,6 +26,8 @@ final class Assets {
 	public static function init() {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'register' ), 5 );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'maybe_enqueue' ), 20 );
+		// Global fonts chosen in Colors & Fonts are loaded site-wide through Elementor.
+		add_action( 'wp_enqueue_scripts', array( Typography::class, 'enqueue' ), 20 );
 		add_action( 'wp_head', array( __CLASS__, 'favicon' ), 2 );
 		add_action( 'wp_head', array( __CLASS__, 'preload_font' ), 7 );
 		// Elementor registers widget dependencies on its own hooks; make sure ours exist.
@@ -105,35 +108,21 @@ final class Assets {
 	}
 
 	/**
-	 * CSS custom properties from brand settings.
+	 * CSS custom properties from X LIGHTS → Settings → Colors & Fonts.
+	 *
+	 * Output on :root and .xl-root so it replaces the stylesheet's default tokens;
+	 * Elementor's per-widget Style controls (more specific) still win.
 	 *
 	 * @return string
 	 */
 	public static function root_vars() {
-		$s     = Settings::all();
-		$vars  = array(
-			'--xl-accent'  => sanitize_hex_color( $s['color_accent'] ),
-			'--xl-dark'    => sanitize_hex_color( $s['color_dark'] ),
-			'--xl-surface' => sanitize_hex_color( $s['color_surface'] ),
-			'--xl-text'    => sanitize_hex_color( $s['color_text'] ),
-		);
-		$fonts = array(
-			'--xl-font-heading' => $s['font_heading'],
-			'--xl-font-body'    => $s['font_body'],
-		);
-		$css = '';
+		$s    = Settings::all();
+		$vars = array_merge( Color::tokens( Color::palette( $s ) ), Typography::tokens( $s ) );
+		$css  = '';
 		foreach ( $vars as $name => $value ) {
-			if ( $value ) {
-				$css .= $name . ':' . $value . ';';
-			}
+			$css .= $name . ':' . $value . ';';
 		}
-		foreach ( $fonts as $name => $value ) {
-			$value = trim( preg_replace( '/[^a-zA-Z0-9\s,\'"\-]/', '', (string) $value ) );
-			if ( '' !== $value ) {
-				$css .= $name . ':' . $value . ';';
-			}
-		}
-		$out = $css ? ':root{' . $css . '}' : '';
+		$out = '' !== $css ? ':root,.xl-root{' . $css . '}' : '';
 
 		$hide = trim( (string) $s['hide_theme_selectors'] );
 		if ( 'global' === $s['header_footer_mode'] && '' !== $hide ) {
@@ -179,15 +168,8 @@ final class Assets {
 		if ( ! wp_style_is( self::STYLE, 'enqueued' ) ) {
 			return;
 		}
-		// The two faces visible above the fold: hero display (Light) and body text.
-		$files = array();
-		if ( '' === trim( (string) Settings::get( 'font_heading' ) ) ) {
-			$files[] = 'barlow-condensed-300.woff2';
-		}
-		if ( '' === trim( (string) Settings::get( 'font_body' ) ) ) {
-			$files[] = 'barlow-400.woff2';
-		}
-		foreach ( $files as $file ) {
+		// The two faces visible above the fold (hero display and body text), when bundled.
+		foreach ( Typography::preload_files() as $file ) {
 			echo '<link rel="preload" href="' . esc_url( XLIGHTS_URL . 'assets/fonts/' . $file ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
 		}
 	}
