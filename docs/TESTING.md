@@ -1,3 +1,32 @@
+# Testing report — v1.2.0
+
+**TL;DR:** the 1.2.0 UX upgrade (stepped quote form, floating header, hero quick-estimate card, stacked cards, FAQ rows, footer, motion) passes every suite. Same expected warning as before: PHP's dev server ignores `.htaccess` (production needs the Nginx rule or `XLIGHTS_LEADS_DIR`). Email *delivery* still has to be checked on the real host.
+
+## v1.2.0 — UX and interaction upgrade
+
+| Suite | Result |
+|---|---|
+| Render (`tests/php/render-pages.php`) | ✅ 84/84 |
+| Elementor (`tests/php/elementor.php`) | ✅ 32/32 |
+| Security (`tests/security.sh`) | ✅ 34/34, 1 expected warning |
+| Pages — 12 pages × 5 widths | ✅ all passing (no overflow, no JS errors, one H1, valid JSON-LD) |
+| Interactions — new: floating header clears the hero copy, estimate card → prefilled step 1, FAQ (click, Enter, one open at a time), stacked cards sticky + numbered, images never left clipped, reduced motion shows everything with no smooth scroll | ✅ 45/45 |
+| Form — rewritten for the 3-step flow: `?service=`/`?zip=` prefill, per-step validation and focus, Back keeps data, Enter advances, stepper jumps, uploads, AJAX success, no-JS single-form fallback | ✅ 31/31 |
+| Accessibility — axe WCAG 2.0/2.1/2.2 A+AA, 12 pages × 1440/375 | ✅ zero violations |
+| Header width check at 1920/1440/1366/1320/1301/1300/1280/1024/390 px | ✅ no overflow |
+| WPCS security sniffs | ✅ clean |
+
+Issues found and fixed during the upgrade:
+
+| Issue | Fix |
+|---|---|
+| Header overlap decided in JavaScript would shift the hero after first paint (CLS) | Overlap is pure CSS (`:has()` on the first section); the script only opts out when the hero isn't directly below the header |
+| Mobile menu button lost its border/background to the `.xl-root button` reset | Two-class selector |
+| Footer menu columns stretched to equal height and spread their links | `align-content: start` |
+| Image reveal could delay the largest paint on the first section | Reveal skips the first section |
+
+---
+
 # Testing report — v1.1.0
 
 **TL;DR:** the 1.1.0 brand redesign was re-verified with every suite: **all passing**. The same expected warning remains: PHP's dev server ignores `.htaccess`, so production needs the Nginx rule or `XLIGHTS_LEADS_DIR` (the plugin detects this and warns in wp-admin). Email *delivery* still has to be checked on the real host.

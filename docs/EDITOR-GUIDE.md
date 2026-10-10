@@ -25,7 +25,11 @@ Tips:
 ## Brand look (what the design system does for you)
 
 - **Headlines** are set in Barlow Condensed capitals. Wrap the phrase to stress in `<em>…</em>`: it switches from Light to Medium weight (no color change). Example: `Beautiful every night. <em>Ready for every celebration.</em>`
-- **Hero frame**: each hero has a *Frame* option — *Inset with rounded corners* (default, like the X LIGHTS website) or *Full bleed*. The transparent header only appears over full-bleed heroes.
+- **Hero frame**: each hero has a *Frame* option — *Inset with rounded corners* (default, like the X LIGHTS website) or *Full bleed*. Over an inset hero the header floats inside the frame as a white card; over a full-bleed hero it turns transparent. Both follow **X LIGHTS → Settings → Header & Footer → Header overlaps the first hero**.
+- **Quick estimate card** (photo heroes): *Hero → Quick estimate card* adds a small card with a lighting-type dropdown and a ZIP field. It opens the quote form at step 1 with both answers filled in. You can change its title, text, button and a preselected lighting type. It is on by default on Home.
+- **Quote form**: the form runs in three steps (*Project → Property → Details*). Visitors can go back without losing anything, and errors are shown on the step where they happen. The Contact page shows it as a booking card with a photo; change the photo under *Quote Form → Side panel photo*.
+- **Card styles**: *Card Grid → Card style* includes **Stacked numbered cards** — large cards numbered 01, 02 … with the image on the right, which stack under the header as visitors scroll (used for the four solutions on Lighting Solutions). Best with 3–5 cards.
+- **Motion**: sections fade up, images wipe in, and the first hero plays a short opening sequence. Turn motion or hover effects off per widget under *Style → Animations & Hover*; visitors who ask their device to reduce motion never see it.
 - **Colors** follow the live X LIGHTS website: black/white, navy and light grey sections, and signal blue for links and active states. Warm light appears only as light (the dotted soffit line, glows) — not as text or button color.
 - **Section backgrounds**: *Light*, *Light grey* or *Dark (navy)* per section.
 - **Logo**: the official X LIGHTS logo with "Southern California" beside it. Upload SVG versions or turn the market label off under **X LIGHTS → Settings → Brand**.

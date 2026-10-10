@@ -1,7 +1,8 @@
 /*
  * Interactive components: gallery filters + URL state + no-JS fallback,
  * lightbox (keyboard, focus return), before/after slider, ARIA tabs,
- * dropdown keyboard support, mobile drawer + scroll lock.
+ * dropdown keyboard support, floating header, hero quick-estimate card,
+ * FAQ accordion, stacked cards, reduced motion, mobile drawer + scroll lock.
  *
  * Expects the data set from tests/php/seed-qa-data.php.
  *
@@ -66,8 +67,30 @@ const { BASE_URL, OUT_DIR, ok, launch, trackErrors, done } = require('./lib');
 	ok(!(await page.content()).includes('must NOT render'), 'review without permission is not rendered');
 	ok((await page.locator('.xl-review__brand').count()) >= 1, 'brand-level review is labeled as such');
 	ok(await page.locator('.xl-section--hero.xl-hero--inset').count() === 1, 'home hero uses the inset frame');
-	ok(!(await page.locator('[data-xl-header]').evaluate((h) => h.classList.contains('is-over-dark'))), 'header stays solid above the framed hero');
+	const float = await page.evaluate(() => {
+		const h = document.querySelector('[data-xl-header]');
+		const bar = h.querySelector('.xl-header__bar').getBoundingClientRect();
+		const hero = document.querySelector('.xl-section--lead').getBoundingClientRect();
+		return { over: hero.top < bar.top && bar.bottom > hero.top, bg: getComputedStyle(h.querySelector('.xl-header__bar')).backgroundColor, dark: h.classList.contains('is-over-dark') };
+	});
+	ok(float.over && !float.dark, 'header card floats inside the framed hero');
+	ok(float.bg === 'rgb(255, 255, 255)', `floating header card is solid white (${float.bg})`);
+	const clear = await page.evaluate(() => {
+		window.scrollTo({ top: 0, behavior: 'instant' });
+		const t = document.querySelector('.xl-section--lead .xl-hero__content').getBoundingClientRect().top;
+		return t - document.querySelector('.xl-header__bar').getBoundingClientRect().bottom;
+	});
+	ok(clear > 0, `hero copy clears the floating header (${Math.round(clear)}px)`);
 	ok((await page.locator('.xl-header .xl-lockup__market').first().textContent()).trim().length > 0, 'header shows the dealer lockup (logo + market)');
+
+	// Hero quick-estimate card → step 1 of the quote form, prefilled.
+	await page.selectOption('.xl-estimate select[name="service"]', 'bistro');
+	await page.fill('.xl-estimate input[name="zip"]', '92672');
+	await Promise.all([page.waitForNavigation({ waitUntil: 'networkidle' }), page.click('.xl-estimate button[type="submit"]')]);
+	ok(page.url().includes('service=bistro') && page.url().includes('zip=92672'), 'estimate card opens the quote page with its answers');
+	ok(await page.locator('input[name="interests[]"][value="bistro"]').isChecked(), 'chosen lighting type is preselected in step 1');
+	ok((await page.inputValue('input[name="zip"]')) === '92672', 'ZIP code carried into the form');
+	await page.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
 
 	// Dropdown keyboard.
 	const toggle = page.locator('.xl-nav .xl-nav__toggle').first();
@@ -90,6 +113,43 @@ const { BASE_URL, OUT_DIR, ok, launch, trackErrors, done } = require('./lib');
 	ok(ratio >= 4.5, `open dropdown text contrast ${ratio.toFixed(1)}:1 (needs 4.5:1)`);
 	await page.keyboard.press('Escape');
 	ok((await toggle.getAttribute('aria-expanded')) === 'false', 'Escape closes the dropdown');
+
+	// FAQ: one row open at a time, keyboard operable, animated close.
+	await page.goto(BASE_URL + '/lighting-solutions/permanent-soffit-lighting/', { waitUntil: 'networkidle' });
+	const faq = page.locator('#xl-soffit-faq details');
+	await faq.nth(0).locator('summary').click();
+	await page.waitForTimeout(500);
+	ok(await faq.nth(0).evaluate((d) => d.open), 'FAQ row opens on click');
+	await faq.nth(1).locator('summary').focus();
+	await page.keyboard.press('Enter');
+	await page.waitForTimeout(600);
+	ok(await faq.nth(1).evaluate((d) => d.open), 'FAQ row opens with Enter');
+	ok(!(await faq.nth(0).evaluate((d) => d.open)), 'opening a row closes the previous one');
+	await page.keyboard.press('Enter');
+	await page.waitForTimeout(600);
+	ok(!(await faq.nth(1).evaluate((d) => d.open)), 'Enter closes the open row again');
+
+	// Stacked numbered cards.
+	await page.goto(BASE_URL + '/lighting-solutions/', { waitUntil: 'networkidle' });
+	const stack = page.locator('.xl-cards--stack > li');
+	ok((await stack.count()) === 4, 'solutions overview uses stacked numbered cards');
+	ok((await stack.first().evaluate((li) => getComputedStyle(li).position)) === 'sticky', 'stacked cards stick on desktop');
+	ok((await page.locator('.xl-cards--stack .xl-card__index').first().textContent()).trim().startsWith('01'), 'cards are numbered 01…');
+
+	// Image reveal settles fully (no lingering clip).
+	const img = page.locator('.xl-section:not(.xl-section--lead) .xl-media__frame > img').first();
+	await img.scrollIntoViewIfNeeded();
+	await page.waitForTimeout(2200);
+	ok((await img.evaluate((i) => getComputedStyle(i).clipPath)) === 'none', 'revealed image is not left clipped');
+
+	// Reduced motion: nothing hidden, nothing animated.
+	const rm = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+	const rp = await rm.newPage();
+	await rp.goto(BASE_URL + '/lighting-solutions/', { waitUntil: 'networkidle' });
+	const hidden = await rp.evaluate(() => Array.from(document.querySelectorAll('[data-xl-reveal]')).filter((e) => getComputedStyle(e).opacity !== '1').length);
+	ok(hidden === 0, 'reduced motion: every block visible without scrolling');
+	ok((await rp.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)) === 'auto', 'reduced motion: no smooth scrolling');
+	await rm.close();
 
 	// Mobile drawer.
 	const m = await browser.newContext({ viewport: { width: 375, height: 780 }, isMobile: true, hasTouch: true });
