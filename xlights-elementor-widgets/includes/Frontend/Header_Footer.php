@@ -501,6 +501,28 @@ final class Header_Footer {
 		<footer class="xl-root xl-footer xl-bg--dark">
 			<?php if ( $opts['show_cta'] ) : ?>
 				<div class="xl-footer__cta">
+					<?php
+					/**
+					 * Background photo behind the footer call to action (decorative). Return '' for none.
+					 *
+					 * @param string $url Image URL or attachment ID.
+					 */
+					$cta_photo = apply_filters( 'xlights_footer_cta_image', Html::asset_image( 'photos/roofline-warm-white-modern.webp' ) );
+					if ( $cta_photo && Html::has_image( $cta_photo ) ) :
+						?>
+						<div class="xl-footer__cta-media" aria-hidden="true">
+							<?php
+							echo Html::image( // phpcs:ignore WordPress.Security.EscapeOutput
+								$cta_photo,
+								array(
+									'alt'   => '',
+									'size'  => 'full',
+									'sizes' => '100vw',
+								)
+							);
+							?>
+						</div>
+					<?php endif; ?>
 					<div class="xl-container xl-footer__cta-inner">
 						<p class="xl-footer__cta-text"><?php echo esc_html( Tokens::replace( __( 'Ready to light up your home or business?', 'xlights-elementor-widgets' ) ) ); ?></p>
 						<div class="xl-actions">

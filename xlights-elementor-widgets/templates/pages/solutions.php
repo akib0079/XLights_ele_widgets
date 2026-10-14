@@ -51,7 +51,7 @@ return array(
 				array(
 					'title'      => __( 'Hanging Bulb Bistro Lighting', 'xlights-elementor-widgets' ),
 					'text'       => __( 'A warm, welcoming glow for patios and outdoor dining.', 'xlights-elementor-widgets' ),
-					'image'      => Defaults::photo( 'backyard-string-lights' ),
+					'image'      => Defaults::photo( 'bistro-string-backyard' ),
 					'scene'      => 'patio',
 					'link_label' => __( 'Explore', 'xlights-elementor-widgets' ),
 					'link'       => '#xl-solutions-bistro',
@@ -139,6 +139,6 @@ return array(
 	'cta'       => Defaults::cta(
 		__( 'Not sure where to start?', 'xlights-elementor-widgets' ),
 		__( 'Tell us about your property and we will recommend the right mix of lighting for it.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'warm' )
+		array( 'image' => Defaults::photo( 'pool-patio-dusk' ), 'bg' => 'warm' )
 	),
 );

@@ -79,6 +79,6 @@ return array(
 	'cta'          => Defaults::cta(
 		__( 'Picture this at your place.', 'xlights-elementor-widgets' ),
 		__( 'Tell us about your project and we will recommend lighting that suits your property.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'light' )
+		array( 'image' => Defaults::photo( 'roofline-holiday-color-modern' ), 'bg' => 'light' )
 	),
 );

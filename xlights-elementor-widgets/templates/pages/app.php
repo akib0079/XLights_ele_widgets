@@ -139,10 +139,12 @@ return array(
 		'type'     => 'cta',
 		'label'    => __( 'App Download', 'xlights-elementor-widgets' ),
 		'defaults' => array(
-			'style'         => 'band',
+			'style'         => 'image',
+			'image'         => Defaults::photo( 'deck-steps-app' ),
+			'overlay'       => 62,
 			'eyebrow'       => __( 'Get the app', 'xlights-elementor-widgets' ),
 			'heading'       => __( 'Download the X LIGHTS app.', 'xlights-elementor-widgets' ),
-			'text'          => __( 'Control your lights from your phone. We will help you connect your system after installation.', 'xlights-elementor-widgets' ),
+			'text'          => __( 'Available on the App Store and Google Play. Control your lights from your phone — we will help you connect your system after installation.', 'xlights-elementor-widgets' ),
 			'primary_label' => '',
 			'primary_link'  => '',
 			'show_phone'    => '',
@@ -154,6 +156,6 @@ return array(
 	'cta'        => Defaults::cta(
 		__( 'Design a connected lighting system.', 'xlights-elementor-widgets' ),
 		__( 'We will plan your soffit, patio, deck and landscape lighting so it all works together from day one.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'warm' )
+		array( 'image' => Defaults::photo( 'firepit-lounge-string-lights' ), 'bg' => 'warm' )
 	),
 );

@@ -205,6 +205,7 @@ return array(
 		__( 'Ready to light your deck?', 'xlights-elementor-widgets' ),
 		__( 'Send us a few photos and we will recommend the right deck lighting for your space.', 'xlights-elementor-widgets' ),
 		array(
+			'image'         => Defaults::photo( 'deck-stairs-step-lights' ),
 			'primary_label' => __( 'Get a Deck Lighting Quote', 'xlights-elementor-widgets' ),
 			'primary_link'  => '{page:contact}?service=deck#quote',
 			'bg'            => 'warm',

@@ -212,6 +212,6 @@ return array(
 	'cta'           => Defaults::cta(
 		__( 'Let’s design your outdoor lighting.', 'xlights-elementor-widgets' ),
 		__( 'Tell us about your home or business and we will set up a consultation.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'warm' )
+		array( 'image' => Defaults::photo( 'installer-controller' ), 'bg' => 'warm' )
 	),
 );

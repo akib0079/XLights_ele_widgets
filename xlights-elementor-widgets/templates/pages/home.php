@@ -197,6 +197,6 @@ return array(
 	'cta'          => Defaults::cta(
 		__( 'Ready to see your home <em>in a new light?</em>', 'xlights-elementor-widgets' ),
 		__( 'Schedule a consultation and we will recommend a lighting plan for your property. Sharing your address and a few photos helps us prepare.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'light' )
+		array( 'image' => Defaults::photo( 'soffit-house-dusk-wide' ), 'bg' => 'light' )
 	),
 );

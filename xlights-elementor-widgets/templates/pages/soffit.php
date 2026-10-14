@@ -373,6 +373,7 @@ return array(
 		__( 'Get your permanent soffit lighting quote.', 'xlights-elementor-widgets' ),
 		__( 'Share your address and a photo of your roofline, and we will prepare recommendations for your home.', 'xlights-elementor-widgets' ),
 		array(
+			'image'         => Defaults::photo( 'soffit-garage-night' ),
 			'primary_label' => __( 'Get a Soffit Lighting Quote', 'xlights-elementor-widgets' ),
 			'primary_link'  => '{page:contact}?service=soffit#quote',
 			'bg'            => 'warm',

@@ -92,7 +92,9 @@ return array(
 		'type'     => 'cta',
 		'label'    => __( 'Google Reviews Link', 'xlights-elementor-widgets' ),
 		'defaults' => array(
-			'style'         => 'band',
+			'style'         => 'image',
+			'image'         => Defaults::photo( 'backyard-overview' ),
+			'overlay'       => 66,
 			'eyebrow'       => __( 'Share your experience', 'xlights-elementor-widgets' ),
 			'heading'       => __( 'Had X LIGHTS installed? We would love your feedback.', 'xlights-elementor-widgets' ),
 			'text'          => __( 'Leave a review on Google to help your neighbors find us.', 'xlights-elementor-widgets' ),
@@ -109,6 +111,6 @@ return array(
 	'cta'         => Defaults::cta(
 		__( 'Join our happy customers.', 'xlights-elementor-widgets' ),
 		__( 'Schedule a consultation and see what X LIGHTS can do for your home or business.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'warm' )
+		array( 'image' => Defaults::photo( 'roofline-two-story-modern' ), 'bg' => 'warm' )
 	),
 );

@@ -57,7 +57,7 @@ return array(
 			'text'           => __( '<p>The right string of bulbs turns a patio into an outdoor room — soft enough for conversation, bright enough for dinner, and beautiful in photos.</p>', 'xlights-elementor-widgets' ),
 			'points'         => __( "Soft, flattering light for dining\nA defined space for entertaining\nA warm view from inside the house", 'xlights-elementor-widgets' ),
 			'visual'         => 'image',
-			'image'          => Defaults::photo( 'backyard-string-lights' ),
+			'image'          => Defaults::photo( 'bistro-string-backyard' ),
 			'image_alt'      => __( 'Backyard path and seating under strings of warm bistro lights at night', 'xlights-elementor-widgets' ),
 			'scene'          => 'patio',
 			'image_position' => 'right',
@@ -271,6 +271,7 @@ return array(
 		__( 'Let’s design your patio lighting.', 'xlights-elementor-widgets' ),
 		__( 'Send a few photos of your patio or outdoor dining area and we will recommend a layout.', 'xlights-elementor-widgets' ),
 		array(
+			'image'         => Defaults::photo( 'bistro-string-backyard' ),
 			'primary_label' => __( 'Get a Bistro Lighting Quote', 'xlights-elementor-widgets' ),
 			'primary_link'  => '{page:contact}?service=bistro#quote',
 			'bg'            => 'warm',

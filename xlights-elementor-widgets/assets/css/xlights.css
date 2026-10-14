@@ -5525,7 +5525,33 @@ html.xl-scroll-lock {
 }
 
 .xl-footer__cta {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.xl-footer__cta-media {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+}
+
+.xl-footer__cta-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center 40%;
+}
+
+/* Dark on the left where the text sits, fading into the footer below. */
+.xl-footer__cta-media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(180deg, rgb(var(--xl-deep-rgb) / 0.2) 0%, rgb(var(--xl-deep-rgb) / 0.55) 70%, var(--xl-dark) 100%),
+		linear-gradient(90deg, rgb(var(--xl-deep-rgb) / 0.82) 0%, rgb(var(--xl-deep-rgb) / 0.55) 55%, rgb(var(--xl-deep-rgb) / 0.35) 100%);
 }
 
 .xl-footer__cta-inner {

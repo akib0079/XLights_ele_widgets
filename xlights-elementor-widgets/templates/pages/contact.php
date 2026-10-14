@@ -118,6 +118,7 @@ return array(
 		__( 'Questions before you request a quote?', 'xlights-elementor-widgets' ),
 		__( 'Call us — we are happy to talk through ideas for your home or business.', 'xlights-elementor-widgets' ),
 		array(
+			'image'         => Defaults::photo( 'soffit-two-story-dusk' ),
 			'eyebrow'       => '',
 			'primary_label' => __( 'Back to the form', 'xlights-elementor-widgets' ),
 			'primary_link'  => '#quote',

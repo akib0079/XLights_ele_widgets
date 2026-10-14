@@ -241,6 +241,7 @@ return array(
 		__( 'Bring your landscape to life after dark.', 'xlights-elementor-widgets' ),
 		__( 'Share a few photos of your yard and we will recommend a lighting plan.', 'xlights-elementor-widgets' ),
 		array(
+			'image'         => Defaults::photo( 'landscape-uplit-trees' ),
 			'primary_label' => __( 'Get a Landscape Lighting Quote', 'xlights-elementor-widgets' ),
 			'primary_link'  => '{page:contact}?service=landscape#quote',
 			'bg'            => 'warm',

@@ -231,7 +231,8 @@ final class Defaults {
 	}
 
 	/**
-	 * Final consultation CTA.
+	 * Final consultation CTA. Passing an "image" in $extra switches it to the
+	 * background-photo style.
 	 *
 	 * @param string $heading Heading.
 	 * @param string $text    Text.
@@ -239,6 +240,12 @@ final class Defaults {
 	 * @return array
 	 */
 	public static function cta( $heading, $text, array $extra = array() ) {
+		if ( ! empty( $extra['image'] ) ) {
+			$extra += array(
+				'style'   => 'image',
+				'overlay' => 62,
+			);
+		}
 		return array(
 			'type'     => 'cta',
 			'label'    => __( 'Final Consultation CTA', 'xlights-elementor-widgets' ),
