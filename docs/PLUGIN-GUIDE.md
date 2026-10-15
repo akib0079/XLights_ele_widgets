@@ -1,4 +1,4 @@
-# X LIGHTS Elementor Widgets — Plugin Guide (v1.6.0)
+# X LIGHTS Elementor Widgets — Plugin Guide (v1.6.1)
 
 **TL;DR:** install the ZIP (Elementor required), fill in **X LIGHTS → Settings**, run **X LIGHTS → Page Setup** to create the 12 pages, then edit any page in Elementor through its **Page Composer** widget. Every phone number, color, font, link and approval switch lives in **Settings** and flows to every page, the header and the footer. Projects, reviews and incoming quote requests are managed under **X LIGHTS** in wp-admin.
 
@@ -244,11 +244,13 @@ Leave a field blank to hide it. Do not enter placeholder URLs.
 
 - **Page Composer** — a complete page from one of the 12 templates (recommended for the standard pages).
 - **Header**, **Footer** — for Elementor Pro Theme Builder or manual placement (Settings → Header & Footer → mode *Off*).
-- **Section widgets (19):** Hero, Intro / Editorial Text, Split Image & Content, Feature Explorer, Card Grid, Connected System Diagram, App Showcase (tabs), Projects Gallery, Before / After Comparison, Customer Reviews, Financing Callout, FAQ Accordion, Service Area & Map, Contact Information, Quote Request Form, CTA Banner, Local Team, Technical Specifications, Local Trust Band. Each has the same content fields as its Page Composer section, plus *Use as the page H1* and *Section ID (anchor)*.
+- **Section widgets (20):** Hero, Intro / Editorial Text, Split Image & Content, Feature Explorer, Project Case Study, Card Grid, Connected System Diagram, App Showcase (tabs), Projects Gallery, Before / After Comparison, Customer Reviews, Financing Callout, FAQ Accordion, Service Area & Map, Contact Information, Quote Request Form, CTA Banner, Local Team, Technical Specifications, Local Trust Band. Each has the same content fields as its Page Composer section, plus *Use as the page H1* and *Section ID (anchor)*.
 
 **Split layouts** (Layout control): *Side by side* · *Editorial* — large photo with an overlapping text card · *Cinematic* — full-width inset photo with a dark glass text panel (use photos ≥ 1600 px wide). Editorial and Cinematic need a photo; app mockups and illustrations always show side by side.
 
 **Feature Explorer:** numbered tabs beside a large photo that changes with the selected feature, with a caption card (title, text, checklist, link) and an optional button. Use it instead of three or more similar Split sections in a row. Keyboard: arrow keys, Home/End. Without JavaScript every feature is listed. On phones the tabs become a row of chips.
+
+**Project Case Study:** a featured project told as a story — eyebrow and headline, *Project facts* (label + value rows), the story text, a highlighted *Takeaway* line, an optional button and a photo gallery (first photo large; each photo has a description for screen readers and an optional caption; photos open in the lightbox). The Commercial page uses it for the Cottonmouth Dispensary project; drop the widget on any page for the next one.
 
 Card Grid styles: Icon cards · Image cards · Large photo cards · Numbered steps · Stacked numbered cards · Minimal list · Bento · Icon strip. The Hero has an optional **Quick estimate card** (lighting type + ZIP → opens the quote form prefilled; on by default on Home).
 

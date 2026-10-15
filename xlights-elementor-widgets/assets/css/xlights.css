@@ -6587,6 +6587,180 @@ html.xl-sticky-cta-on {
 	}
 }
 
+/* -------------------------------------------------------------------------
+ * Project case study: facts + story, then a gallery (first photo large)
+ * ---------------------------------------------------------------------- */
+.xl-root .xl-case {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	gap: clamp(32px, 4vw, 64px) clamp(32px, 5vw, 88px);
+	align-items: start;
+}
+
+.xl-root .xl-case__intro .xl-head {
+	margin-bottom: 0;
+}
+
+.xl-root .xl-case__facts {
+	display: grid;
+	margin: clamp(24px, 3vw, 36px) 0 0;
+	border-top: 1px solid var(--xl-line);
+}
+
+.xl-root .xl-case__fact {
+	display: grid;
+	grid-template-columns: 6.5rem minmax(0, 1fr);
+	gap: 1rem;
+	padding: 0.85rem 0;
+	border-bottom: 1px solid var(--xl-line);
+}
+
+.xl-root .xl-case__fact dt {
+	margin: 0;
+	padding-top: 0.2em;
+	font-size: 0.74rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--xl-accent-ink);
+}
+
+.xl-root .xl-case__fact dd {
+	margin: 0;
+	font-weight: 500;
+	color: var(--xl-heading);
+}
+
+.xl-root .xl-case__story {
+	padding-top: clamp(0px, 2.6vw, 44px);
+}
+
+.xl-root .xl-case__takeaway {
+	margin: 1.75rem 0 0;
+	padding: 0.15rem 0 0.15rem 1.25rem;
+	border-left: 3px solid var(--xl-accent-ink);
+	font-family: var(--xl-font-display);
+	font-size: calc(clamp(1.2rem, 1rem + 0.6vw, 1.5rem) * var(--xl-heading-scale));
+	line-height: 1.3;
+	color: var(--xl-heading);
+}
+
+.xl-root .xl-case__story .xl-actions {
+	margin-top: 2rem;
+}
+
+.xl-root .xl-case__gallery {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(12px, 1.6vw, 20px);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.xl-root .xl-case__gallery--1 {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.xl-root .xl-case__gallery--2 {
+	grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+
+.xl-root .xl-case__gallery--4 {
+	grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
+}
+
+.xl-root .xl-case__photo figure {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin: 0;
+}
+
+/* The first photo sets the row height; the others fill it. */
+.xl-root .xl-case__open,
+.xl-root .xl-case__photo figure > img {
+	position: relative;
+	display: block;
+	flex: 1 1 auto;
+	width: 100%;
+	min-height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+	border-radius: var(--xl-img-radius);
+	background: var(--xl-dark-2);
+	cursor: zoom-in;
+}
+
+.xl-root .xl-case__photo:first-child .xl-case__open,
+.xl-root .xl-case__photo:first-child figure > img {
+	flex: none;
+	aspect-ratio: 4 / 5;
+}
+
+.xl-root .xl-case__open img,
+.xl-root .xl-case__photo figure > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 1s var(--xl-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.xl-root .xl-case__open:hover img {
+		transform: scale(1.04);
+	}
+}
+
+.xl-root .xl-case__open:focus-visible {
+	outline: 2px solid var(--xl-accent-ink);
+	outline-offset: 3px;
+}
+
+.xl-root .xl-case__open:focus-visible img {
+	transform: scale(1.04);
+}
+
+.xl-root .xl-case__photo figcaption {
+	margin-top: 0.65rem;
+	font-size: 0.82rem;
+	line-height: 1.45;
+	color: var(--xl-muted);
+}
+
+@media (max-width: 1024px) {
+	.xl-root .xl-case {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.xl-root .xl-case__story {
+		padding-top: 0;
+	}
+}
+
+@media (max-width: 767px) {
+	.xl-root .xl-case__gallery,
+	.xl-root .xl-case__gallery--4 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.xl-root .xl-case__photo:first-child {
+		grid-column: 1 / -1;
+	}
+
+	.xl-root .xl-case__photo:not(:first-child) .xl-case__open,
+	.xl-root .xl-case__photo:not(:first-child) figure > img {
+		flex: none;
+		aspect-ratio: 3 / 4;
+	}
+
+	.xl-root .xl-case__fact {
+		grid-template-columns: 5.5rem minmax(0, 1fr);
+	}
+}
+
 /* BEGIN generated theme-style shield (bin/build-theme-shield.js) */
 /* Do not edit by hand: run `node bin/build-theme-shield.js` after changing link or button styles.
  * Elementor Theme Style (.elementor-kit-N a:hover, button:focus) must not recolor the widgets.
@@ -6984,6 +7158,10 @@ html .xl-sticky-cta .xl-sticky-cta__btn--call {
 html .xl-sticky-cta .xl-sticky-cta__btn--quote {
 	color: var(--xl-on-accent);
 	background: var(--xl-accent);
+}
+
+html .xl-root .xl-case__open {
+	background: var(--xl-dark-2);
 }
 
 /* END generated theme-style shield */

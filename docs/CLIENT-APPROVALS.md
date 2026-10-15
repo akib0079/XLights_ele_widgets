@@ -70,6 +70,7 @@
 | # | Item | Status |
 |---|---|---|
 | 20 | **Approved project photos** with city/area only (no addresses, no visible house numbers), category, residential/commercial | Sample projects (brand photos, neutral titles, no city) fill the gallery until real projects are added — replace them as approved local projects come in |
+| 20b | **Cottonmouth Dispensary case study** (Commercial page) — owner consent to name the business and show the storefront | Supplied by the client for the site; copy used as written, with US spelling ("colors") |
 | 21 | Matching **before/after** pairs (same angle, day + night) | Before/After section hidden until a pair exists |
 | 22 | **Real customer reviews** with written permission | None. No reviews are invented; sections hide or show a neutral message |
 | 23 | Local team: names, roles, bios, photos | About → Local Team hidden until added |

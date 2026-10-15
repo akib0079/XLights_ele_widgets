@@ -81,6 +81,55 @@ return array(
 			'bg'              => 'light',
 		),
 	),
+	'case_study'    => array(
+		'type'     => 'case_study',
+		'label'    => __( 'Featured Project: Cottonmouth Dispensary', 'xlights-elementor-widgets' ),
+		'anchor'   => 'xl-commercial-case-study',
+		'defaults' => array(
+			'eyebrow'       => __( 'Featured commercial project', 'xlights-elementor-widgets' ),
+			'heading'       => __( 'Bringing the Cottonmouth brand <em>to light.</em>', 'xlights-elementor-widgets' ),
+			'text'          => __( '<p>The owner of Cottonmouth Dispensary wanted to give his commercial property a more upscale appearance and bring the company’s signature colors into the building’s exterior.</p><p>Using X LIGHTS soffit lights and line lighting, we created a coordinated lighting design that highlights the architecture and carries the brand colors across the property.</p><p>With most customers visiting in the evening, the lighting makes an impression when it matters most. The result is a polished, distinctive storefront with a stronger nighttime presence — now visible from the highway.</p>', 'xlights-elementor-widgets' ),
+			'takeaway'      => __( 'This project shows how commercial lighting can enhance a building’s appearance while making its branding a visible part of the architecture.', 'xlights-elementor-widgets' ),
+			'facts'         => array(
+				array(
+					'label' => __( 'Client', 'xlights-elementor-widgets' ),
+					'value' => __( 'Cottonmouth Dispensary', 'xlights-elementor-widgets' ),
+				),
+				array(
+					'label' => __( 'Goal', 'xlights-elementor-widgets' ),
+					'value' => __( 'A more upscale look in the brand’s signature colors', 'xlights-elementor-widgets' ),
+				),
+				array(
+					'label' => __( 'Lighting', 'xlights-elementor-widgets' ),
+					'value' => __( 'X LIGHTS soffit lights and line lighting', 'xlights-elementor-widgets' ),
+				),
+				array(
+					'label' => __( 'Result', 'xlights-elementor-widgets' ),
+					'value' => __( 'A stronger nighttime presence, visible from the highway', 'xlights-elementor-widgets' ),
+				),
+			),
+			'photos'        => array(
+				array(
+					'image'     => Defaults::photo( 'commercial-cottonmouth-entrance' ),
+					'image_alt' => __( 'Cottonmouth Dispensary entrance at dusk with green line lighting on the columns and around the logo sign', 'xlights-elementor-widgets' ),
+					'caption'   => __( 'Line lighting frames the entrance and the logo sign', 'xlights-elementor-widgets' ),
+				),
+				array(
+					'image'     => Defaults::photo( 'commercial-cottonmouth-roofline' ),
+					'image_alt' => __( 'Green X LIGHTS soffit lights along the cornice above the Cottonmouth Dispensary sign', 'xlights-elementor-widgets' ),
+					'caption'   => __( 'Soffit lights trace the cornice in the brand’s green', 'xlights-elementor-widgets' ),
+				),
+				array(
+					'image'     => Defaults::photo( 'commercial-cottonmouth-storefront' ),
+					'image_alt' => __( 'Wide view of the Cottonmouth Dispensary storefront at dusk with green lighting across the building', 'xlights-elementor-widgets' ),
+					'caption'   => __( 'Brand color carried across the whole property', 'xlights-elementor-widgets' ),
+				),
+			),
+			'primary_label' => __( 'Plan your commercial lighting', 'xlights-elementor-widgets' ),
+			'primary_link'  => '#quote',
+			'bg'            => 'dark',
+		),
+	),
 	'landscape'     => array(
 		'type'     => 'split',
 		'label'    => __( 'Commercial Landscape & Pathway Lighting', 'xlights-elementor-widgets' ),

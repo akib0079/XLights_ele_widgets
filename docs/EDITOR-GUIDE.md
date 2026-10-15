@@ -102,6 +102,7 @@ Site-wide colors and fonts are set once in **X LIGHTS → Settings → Colors & 
 - **Split sections** have a **Layout** control: *Side by side*, *Editorial* (large photo, overlapping text card) and *Cinematic* (full-width photo with a text panel). Avoid two *Side by side* splits in a row — the defaults never do this, and the test suite checks it.
 - **Cinematic** shows the photo large, so use sharp photos at least 1600 px wide. Put the subject on the side away from the text panel (*Visual position* decides which side the panel sits on).
 - **Feature Explorer** (Deck and Landscape pages) holds several related features in one block: each feature has a title, text, optional checklist, photo, photo description and link. Add or reorder features in its section settings.
+- **Project Case Study** (Commercial page → *Featured Project: Cottonmouth Dispensary*): edit the facts, story, takeaway and photos in its section settings. To feature another project, change the content here or add the *X LIGHTS — Project Case Study* widget to a page. Use real, approved projects only.
 - The Home page's **Outdoor Spaces** bento: the first card is large, the second wide, the next two small; keep the small cards' text short.
 
 ## Photos

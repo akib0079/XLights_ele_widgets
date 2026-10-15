@@ -291,6 +291,43 @@ final class Html {
 	}
 
 	/**
+	 * One lightbox entry (src, srcset, alt, caption) for a Media Library or
+	 * bundled image, in the format the front-end lightbox reads.
+	 *
+	 * @param mixed  $media   Media value (array, attachment ID or URL).
+	 * @param string $alt     Alt text for bundled images (Media Library images keep their own unless empty).
+	 * @param string $caption Caption.
+	 * @return array|null
+	 */
+	public static function lightbox_item( $media, $alt = '', $caption = '' ) {
+		$id  = is_array( $media ) && ! empty( $media['id'] ) ? (int) $media['id'] : ( is_numeric( $media ) ? (int) $media : 0 );
+		$url = is_array( $media ) ? ( isset( $media['url'] ) ? (string) $media['url'] : '' ) : ( is_string( $media ) ? $media : '' );
+		if ( $id && wp_attachment_is_image( $id ) ) {
+			$src = wp_get_attachment_image_src( $id, 'full' );
+			if ( ! $src ) {
+				return null;
+			}
+			$own = trim( (string) get_post_meta( $id, '_wp_attachment_image_alt', true ) );
+			return array(
+				'src'     => $src[0],
+				'srcset'  => (string) wp_get_attachment_image_srcset( $id, 'full' ),
+				'alt'     => '' !== $own ? $own : wp_strip_all_tags( (string) $alt ),
+				'caption' => wp_strip_all_tags( (string) $caption ),
+			);
+		}
+		if ( '' === $url || self::is_placeholder( $url ) ) {
+			return null;
+		}
+		$dims = self::local_dimensions( $url );
+		return array(
+			'src'     => esc_url_raw( $url ),
+			'srcset'  => $dims ? self::local_srcset( $url, $dims[0] ) : '',
+			'alt'     => wp_strip_all_tags( Tokens::replace( (string) $alt ) ),
+			'caption' => wp_strip_all_tags( Tokens::replace( (string) $caption ) ),
+		);
+	}
+
+	/**
 	 * Whether a MEDIA value contains an image.
 	 *
 	 * @param mixed $media Media.

@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,10 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.6.1 =
+* Commercial page: new featured project case study — Cottonmouth Dispensary (client copy, project facts, takeaway and three photos that open in the lightbox). Existing Commercial pages show it automatically after "Permanent Architectural Lighting"; it can be hidden, moved or edited like any section.
+* New "Project Case Study" section and standalone widget for future featured projects.
 
 = 1.6.0 =
 * Real content only: the drawn app mock-ups and illustrations are gone. App sections show the official X LIGHTS app screenshots (color, patterns, music, timers, controllers, family management); the service-area map uses a photo.

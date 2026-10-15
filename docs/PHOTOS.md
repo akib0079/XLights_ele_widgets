@@ -56,6 +56,8 @@ Same processing: metadata and GPS removed, adaptive WebP quality (most files ≤
 | App | assets/images/app/: official framed screenshots (color, patterns, music, timers, controllers, family) | App showcase tabs and hero |
 | Brand | assets/images/brand/: official App Store and Google Play badges, X LIGHTS app icon | Store badges, connected hub |
 
+**Commercial case study (1.6.1):** `commercial-cottonmouth-entrance`, `commercial-cottonmouth-roofline`, `commercial-cottonmouth-storefront` — the client's Cottonmouth Dispensary photos (1500×2000 JPEG, no EXIF/GPS; ICC profile dropped; 1200×1600 WebP with 640/1024 copies). The building number "10 E" is visible on the storefront; it is a public business address, so it was left as is.
+
 **Sample projects** reuse these photos (and the 1.4.0 set) as Media Library images. They have neutral titles and no location because they are brand photos, not this dealer's own jobs.
 
 ## Confirm with the client

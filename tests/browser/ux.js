@@ -310,6 +310,20 @@ function webpChunks(file) {
 	ok(app.links.some((h) => /apps\.apple\.com\/.*id6462840352/.test(h)) && app.links.some((h) => /play\.google\.com\/.*com\.goulyled\.xlights/.test(h)), 'home: App Store and Google Play badges link to the X LIGHTS LED app');
 	const screens = await cp.evaluate(() => [...document.querySelectorAll('.xl-app-showcase img.xl-phone__device')].filter((i) => /\/images\/app\//.test(i.src)).length);
 	ok(screens >= 3, `home: app showcase uses real app screenshots (${screens})`);
+
+	// Commercial case study: facts, story, three photos that open in the lightbox.
+	await cp.goto(BASE_URL + '/commercial-lighting/', { waitUntil: 'networkidle' });
+	const cs = await cp.evaluate(() => {
+		const s = document.querySelector('.xl-case');
+		return s ? { facts: s.querySelectorAll('.xl-case__fact').length, photos: s.querySelectorAll('.xl-case__open img').length, alts: [...s.querySelectorAll('.xl-case__open img')].every((i) => i.alt.length > 10), text: /Cottonmouth/.test(s.textContent) } : null;
+	});
+	ok(cs && cs.text && cs.facts === 4 && cs.photos === 3 && cs.alts, 'commercial: Cottonmouth case study with facts and 3 described photos');
+	await cp.locator('.xl-case__open').nth(2).scrollIntoViewIfNeeded();
+	await cp.locator('.xl-case__open').nth(2).click();
+	await cp.waitForTimeout(600);
+	const lb = await cp.evaluate(() => { const d = document.querySelector('.xl-lightbox'); return d && d.open ? d.querySelector('.xl-lightbox__caption').textContent : ''; });
+	ok(/3 of 3/.test(lb), 'commercial: case study photo opens in the lightbox at the right photo');
+	await cp.keyboard.press('Escape');
 	await cp.close();
 
 	await browser.close();
