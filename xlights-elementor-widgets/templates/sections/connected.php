@@ -26,7 +26,23 @@ $count = count( $items );
 		</div>
 		<div class="xl-connected__diagram" data-xl-reveal style="--xl-n:<?php echo (int) max( 1, $count ); ?>">
 			<div class="xl-connected__hub">
-				<span class="xl-connected__hub-icon"><?php echo Icons::svg( 'smartphone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+				<?php if ( isset( $data['hub_icon'] ) && Html::has_image( $data['hub_icon'] ) ) : ?>
+					<span class="xl-connected__hub-icon xl-connected__hub-icon--app">
+						<?php
+						// Decorative: the hub label next to it names the app.
+						echo Html::image( // phpcs:ignore WordPress.Security.EscapeOutput
+							$data['hub_icon'],
+							array(
+								'alt'   => '',
+								'size'  => 'thumbnail',
+								'sizes' => '64px',
+							)
+						);
+						?>
+					</span>
+				<?php else : ?>
+					<span class="xl-connected__hub-icon"><?php echo Icons::svg( 'smartphone' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+				<?php endif; ?>
 				<strong><?php echo Html::text( $data['hub_label'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></strong>
 				<?php if ( '' !== trim( $data['hub_text'] ) ) : ?>
 					<span><?php echo Html::text( $data['hub_text'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>

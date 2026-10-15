@@ -140,8 +140,8 @@ return array(
 		'label'    => __( 'App Download', 'xlights-elementor-widgets' ),
 		'defaults' => array(
 			'style'         => 'image',
-			'image'         => Defaults::photo( 'deck-steps-app' ),
-			'overlay'       => 62,
+			'image'         => Defaults::photo( 'pergola-bar' ),
+			'overlay'       => 66,
 			'eyebrow'       => __( 'Get the app', 'xlights-elementor-widgets' ),
 			'heading'       => __( 'Download the X LIGHTS app.', 'xlights-elementor-widgets' ),
 			'text'          => __( 'Available on the App Store and Google Play. Control your lights from your phone — we will help you connect your system after installation.', 'xlights-elementor-widgets' ),

@@ -89,7 +89,35 @@ final class Installer {
 		if ( $stored && version_compare( (string) $stored, '1.1.0', '<' ) ) {
 			self::migrate_brand_defaults();
 		}
+		if ( $stored && version_compare( (string) $stored, '1.6.0', '<' ) ) {
+			self::migrate_store_links();
+		}
 		update_option( self::VERSION_OPTION, XLIGHTS_VERSION );
+	}
+
+	/**
+	 * 1.6.0 ships the official X LIGHTS LED store links as defaults. Sites saved
+	 * before that hold empty values, which would keep the badges hidden; fill
+	 * only the empty ones so a dealer's own links are left alone.
+	 */
+	private static function migrate_store_links() {
+		$stored = get_option( Settings::OPTION, array() );
+		if ( ! is_array( $stored ) ) {
+			return;
+		}
+		$defaults = array(
+			'app_store_url'   => Settings::APP_STORE_URL,
+			'google_play_url' => Settings::GOOGLE_PLAY_URL,
+		);
+		$changed  = array();
+		foreach ( $defaults as $key => $url ) {
+			if ( array_key_exists( $key, $stored ) && '' === trim( (string) $stored[ $key ] ) ) {
+				$changed[ $key ] = $url;
+			}
+		}
+		if ( $changed ) {
+			Settings::update( $changed );
+		}
 	}
 
 	/**

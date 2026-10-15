@@ -7,6 +7,8 @@
 
 namespace XLights\Sections\Components;
 
+use XLights\Helpers\Html;
+
 use XLights\Sections\Component;
 
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +35,15 @@ class Connected extends Component {
 		return array_merge(
 			self::head_fields( true ),
 			array(
-				'hub_label'  => self::text( __( 'Hub label', 'xlights-elementor-widgets' ), __( 'X LIGHTS App', 'xlights-elementor-widgets' ), array( 'separator' => 'before' ) ),
+				'hub_icon'   => self::media(
+					__( 'Hub icon', 'xlights-elementor-widgets' ),
+					Html::asset_image( 'brand/app-icon.webp' ),
+					array(
+						'separator'   => 'before',
+						'description' => __( 'The X LIGHTS app icon by default. Square images work best; remove it to show a phone symbol.', 'xlights-elementor-widgets' ),
+					)
+				),
+				'hub_label'  => self::text( __( 'Hub label', 'xlights-elementor-widgets' ), __( 'X LIGHTS App', 'xlights-elementor-widgets' ) ),
 				'hub_text'   => self::text( __( 'Hub caption', 'xlights-elementor-widgets' ), __( 'One app for every zone', 'xlights-elementor-widgets' ) ),
 				'items'      => array(
 					'type'        => 'repeater',

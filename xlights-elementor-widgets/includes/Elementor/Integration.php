@@ -22,6 +22,7 @@ final class Integration {
 		add_action( 'elementor/elements/categories_registered', array( __CLASS__, 'category' ) );
 		add_action( 'elementor/widgets/register', array( __CLASS__, 'widgets' ) );
 		add_action( 'elementor/editor/after_enqueue_styles', array( __CLASS__, 'editor_styles' ) );
+		add_action( 'elementor/editor/after_enqueue_scripts', array( __CLASS__, 'editor_scripts' ) );
 		add_action( 'elementor/preview/enqueue_scripts', array( __CLASS__, 'preview_scripts' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'missing_notice' ) );
 	}
@@ -91,6 +92,10 @@ final class Integration {
 
 	public static function editor_styles() {
 		wp_enqueue_style( 'xlights-editor', XLIGHTS_URL . 'assets/css/editor.css', array(), XLIGHTS_VERSION );
+	}
+
+	public static function editor_scripts() {
+		wp_enqueue_script( 'xlights-editor', XLIGHTS_URL . 'assets/js/editor.js', array( 'elementor-editor' ), XLIGHTS_VERSION, true );
 	}
 
 	public static function preview_scripts() {

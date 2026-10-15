@@ -2269,6 +2269,26 @@
 	color: var(--xl-accent-ink);
 }
 
+/* Official app icon: a dark tile, so a light rim and glow separate it from the navy hub. */
+.xl-root .xl-connected__hub .xl-connected__hub-icon--app {
+	display: block;
+	width: clamp(52px, 4.4vw, 64px);
+	aspect-ratio: 1;
+	margin-bottom: 0.45rem;
+	padding: 0;
+	opacity: 1;
+	border-radius: 24%;
+	box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.55), 0 0 22px rgb(var(--xl-accent-glow-rgb) / 0.55), 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.xl-root .xl-connected__hub .xl-connected__hub-icon--app img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	object-fit: cover;
+}
+
 .xl-root .xl-connected__hub strong {
 	font-family: var(--xl-font-display);
 	text-transform: var(--xl-heading-case);
@@ -2378,7 +2398,12 @@
 		grid-column: 1;
 		grid-row: auto;
 		margin: 0 auto 8px;
-		width: 150px;
+		width: 176px;
+	}
+
+	.xl-root .xl-connected__hub .xl-connected__hub-icon--app {
+		width: 46px;
+		margin-bottom: 0.3rem;
 	}
 
 	.xl-root .xl-connected__node,
@@ -2527,11 +2552,46 @@
 	transition: transform 0.2s var(--xl-ease);
 }
 
+/* Official app icon ahead of the badges. */
+.xl-root .xl-stores__app {
+	display: inline-block;
+	flex: none;
+	width: 48px;
+	height: 48px;
+	border-radius: 11px;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+
+.xl-root .xl-stores__app img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+}
+
 /* Official badge artwork: shown as supplied, never recolored or stretched. */
 .xl-root .xl-store__badge {
 	display: block;
 	width: auto;
 	height: 48px;
+}
+
+/* Narrow phones: keep the icon and both badges on one row (40 px is the smallest badge size Apple allows). */
+@media (max-width: 420px) {
+	.xl-root .xl-stores {
+		gap: 0.5rem;
+	}
+
+	.xl-root .xl-stores__app {
+		width: 40px;
+		height: 40px;
+		border-radius: 9px;
+	}
+
+	.xl-root .xl-store__badge {
+		height: 40px;
+		width: auto;
+	}
 }
 
 @media (hover: hover) and (pointer: fine) {

@@ -37,7 +37,7 @@ final class Store_Badges {
 			}
 			return $out . '</div>';
 		}
-		$out = '<div class="xl-stores">';
+		$out = '<div class="xl-stores">' . self::app_icon();
 		foreach ( $badges as $b ) {
 			if ( '' === $b[0] ) {
 				continue;
@@ -51,6 +51,25 @@ final class Store_Badges {
 		 * @param string $out Markup.
 		 */
 		return apply_filters( 'xlights/store_badges', $out );
+	}
+
+	/**
+	 * The official app icon shown ahead of the badges, so visitors recognize the
+	 * app in the store. Decorative: the badges carry the link text.
+	 *
+	 * @return string
+	 */
+	private static function app_icon() {
+		/**
+		 * App icon shown next to the store badges. Return '' to hide it.
+		 *
+		 * @param string $url Image URL.
+		 */
+		$url = (string) apply_filters( 'xlights_app_icon', Html::asset_image( 'brand/app-icon.webp' ) );
+		if ( '' === $url ) {
+			return '';
+		}
+		return '<span class="xl-stores__app" aria-hidden="true"><img src="' . esc_url( $url ) . '" width="48" height="48" alt="" loading="lazy" decoding="async"></span>';
 	}
 
 	/**
