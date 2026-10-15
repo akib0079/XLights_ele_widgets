@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,18 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.6.0 =
+* Real content only: the drawn app mock-ups and illustrations are gone. App sections show the official X LIGHTS app screenshots (color, patterns, music, timers, controllers, family management); the service-area map uses a photo.
+* Official X LIGHTS app icon in the "one connected system" hub (Hub icon field) and next to the store badges.
+* App Store and Google Play badges (official artwork) link to the X LIGHTS LED app by default. Sites saved with empty store links get them filled on update; links a dealer entered are kept.
+* Bond Bridge smart-home section (official copy) on the App and Soffit pages: Control4, Savant, Crestron, Alexa, Google Home and more.
+* Deck and Landscape collections follow the official X LIGHTS product sheets, with photos; new "All fixtures are" strip (RGBW, IP67, quick connect, premium build, expandable, low voltage). Soffit and Bistro product details from the official site.
+* Every call to action now has a background photo, including the footer band.
+* 29 new photos from the client (metadata removed, compressed, 640/1024 px copies). Explorer sections use the sharper photos.
+* Default project gallery: on sites with no projects, 12 editable projects (48 photos in the Media Library) are added in the background. Add or remove them in X LIGHTS → Page Setup, or with `wp xlights samples [--remove]`.
+* Editor: switching a section off in "Sections — Visibility & Order" also hides its settings panel; switching it back on brings it back.
+* Image cards without a photo show a product icon instead of a drawn illustration.
 
 = 1.5.0 =
 * Layout system: Split sections gain an Editorial layout (large photo with an overlapping text card) and a Cinematic layout (full-width inset photo with a glass text panel).

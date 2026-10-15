@@ -325,7 +325,7 @@ return array(
 	'projects'  => Defaults::projects(
 		'soffit',
 		__( 'Permanent soffit lighting projects', 'xlights-elementor-widgets' ),
-		__( 'Recent roofline installations by {dealer}.', 'xlights-elementor-widgets' ),
+		__( 'Roofline lighting from X LIGHTS installations.', 'xlights-elementor-widgets' ),
 		array( 'bg' => 'light' )
 	),
 	'faq'       => array(

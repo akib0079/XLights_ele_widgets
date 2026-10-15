@@ -1,3 +1,23 @@
+# Testing report — v1.6.0
+
+**TL;DR:** 1.6.0 (real app screens and icon, store links, Bond Bridge, official deck/landscape collections, photo CTAs, sample projects, hidden sections dropping out of the editor panel) passes every suite on the Hello Elementor dev site and after upgrading a fresh install from the 1.6.0 ZIP. The upgrade fills empty store links and imports the sample projects only on a site without projects.
+
+| Suite | Hello theme dev site | Fresh install upgraded with the 1.6.0 ZIP (Twenty Twenty-Five) |
+|---|---|---|
+| **Photos, layouts & content** (`ux.js`, extended) | ✅ 56/56 | ✅ all passed |
+| Render | ✅ all passed | — |
+| Elementor | ✅ all passed | — |
+| Security | ✅ 34/34, 1 expected warning (PHP dev server ignores .htaccess) | — |
+| Pages — 12 pages × 5 widths | ✅ all passed | ✅ all passed |
+| Interactions | ✅ all passed | — |
+| Form | ✅ all passed | — |
+| Accessibility — axe, 12 pages × 2 widths | ✅ all passed | ✅ all passed |
+| Design settings | ✅ all passed | — |
+| **Editor** (real Elementor 4.0 editor, extended) | ✅ 12/12 | — |
+| Sample projects: background import, add/remove, skip when projects exist | ✅ 12 projects, 48 images, all removed again | ✅ |
+
+New in `ux.js`: no drawn mock-up or illustration on any of the 12 pages; every call to action has a background photo; the connected hub shows the app icon; the app icon sits beside the store badges; the badges link to the X LIGHTS LED listings; the app showcase uses the real screenshots. New in `editor.js`: switching a section off hides its settings panel, and switching it on brings it back.
+
 # Testing report — v1.5.0
 
 **TL;DR:** the new layout system (editorial and cinematic splits, Feature Explorer, Home bento) and the hover-underline fix pass every suite on the Hello Elementor setup and after upgrading a 1.4.0 install from the ZIP. No page renders two side-by-side sections in a row (now a test). Under a deliberately garish Elementor *Theme Style*, the explorer tabs, editorial card and cinematic panel buttons keep their own colors.

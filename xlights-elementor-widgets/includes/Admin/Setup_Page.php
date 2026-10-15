@@ -102,6 +102,31 @@ final class Setup_Page {
 				</fieldset>
 				<?php submit_button( __( 'Run page setup', 'xlights-elementor-widgets' ) ); ?>
 			</form>
+
+			<?php $samples = \XLights\Setup\Sample_Projects::status(); ?>
+			<h2><?php esc_html_e( 'Sample projects', 'xlights-elementor-widgets' ); ?></h2>
+			<p>
+				<?php esc_html_e( 'Fills the project gallery with editable projects made from the bundled X LIGHTS photos (they are added to the Media Library). They have neutral titles and no city — edit them, or replace them with your own projects. They are added automatically only on sites that have no projects yet.', 'xlights-elementor-widgets' ); ?>
+			</p>
+			<p><strong>
+				<?php
+				if ( 'queued' === $samples['state'] ) {
+					/* translators: %d: number of sample projects */
+					printf( esc_html__( 'Adding in the background — %d added so far.', 'xlights-elementor-widgets' ), (int) $samples['count'] );
+				} else {
+					/* translators: %d: number of sample projects */
+					printf( esc_html( _n( '%d sample project on this site.', '%d sample projects on this site.', (int) $samples['count'], 'xlights-elementor-widgets' ) ), (int) $samples['count'] );
+				}
+				?>
+			</strong></p>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="xl-inline-form">
+				<input type="hidden" name="action" value="xlights_samples">
+				<?php wp_nonce_field( 'xlights_samples' ); ?>
+				<button type="submit" class="button button-secondary" name="do" value="add"><?php esc_html_e( 'Add sample projects', 'xlights-elementor-widgets' ); ?></button>
+				<?php if ( $samples['count'] ) : ?>
+					<button type="submit" class="button-link button-link-delete" name="do" value="remove" onclick="return window.confirm('<?php echo esc_js( __( 'Delete the sample projects and the images imported for them? Projects you created are not affected.', 'xlights-elementor-widgets' ) ); ?>');"><?php esc_html_e( 'Remove sample projects', 'xlights-elementor-widgets' ); ?></button>
+				<?php endif; ?>
+			</form>
 		</div>
 		<?php
 	}

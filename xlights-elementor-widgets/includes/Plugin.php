@@ -28,6 +28,7 @@ final class Plugin {
 		add_action( 'init', array( $this, 'load_textdomain' ), 0 );
 
 		Setup\Installer::init();
+		Setup\Sample_Projects::init();
 
 		// Content models.
 		PostTypes\Projects::init();

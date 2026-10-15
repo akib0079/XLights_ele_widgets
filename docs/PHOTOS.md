@@ -41,6 +41,23 @@ The three images that shipped in earlier versions (`home-two-story-night.jpg`, `
 
 **Not used:** the five flyers (text-heavy, not photos), wiring/detail close-ups (IMG_2060, IMG_3467, IMG_3472, IMG_1091), IMG_2061 (licence plates and house number), IMG_8508 (garage interior), IMG_0128 / IMG_0305 / IMG_3372–3374 / IMG_8509 / remaining dsc… product close-ups (daylight or detail shots that read poorly at section size). They can still be uploaded to the Media Library and picked in Elementor.
 
+## 1.6.0 additions (newphotos1.zip, newphotos2.zip)
+
+Same processing: metadata and GPS removed, adaptive WebP quality (most files ≤ 250 KB), 640/1024 px copies for srcset.
+
+| Group | Files | Used on |
+|---|---|---|
+| Soffit | soffit-two-story-dusk, soffit-house-dusk-wide, soffit-house-evening, soffit-garage-night, soffit-winter-warm, soffit-winter-night, holiday-color-family | CTAs (Home, Soffit, Contact), map backdrop, sample projects. The snow photos are used only in sample projects |
+| Install / product | installer-controller, controller-box | About CTA |
+| Deck | deck-stairs-step-lights, deck-steps-app, deck-flex-pergola, deck-dot-light, deck-dot-lights-boards, deck-flex-detail | Deck explorer, collection cards, CTA |
+| Landscape | landscape-uplit-trees, landscape-tree-wall, landscape-tree-deck-dots, landscape-walkway-pergola, landscape-stone-steps, landscape-inground-mulch/-green/-blue, landscape-path-pagoda, landscape-path-ring, landscape-spot-green, landscape-path-garden, landscape-wall-light | Landscape explorer, collection cards, CTA |
+| Bistro | bistro-string-backyard (sharper copy of backyard-string-lights) | Bistro, Solutions, CTA |
+| Smart home | bond-integrations (Bond partner logos, from the client's image) | Bond Bridge section |
+| App | assets/images/app/: official framed screenshots (color, patterns, music, timers, controllers, family) | App showcase tabs and hero |
+| Brand | assets/images/brand/: official App Store and Google Play badges, X LIGHTS app icon | Store badges, connected hub |
+
+**Sample projects** reuse these photos (and the 1.4.0 set) as Media Library images. They have neutral titles and no location because they are brand photos, not this dealer's own jobs.
+
 ## Confirm with the client
 
 1. **Usage rights.** Several images look like professional marketing renderings rather than photos of this dealer's installs (very clean, staged scenes). Confirm they come from X LIGHTS corporate marketing or a source the dealer may use. The site never captions them as local projects; real installs belong in **X LIGHTS → Projects**.

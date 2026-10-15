@@ -165,7 +165,7 @@ return array(
 	'projects'     => Defaults::projects(
 		'featured',
 		__( 'Featured projects', 'xlights-elementor-widgets' ),
-		__( 'A look at recent installations by {dealer}.', 'xlights-elementor-widgets' ),
+		__( 'A look at X LIGHTS installations.', 'xlights-elementor-widgets' ),
 		array( 'bg' => 'warm' )
 	),
 	'reviews'      => array(

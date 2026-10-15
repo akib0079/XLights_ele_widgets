@@ -52,6 +52,23 @@ const EDITED = 'Edited in the <em>Elementor editor</em>';
 	ok(!panel.includes('About Hero'), 'only the current template’s sections are listed');
 	await p.screenshot({ path: OUT_DIR + '/editor-panel.png' });
 
+	// Switching a section off in "Sections — Visibility & Order" also removes its settings panel.
+	const shown = (sec) => p.evaluate((sec) => {
+		const el = document.querySelector('#elementor-panel .elementor-control-home__' + sec);
+		return !!el && getComputedStyle(el).display !== 'none';
+	}, sec);
+	const setEnabled = (sec, on) => p.evaluate(({ id, sec, on }) => {
+		const row = elementor.getContainer(id).settings.get('home__order').find((m) => m.get('section') === sec);
+		row.set('enabled', on ? 'yes' : '');
+	}, { id, sec, on });
+	ok(await shown('connected'), 'section panel listed while the section is on');
+	await setEnabled('connected', false);
+	await p.waitForTimeout(1000);
+	ok(!(await shown('connected')), 'switching a section off hides its settings panel');
+	await setEnabled('connected', true);
+	await p.waitForTimeout(1000);
+	ok(await shown('connected'), 'switching it back on brings the panel back');
+
 	const original = await p.evaluate((id) => elementor.getContainer(id).settings.get('home__hero__heading'), id);
 	const save = () => p.evaluate(() => $e.run('document/save/update', { force: true }));
 	await p.evaluate(

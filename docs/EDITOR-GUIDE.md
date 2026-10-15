@@ -11,7 +11,7 @@
 | Panel | What it does |
 |---|---|
 | **Page Configuration → Page template** | Which of the 12 page layouts this widget renders. Already set by Page Setup — normally leave it alone. |
-| **Sections — Visibility & Order** | One row per section. **Drag** to reorder. Open a row to turn *Show section* off, or *Hide on desktop / tablet / mobile*. Hidden rows show "— hidden". |
+| **Sections — Visibility & Order** | One row per section. **Drag** to reorder. Open a row to turn *Show section* off, or *Hide on desktop / tablet / mobile*. Hidden rows show "— hidden", and the section's settings panel disappears from the list below until you switch it back on. |
 | **01 · Hero**, **02 · …** | One panel per section with its headline, text, buttons, images and lists. Only the current template's sections are shown. |
 
 4. **Update** (bottom-left) saves and publishes changes; use the arrow next to it for *Save Draft*.
@@ -117,6 +117,7 @@ On phones, a bar with **Call** and **Get a Quote** slides up after the first scr
 
 ## Projects gallery
 
+- New sites start with **sample projects** made from the bundled X LIGHTS photos. Edit them, or remove them all in **X LIGHTS → Page Setup → Sample projects** once you have your own.
 - Add projects in **X LIGHTS → Projects** — they appear automatically on Projects, Home ("Featured"), and each solution page (filtered by category).
 - Location field: **city or neighborhood only** — never a homeowner's address.
 - Mark the best 3–6 as **Featured**.

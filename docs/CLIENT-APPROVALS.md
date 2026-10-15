@@ -51,7 +51,9 @@
 | 11 | Soffit feature claims: *individually programmable*, *weather-resistant*, *low-voltage* | Soffit → feature cards | Hidden (pending) |
 | 12 | **Bistro** product: bulb specs, color capability, app control | Bistro → "special occasions" section + specs | Hidden (pending) |
 | 13 | Deck & landscape product specs and warranty | Deck / Landscape → specs | Rows blank/hidden |
-| 14 | **Bond Bridge / smart-home compatibility** per product | X LIGHTS App page | Shown as general capability with editor note — confirm or set to pending |
+| 14 | **Bond Bridge / smart-home compatibility** per product | App and Soffit pages | Official X LIGHTS copy supplied by the client; platform list from the official soffit page |
+| 14b | **Controller voltage**: the official site names the light line "48 V" but the controller card says "120 V in, 24 V out" | Soffit → Product details | The voltage line is left off the controller card until X LIGHTS confirms which is correct |
+| 14c | **Landscape "Wall lights" card** — not on the landscape sheet; added because the client's photos include a wall light | Landscape → collection | Confirm or delete the card. The "Modern bollard lights" card has no photo yet (none supplied) |
 | 15 | Commercial terms: warranty, maintenance plans, timelines, minimums | Commercial FAQ | Neutral copy ("we'll walk you through …"), no specifics |
 | 16 | Financing partner, terms and disclaimer | Settings → Credentials & Financing | Hidden (financing gate) |
 
@@ -59,7 +61,7 @@
 
 | # | Item | Status |
 |---|---|---|
-| 17 | App Store URL / Google Play URL for the X LIGHTS app | Hidden badges |
+| 17 | App Store URL / Google Play URL for the X LIGHTS app | **Done** — official X LIGHTS LED links are the defaults (Settings → App & Social) |
 | 18 | Google Business Profile reviews URL | Hidden links |
 | 19 | Social profile URLs (Facebook, Instagram, YouTube …) — the dealer's own, not corporate, unless approved | Blank → icons not shown |
 
@@ -67,7 +69,7 @@
 
 | # | Item | Status |
 |---|---|---|
-| 20 | **Approved project photos** with city/area only (no addresses, no visible house numbers), category, residential/commercial | 3 client photos bundled as defaults; Projects gallery empty until projects are added |
+| 20 | **Approved project photos** with city/area only (no addresses, no visible house numbers), category, residential/commercial | Sample projects (brand photos, neutral titles, no city) fill the gallery until real projects are added — replace them as approved local projects come in |
 | 21 | Matching **before/after** pairs (same angle, day + night) | Before/After section hidden until a pair exists |
 | 22 | **Real customer reviews** with written permission | None. No reviews are invented; sections hide or show a neutral message |
 | 23 | Local team: names, roles, bios, photos | About → Local Team hidden until added |

@@ -45,6 +45,7 @@ final class Installer {
 		Reviews::register();
 		Leads::register();
 		Projects::ensure_terms();
+		Sample_Projects::schedule();
 
 		$admin = get_role( 'administrator' );
 		if ( $admin && ! $admin->has_cap( Leads::CAP ) ) {
@@ -91,6 +92,8 @@ final class Installer {
 		}
 		if ( $stored && version_compare( (string) $stored, '1.6.0', '<' ) ) {
 			self::migrate_store_links();
+			// Sites without any projects get the default gallery (never sites that have their own).
+			Sample_Projects::schedule();
 		}
 		update_option( self::VERSION_OPTION, XLIGHTS_VERSION );
 	}

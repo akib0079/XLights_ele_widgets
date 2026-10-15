@@ -36,14 +36,14 @@ defined( 'ABSPATH' ) || exit;
 				<div class="xl-map__placeholder">
 					<?php
 					// Decorative backdrop behind the click-to-load button (empty alt).
-					echo Html::image(
+					echo Html::image( // phpcs:ignore WordPress.Security.EscapeOutput
 						Html::asset_image( 'photos/soffit-house-dusk-wide.webp' ),
 						array(
 							'alt'   => '',
 							'sizes' => '(max-width: 1024px) 100vw, 50vw',
 							'class' => 'xl-map__photo',
 						)
-					); // phpcs:ignore WordPress.Security.EscapeOutput
+					);
 					?>
 					<div class="xl-map__cta">
 						<button type="button" class="xl-btn xl-btn--light" data-xl-map-load><?php echo Icons::svg( 'map-pin' ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php esc_html_e( 'Show service-area map', 'xlights-elementor-widgets' ); ?></span></button>

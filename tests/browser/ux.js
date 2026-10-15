@@ -3,7 +3,8 @@
  * no metadata, theme-style shield is current, hover motion only for fine
  * pointers, keyboard focus mirrors hover, whole overlay cards are clickable,
  * focus rings are not clipped, reduced motion disables the button sheen,
- * Everyday/Holiday comparison, mobile call & quote bar behaviour.
+ * Everyday/Holiday comparison, mobile call & quote bar behaviour; 1.6.0: no
+ * drawn mock-ups, real app screens and icon, store links, photo behind every CTA.
  *
  *   BASE_URL=http://localhost:8080 node tests/browser/ux.js
  */
@@ -274,6 +275,42 @@ function webpChunks(file) {
 	ok(formOnScreen && !(await bar()).shown, 'phone: bar hidden while the quote form is on screen');
 	ok(merrs.length === 0, 'phone: no JS errors ' + merrs.join(' | '));
 	await mob.close();
+
+	// 1.6.0 content: real photos and app screens only, store badges with the app icon,
+	// a photo behind every call to action.
+	const pages = ['/', '/about-us/', '/x-lights-app/', '/reviews/', '/lighting-solutions/', '/commercial-lighting/', '/projects/', '/contact-us/',
+		'/lighting-solutions/permanent-soffit-lighting/', '/lighting-solutions/bistro-lighting/', '/lighting-solutions/deck-lighting/', '/lighting-solutions/landscape-lighting/'];
+	const cp = await desk.newPage();
+	const drawn = [];
+	const plainCta = [];
+	for (const u of pages) {
+		await cp.goto(BASE_URL + u, { waitUntil: 'domcontentloaded' });
+		const r = await cp.evaluate(() => ({
+			drawn: document.querySelectorAll('.xl-root .xl-illus, .xl-root .xl-phone--mock').length,
+			plain: [...document.querySelectorAll('.xl-root .xl-cta')].filter((c) => !c.querySelector('.xl-cta__media img')).length,
+		}));
+		if (r.drawn) drawn.push(u + ' (' + r.drawn + ')');
+		if (r.plain) plainCta.push(u + ' (' + r.plain + ')');
+	}
+	ok(drawn.length === 0, 'no drawn mock-ups or illustrations on any page' + (drawn.length ? ': ' + drawn.join(', ') : ''));
+	ok(plainCta.length === 0, 'every call to action has a background photo' + (plainCta.length ? ': ' + plainCta.join(', ') : ''));
+
+	await cp.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
+	const app = await cp.evaluate(() => {
+		const hub = document.querySelector('.xl-connected__hub img');
+		const stores = document.querySelector('.xl-stores');
+		return {
+			hub: hub ? /app-icon/.test(hub.currentSrc || hub.src) : false,
+			icon: !!(stores && stores.querySelector('.xl-stores__app img')),
+			links: stores ? [...stores.querySelectorAll('a.xl-store')].map((a) => a.href) : [],
+		};
+	});
+	ok(app.hub, 'home: connected hub shows the X LIGHTS app icon');
+	ok(app.icon, 'home: app icon next to the store badges');
+	ok(app.links.some((h) => /apps\.apple\.com\/.*id6462840352/.test(h)) && app.links.some((h) => /play\.google\.com\/.*com\.goulyled\.xlights/.test(h)), 'home: App Store and Google Play badges link to the X LIGHTS LED app');
+	const screens = await cp.evaluate(() => [...document.querySelectorAll('.xl-app-showcase img.xl-phone__device')].filter((i) => /\/images\/app\//.test(i.src)).length);
+	ok(screens >= 3, `home: app showcase uses real app screenshots (${screens})`);
+	await cp.close();
 
 	await browser.close();
 	done();

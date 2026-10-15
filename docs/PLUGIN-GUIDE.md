@@ -1,4 +1,4 @@
-# X LIGHTS Elementor Widgets — Plugin Guide (v1.5.0)
+# X LIGHTS Elementor Widgets — Plugin Guide (v1.6.0)
 
 **TL;DR:** install the ZIP (Elementor required), fill in **X LIGHTS → Settings**, run **X LIGHTS → Page Setup** to create the 12 pages, then edit any page in Elementor through its **Page Composer** widget. Every phone number, color, font, link and approval switch lives in **Settings** and flows to every page, the header and the footer. Projects, reviews and incoming quote requests are managed under **X LIGHTS** in wp-admin.
 
@@ -63,7 +63,7 @@ Activation itself creates **no pages and publishes nothing**; it creates the pri
 |---|---|
 | **Content → Page template** | Which of the 12 templates this page shows. |
 | **Content → 01 · Hero, 02 · …** | One panel per section of the chosen template: headline, text, buttons, images, lists (repeaters: add, drag, duplicate, delete). Common to every section: **Section background** (Light / Light grey / Dark), **Vertical spacing**, and per-item **Publication** (Always show · Only when credentials are verified · Only when financing is approved · Pending client approval). |
-| **Content → Sections — Visibility & Order** | Drag to reorder, switch sections off, hide on desktop/tablet/mobile. |
+| **Content → Sections — Visibility & Order** | Drag to reorder, switch sections off, hide on desktop/tablet/mobile. A section that is switched off also drops out of the panel list below, so only the sections on the page have settings; switch it back on here to edit it. |
 | **Style** | Overrides for this page only: Global Layout (width, spacing, gutter), Colors, Typography, Buttons, Cards, Images, Section Backgrounds, Animations & Hover. Leave empty to use *Settings → Colors & Fonts*. |
 | **Advanced** | Standard Elementor options (margins, CSS classes, responsive). |
 
@@ -183,8 +183,8 @@ Leave a field blank to hide it. Do not enter placeholder URLs.
 
 | Setting | Default | What it does |
 |---|---|---|
-| **Apple App Store URL 🔒** | — |  |
-| **Google Play URL 🔒** | — |  |
+| **Apple App Store URL** | X LIGHTS LED on the App Store | Store badges link here. |
+| **Google Play URL** | X LIGHTS LED on Google Play | Store badges link here. |
 | **Google Reviews URL** | — | Link to the dealer's Google Business Profile reviews. |
 | **Facebook** | — |  |
 | **Instagram** | — |  |
@@ -276,6 +276,8 @@ Type these in any text, heading, link or button field:
 ## 9. Projects, reviews and leads
 
 **Projects** (X LIGHTS → Projects): title, main photo (featured image), gallery (drag to order; alt text in the Media Library), **city/area only — never an address**, completion date, *Featured*, **Lighting categories** and **Property type** (sidebar), optional *Before & after* pair. They feed the Projects gallery (filters + lightbox, works without JavaScript), Home "Featured projects", each solution page (filtered) and the Before/After section. Each project also gets its own page under `/projects/<name>/`.
+
+**Sample projects.** A site with no projects gets 12 editable projects built from the bundled photos (48 images added to the Media Library, neutral titles, no city), imported in the background a few at a time. Edit them like any project, or remove them all in **X LIGHTS → Page Setup → Sample projects** (or `wp xlights samples --remove`); projects you create are never touched. Sites that already have projects never get them unless you click *Add sample projects*.
 
 **Reviews** (X LIGHTS → Reviews): customer display name, exact review text, rating (only if given), source + link, date, city, related project, attribution (*local* or *brand-level*, labeled on the site), featured. **Never shown without "Customer permission confirmed".** Reviews sections hide themselves when nothing is approved.
 

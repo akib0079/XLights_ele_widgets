@@ -192,4 +192,38 @@ final class Command {
 		$n   = Installer::purge_old_leads( $dry );
 		WP_CLI::success( sprintf( '%d lead(s) %s.', $n, $dry ? 'would be deleted' : 'deleted' ) );
 	}
+
+	/**
+	 * Add or remove the sample projects built from the bundled photos.
+	 *
+	 * ## OPTIONS
+	 *
+	 * [--remove]
+	 * : Delete the sample projects and the images imported for them.
+	 *
+	 * [--force]
+	 * : Add them even if the site already has projects.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp xlights samples
+	 *     wp xlights samples --remove
+	 *
+	 * @param array $args  Args.
+	 * @param array $assoc Assoc.
+	 */
+	public function samples( $args, $assoc ) {
+		if ( isset( $assoc['remove'] ) ) {
+			WP_CLI::success( sprintf( '%d sample project(s) removed.', \XLights\Setup\Sample_Projects::remove() ) );
+			return;
+		}
+		if ( ! isset( $assoc['force'] ) && ! \XLights\Setup\Sample_Projects::site_is_empty() && ! \XLights\Setup\Sample_Projects::status()['count'] ) {
+			WP_CLI::warning( 'This site already has projects. Use --force to add the samples anyway.' );
+			return;
+		}
+		update_option( \XLights\Setup\Sample_Projects::STATE, 'queued', false );
+		$n = \XLights\Setup\Sample_Projects::run_batch( 0 );
+		wp_clear_scheduled_hook( \XLights\Setup\Sample_Projects::CRON_HOOK );
+		WP_CLI::success( sprintf( '%d sample project(s) added (%d in total).', $n, \XLights\Setup\Sample_Projects::status()['count'] ) );
+	}
 }

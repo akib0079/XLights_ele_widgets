@@ -280,10 +280,13 @@ final class Defaults {
 					'eyebrow'        => __( 'Bond Bridge integration', 'xlights-elementor-widgets' ),
 					'heading'        => __( 'Seamless integration with <em>luxury home automation.</em>', 'xlights-elementor-widgets' ),
 					'text'           => __( '<p>X LIGHTS now integrates with Bond Bridge, syncing your outdoor lighting with luxury home automation systems like Control4 and Savant. You can now manage lights, shades, and fans through a single app or remote, while still using the X Lights app for advanced color customization.</p><p>Your lighting works alongside other automated patio features such as louvers, shades, screens, awnings and fans, with scheduling and scene creation from the remote or smart-home app you already use.</p>', 'xlights-elementor-widgets' ),
-					'points'         => __( "Alexa and Google Home
+					'points'         => __(
+						'Alexa and Google Home
 Control4, Savant and Crestron
 Loxone, RTI and Josh.ai
-Advanced colors and patterns stay in the X LIGHTS app", 'xlights-elementor-widgets' ),
+Advanced colors and patterns stay in the X LIGHTS app',
+						'xlights-elementor-widgets'
+					),
 					'visual'         => 'image',
 					'image'          => self::photo( 'bond-integrations' ),
 					'image_alt'      => __( 'Bond works with Alexa, Google Home, Samsung SmartThings, Josh.ai, Control4, Nice, Crestron, Savant, RTI, Hubitat, Homebridge, URC and Loxone', 'xlights-elementor-widgets' ),
