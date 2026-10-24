@@ -365,6 +365,9 @@ function webpChunks(file) {
 		return g ? { phones: g.querySelectorAll('img.xl-phone__device').length, nav: !!g.querySelector('[data-xl-next]'), heading: /Control it all/i.test(g.textContent) } : null;
 	});
 	ok(gal && gal.heading && gal.phones >= 6 && gal.nav, 'solutions: "Control it all from your phone" is a scrolling gallery of the real app screens');
+	await cp.goto(BASE_URL + '/projects/?xl_filter=commercial', { waitUntil: 'networkidle' });
+	const cm = await cp.evaluate(() => [...document.querySelectorAll('#xl-projects-gallery .xl-projects__grid > li')].map((li) => li.textContent.replace(/\s+/g, ' ').trim()));
+	ok(cm.some((t) => /Cottonmouth Dispensary/.test(t)), 'projects gallery: Cottonmouth Dispensary listed under Commercial');
 	await cp.close();
 
 	await browser.close();

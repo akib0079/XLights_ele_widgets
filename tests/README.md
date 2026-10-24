@@ -19,7 +19,8 @@ Run against a **local or staging** WordPress site with Elementor and this plugin
 ## Setup
 
 ```bash
-# QA content the browser tests expect (4 projects, 4 reviews incl. one without permission)
+# QA content the browser tests expect (4 projects, 4 reviews incl. one without permission).
+# The plugin also adds the Cottonmouth Dispensary project, so the gallery tests expect 5 projects.
 wp eval-file tests/php/seed-qa-data.php
 
 # Browser tooling

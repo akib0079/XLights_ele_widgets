@@ -1,4 +1,4 @@
-# X LIGHTS Elementor Widgets — Plugin Guide (v1.7.0)
+# X LIGHTS Elementor Widgets — Plugin Guide (v1.7.1)
 
 **TL;DR:** install the ZIP (Elementor required), fill in **X LIGHTS → Settings**, run **X LIGHTS → Page Setup** to create the 12 pages, then edit any page in Elementor through its **Page Composer** widget. Every phone number, color, font, link and approval switch lives in **Settings** and flows to every page, the header and the footer. Projects, reviews and incoming quote requests are managed under **X LIGHTS** in wp-admin.
 
@@ -280,6 +280,8 @@ Type these in any text, heading, link or button field:
 ## 9. Projects, reviews and leads
 
 **Projects** (X LIGHTS → Projects): title, main photo (featured image), gallery (drag to order; alt text in the Media Library), **city/area only — never an address**, completion date, *Featured*, **Lighting categories** and **Property type** (sidebar), optional *Before & after* pair. They feed the Projects gallery (filters + lightbox, works without JavaScript), Home "Featured projects", each solution page (filtered) and the Before/After section. Each project also gets its own page under `/projects/<name>/`.
+
+**Cottonmouth Dispensary project.** The dealer's first commercial project is added once to X LIGHTS → Projects (featured, Commercial, Permanent Soffit Lighting, three photos). Edit it like any project. It is not a sample, so removing the sample projects keeps it.
 
 **Brand-level Google reviews.** Three Google reviews of X LIGHTS in Canada (supplied by X LIGHTS) are added once as reviews with attribution *brand-level*, location Canada and no name or rating (none were supplied). The site labels them "Brand-level review from another X LIGHTS location". Edit or delete them like any review; a deleted one is not added back.
 

@@ -3,7 +3,7 @@
  * Plugin Name:       X LIGHTS Elementor Widgets
  * Plugin URI:        https://github.com/akib0079/XLights_ele_widgets
  * Description:       Page Composer, section widgets, dealer settings, projects, reviews and secure quote-request handling for X LIGHTS dealer websites built with Elementor.
- * Version:           1.7.0
+ * Version:           1.7.1
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            AvixDigital
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'XLIGHTS_VERSION', '1.7.0' );
+define( 'XLIGHTS_VERSION', '1.7.1' );
 define( 'XLIGHTS_FILE', __FILE__ );
 define( 'XLIGHTS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'XLIGHTS_URL', plugin_dir_url( __FILE__ ) );

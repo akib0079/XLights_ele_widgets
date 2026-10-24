@@ -19,10 +19,11 @@ const { BASE_URL, OUT_DIR, ok, launch, trackErrors, done } = require('./lib');
 
 	// Projects gallery.
 	await page.goto(BASE_URL + '/projects/', { waitUntil: 'networkidle' });
-	ok((await cards()) === 4, 'gallery shows the 4 QA projects');
+	// 4 QA projects (tests/php/seed-qa-data.php) + the Cottonmouth Dispensary project the plugin adds (1.7.1).
+	ok((await cards()) === 5, 'gallery shows the 4 QA projects and Cottonmouth Dispensary');
 	await page.click('#xl-projects-gallery [data-xl-filter="soffit"]');
 	await page.waitForTimeout(600);
-	ok((await cards()) === 2, 'soffit filter → 2 projects');
+	ok((await cards()) === 3, 'soffit filter → 3 projects');
 	ok((await page.getAttribute('#xl-projects-gallery [data-xl-filter="soffit"]', 'aria-current')) === 'true', 'active filter has aria-current');
 	ok(page.url().includes('xl_filter=soffit'), 'URL reflects the filter (shareable)');
 	await page.click('#xl-projects-gallery [data-xl-filter="bistro"]');

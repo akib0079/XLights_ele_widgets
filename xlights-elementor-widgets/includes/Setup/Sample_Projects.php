@@ -361,13 +361,27 @@ final class Sample_Projects {
 	 * @return int Attachment ID or 0.
 	 */
 	private static function attachment( $name ) {
+		return self::import_image( $name, self::alt( $name ), self::META_SRC, true );
+	}
+
+	/**
+	 * Copy a bundled image into the Media Library, or return the copy made
+	 * earlier (matched by $src_key = $name).
+	 *
+	 * @param string $name    Image name ("<photo>" or a legacy file in assets/images).
+	 * @param string $alt     Alt text.
+	 * @param string $src_key Meta key that records which bundled image it came from.
+	 * @param bool   $sample  Tag the image as a sample (removed with the samples).
+	 * @return int Attachment ID or 0.
+	 */
+	public static function import_image( $name, $alt, $src_key, $sample ) {
 		$existing = get_posts(
 			array(
 				'post_type'      => 'attachment',
 				'post_status'    => 'inherit',
 				'posts_per_page' => 1,
 				'fields'         => 'ids',
-				'meta_key'       => self::META_SRC, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'meta_key'       => $src_key, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 				'meta_value'     => $name, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 			)
 		);
@@ -383,7 +397,7 @@ final class Sample_Projects {
 			return 0;
 		}
 		$type = wp_check_filetype( $bits['file'] );
-		$alt  = self::alt( $name );
+		$alt  = (string) $alt;
 		$aid  = wp_insert_attachment(
 			array(
 				'post_mime_type' => $type['type'],
@@ -402,8 +416,10 @@ final class Sample_Projects {
 		}
 		wp_update_attachment_metadata( $aid, wp_generate_attachment_metadata( $aid, $bits['file'] ) );
 		update_post_meta( $aid, '_wp_attachment_image_alt', $alt );
-		update_post_meta( $aid, self::META, '1' );
-		update_post_meta( $aid, self::META_SRC, $name );
+		if ( $sample ) {
+			update_post_meta( $aid, self::META, '1' );
+		}
+		update_post_meta( $aid, $src_key, $name );
 		return (int) $aid;
 	}
 

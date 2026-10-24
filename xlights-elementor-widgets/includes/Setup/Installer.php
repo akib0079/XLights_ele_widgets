@@ -47,6 +47,7 @@ final class Installer {
 		Projects::ensure_terms();
 		Sample_Projects::schedule();
 		Brand_Reviews::seed();
+		Client_Projects::seed();
 
 		$admin = get_role( 'administrator' );
 		if ( $admin && ! $admin->has_cap( Leads::CAP ) ) {
@@ -101,6 +102,7 @@ final class Installer {
 			Sample_Projects::sync();
 		}
 		Brand_Reviews::seed();
+		Client_Projects::seed();
 		if ( $stored ) {
 			// Saved pages follow improved default text again (edited text is kept).
 			Stale_Defaults::run();
