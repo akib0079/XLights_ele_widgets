@@ -17,6 +17,7 @@ final class Settings {
 
 	/** Official X LIGHTS LED app listings. */
 	const APP_STORE_URL   = 'https://apps.apple.com/ca/app/x-lights-led/id6462840352';
+	const DEALER_PROGRAM_URL = 'https://www.xlightsled.com/dealer';
 	const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.goulyled.xlights&hl=en_CA';
 
 	const OPTION = 'xlights_settings';
@@ -636,6 +637,17 @@ final class Settings {
 						'label'       => __( 'Mobile call & quote bar', 'xlights-elementor-widgets' ),
 						'default'     => 1,
 						'description' => __( 'On phones, a Call / Get a Quote bar slides up after the first screen. It steps aside while a quote form is on screen or someone is typing.', 'xlights-elementor-widgets' ),
+					),
+					'dealer_link_url'    => array(
+						'type'        => 'url',
+						'label'       => __( 'Dealer program link', 'xlights-elementor-widgets' ),
+						'default'     => self::DEALER_PROGRAM_URL,
+						'description' => __( 'Footer link for people interested in becoming an X LIGHTS dealer (dealer information and map on xlightsled.com). Leave blank to hide it.', 'xlights-elementor-widgets' ),
+					),
+					'dealer_link_label'  => array(
+						'type'    => 'text',
+						'label'   => __( 'Dealer program link text', 'xlights-elementor-widgets' ),
+						'default' => __( 'Become an X LIGHTS dealer', 'xlights-elementor-widgets' ),
 					),
 					'footer_note'        => array(
 						'type'        => 'textarea',

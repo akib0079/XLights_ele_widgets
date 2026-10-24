@@ -73,6 +73,7 @@ return array(
 			'bg'              => 'warm',
 		),
 	),
+	'compare'      => Defaults::holiday_compare(),
 	'spaces'       => array(
 		'type'     => 'cards',
 		'label'    => __( 'Outdoor Spaces (Bistro, Commercial, Deck, Landscape)', 'xlights-elementor-widgets' ),
@@ -149,6 +150,7 @@ return array(
 			'bg'             => 'warm',
 		),
 	),
+	'automation'   => Defaults::home_automation(),
 	'why'          => array(
 		'type'     => 'cards',
 		'label'    => __( 'Why Choose X LIGHTS', 'xlights-elementor-widgets' ),
@@ -173,7 +175,7 @@ return array(
 		'label'    => __( 'Reviews', 'xlights-elementor-widgets' ),
 		'defaults' => array(
 			'eyebrow'    => __( 'Customer reviews', 'xlights-elementor-widgets' ),
-			'heading'    => __( 'What our customers say', 'xlights-elementor-widgets' ),
+			'heading'    => __( 'What X LIGHTS customers say', 'xlights-elementor-widgets' ),
 			'layout'     => 'carousel',
 			'scope'      => 'local_first',
 			'count'      => 6,

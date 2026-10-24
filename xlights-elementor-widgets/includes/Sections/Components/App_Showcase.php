@@ -36,6 +36,15 @@ class App_Showcase extends Component {
 		return array_merge(
 			self::head_fields( true ),
 			array(
+				'layout'         => self::select(
+					__( 'Layout', 'xlights-elementor-widgets' ),
+					array(
+						'tabs'    => __( 'Tabs beside one phone', 'xlights-elementor-widgets' ),
+						'gallery' => __( 'Scrolling gallery of app screens', 'xlights-elementor-widgets' ),
+					),
+					'tabs',
+					array( 'separator' => 'before' )
+				),
 				'phone_position' => self::select(
 					__( 'Phone position', 'xlights-elementor-widgets' ),
 					array(
@@ -43,7 +52,7 @@ class App_Showcase extends Component {
 						'right' => __( 'Right', 'xlights-elementor-widgets' ),
 					),
 					'right',
-					array( 'separator' => 'before' )
+					array( 'description' => __( 'Tabs layout only.', 'xlights-elementor-widgets' ) )
 				),
 				'items'          => array(
 					'type'        => 'repeater',
@@ -74,5 +83,9 @@ class App_Showcase extends Component {
 		}
 		$data['store_visibility'] = 'yes' === $data['show_store'] ? Context::visibility( 'app_links' ) : Context::HIDE;
 		return $data;
+	}
+
+	public function wrapper_classes( array $data ) {
+		return array( 'xl-app-layout--' . ( 'gallery' === $data['layout'] ? 'gallery' : 'tabs' ) );
 	}
 }

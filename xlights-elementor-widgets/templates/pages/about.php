@@ -70,8 +70,8 @@ return array(
 			'text'           => __( '<p>The X LIGHTS brand was founded in Calgary, Canada, by Laura Ericson. Her background in interior design shaped the way the company approached permanent outdoor lighting: it should look as considered during the day as it does when it is lit at night.</p><p>That idea led to a low-profile light and track system designed to blend into the architecture of a home, paired with smart controls that make it useful every night of the year.</p>', 'xlights-elementor-widgets' ),
 			'note'           => __( 'This is the story of the X LIGHTS brand. {dealer} is the local X LIGHTS team serving {area}.', 'xlights-elementor-widgets' ),
 			'visual'         => 'image',
-			'image'          => Defaults::photo( 'installer-roofline' ),
-			'image_alt'      => __( 'Installer in an X LIGHTS shirt mounting a light along a roofline', 'xlights-elementor-widgets' ),
+			'image'          => Defaults::photo( 'installer-xlights-branded' ),
+			'image_alt'      => __( 'X LIGHTS installer in a branded cap and T-shirt preparing a length of light track', 'xlights-elementor-widgets' ),
 			'scene'          => 'daytime',
 			'image_position' => 'left',
 			'badge'          => __( 'Brand story', 'xlights-elementor-widgets' ),
@@ -98,11 +98,11 @@ return array(
 			'heading'        => __( 'No more ladders, tangled strands or <em>bulky daytime hardware.</em>', 'xlights-elementor-widgets' ),
 			'text'           => __( '<p>Seasonal lights mean climbing ladders twice a year, untangling strands and storing boxes. Many permanent alternatives solve that problem but leave visible hardware on the house all year.</p><p>X LIGHTS permanent lighting was developed to remove the seasonal hassle while keeping the roofline clean: install once, enjoy warm white every evening, and switch to color for the holidays from your phone.</p>', 'xlights-elementor-widgets' ),
 			'visual'         => 'image',
-			'image'          => Defaults::img( 'soffit-track-daytime.jpg' ),
-			'image_alt'      => __( 'Close-up of the low-profile X LIGHTS track and lights mounted along a fascia board in daylight', 'xlights-elementor-widgets' ),
+			'image'          => Defaults::photo( 'soffit-light-closeup' ),
+			'image_alt'      => __( 'Close-up of an X LIGHTS soffit light set into the low-profile track under the eave', 'xlights-elementor-widgets' ),
 			'scene'          => 'daytime',
 			'image_position' => 'right',
-			'caption'        => __( 'By day: the low-profile track sits close to the fascia.', 'xlights-elementor-widgets' ),
+			'caption'        => __( 'The light sits inside a slim track that follows the soffit — barely visible by day.', 'xlights-elementor-widgets' ),
 			'bg'             => 'light',
 		),
 	),
@@ -212,6 +212,6 @@ return array(
 	'cta'           => Defaults::cta(
 		__( 'Let’s design your outdoor lighting.', 'xlights-elementor-widgets' ),
 		__( 'Tell us about your home or business and we will set up a consultation.', 'xlights-elementor-widgets' ),
-		array( 'image' => Defaults::photo( 'installer-controller' ), 'bg' => 'warm' )
+		array( 'image' => Defaults::photo( 'pool-patio-dusk' ), 'bg' => 'warm' )
 	),
 );

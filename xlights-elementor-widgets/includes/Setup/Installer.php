@@ -46,6 +46,7 @@ final class Installer {
 		Leads::register();
 		Projects::ensure_terms();
 		Sample_Projects::schedule();
+		Brand_Reviews::seed();
 
 		$admin = get_role( 'administrator' );
 		if ( $admin && ! $admin->has_cap( Leads::CAP ) ) {
@@ -94,6 +95,15 @@ final class Installer {
 			self::migrate_store_links();
 			// Sites without any projects get the default gallery (never sites that have their own).
 			Sample_Projects::schedule();
+		}
+		if ( $stored && version_compare( (string) $stored, '1.7.0', '<' ) ) {
+			// Client feedback: no snow photos and no old-packaging installer photo.
+			Sample_Projects::sync();
+		}
+		Brand_Reviews::seed();
+		if ( $stored ) {
+			// Saved pages follow improved default text again (edited text is kept).
+			Stale_Defaults::run();
 		}
 		update_option( self::VERSION_OPTION, XLIGHTS_VERSION );
 	}

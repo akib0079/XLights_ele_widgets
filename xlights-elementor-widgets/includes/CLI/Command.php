@@ -226,4 +226,17 @@ final class Command {
 		wp_clear_scheduled_hook( \XLights\Setup\Sample_Projects::CRON_HOOK );
 		WP_CLI::success( sprintf( '%d sample project(s) added (%d in total).', $n, \XLights\Setup\Sample_Projects::status()['count'] ) );
 	}
+
+	/**
+	 * Let saved Page Composer pages follow the current default content: removes
+	 * stored values that are exactly an earlier version's default. Text an
+	 * editor changed is kept; the previous page data is backed up in post meta.
+	 * Runs automatically on plugin updates.
+	 *
+	 * @subcommand refresh-defaults
+	 */
+	public function refresh_defaults() {
+		$r = \XLights\Setup\Stale_Defaults::run();
+		WP_CLI::success( sprintf( '%d stale value(s) cleared on %d page(s).', $r['values'], $r['posts'] ) );
+	}
 }

@@ -60,22 +60,13 @@ final class Sample_Projects {
 				'images'   => array( 'soffit-two-story-dusk', 'soffit-house-dusk-wide', 'roofline-two-story-modern', 'home-two-story-night.jpg', 'home-single-story-dusk.jpg' ),
 			),
 			array(
-				'key'      => 'winter-season',
-				'title'    => __( 'Roofline lighting through the winter', 'xlights-elementor-widgets' ),
-				'excerpt'  => __( 'Installed once and ready for every season — no ladders and no tangled strands when it snows.', 'xlights-elementor-widgets' ),
-				'service'  => array( 'permanent-soffit-lighting' ),
-				'type'     => 'residential',
-				'featured' => false,
-				'images'   => array( 'soffit-winter-warm', 'soffit-winter-night', 'holiday-color-family' ),
-			),
-			array(
 				'key'      => 'garage-entry',
 				'title'    => __( 'Garage and entry lighting', 'xlights-elementor-widgets' ),
 				'excerpt'  => __( 'Roofline lights above the garage and entry, plus color for celebrations.', 'xlights-elementor-widgets' ),
 				'service'  => array( 'permanent-soffit-lighting' ),
 				'type'     => 'residential',
 				'featured' => false,
-				'images'   => array( 'soffit-garage-night', 'steps-color-celebration', 'installer-roofline' ),
+				'images'   => array( 'soffit-garage-night', 'steps-color-celebration' ),
 			),
 			array(
 				'key'      => 'deck-stairs',
@@ -167,12 +158,8 @@ final class Sample_Projects {
 			'roofline-two-story-modern'     => __( 'Modern two-story home with roofline lighting at night', 'xlights-elementor-widgets' ),
 			'home-two-story-night.jpg'      => __( 'Two-story home at night with permanent roofline lighting', 'xlights-elementor-widgets' ),
 			'home-single-story-dusk.jpg'    => __( 'Family in front of their home with warm white roofline lighting', 'xlights-elementor-widgets' ),
-			'soffit-winter-warm'            => __( 'Snow-covered roof with warm white soffit lighting', 'xlights-elementor-widgets' ),
-			'soffit-winter-night'           => __( 'Home in the snow at night with soft white roofline lighting', 'xlights-elementor-widgets' ),
-			'holiday-color-family'          => __( 'Family in the snow looking at their home lit in holiday colors', 'xlights-elementor-widgets' ),
 			'soffit-garage-night'           => __( 'Garage and gable roofline lit at night', 'xlights-elementor-widgets' ),
 			'steps-color-celebration'       => __( 'Home with purple roofline and step lighting at sunset', 'xlights-elementor-widgets' ),
-			'installer-roofline'            => __( 'X LIGHTS installer fitting roofline lights above a garage', 'xlights-elementor-widgets' ),
 			'deck-stairs-step-lights'       => __( 'Deck stairs at dusk with a step light under each tread', 'xlights-elementor-widgets' ),
 			'deck-steps-app'                => __( 'Holding the X LIGHTS app in front of deck stairs lit with step lights', 'xlights-elementor-widgets' ),
 			'deck-stairs-dot-lights'        => __( 'Wood deck at night with warm step lights and small recessed deck lights', 'xlights-elementor-widgets' ),
@@ -450,6 +437,71 @@ final class Sample_Projects {
 		}
 		wp_clear_scheduled_hook( self::CRON_HOOK );
 		update_option( self::STATE, 'removed', false );
+		return $removed;
+	}
+
+	/**
+	 * Bring sample projects already on a site in line with definitions():
+	 * delete samples that were dropped, take dropped photos out of the
+	 * remaining galleries, and delete imported photos nothing uses any more.
+	 * Photos an editor added to a sample project are kept.
+	 *
+	 * @return array{projects:int,images:int} Removed counts.
+	 */
+	public static function sync() {
+		$defs   = array();
+		$wanted = array();
+		foreach ( self::definitions() as $def ) {
+			$defs[ $def['key'] ] = $def;
+			foreach ( $def['images'] as $name ) {
+				$wanted[ $name ] = true;
+			}
+		}
+		$removed = array(
+			'projects' => 0,
+			'images'   => 0,
+		);
+		foreach ( self::existing_keys() as $key => $pid ) {
+			if ( ! isset( $defs[ $key ] ) ) {
+				if ( wp_delete_post( $pid, true ) ) {
+					$removed['projects']++;
+				}
+				continue;
+			}
+			$ids  = Projects::gallery_ids( $pid );
+			$keep = array();
+			foreach ( $ids as $aid ) {
+				$src = (string) get_post_meta( $aid, self::META_SRC, true );
+				if ( '' === $src || in_array( $src, $defs[ $key ]['images'], true ) ) {
+					$keep[] = $aid;
+				}
+			}
+			if ( $keep !== $ids ) {
+				update_post_meta( $pid, Projects::META_GALLERY, implode( ',', $keep ) );
+				if ( ! in_array( (int) get_post_thumbnail_id( $pid ), $keep, true ) ) {
+					if ( $keep ) {
+						set_post_thumbnail( $pid, $keep[0] );
+					} else {
+						delete_post_thumbnail( $pid );
+					}
+				}
+			}
+		}
+		$images = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'posts_per_page' => 200,
+				'fields'         => 'ids',
+				'meta_key'       => self::META_SRC, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			)
+		);
+		foreach ( $images as $aid ) {
+			$src = (string) get_post_meta( $aid, self::META_SRC, true );
+			if ( ! isset( $wanted[ $src ] ) && ! self::attachment_in_use( (int) $aid ) && wp_delete_attachment( $aid, true ) ) {
+				$removed['images']++;
+			}
+		}
 		return $removed;
 	}
 

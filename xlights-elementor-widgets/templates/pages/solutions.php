@@ -109,13 +109,15 @@ return array(
 			'bg'      => 'dark',
 		),
 	),
-	'app'       => array(
+	'app_gallery' => array(
 		'type'     => 'app_showcase',
-		'label'    => __( 'App Showcase', 'xlights-elementor-widgets' ),
+		'label'    => __( 'App Screens Gallery', 'xlights-elementor-widgets' ),
 		'defaults' => array(
+			'layout'     => 'gallery',
 			'eyebrow'    => __( 'The X LIGHTS app', 'xlights-elementor-widgets' ),
-			'heading'    => __( 'Control it all from your phone.', 'xlights-elementor-widgets' ),
-			'items'      => Defaults::app_tabs( array( 'color', 'patterns', 'schedule' ) ),
+			'heading'    => __( 'Control it all from <em>your phone.</em>', 'xlights-elementor-widgets' ),
+			'text'       => __( 'Scroll through the real app: pick colors and brightness, choose patterns, set timers, dance to music, manage every controller and share control with your family.', 'xlights-elementor-widgets' ),
+			'items'      => Defaults::app_tabs(),
 			'show_store' => 'yes',
 			'link_label' => __( 'Explore the app', 'xlights-elementor-widgets' ),
 			'link'       => '{page:app}',

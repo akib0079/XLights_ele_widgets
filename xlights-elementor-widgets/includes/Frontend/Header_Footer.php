@@ -537,6 +537,20 @@ final class Header_Footer {
 					<a class="xl-header__brand" href="<?php echo esc_url( home_url( '/' ) ); ?>"><span class="xl-logo"><?php echo self::logo( 'dark' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span></a>
 					<p><?php echo esc_html( Tokens::replace( $s['dealer_intro'] ) ); ?></p>
 					<?php echo Social_Links::render(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php
+					$dealer_url = isset( $s['dealer_link_url'] ) ? trim( (string) $s['dealer_link_url'] ) : '';
+					if ( '' !== $dealer_url ) :
+						$dealer_label = '' !== trim( (string) $s['dealer_link_label'] ) ? $s['dealer_link_label'] : __( 'Become an X LIGHTS dealer', 'xlights-elementor-widgets' );
+						?>
+						<a class="xl-footer__dealer" href="<?php echo esc_url( $dealer_url ); ?>" target="_blank" rel="noopener">
+							<span class="xl-footer__dealer-text">
+								<strong><?php echo esc_html( Tokens::replace( $dealer_label ) ); ?></strong>
+								<small><?php esc_html_e( 'Dealer information and the dealer map on xlightsled.com', 'xlights-elementor-widgets' ); ?></small>
+							</span>
+							<?php echo Icons::svg( 'arrow-up-right' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<span class="xl-sr"><?php esc_html_e( '(opens in a new tab)', 'xlights-elementor-widgets' ); ?></span>
+						</a>
+					<?php endif; ?>
 				</div>
 				<?php foreach ( $cols as $col ) : ?>
 					<nav class="xl-footer__col" aria-label="<?php echo esc_attr( $col['title'] ); ?>">

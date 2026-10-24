@@ -276,22 +276,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'compare'   => array(
-		'type'     => 'before_after',
-		'label'    => __( 'Everyday / Holiday Comparison', 'xlights-elementor-widgets' ),
-		'defaults' => array(
-			'eyebrow'      => __( 'Same roofline, two looks', 'xlights-elementor-widgets' ),
-			'heading'      => __( 'Warm white every night. <em>Color when you want it.</em>', 'xlights-elementor-widgets' ),
-			'text'         => __( 'Drag the slider to switch the same home from everyday warm white to holiday color.', 'xlights-elementor-widgets' ),
-			'source'       => 'manual',
-			'before_image' => Defaults::photo( 'roofline-warm-white-modern' ),
-			'after_image'  => Defaults::photo( 'roofline-holiday-color-modern' ),
-			'before_label' => __( 'Everyday', 'xlights-elementor-widgets' ),
-			'after_label'  => __( 'Holiday', 'xlights-elementor-widgets' ),
-			'bg'           => 'dark',
-			'editor_note'  => __( 'Shows the same home in two looks. To use your own, upload two photos of one home taken from the same spot (for example day and night, or warm white and holiday color).', 'xlights-elementor-widgets' ),
-		),
-	),
+	'compare'   => Defaults::holiday_compare(),
 	'permanent' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Why Permanent Installation Makes Sense', 'xlights-elementor-widgets' ),

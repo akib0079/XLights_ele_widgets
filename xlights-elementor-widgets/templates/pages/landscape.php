@@ -192,6 +192,7 @@ return array(
 					'icon'  => 'lightbulb',
 					'title' => __( 'Modern bollard lights', 'xlights-elementor-widgets' ),
 					'text'  => __( 'Sleek posts that light driveways, entries and walkways.', 'xlights-elementor-widgets' ),
+					'image' => Defaults::photo( 'landscape-bollard' ),
 				),
 				array(
 					'icon'  => 'home',
@@ -202,7 +203,7 @@ return array(
 			),
 			'note'        => __( 'Product availability and specifications are confirmed in your proposal.', 'xlights-elementor-widgets' ),
 			'bg'          => 'warm',
-			'editor_note' => __( 'Collection from the official X LIGHTS landscape lighting sheet. Add a photo of a bollard light to the "Modern bollard lights" card when you have one; replace any photo with your own installation photos.', 'xlights-elementor-widgets' ),
+			'editor_note' => __( 'Collection from the official X LIGHTS landscape lighting sheet. Replace any photo with your own installation photos.', 'xlights-elementor-widgets' ),
 		),
 	),
 	'fixtures' => Defaults::fixture_features( 'dark' ),

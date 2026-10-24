@@ -266,6 +266,71 @@ final class Defaults {
 	}
 
 	/**
+	 * Everyday ↔ Holiday comparison slider: the same home in warm white and in
+	 * holiday color (Soffit and Home pages).
+	 *
+	 * @param array $extra Extra defaults.
+	 * @return array
+	 */
+	public static function holiday_compare( array $extra = array() ) {
+		return array(
+			'type'     => 'before_after',
+			'label'    => __( 'Everyday / Holiday Comparison', 'xlights-elementor-widgets' ),
+			'defaults' => array_merge(
+				array(
+					'eyebrow'      => __( 'Same roofline, two looks', 'xlights-elementor-widgets' ),
+					'heading'      => __( 'Warm white every night. <em>Color when you want it.</em>', 'xlights-elementor-widgets' ),
+					'text'         => __( 'Drag the slider to switch the same home from everyday warm white to holiday color.', 'xlights-elementor-widgets' ),
+					'source'       => 'manual',
+					'before_image' => self::photo( 'roofline-warm-white-modern' ),
+					'after_image'  => self::photo( 'roofline-holiday-color-modern' ),
+					'before_label' => __( 'Everyday', 'xlights-elementor-widgets' ),
+					'after_label'  => __( 'Holiday', 'xlights-elementor-widgets' ),
+					'bg'           => 'dark',
+					'editor_note'  => __( 'Shows the same home in two looks. To use your own, upload two photos of one home taken from the same spot (for example day and night, or warm white and holiday color).', 'xlights-elementor-widgets' ),
+				),
+				$extra
+			),
+		);
+	}
+
+	/**
+	 * Luxury home automation: compatibility with Control4, Lutron and Crestron
+	 * (as stated by X LIGHTS) and the Bond partnership for outdoor patio systems.
+	 *
+	 * @param array $extra Extra defaults.
+	 * @return array
+	 */
+	public static function home_automation( array $extra = array() ) {
+		return array(
+			'type'     => 'split',
+			'label'    => __( 'Luxury Home Automation', 'xlights-elementor-widgets' ),
+			'defaults' => array_merge(
+				array(
+					'layout'          => 'cinematic',
+					'eyebrow'         => __( 'Luxury home automation', 'xlights-elementor-widgets' ),
+					'heading'         => __( 'Part of the smart home <em>you already have.</em>', 'xlights-elementor-widgets' ),
+					'text'            => __( '<p>X LIGHTS is compatible with luxury home automation systems such as Control4, Lutron and Crestron, so your outdoor lighting becomes part of the system that already runs your home.</p><p>We have also partnered with Bond for outdoor patio systems. Through Bond Bridge, your lights work alongside louvers, shades, screens, awnings and fans from a single app or remote — while the X LIGHTS app handles advanced color customization.</p>', 'xlights-elementor-widgets' ),
+					'points'          => __( "Control4, Lutron and Crestron
+Bond Bridge for outdoor patio systems
+Lights, shades and fans from one app or remote
+Advanced colors and patterns in the X LIGHTS app", 'xlights-elementor-widgets' ),
+					'secondary_label' => __( 'More about the app and integrations', 'xlights-elementor-widgets' ),
+					'secondary_link'  => '{page:app}',
+					'visual'          => 'image',
+					'image'           => self::photo( 'pergola-lounge' ),
+					'image_alt'       => __( 'Covered outdoor lounge and kitchen under a louvered pergola with recessed lighting at dusk', 'xlights-elementor-widgets' ),
+					'scene'           => 'roofline',
+					'image_position'  => 'right',
+					'bg'              => 'dark',
+					'editor_note'     => __( 'Compatibility as stated by X LIGHTS. Confirm the systems in each customer’s proposal.', 'xlights-elementor-widgets' ),
+				),
+				$extra
+			),
+		);
+	}
+
+	/**
 	 * Bond Bridge smart-home integration (official X LIGHTS copy).
 	 *
 	 * @param array $extra Extra defaults (bg, image_position, layout).
