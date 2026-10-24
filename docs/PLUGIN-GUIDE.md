@@ -1,4 +1,4 @@
-# X LIGHTS Elementor Widgets — Plugin Guide (v1.6.1)
+# X LIGHTS Elementor Widgets — Plugin Guide (v1.7.0)
 
 **TL;DR:** install the ZIP (Elementor required), fill in **X LIGHTS → Settings**, run **X LIGHTS → Page Setup** to create the 12 pages, then edit any page in Elementor through its **Page Composer** widget. Every phone number, color, font, link and approval switch lives in **Settings** and flows to every page, the header and the footer. Projects, reviews and incoming quote requests are managed under **X LIGHTS** in wp-admin.
 
@@ -250,6 +250,8 @@ Leave a field blank to hide it. Do not enter placeholder URLs.
 
 **Feature Explorer:** numbered tabs beside a large photo that changes with the selected feature, with a caption card (title, text, checklist, link) and an optional button. Use it instead of three or more similar Split sections in a row. Keyboard: arrow keys, Home/End. Without JavaScript every feature is listed. On phones the tabs become a row of chips.
 
+**App Showcase layouts:** *Tabs beside one phone* (Home, App) or *Scrolling gallery of app screens* (Solutions): every screen side by side with its caption, scroll or use the arrow buttons; arrow keys work when the row has focus.
+
 **Project Case Study:** a featured project told as a story — eyebrow and headline, *Project facts* (label + value rows), the story text, a highlighted *Takeaway* line, an optional button and a photo gallery (first photo large; each photo has a description for screen readers and an optional caption; photos open in the lightbox). The Commercial page uses it for the Cottonmouth Dispensary project; drop the widget on any page for the next one.
 
 Card Grid styles: Icon cards · Image cards · Large photo cards · Numbered steps · Stacked numbered cards · Minimal list · Bento · Icon strip. The Hero has an optional **Quick estimate card** (lighting type + ZIP → opens the quote form prefilled; on by default on Home).
@@ -279,6 +281,8 @@ Type these in any text, heading, link or button field:
 
 **Projects** (X LIGHTS → Projects): title, main photo (featured image), gallery (drag to order; alt text in the Media Library), **city/area only — never an address**, completion date, *Featured*, **Lighting categories** and **Property type** (sidebar), optional *Before & after* pair. They feed the Projects gallery (filters + lightbox, works without JavaScript), Home "Featured projects", each solution page (filtered) and the Before/After section. Each project also gets its own page under `/projects/<name>/`.
 
+**Brand-level Google reviews.** Three Google reviews of X LIGHTS in Canada (supplied by X LIGHTS) are added once as reviews with attribution *brand-level*, location Canada and no name or rating (none were supplied). The site labels them "Brand-level review from another X LIGHTS location". Edit or delete them like any review; a deleted one is not added back.
+
 **Sample projects.** A site with no projects gets 12 editable projects built from the bundled photos (48 images added to the Media Library, neutral titles, no city), imported in the background a few at a time. Edit them like any project, or remove them all in **X LIGHTS → Page Setup → Sample projects** (or `wp xlights samples --remove`); projects you create are never touched. Sites that already have projects never get them unless you click *Add sample projects*.
 
 **Reviews** (X LIGHTS → Reviews): customer display name, exact review text, rating (only if given), source + link, date, city, related project, attribution (*local* or *brand-level*, labeled on the site), featured. **Never shown without "Customer permission confirmed".** Reviews sections hide themselves when nothing is approved.
@@ -307,6 +311,8 @@ Type these in any text, heading, link or button field:
 | Team, projects, before/after | Real entries exist |
 
 ## 12. Developer & ops reference
+
+**Saved pages and plugin updates.** Elementor stores every text field and card list of the Page Composer when a page is saved, even ones nobody touched. On each plugin update, stored values that are exactly a default from an earlier version are cleared, so improved wording, alt text and card lists show up; edited values are kept and the previous page data is saved in the `_xlights_backup_pre_refresh` post meta. The table of earlier defaults is generated from git history with `bin/build-shipped-defaults.sh` before each release; `wp xlights refresh-defaults` runs the refresh by hand.
 
 **WP-CLI**
 

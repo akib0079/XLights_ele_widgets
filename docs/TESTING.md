@@ -1,3 +1,14 @@
+# Testing report — v1.7.0
+
+**TL;DR:** the client's third round of feedback passes every suite on the Hello Elementor dev site and after upgrading a 1.6.1 install (with sample projects) from the 1.7.0 ZIP: the snow sample project and its four outdated photos were removed, galleries cleaned up, three brand-level Google reviews added. The new stale-default refresh cleared 88 untouched old values on the dev Home page and kept everything else.
+
+| Suite | Hello theme dev site | 1.6.1 → 1.7.0 upgrade (Twenty Twenty-Five) |
+|---|---|---|
+| Photos, layouts & content (`ux.js`, 10 new checks) | ✅ all passed | ✅ all passed |
+| Stale defaults (`tests/php/stale-defaults.php`, new) | ✅ 11/11 | — |
+| Render · Elementor · Pages · Interactions · Form · Accessibility · Design · Editor | ✅ all passed | Pages ✅ · Accessibility ✅ |
+| Security | ✅ 34/34, 1 expected warning (PHP dev server ignores .htaccess) | — |
+
 # Testing report — v1.6.0
 
 **TL;DR:** 1.6.0 (real app screens and icon, store links, Bond Bridge, official deck/landscape collections, photo CTAs, sample projects, hidden sections dropping out of the editor panel) passes every suite on the Hello Elementor dev site and after upgrading a fresh install from the 1.6.0 ZIP. The upgrade fills empty store links and imports the sample projects only on a site without projects.

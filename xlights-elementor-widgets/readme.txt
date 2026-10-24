@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,17 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.7.0 =
+* Client feedback: snow photos removed everywhere (bundled photos, sample projects; on update, the snow sample project and its imported photos are removed unless something else uses them).
+* About: the brand story uses the installer in the X LIGHTS cap and T-shirt (old-packaging installer photos removed); "No more ladders" shows the light itself in the low-profile track.
+* Footer: "Become an X LIGHTS dealer" link to xlightsled.com/dealer (Settings → Header & Footer; blank hides it).
+* Home: Everyday ↔ Holiday comparison slider; new Luxury Home Automation section (Control4, Lutron and Crestron; Bond partnership for outdoor patio systems).
+* Solutions: "Control it all from your phone" is now a scrolling gallery of all six real app screens (new Gallery layout for the App Showcase).
+* Reviews: three Google reviews of X LIGHTS in Canada added as brand-level reviews, text verbatim, labelled as from another X LIGHTS location. The Home heading now reads "What X LIGHTS customers say".
+* Commercial: the Cottonmouth sign is the main image; the sections that used residential photos are replaced by a "Lighting for the whole property" overview; the case study follows the introduction.
+* Landscape: photo for Modern bollard lights.
+* Updates now reach saved pages: when a page is saved in Elementor, the editor stores every text field and card list. On update, stored values that are exactly an earlier version's default are cleared so the current default shows; anything an editor changed is kept, and the previous page data is backed up in post meta (`wp xlights refresh-defaults` runs it by hand).
 
 = 1.6.1 =
 * Commercial page: new featured project case study — Cottonmouth Dispensary (client copy, project facts, takeaway and three photos that open in the lightbox). Existing Commercial pages show it automatically after "Permanent Architectural Lighting"; it can be hidden, moved or edited like any section.

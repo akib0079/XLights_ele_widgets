@@ -72,7 +72,9 @@
 | 20 | **Approved project photos** with city/area only (no addresses, no visible house numbers), category, residential/commercial | Sample projects (brand photos, neutral titles, no city) fill the gallery until real projects are added — replace them as approved local projects come in |
 | 20b | **Cottonmouth Dispensary case study** (Commercial page) — owner consent to name the business and show the storefront | Supplied by the client for the site; copy used as written, with US spelling ("colors") |
 | 21 | Matching **before/after** pairs (same angle, day + night) | Before/After section hidden until a pair exists |
-| 22 | **Real customer reviews** with written permission | None. No reviews are invented; sections hide or show a neutral message |
+| 22 | **Real customer reviews** with written permission | Three Google reviews of X LIGHTS in Canada supplied by X LIGHTS are shown as brand-level reviews (verbatim, labelled, no names or ratings). Local reviews still needed; none are invented |
+| 22b | **Lutron** compatibility (with Control4 and Crestron) | Shown on Home as stated by X LIGHTS; the xlightsled.com homepage text could not be read from the build environment — confirm wording |
+| 22c | **San Clemente page content** and the **low-profile comparison images** mentioned by X LIGHTS | Not received / not reachable from the build environment — send the text and images to add them |
 | 23 | Local team: names, roles, bios, photos | About → Local Team hidden until added |
 | 24 | Dealer's own story / year established | About intro uses neutral copy; corporate founding story (Calgary, Laura Ericson) is not presented as the dealer's history |
 | 25 | Current app screenshots | App page uses illustrated phone screens until provided |

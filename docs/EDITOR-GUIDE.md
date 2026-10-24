@@ -14,7 +14,8 @@
 | **Sections — Visibility & Order** | One row per section. **Drag** to reorder. Open a row to turn *Show section* off, or *Hide on desktop / tablet / mobile*. Hidden rows show "— hidden", and the section's settings panel disappears from the list below until you switch it back on. |
 | **01 · Hero**, **02 · …** | One panel per section with its headline, text, buttons, images and lists. Only the current template's sections are shown. |
 
-4. **Update** (bottom-left) saves and publishes changes; use the arrow next to it for *Save Draft*.
+4. **Update** (bottom-left) saves and publishes changes. Text you have not changed keeps following plugin updates (improved wording and photos appear after an update); text you edited stays as you wrote it.
+   Use the arrow next to **Update** for *Save Draft*.
 
 Tips:
 

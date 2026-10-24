@@ -64,7 +64,7 @@ final class Brand_Reviews {
 		$created = 0;
 		$i       = 0;
 		foreach ( self::definitions() as $key => $text ) {
-			$i++;
+			++$i;
 			if ( isset( $existing[ $key ] ) ) {
 				continue;
 			}
@@ -88,7 +88,7 @@ final class Brand_Reviews {
 			update_post_meta( $id, Reviews::META_FEATURED, '1' );
 			// Supplied by X LIGHTS for use on this site (public Google reviews of X LIGHTS).
 			update_post_meta( $id, Reviews::META_PERMISSION, '1' );
-			$created++;
+			++$created;
 		}
 		update_option( self::OPTION, 1, false );
 		return $created;

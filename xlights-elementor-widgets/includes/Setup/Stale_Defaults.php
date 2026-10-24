@@ -215,7 +215,7 @@ final class Stale_Defaults {
 				'%' . $wpdb->esc_like( self::WIDGET ) . '%'
 			)
 		);
-		$result = array(
+		$result  = array(
 			'posts'  => 0,
 			'values' => 0,
 		);
@@ -234,7 +234,7 @@ final class Stale_Defaults {
 			update_post_meta( $post_id, '_elementor_data', wp_slash( (string) wp_json_encode( $data ) ) );
 			delete_post_meta( $post_id, '_elementor_element_cache' );
 			delete_post_meta( $post_id, '_elementor_css' );
-			$result['posts']++;
+			++$result['posts'];
 			$result['values'] += $count;
 		}
 		return $result;

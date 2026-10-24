@@ -317,13 +317,54 @@ function webpChunks(file) {
 		const s = document.querySelector('.xl-case');
 		return s ? { facts: s.querySelectorAll('.xl-case__fact').length, photos: s.querySelectorAll('.xl-case__open img').length, alts: [...s.querySelectorAll('.xl-case__open img')].every((i) => i.alt.length > 10), text: /Cottonmouth/.test(s.textContent) } : null;
 	});
-	ok(cs && cs.text && cs.facts === 4 && cs.photos === 3 && cs.alts, 'commercial: Cottonmouth case study with facts and 3 described photos');
-	await cp.locator('.xl-case__open').nth(2).scrollIntoViewIfNeeded();
-	await cp.locator('.xl-case__open').nth(2).click();
+	ok(cs && cs.text && cs.facts === 4 && cs.photos === 2 && cs.alts, 'commercial: Cottonmouth case study with facts and 2 described photos');
+	await cp.locator('.xl-case__open').nth(1).scrollIntoViewIfNeeded();
+	await cp.locator('.xl-case__open').nth(1).click();
 	await cp.waitForTimeout(600);
 	const lb = await cp.evaluate(() => { const d = document.querySelector('.xl-lightbox'); return d && d.open ? d.querySelector('.xl-lightbox__caption').textContent : ''; });
-	ok(/3 of 3/.test(lb), 'commercial: case study photo opens in the lightbox at the right photo');
+	ok(/2 of 2/.test(lb), 'commercial: case study photo opens in the lightbox at the right photo');
 	await cp.keyboard.press('Escape');
+	const comm = await cp.evaluate(() => {
+		const imgs = [...document.querySelectorAll('.xl-root img')].map((i) => i.getAttribute('src') || '').filter((s) => /\/assets\/images\/photos\//.test(s));
+		const hero = document.querySelector('.xl-section--hero img');
+		return { hero: hero ? hero.getAttribute('src') : '', other: imgs.filter((s) => !/cottonmouth|\/brand\//.test(s)) };
+	});
+	ok(/cottonmouth-roofline/.test(comm.hero), 'commercial: the Cottonmouth sign is the main (hero) image');
+	ok(comm.other.length === 0, 'commercial: no residential photos on the commercial page' + (comm.other.length ? ': ' + comm.other.join(', ') : ''));
+
+	// Round 3 feedback: no snow or old-packaging installer photos anywhere; dealer link; Home slider,
+	// automation and Google reviews; Solutions app screens gallery.
+	const banned = [];
+	for (const u of pages) {
+		await cp.goto(BASE_URL + u, { waitUntil: 'domcontentloaded' });
+		const hits = await cp.evaluate(() => [...document.querySelectorAll('img')].map((i) => (i.getAttribute('src') || '') + ' ' + (i.getAttribute('srcset') || '')).filter((s) => /soffit-winter|holiday-color-family|installer-controller|installer-roofline|controller-box/.test(s)).length);
+		if (hits) banned.push(u + ' (' + hits + ')');
+	}
+	ok(banned.length === 0, 'no snow or old-packaging installer photos on any page' + (banned.length ? ': ' + banned.join(', ') : ''));
+	await cp.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
+	const home = await cp.evaluate(() => {
+		const dealer = document.querySelector('.xl-footer__dealer');
+		const txt = document.body.textContent;
+		const brand = [...document.querySelectorAll('.xl-review')].filter((r) => /Google review/.test(r.textContent));
+		return {
+			dealer: dealer ? dealer.href : '',
+			blank: dealer ? dealer.target : '',
+			slider: !!document.querySelector('.xl-ba input[type=range]'),
+			automation: /Control4/.test(txt) && /Lutron/.test(txt) && /Crestron/.test(txt) && /Bond/.test(txt),
+			google: brand.length,
+			labelled: brand.every((r) => /another X LIGHTS location/.test(r.textContent) && /Canada/.test(r.textContent)),
+		};
+	});
+	ok(home.dealer === 'https://www.xlightsled.com/dealer' && home.blank === '_blank', 'footer: dealer program link to xlightsled.com/dealer (new tab)');
+	ok(home.slider, 'home: Everyday / Holiday comparison slider');
+	ok(home.automation, 'home: luxury home automation (Control4, Lutron, Crestron, Bond)');
+	ok(home.google >= 1 && home.labelled, `home: Google reviews shown and labelled as brand-level from Canada (${home.google})`);
+	await cp.goto(BASE_URL + '/lighting-solutions/', { waitUntil: 'networkidle' });
+	const gal = await cp.evaluate(() => {
+		const g = document.querySelector('.xl-app-gallery');
+		return g ? { phones: g.querySelectorAll('img.xl-phone__device').length, nav: !!g.querySelector('[data-xl-next]'), heading: /Control it all/i.test(g.textContent) } : null;
+	});
+	ok(gal && gal.heading && gal.phones >= 6 && gal.nav, 'solutions: "Control it all from your phone" is a scrolling gallery of the real app screens');
 	await cp.close();
 
 	await browser.close();

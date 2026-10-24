@@ -12,7 +12,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'          => array(
+	'hero'         => array(
 		'type'     => 'hero',
 		'label'    => __( 'Commercial Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -34,7 +34,7 @@ return array(
 			'bg'              => 'dark',
 		),
 	),
-	'why'           => array(
+	'why'          => array(
 		'type'     => 'intro',
 		'label'    => __( 'Why Commercial Exterior Lighting Matters', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -46,7 +46,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'case_study'    => array(
+	'case_study'   => array(
 		'type'     => 'case_study',
 		'label'    => __( 'Featured Project: Cottonmouth Dispensary', 'xlights-elementor-widgets' ),
 		'anchor'   => 'xl-commercial-case-study',
@@ -90,7 +90,7 @@ return array(
 			'bg'            => 'dark',
 		),
 	),
-	'services'      => array(
+	'services'     => array(
 		'type'     => 'cards',
 		'label'    => __( 'Lighting Services for Businesses', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -124,7 +124,7 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'management'    => array(
+	'management'   => array(
 		'type'     => 'connected',
 		'label'    => __( 'Connected Lighting Management', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -157,7 +157,7 @@ return array(
 			'bg'      => 'dark',
 		),
 	),
-	'process'       => array(
+	'process'      => array(
 		'type'     => 'cards',
 		'label'    => __( 'Custom Design & Layout Process', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -186,7 +186,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'applications'  => array(
+	'applications' => array(
 		'type'     => 'cards',
 		'label'    => __( 'Commercial Property Applications', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -229,7 +229,7 @@ return array(
 			'bg'      => 'warm',
 		),
 	),
-	'install'       => array(
+	'install'      => array(
 		'type'     => 'cards',
 		'label'    => __( 'Benefits of Professional Installation', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -257,7 +257,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'trust'         => array(
+	'trust'        => array(
 		'type'     => 'trust',
 		'label'    => __( 'Local Dealer Trust Section', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -286,12 +286,12 @@ return array(
 			'bg'           => 'dark',
 		),
 	),
-	'financing'     => Defaults::financing( 'light' ),
-	'projects'      => array_merge(
+	'financing'    => Defaults::financing( 'light' ),
+	'projects'     => array_merge(
 		Defaults::projects( 'commercial', __( 'Commercial projects', 'xlights-elementor-widgets' ), '', array( 'bg' => 'warm' ) ),
 		array( 'anchor' => 'xl-commercial-projects' )
 	),
-	'faq'           => array(
+	'faq'          => array(
 		'type'     => 'faq',
 		'label'    => __( 'Commercial FAQ', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -319,7 +319,7 @@ return array(
 			'editor_note' => __( 'Confirm commercial warranty, maintenance, timelines, minimums and financing with the dealer before adding specifics.', 'xlights-elementor-widgets' ),
 		),
 	),
-	'form'          => array(
+	'form'         => array(
 		'type'     => 'quote_form',
 		'label'    => __( 'Commercial Consultation Form', 'xlights-elementor-widgets' ),
 		'anchor'   => 'quote',

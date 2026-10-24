@@ -10,7 +10,7 @@ use XLights\Pages\Defaults;
 defined( 'ABSPATH' ) || exit;
 
 return array(
-	'hero'      => array(
+	'hero'        => array(
 		'type'     => 'hero',
 		'label'    => __( 'Lighting Solutions Hero', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -30,7 +30,7 @@ return array(
 			'overlay'         => 60,
 		),
 	),
-	'overview'  => array(
+	'overview'    => array(
 		'type'     => 'cards',
 		'label'    => __( 'System Overview', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -76,7 +76,7 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'soffit'    => array(
+	'soffit'      => array(
 		'type'     => 'split',
 		'label'    => __( 'Permanent Soffit Lighting', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -97,7 +97,7 @@ return array(
 			'bg'              => 'light',
 		),
 	),
-	'connected' => array(
+	'connected'   => array(
 		'type'     => 'connected',
 		'label'    => __( 'One Connected Outdoor Lighting System', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -124,7 +124,7 @@ return array(
 			'bg'         => 'warm',
 		),
 	),
-	'benefits'  => array(
+	'benefits'    => array(
 		'type'     => 'cards',
 		'label'    => __( 'Benefits & Differentiators', 'xlights-elementor-widgets' ),
 		'defaults' => array(
@@ -136,11 +136,14 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'financing' => Defaults::financing( 'warm' ),
-	'projects'  => Defaults::projects( 'featured', __( 'Recent installations', 'xlights-elementor-widgets' ) ),
-	'cta'       => Defaults::cta(
+	'financing'   => Defaults::financing( 'warm' ),
+	'projects'    => Defaults::projects( 'featured', __( 'Recent installations', 'xlights-elementor-widgets' ) ),
+	'cta'         => Defaults::cta(
 		__( 'Not sure where to start?', 'xlights-elementor-widgets' ),
 		__( 'Tell us about your property and we will recommend the right mix of lighting for it.', 'xlights-elementor-widgets' ),
-		array( 'image' => Defaults::photo( 'pool-patio-dusk' ), 'bg' => 'warm' )
+		array(
+			'image' => Defaults::photo( 'pool-patio-dusk' ),
+			'bg'    => 'warm',
+		)
 	),
 );
