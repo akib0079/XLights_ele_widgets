@@ -97,6 +97,9 @@ final class Installer {
 			// Sites without any projects get the default gallery (never sites that have their own).
 			Sample_Projects::schedule();
 		}
+		if ( $stored && version_compare( (string) $stored, '1.7.2', '<' ) ) {
+			self::ensure_lead_inbox();
+		}
 		if ( $stored && version_compare( (string) $stored, '1.7.0', '<' ) ) {
 			// Client feedback: no snow photos and no old-packaging installer photo.
 			Sample_Projects::sync();
@@ -108,6 +111,25 @@ final class Installer {
 			Stale_Defaults::run();
 		}
 		update_option( self::VERSION_OPTION, XLIGHTS_VERSION );
+	}
+
+	/**
+	 * X LIGHTS asked that every lead reaches info@xlightsled.com. Put it first in
+	 * the saved recipient list when it is missing; other addresses are kept.
+	 */
+	private static function ensure_lead_inbox() {
+		$stored = get_option( Settings::OPTION, array() );
+		if ( ! is_array( $stored ) || ! array_key_exists( 'lead_recipients', $stored ) ) {
+			return; // Not saved yet: the default already is the lead inbox.
+		}
+		$list = array_filter( array_map( 'trim', explode( ',', (string) $stored['lead_recipients'] ) ) );
+		foreach ( $list as $email ) {
+			if ( 0 === strcasecmp( $email, Settings::LEAD_INBOX ) ) {
+				return;
+			}
+		}
+		array_unshift( $list, Settings::LEAD_INBOX );
+		Settings::update( array( 'lead_recipients' => implode( ', ', $list ) ) );
 	}
 
 	/**

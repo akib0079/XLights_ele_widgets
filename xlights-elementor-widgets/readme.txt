@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,10 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.7.2 =
+* Leads: every quote request is emailed to info@xlightsled.com. On update the address is added first to the saved recipient list if it is missing (other recipients are kept), and an empty recipient setting now falls back to it instead of the WordPress admin address.
+* The customer confirmation email has Reply-To: info@xlightsled.com, so replies reach the lead inbox instead of the site's no-reply sender.
 
 = 1.7.1 =
 * Projects gallery: the Cottonmouth Dispensary project is added once as a featured commercial project (three photos in the Media Library, the dealer's own copy, no location). It appears on Projects (Commercial filter), in Featured projects and in the Commercial page's project grid, and has its own project page. It is a real project, not a sample: "Remove sample projects" never deletes it, and it is not added back if deleted or if a project with the same name already exists.

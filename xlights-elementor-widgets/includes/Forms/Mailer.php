@@ -127,9 +127,10 @@ final class Mailer {
 	public static function recipients() {
 		$list = array_filter( array_map( 'trim', explode( ',', (string) Settings::get( 'lead_recipients' ) ) ), 'is_email' );
 		if ( ! $list ) {
-			$list = array( get_option( 'admin_email' ) );
+			// Never lose a lead to an empty setting: fall back to the X LIGHTS lead inbox.
+			$list = array( Settings::LEAD_INBOX );
 		}
-		return array_values( $list );
+		return array_values( array_unique( $list ) );
 	}
 
 	/**
@@ -209,7 +210,9 @@ final class Mailer {
 		);
 		/* translators: %s: first name */
 		$text = sprintf( __( 'Hi %s,', 'xlights-elementor-widgets' ), $first ) . "\n\n" . $message;
-		return self::send( $lead['email'], $subject, $html, $text );
+		// Replies from the customer go to the lead inbox, not the site's no-reply sender.
+		$inbox = self::recipients();
+		return self::send( $lead['email'], $subject, $html, $text, array( 'Reply-To: ' . self::header_safe( $inbox[0] ) ) );
 	}
 
 	/**

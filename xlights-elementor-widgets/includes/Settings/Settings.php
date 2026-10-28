@@ -16,9 +16,10 @@ defined( 'ABSPATH' ) || exit;
 final class Settings {
 
 	/** Official X LIGHTS LED app listings. */
-	const APP_STORE_URL   = 'https://apps.apple.com/ca/app/x-lights-led/id6462840352';
+	const APP_STORE_URL      = 'https://apps.apple.com/ca/app/x-lights-led/id6462840352';
 	const DEALER_PROGRAM_URL = 'https://www.xlightsled.com/dealer';
-	const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.goulyled.xlights&hl=en_CA';
+	const GOOGLE_PLAY_URL    = 'https://play.google.com/store/apps/details?id=com.goulyled.xlights&hl=en_CA';
+	const LEAD_INBOX         = 'info@xlightsled.com';
 
 	const OPTION = 'xlights_settings';
 
@@ -175,8 +176,8 @@ final class Settings {
 					'lead_recipients'     => array(
 						'type'        => 'emails',
 						'label'       => __( 'Lead notification recipients', 'xlights-elementor-widgets' ),
-						'default'     => 'info@xlightsled.com',
-						'description' => __( 'Comma-separated list.', 'xlights-elementor-widgets' ),
+						'default'     => self::LEAD_INBOX,
+						'description' => __( 'Every quote request is emailed here (comma-separated list). info@xlightsled.com is the X LIGHTS lead inbox; add other addresses after it. Customers who reply to their confirmation email also reach the first address.', 'xlights-elementor-widgets' ),
 					),
 					'from_name'           => array(
 						'type'    => 'text',

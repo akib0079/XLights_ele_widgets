@@ -90,8 +90,8 @@ Lead notifications are the business-critical path. `wp_mail()` from a web server
 | Setting | Value |
 |---|---|
 | From address | An address the provider is authorized to send for, e.g. `no-reply@socal.xlightsled.com` (subdomain keeps the corporate domain's reputation separate) |
-| Reply-To | Set automatically to the customer's email on lead notifications |
-| Recipients | `info@xlightsled.com` (Settings → Leads & Form) |
+| Reply-To | Set automatically: the customer's email on lead notifications; `info@xlightsled.com` on the customer's confirmation email |
+| Recipients | `info@xlightsled.com` (Settings → Leads & Form). The plugin keeps it in the list: it is the default, an empty setting falls back to it, and updates add it back if it was removed (other addresses are kept) |
 | DNS | The provider's DKIM `TXT`/`CNAME` and SPF `include:` records — **another DNS change that needs approval** |
 
 Configure SMTP with an SMTP plugin (WP Mail SMTP, FluentSMTP) **or** constants in `wp-config.php` (secrets stay out of the database):
