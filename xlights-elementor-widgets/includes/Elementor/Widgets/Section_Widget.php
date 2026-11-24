@@ -132,7 +132,8 @@ abstract class Section_Widget extends Widget_Base {
 				$data[ $field ] = $settings[ $field ];
 			}
 		}
-		$ctx = new Render_Context(
+		$data = \XLights\Helpers\Retired_Media::scrub( $data, $component->fields(), $this->seed_defaults() );
+		$ctx  = new Render_Context(
 			array(
 				'source'          => 'widget',
 				'section'         => $component->type(),

@@ -323,7 +323,14 @@ final class Projects {
 		$id      = $post->ID;
 		$thumb   = (int) get_post_thumbnail_id( $id );
 		$gallery = self::gallery_ids( $id );
-		$images  = array_values( array_unique( array_filter( array_merge( array( $thumb ), $gallery ) ) ) );
+		$images  = array_values(
+			array_filter(
+				array_unique( array_filter( array_merge( array( $thumb ), $gallery ) ) ),
+				static function ( $aid ) {
+					return ! \XLights\Helpers\Retired_Media::is_retired( (int) $aid );
+				}
+			)
+		);
 		$before  = (int) get_post_meta( $id, self::META_BEFORE, true );
 		$after   = (int) get_post_meta( $id, self::META_AFTER, true );
 
@@ -337,8 +344,8 @@ final class Projects {
 			'city'     => (string) get_post_meta( $id, self::META_CITY, true ),
 			'image'    => $images ? $images[0] : ( $after ? $after : 0 ),
 			'images'   => $images,
-			'before'   => $before && wp_attachment_is_image( $before ) ? $before : 0,
-			'after'    => $after && wp_attachment_is_image( $after ) ? $after : 0,
+			'before'   => $before && wp_attachment_is_image( $before ) && ! \XLights\Helpers\Retired_Media::is_retired( $before ) ? $before : 0,
+			'after'    => $after && wp_attachment_is_image( $after ) && ! \XLights\Helpers\Retired_Media::is_retired( $after ) ? $after : 0,
 			'services' => is_array( $services ) ? wp_list_pluck( $services, 'name' ) : array(),
 			'types'    => is_array( $types ) ? wp_list_pluck( $types, 'name' ) : array(),
 			'excerpt'  => has_excerpt( $id ) ? get_the_excerpt( $id ) : '',

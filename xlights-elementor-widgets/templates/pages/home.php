@@ -95,8 +95,8 @@ return array(
 				),
 				array(
 					'title'      => __( 'Commercial Lighting', 'xlights-elementor-widgets' ),
-					'text'       => __( 'Restaurant patios, dealerships and customer-facing spaces that look their best after dark.', 'xlights-elementor-widgets' ),
-					'image'      => Defaults::photo( 'pergola-bar' ),
+					'text'       => __( 'Storefronts, restaurant patios and customer-facing spaces that look their best after dark — like the Cottonmouth Dispensary.', 'xlights-elementor-widgets' ),
+					'image'      => Defaults::photo( 'commercial-cottonmouth-roofline' ),
 					'scene'      => 'commercial',
 					'link_label' => __( 'Explore commercial lighting', 'xlights-elementor-widgets' ),
 					'link'       => '{page:commercial}',
@@ -163,13 +163,8 @@ return array(
 			'bg'      => 'light',
 		),
 	),
-	'financing'    => Defaults::financing( 'warm' ),
-	'projects'     => Defaults::projects(
-		'featured',
-		__( 'Featured projects', 'xlights-elementor-widgets' ),
-		__( 'A look at X LIGHTS installations.', 'xlights-elementor-widgets' ),
-		array( 'bg' => 'warm' )
-	),
+	'hoa'          => Defaults::hoa(),
+	'financing'    => Defaults::financing( 'light' ),
 	'reviews'      => array(
 		'type'     => 'reviews',
 		'label'    => __( 'Reviews', 'xlights-elementor-widgets' ),

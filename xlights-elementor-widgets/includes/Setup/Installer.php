@@ -97,6 +97,9 @@ final class Installer {
 			// Sites without any projects get the default gallery (never sites that have their own).
 			Sample_Projects::schedule();
 		}
+		if ( $stored && version_compare( (string) $stored, '1.8.0', '<' ) ) {
+			self::fill_if_empty( 'google_reviews_url', Settings::GOOGLE_REVIEWS_URL );
+		}
 		if ( $stored && version_compare( (string) $stored, '1.7.2', '<' ) ) {
 			self::ensure_lead_inbox();
 		}
@@ -111,6 +114,19 @@ final class Installer {
 			Stale_Defaults::run();
 		}
 		update_option( self::VERSION_OPTION, XLIGHTS_VERSION );
+	}
+
+	/**
+	 * Set a saved-but-empty setting to its new default (values a dealer entered are kept).
+	 *
+	 * @param string $key   Setting.
+	 * @param string $value New value.
+	 */
+	private static function fill_if_empty( $key, $value ) {
+		$stored = get_option( Settings::OPTION, array() );
+		if ( is_array( $stored ) && array_key_exists( $key, $stored ) && '' === trim( (string) $stored[ $key ] ) ) {
+			Settings::update( array( $key => $value ) );
+		}
 	}
 
 	/**

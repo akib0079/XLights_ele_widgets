@@ -20,6 +20,7 @@ final class Settings {
 	const DEALER_PROGRAM_URL = 'https://www.xlightsled.com/dealer';
 	const GOOGLE_PLAY_URL    = 'https://play.google.com/store/apps/details?id=com.goulyled.xlights&hl=en_CA';
 	const LEAD_INBOX         = 'info@xlightsled.com';
+	const GOOGLE_REVIEWS_URL = 'https://share.google/8LSs38qe9SDcuM32D';
 
 	const OPTION = 'xlights_settings';
 
@@ -489,7 +490,7 @@ final class Settings {
 					'google_reviews_url' => array(
 						'type'        => 'url',
 						'label'       => __( 'Google Reviews URL', 'xlights-elementor-widgets' ),
-						'default'     => '',
+						'default'     => self::GOOGLE_REVIEWS_URL,
 						'description' => __( 'Link to the dealer\'s Google Business Profile reviews.', 'xlights-elementor-widgets' ),
 					),
 					'facebook_url'       => array(

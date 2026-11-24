@@ -359,6 +359,22 @@ function webpChunks(file) {
 	ok(home.slider, 'home: Everyday / Holiday comparison slider');
 	ok(home.automation, 'home: luxury home automation (Control4, Lutron, Crestron, Bond)');
 	ok(home.google >= 1 && home.labelled, `home: Google reviews shown and labelled as brand-level from Canada (${home.google})`);
+	// 1.8.0 final revisions: HOA section, no project grid on Home, Cottonmouth on the Commercial card, Google profile link.
+	const fin = await cp.evaluate(() => {
+		const hoa = document.querySelector('#xl-hoa');
+		const commercial = [...document.querySelectorAll('.xl-card')].find((c) => /Commercial Lighting/i.test(c.textContent));
+		const img = commercial ? commercial.querySelector('img') : null;
+		return {
+			hoa: !!hoa && /HOA/.test(hoa.textContent) && /color-matched track/.test(hoa.textContent),
+			projects: !!document.querySelector('[data-xl-section="projects"]'),
+			commercial: img ? img.getAttribute('src') : '',
+			google: [...document.querySelectorAll('a')].some((a) => a.href.indexOf('share.google/8LSs38qe9SDcuM32D') !== -1),
+		};
+	});
+	ok(fin.hoa, 'home: HOA information section');
+	ok(!fin.projects, 'home: project grid removed');
+	ok(/cottonmouth/.test(fin.commercial), 'home: Commercial card shows the Cottonmouth project');
+	ok(fin.google, 'home: link to the X LIGHTS Google Business Profile');
 	await cp.goto(BASE_URL + '/lighting-solutions/', { waitUntil: 'networkidle' });
 	const gal = await cp.evaluate(() => {
 		const g = document.querySelector('.xl-app-gallery');

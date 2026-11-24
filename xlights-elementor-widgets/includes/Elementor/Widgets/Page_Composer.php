@@ -248,7 +248,9 @@ class Page_Composer extends Widget_Base {
 						$data[ $field ] = $value;
 					}
 				}
-				return Page_Composer::backfill_photos( $data, $component->fields(), isset( $def['defaults'] ) ? (array) $def['defaults'] : array() );
+				$defaults = isset( $def['defaults'] ) ? (array) $def['defaults'] : array();
+				$data     = \XLights\Helpers\Retired_Media::scrub( $data, $component->fields(), $defaults );
+				return Page_Composer::backfill_photos( $data, $component->fields(), $defaults );
 			},
 			$order,
 			array(

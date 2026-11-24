@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.2
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,13 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.8.0 =
+* Final client revisions.
+* Home: new HOA information section (discreet color-matched track, everyday warm white, scheduled holiday colors, zones, per-light control, help with the HOA request); the project grid is removed; the Commercial card shows the Cottonmouth Dispensary.
+* Bistro: the restaurants section no longer uses a residential bar photo.
+* Retired photos are never shown: snow scenes and the old control box / old-packaging installer photos are recognized by file name, including copies uploaded to the Media Library. A section whose picked image is retired shows its default photo; retired photos are left out of project cards, galleries and lightboxes. Nothing is deleted.
+* Google Reviews link defaults to the X LIGHTS Google Business Profile (filled in on update if the setting is empty).
 
 = 1.7.2 =
 * Leads: every quote request is emailed to info@xlightsled.com. On update the address is added first to the saved recipient list if it is missing (other recipients are kept), and an empty recipient setting now falls back to it instead of the WordPress admin address.

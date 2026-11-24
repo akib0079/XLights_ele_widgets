@@ -73,6 +73,9 @@
 | 20b | **Cottonmouth Dispensary case study** (Commercial page) — owner consent to name the business and show the storefront | Supplied by the client for the site; copy used as written, with US spelling ("colors") |
 | 21 | Matching **before/after** pairs (same angle, day + night) | Before/After section hidden until a pair exists |
 | 22 | **Real customer reviews** with written permission | Three Google reviews of X LIGHTS in Canada supplied by X LIGHTS are shown as brand-level reviews (verbatim, labelled, no names or ratings). Local reviews still needed; none are invented |
+| 22a | **Placeholder content on the live site** (not created by the plugin): 4 reviews named "Property Owner", "Slith Business", "Steve Homeowner", "Strark Customer" and 3 "Demo" projects (one with a snow photo) | Delete in X LIGHTS → Reviews and X LIGHTS → Projects. Invented testimonials must not be published |
+| 22d | **Google reviews from the X LIGHTS Google Business Profile** | The profile is linked (Settings → App & Social). Review text cannot be read automatically; add each review verbatim in X LIGHTS → Reviews (source Google, link, rating as given) |
+| 22e | **HOA section** | Written from X LIGHTS product features only; confirm the HOA support offered (product sheets, photos, help with the request) |
 | 22b | **Lutron** compatibility (with Control4 and Crestron) | Shown on Home as stated by X LIGHTS; the xlightsled.com homepage text could not be read from the build environment — confirm wording |
 | 22c | **San Clemente page content** and the **low-profile comparison images** mentioned by X LIGHTS | Not received / not reachable from the build environment — send the text and images to add them |
 | 23 | Local team: names, roles, bios, photos | About → Local Team hidden until added |

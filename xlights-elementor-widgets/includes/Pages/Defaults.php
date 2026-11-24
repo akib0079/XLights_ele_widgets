@@ -295,6 +295,49 @@ final class Defaults {
 	}
 
 	/**
+	 * HOA-friendly lighting: what homeowner associations usually look at and
+	 * how the X LIGHTS system addresses it. Only X LIGHTS product facts are used
+	 * (low-profile color-matched track, warm white, scheduled colors, zones,
+	 * individually controllable lights, 1 W soffit lights).
+	 *
+	 * @param array $extra Extra defaults.
+	 * @return array
+	 */
+	public static function hoa( array $extra = array() ) {
+		return array(
+			'type'     => 'split',
+			'label'    => __( 'HOA Information', 'xlights-elementor-widgets' ),
+			'anchor'   => 'xl-hoa',
+			'defaults' => array_merge(
+				array(
+					'layout'          => 'offset',
+					'eyebrow'         => __( 'HOA information', 'xlights-elementor-widgets' ),
+					'heading'         => __( 'Permanent lighting that works <em>with your HOA.</em>', 'xlights-elementor-widgets' ),
+					'text'            => __( '<p>Many communities have homeowner association guidelines for exterior lighting. X LIGHTS permanent lighting is designed to fit them: the slim, color-matched track sits under the eaves so the system stays discreet from the street, warm white works as everyday accent and security lighting, and holiday colors only come on for the dates you schedule.</p><p>We understand the approval process. If your HOA reviews exterior changes, we can provide product details and photos of the low-profile track and lights for your application, and we plan the layout around your association’s guidelines.</p>', 'xlights-elementor-widgets' ),
+					'points'          => __( "Discreet from the street: a low-profile, color-matched track under the eaves
+Warm white for everyday accent and security lighting
+Holiday colors only on the dates you schedule, with yearly calendar timers
+Separate zones, so the front can stay warm white while the back shows color
+Choose exactly which lights are on, down to each individual light
+Low-voltage, energy-efficient LEDs: about 1 W per soffit light", 'xlights-elementor-widgets' ),
+					'note'            => __( 'HOA rules vary by community. Check your association’s guidelines before installation; we are happy to help you prepare the request.', 'xlights-elementor-widgets' ),
+					'primary_label'   => __( 'Ask about HOA approval', 'xlights-elementor-widgets' ),
+					'primary_link'    => '{quote_url}',
+					'visual'          => 'image',
+					'image'           => self::photo( 'soffit-light-closeup' ),
+					'image_alt'       => __( 'Close-up of an X LIGHTS soffit light set into the low-profile track under the eave', 'xlights-elementor-widgets' ),
+					'caption'         => __( 'The light sits inside a slim, color-matched track under the eave.', 'xlights-elementor-widgets' ),
+					'scene'           => 'daytime',
+					'image_position'  => 'left',
+					'bg'              => 'warm',
+					'editor_note'     => __( 'Based on X LIGHTS product features. Confirm the HOA support you offer (product sheets, photos, help with the application).', 'xlights-elementor-widgets' ),
+				),
+				$extra
+			),
+		);
+	}
+
+	/**
 	 * Luxury home automation: compatibility with Control4, Lutron and Crestron
 	 * (as stated by X LIGHTS) and the Bond partnership for outdoor patio systems.
 	 *
