@@ -4,7 +4,7 @@ Tags: elementor, widgets, lighting, dealer, lead form
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,9 @@ The plugin records whether the mail server accepted each notification and never 
 No, unless XLIGHTS_UNINSTALL_DELETE_DATA is defined as true in wp-config.php.
 
 == Changelog ==
+
+= 1.8.1 =
+* Reviews: long reviews are cut to five lines with a "See more" link that opens the full text in place, so short reviews no longer stretch to the height of the longest one.
 
 = 1.8.0 =
 * Final client revisions.
