@@ -206,7 +206,9 @@ final class Reviews {
 			}
 			$out .= '</p>';
 		}
-		$out .= '<blockquote class="xl-review__text">' . wpautop( esc_html( wp_strip_all_tags( $r['text'] ) ) ) . '</blockquote>';
+		$out .= '<blockquote class="xl-review__text" data-xl-review-text>' . wpautop( esc_html( wp_strip_all_tags( $r['text'] ) ) ) . '</blockquote>';
+		// Long reviews are cut to a few lines by xlights.js; the button only appears when text is cut.
+		$out .= '<button type="button" class="xl-review__more" data-xl-review-more aria-expanded="false" hidden>' . esc_html__( 'See more', 'xlights-elementor-widgets' ) . '</button>';
 		$out .= '<figcaption class="xl-review__by"><strong>' . esc_html( $r['name'] ) . '</strong>';
 		$meta = array_filter( array( $r['location'], $r['project'] ) );
 		if ( $meta ) {

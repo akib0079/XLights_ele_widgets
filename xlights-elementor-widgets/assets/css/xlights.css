@@ -3054,6 +3054,54 @@
 	margin-top: 0.75em;
 }
 
+/* Long reviews: cut to five lines with a soft fade; "See more" opens the full text. */
+.xl-root .xl-review__text.is-clamped {
+	max-height: calc(1.7em * 5);
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
+	mask-image: linear-gradient(to bottom, #000 62%, transparent);
+}
+
+.xl-root .xl-review--large .xl-review__text.is-clamped {
+	max-height: calc(1.45em * 6);
+}
+
+.xl-root .xl-review__more {
+	align-self: flex-start;
+	margin: -0.35rem 0 0;
+	padding: 0.25rem 0;
+	border: 0;
+	background: none;
+	font-family: var(--xl-font-ui);
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	text-decoration: underline;
+	text-underline-offset: 0.3em;
+	color: var(--xl-accent-ink);
+	cursor: pointer;
+}
+
+.xl-root .xl-review__more[hidden] {
+	display: none;
+}
+
+.xl-root .xl-review__more:hover,
+.xl-root .xl-review__more:focus-visible {
+	text-decoration-thickness: 2px;
+}
+
+.xl-root .xl-review__more:focus-visible {
+	outline: 2px solid var(--xl-accent);
+	outline-offset: 3px;
+}
+
+/* While a review is open, its neighbours keep their height instead of stretching. */
+.xl-root .xl-has-open-review > li {
+	align-self: start;
+}
+
 .xl-root .xl-review__by {
 	display: grid;
 	gap: 0.2rem;

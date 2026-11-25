@@ -309,6 +309,72 @@
 	}
 
 	/* ------------------------------------------------------------------
+	 * Reviews: cut long text, "See more" opens it in place
+	 * ---------------------------------------------------------------- */
+	function initReviewMore(root) {
+		$all(root, '[data-xl-review-text]').forEach(function (text) {
+			if (!once(text, 'More')) {
+				return;
+			}
+			var btn = text.parentNode.querySelector('[data-xl-review-more]');
+			if (!btn) {
+				return;
+			}
+			var card = text.closest('.xl-review');
+			var list = card && card.closest('ul');
+			var open = false;
+			if (!text.id) {
+				text.id = 'xl-review-' + Math.random().toString(36).slice(2, 9);
+			}
+			btn.setAttribute('aria-controls', text.id);
+
+			function measure() {
+				if (open) {
+					return;
+				}
+				text.classList.add('is-clamped');
+				var cut = text.scrollHeight > text.clientHeight + 4;
+				text.classList.toggle('is-clamped', cut);
+				btn.hidden = !cut;
+			}
+			function setOpen(state) {
+				if (state && list && list.xlCloseReview && list.xlCloseReview !== close) {
+					list.xlCloseReview(); // One open review per row.
+				}
+				open = state;
+				if (list) {
+					// Neighbours keep the height they had, so only this card grows.
+					$all(list, ':scope > li').forEach(function (li) {
+						var other = li.querySelector('.xl-review');
+						if (other && other !== card) {
+							other.style.minHeight = state ? other.offsetHeight + 'px' : '';
+						}
+					});
+					list.classList.toggle('xl-has-open-review', state);
+					list.xlCloseReview = state ? close : null;
+				}
+				text.classList.toggle('is-clamped', !state);
+				btn.setAttribute('aria-expanded', state ? 'true' : 'false');
+				btn.textContent = state ? t('seeLess', 'See less') : t('seeMore', 'See more');
+				if (!state) {
+					measure();
+				}
+			}
+			function close() {
+				setOpen(false);
+			}
+			btn.addEventListener('click', function () {
+				setOpen(!open);
+			});
+			measure();
+			window.addEventListener('resize', measure);
+			if (document.fonts && document.fonts.ready) {
+				document.fonts.ready.then(measure);
+			}
+		});
+	}
+
+	/* ------------------------------------------------------------------
 	 * Before / after slider
 	 * ---------------------------------------------------------------- */
 	function initCompare(root) {
@@ -877,6 +943,7 @@
 		initShowcase(root);
 		initAccordion(root);
 		initCarousels(root);
+		initReviewMore(root);
 		initCompare(root);
 		initProjects(root);
 		initMaps(root);

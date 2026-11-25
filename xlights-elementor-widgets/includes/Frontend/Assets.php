@@ -72,6 +72,8 @@ final class Assets {
 					'loading'  => __( 'Loading projects…', 'xlights-elementor-widgets' ),
 					'error'    => __( 'Projects could not be loaded. Please try again.', 'xlights-elementor-widgets' ),
 					'dialog'   => __( 'Project photos', 'xlights-elementor-widgets' ),
+					'seeMore'  => __( 'See more', 'xlights-elementor-widgets' ),
+					'seeLess'  => __( 'See less', 'xlights-elementor-widgets' ),
 				),
 			)
 		);
